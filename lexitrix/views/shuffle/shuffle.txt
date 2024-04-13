@@ -1,0 +1,4 @@
+
+ ** 'Solve' places correct tiles insantaneously, but in the future, they could slide into place one by one, quickly, with a gap of something like 0.5 seconds
+ * there will be a 'tap and drop' option in addition to the present 'click and drag,' with touchscreen surfaces in mind
+ ** gotto have a daily game with set words

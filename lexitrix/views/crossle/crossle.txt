@@ -1,0 +1,10 @@
+ ** GOOGLE: 11-letter words - provides plenty of source options
+ ** some joint 11-letter words - femmefatale, silverlight, collywobbles
+ ** reconstruct, immigration, fraudulence, campanology, horologists, watchmakers, clawhammers, perpetrator
+ ** should consider adding hints, especially if there are proper nouns
+ ** there is a multiple solutions problem, such as 'qualifies' and 'qualified' both being valid; note that this is less of a risk with 11-letter word
+ ** pentiment
+ ** avoiding hyphenated words for now
+ ** write "Bravo!" between date and game number when solved
+ ** for Symmetrical Random generation, could try to come up w/ something for upto 3 secs, after generation technique has been optimized, but if a new one isn't created then should inform player, maybe suggest an old one randomly
+ ** 1 of 42

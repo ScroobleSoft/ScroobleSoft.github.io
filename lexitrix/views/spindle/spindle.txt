@@ -1,0 +1,3 @@
+ ** purpose is to guess the 11-letter word on the spine
+ ** idea is to let player have vowels for free, although it is up to them how many they want to use, but only show them on the branches (5-letter words)
+ ** the keyboard configuration will be 5-7-7-7, with vowels on top, the rest in alphabetical order

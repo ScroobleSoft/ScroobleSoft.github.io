@@ -1,0 +1,2 @@
+
+ * 6-letter word in left column (that cannot have x in it) is first displayed scrambled (in such a way that there are no green lights), and when a letter is placed in its correct place via swapping, the letters of the word are placed in shuffled form

@@ -1,0 +1,2 @@
+
+ ** add HINT button that randomly places one correct letter
