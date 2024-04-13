@@ -1,0 +1,23 @@
+
+var Words6b = [ "babble", "baboon", "badger", "baffle", "bailey", "bakery", "baking", "ballad", "ballet", "ballot", "balsam", "bamboo",
+					 "banana", "bandit", "banger", "bangle", "banish", "banker", "banner", "banter", "banyan", "barbed", "barber", "barely",
+					 "barker", "barley", "barony", "barque", "barrel", "barren", "barrow", "barter", "basalt", "basket", "bathed",
+					 "batten", "batter", "battle", "bauble", "bazaar", "beacon", "beaded", "beagle", "beaker", "beamed", "beanie",
+					 "bearer", "beauty", "beaver", "became", "beckon", "become", "bedeck", "bedlam", "beeper", "beetle",
+					 "befall", "before", "beggar", "begone", "behalf", "behave", "beheld", "behest", "behind", "behold", "behove", "belfry",
+					 "belief", "bellow", "belong", "belted", "bemoan", "bender", "bereft", "bestow", "betide", "betray", "better", "beware",
+					 "beyond", "biased", "biceps", "bicker", "bidder", "bigamy", "bikini", "bilked", "billed", "billet", "billow", "binary",
+					 "binder", "binged", "bionic", "biopsy", "birdie", "bisect", "bishop", "bistro", "biting", "bitmap", "bitten", "bitter",
+					 "blamed", "blanch", "blared", "blazed", "blazer", "blazon", "bleach", "bleary", "blight", "blithe", "blonde", "bloody",
+					 "blotch", "blouse", "blower", "bluesy", "bluish", "blurry", "boater", "bobbed", "bobbin", "bobble", "bobcat", "bodied",
+					 "boffin", "boggle", "boiled", "boiler", "bolero", "bolder", "bolted", "bomber", "bonbon", "bonnet", "bonsai", "boogie",
+					 "booked", "booker", "bookie", "boomed", "boomer", "booted", "boozer", "border", "boring", "borrow", "botany", "bother",
+					 "bottle", "bottom", "bought", "bounce", "bouncy", "bounds", "bounty", "bovine", "bowler", "bowman", "bowtie", "boxing",
+					 "boyish", "braced", "brainy", "braise", "braked", "branch", "brandy", "brassy", "brawny", "brazen", "breach", "breast",
+					 "breath", "breeze", "breezy", "brewer", "bribed", "bridal", "bridge", "bridle", "briefs", "bright", "broach", "brogue",
+					 "broken", "bronze", "broody", "browse", "bruise", "brunch", "brutal", "bubble", "bubbly", "bucked", "bucket", "buckle",
+					 "budget", "buffed", "buffer", "buffet", "bugged", "bugler", "bulged", "bullet", "bumble", "bumped", "bumper", "bundle",
+					 "bungee", "bungle", "bunion", "bunked", "bunker", "bunkum", "buoyed", "burden", "bureau", "burger", "burgle", "burial",
+					 "buried", "burlap", "burned", "burner", "burrow", "bursar", "bushed", "bushel", "busily", "busked", "busker", "busted",
+					 "bustle", "butane", "butler", "butted", "butter", "button", "buzzer"
+];

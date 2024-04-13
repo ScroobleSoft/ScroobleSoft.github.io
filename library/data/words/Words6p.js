@@ -1,0 +1,22 @@
+
+var Words6p = [ "packer", "packet", "padded", "paddle", "paella", "pagoda", "pained", "paired", "palace", "palate",
+					 "pallet", "pallid", "pallor", "palmed", "paltry", "pander", "panted", "papacy", "papaya", "parade", "parcel", "pardon",
+					 "parent", "pariah", "parish", "parity", "parlay", "parley", "parody", "parole", "parrot", "parsed", "parson", "partly",
+					 "passed", "pasted", "pastel", "pastor", "pastry", "patchy", "patent", "pathos", "patina", "patois", "patrol", "patron",
+					 "patter", "paunch", "pauper", "paused", "paving", "pawned", "payout", "peachy", "peaked", "peanut", "pearly", "pebble",
+					 "pecked", "pedant", "peddle", "pedlar", "peeked", "peeled", "peeped", "peered", "peeved", "pegged", "pellet", "pelted",
+					 "pelvis", "pencil", "penury", "people", "pepper", "period", "perish", "perked", "permit", "person", "peruse", "pester",
+					 "pestle", "petted", "petard", "petite", "petrol", "pewter", "phased", "phlegm", "phobia", "phobic", "phoned", "phonic",
+					 "phrase", "picked", "picker", "picket", "pickle", "picnic", "pidgin", "pierce", "pigeon", "piglet", "pilfer", "pillar",
+					 "pillow", "pincer", "pinged", "pinion", "piqued", "piracy", "pirate", "pistol", "piston", "pitted", "placed", "placid",
+					 "plague", "planer", "planet", "plaque", "plasma", "plated", "played", "player", "please", "pledge", "plenty", "pliant",
+					 "pliers", "plight", "plough", "plucky", "plumed", "plunge", "plural", "pocked", "pocket", "podium", "poetic", "poetry",
+					 "pointe", "pointy", "poised", "poison", "police", "policy", "polish", "polite", "polity", "polled", "pollen", "poncho",
+					 "ponder", "poodle", "poorly", "poplar", "porous", "portal", "porter", "portly", "poseur", "possum", "postal", "poster",
+					 "potash", "potato", "potent", "potion", "potted", "potter", "pounce", "powder", "praise", "prance", "prayer", "preach",
+					 "precis", "prefer", "prefix", "preset", "presto", "pretty", "preyed", "priced", "pricey", "primal", "primer", "prince",
+					 "priory", "prison", "prissy", "privet", "prized", "probed", "profit", "prompt", "propel", "proper", "proton", "proved",
+					 "proven", "pruned", "psyche", "public", "pucker", "puddle", "puffed", "puffer", "pulled", "pulley", "puplit", "pulsar",
+					 "pulsed", "pumice", "pummel", "pumped", "punchy", "pundit", "punish", "punter", "purged", "purify", "purist", "purity",
+					 "purple", "purred", "purser", "pursue", "purvey", "pushed", "putrid", "putter", "puzzle", "python"
+];
