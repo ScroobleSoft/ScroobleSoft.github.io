@@ -141,3 +141,31 @@ GenieArray.prototype.RotateRight = function(nElmnts) {
       this[0] = elmnt;
    }
 };
+GenieArray.prototype.RotateSectionLeft = function(nElmnts, start, end) {  //UNTESTED
+   var i, j;
+   var elmnt;
+
+   if (nElmnts==0 || start<0 || end>=this.length || nElements!=((end-start)+1))
+      return;
+
+   for (i=0;i<nElmnts;++i) {
+      elmnt = this[start];
+      for (j=start;j<end;++j)
+	 this[j] = this[j+1];
+      this[end] = elmnt;
+   }
+};
+GenieArray.prototype.RotateSectionRight = function(nElmnts, start, end) {  //UNTESTED
+   var i, j;
+   var elmnt;
+
+   if (nElmnts==0 || start<0 || end>=this.length || nElements!=((end-start)+1))
+      return;
+
+   for (i=0;i<nElmnts;++i) {
+      elmnt = this[end];
+      for (j=end;j>start;--j)
+	 this[j] = this[j-1];
+      this[start] = elmnt;
+   }
+};

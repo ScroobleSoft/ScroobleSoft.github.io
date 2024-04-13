@@ -1,0 +1,133 @@
+
+//NOTE: one major difference beween GenieDialog and GenieText is latter only writes one line (former is for paragraphs)
+
+//--------------------------------------
+//---------- GENIE TEXT ----------------
+var GenieText = function() {
+   var Context;
+   var Screen, ControlPanel, InfoBox, Ticker, Tabloid;
+   var Specs;
+   var Font;
+
+   var cntxt;		//scratch variables
+};
+GenieText.prototype = {
+   Set(cntxt, specs, iBox, cPanel, tTape, tRoll) {
+		this.Context = cntxt;
+		this.Screen = cntxt;
+		this.InfoBox = iBox;
+		this.ControlPanel = cPanel;
+		this.Ticker = tTape;
+		this.Tabloid = tRoll;
+		this.Specs = specs || TEXT;
+		if (!this.Specs.FONT)
+			this.Specs.FONT = FONT.DEFAULT;
+		if (!this.Specs.COLOUR)
+			this.Specs.COLOUR = "black";
+   },
+   SetContext(cntxt) {
+
+      this.Context = cntxt;
+   },
+   SwitchContext(cnvs) {
+
+      switch (cnvs) {
+			case CANVAS.PRIME:
+				this.Context = this.Screen;
+				break;
+			case CANVAS.ZOOM:
+				this.Context = this.InfoBox;
+				break;
+			case CANVAS.CONSOLE:
+				this.Context = this.ControlPanel;
+				break;
+			case CANVAS.TICKER:
+				this.Context = this.Ticker;
+				break;
+			case CANVAS.HELP:
+				this.Context = this.Tabloid;
+				break;
+      }
+   },
+   ResetContext() {	//TODO: will replace ::RestoreContext
+
+      this.Context = this.Screen;
+   },
+   RestoreContext(cntxt) {
+
+      if (cntxt)
+			this.Context = cntxt;
+      else
+			this.Context = this.Screen;
+   },
+   SetFont(fnt) {
+
+      this.Font = this.Specs.FONT;
+      this.Specs.FONT = fnt;
+   },
+   RestoreFont() {
+
+      this.Specs.FONT = this.Font;
+   },
+   Write(strng, x, y, specs, cnvs) {
+      var tLength;  //t- text
+
+      //Switch context if thus specified
+      if (cnvs) {	//ASSUMPTION: cnvs is passed only if writing to other than Screen
+			this.cntxt = this.Context;
+			switch (cnvs) {
+				case CANVAS.PRIME:
+					this.Context = this.Screen;
+					break;
+				case CANVAS.ZOOM:
+					this.Context = this.InfoBox;
+					break;
+				case CANVAS.CONSOLE:
+					this.Context = this.ControlPanel;
+					break;
+				case CANVAS.TICKER:
+					this.Context = this.TickerTape;
+					break;
+				case CANVAS.HELP:
+					this.Context = this.Tabloid;
+					break;
+			}
+      }
+
+      if (specs) {
+	 this.Context.font = specs.FONT || this.Specs.FONT;
+	 this.Context.fillStyle = specs.COLOUR || this.Specs.COLOUR;
+	 if (specs.STYLE) {
+	    if (specs.STYLE & FONT.STYLE.BOLD)
+	       this.Context.font = "bold " + this.Context.font;
+	    if (specs.STYLE & FONT.STYLE.ITALICS)
+	       this.Context.font = "italic " + this.Context.font;
+	    if (specs.STYLE & FONT.STYLE.UNDERLINED) {
+	       tLength = this.Context.measureText(strng).width;
+	       this.Context.beginPath();
+	       this.Context.strokeStyle = "black";
+	       this.Context.lineWidth = 2;
+	       this.Context.moveTo(x, y+4);
+	       this.Context.lineTo(Math.round(x+tLength), y+4);
+	       this.Context.stroke();
+	       this.Context.closePath();
+	    }
+	 }
+      } else {
+	 this.Context.font = this.Specs.FONT;
+	 this.Context.fillStyle = this.Specs.COLOUR;
+      }
+      this.Context.fillText(strng, x, y);
+
+      //Restore original settings
+      this.Context.font = this.Specs.FONT;
+      this.Context.fillStyle = this.Specs.COLOUR;
+      if (this.cntxt) {
+	 this.Context = this.cntxt;
+	 this.cntxt = null;
+      }
+   },
+   WriteArray(aStrng, x, y, specs, cnvs) {
+      //TODO: spacing is the only issue, delineated in specs with a default behaviour
+   }
+};
