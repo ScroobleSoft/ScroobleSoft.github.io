@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+
+<a href="https://www.instagram.com/mirrorsbytazeen/?hl=en">
+   <img src="mirrors.png" alt="Mirrors By Tazeen" width="360" height="32" >
+</a>
+
+   <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<div id="PrimeDiv" style="position:absolute; top:40px; left:8px; z-index:2">
+	   <canvas id="PrimeCanvas" width="360" height="600"></canvas>
+	</div>
+   </head>
+
+   <body onload="RunWordGames()">
+
+	<!-- Data -->
+	<script src="..\library\GenieData.js"></script>
+	<script src="..\library\data\Consts.js"></script>
+	<script src="..\library\data\Colours.js"></script>
+	<script src="..\library\data\Geo.js"></script>
+	<script src="..\library\data\IO.js"></script>
+	<script src="..\library\data\Controls.js"></script>
+	<script src="..\library\data\Images.js"></script>
+
+	<!-- Types -->
+	<script src="..\library\GenieTypes.js"></script>
+	<script src="..\library\GenieArray.js"></script>
+	<script src="..\library\GenieList.js"></script>
+	<script src="..\library\AgentArray.js"></script>
+
+	<!-- Utilities -->
+	<script src="..\library\GenieUtils.js"></script>
+	<script src="..\library\utils\ArrayUtils.js"></script>
+	<script src="..\library\utils\SpaceUtils.js"></script>
+	<script src="..\library\utils\StringUtils.js"></script>
+
+	<!-- Tools -->
+	<script src="..\library\GenieRandom.js"></script>
+	<script src="..\modules\GenieText.js"></script>
+
+	<!-- Graphics -->
+	<script src="..\library\GenieGraphics.js"></script>
+	<script src="..\library\GenieImage.js"></script>
+	<script src="..\library\ImageMap.js"></script>
+
+	<!-- Controls -->
+	<script src="..\library\GenieControl.js"></script>
+	<script src="..\library\controls\GenieButton.js"></script>
+	<script src="..\library\controls\TextButton.js"></script>
+	<script src="..\library\controls\ImageButton.js"></script>
+	<script src="..\library\controls\GenieIcon.js"></script>
+	<script src="..\library\controls\PushButton.js"></script>
+	<script src="..\library\controls\ButtonPanel.js"></script>
+	<script src="..\library\controls\GenieRadio.js"></script>
+	<script src="..\library\controls\MobileController.js"></script>
+
+	<!-- Interface -->
+	<script src="..\library\GenieMouse.js"></script>
+	<script src="..\library\TouchScreen.js"></script>
+	<script src="..\library\GenieKeyboard.js"></script>
+	<script src="..\library\GenieGamepad.js"></script>
+
+	<!-- Framework -->
+	<script src="..\library\ImageManager.js"></script>
+	<script src="..\library\GenieCanvas.js"></script>
+	<script src="..\library\GenieScape.js"></script>
+	<script src="..\library\GenieView.js"></script>
+	<script src="..\library\GenieGame.js"></script>
+
+	<script src="data.js"></script>
+	<script src="data\views.js"></script>
+
+	<!-- 5-letter words -->
+	<script src="..\library\data\words\Words5a.js"></script>
+	<script src="..\library\data\words\Words5b.js"></script>
+	<script src="..\library\data\words\Words5c.js"></script>
+	<script src="..\library\data\words\Words5d.js"></script>
+	<script src="..\library\data\words\Words5e.js"></script>
+	<script src="..\library\data\words\Words5f.js"></script>
+	<script src="..\library\data\words\Words5g.js"></script>
+	<script src="..\library\data\words\Words5h.js"></script>
+	<script src="..\library\data\words\Words5i.js"></script>
+	<script src="..\library\data\words\Words5j.js"></script>
+	<script src="..\library\data\words\Words5k.js"></script>
+	<script src="..\library\data\words\Words5l.js"></script>
+	<script src="..\library\data\words\Words5m.js"></script>
+	<script src="..\library\data\words\Words5n.js"></script>
+	<script src="..\library\data\words\Words5o.js"></script>
+	<script src="..\library\data\words\Words5p.js"></script>
+	<script src="..\library\data\words\Words5q.js"></script>
+	<script src="..\library\data\words\Words5r.js"></script>
+	<script src="..\library\data\words\Words5s.js"></script>
+	<script src="..\library\data\words\Words5t.js"></script>
+	<script src="..\library\data\words\Words5u.js"></script>
+	<script src="..\library\data\words\Words5v.js"></script>
+	<script src="..\library\data\words\Words5w.js"></script>
+	<script src="..\library\data\words\Words5y.js"></script>
+	<script src="..\library\data\words\Words5z.js"></script>
+
+	<!-- 6-letter words -->
+	<script src="..\library\data\words\Words6a.js"></script>
+	<script src="..\library\data\words\Words6b.js"></script>
+	<script src="..\library\data\words\Words6c.js"></script>
+	<script src="..\library\data\words\Words6d.js"></script>
+	<script src="..\library\data\words\Words6e.js"></script>
+	<script src="..\library\data\words\Words6f.js"></script>
+	<script src="..\library\data\words\Words6g.js"></script>
+	<script src="..\library\data\words\Words6h.js"></script>
+	<script src="..\library\data\words\Words6i.js"></script>
+	<script src="..\library\data\words\Words6j.js"></script>
+	<script src="..\library\data\words\Words6k.js"></script>
+	<script src="..\library\data\words\Words6l.js"></script>
+	<script src="..\library\data\words\Words6m.js"></script>
+	<script src="..\library\data\words\Words6n.js"></script>
+	<script src="..\library\data\words\Words6o.js"></script>
+	<script src="..\library\data\words\Words6p.js"></script>
+	<script src="..\library\data\words\Words6q.js"></script>
+	<script src="..\library\data\words\Words6r.js"></script>
+	<script src="..\library\data\words\Words6s.js"></script>
+	<script src="..\library\data\words\Words6t.js"></script>
+	<script src="..\library\data\words\Words6u.js"></script>
+	<script src="..\library\data\words\Words6v.js"></script>
+	<script src="..\library\data\words\Words6w.js"></script>
+	<script src="..\library\data\words\Words6y.js"></script>
+	<script src="..\library\data\words\Words6z.js"></script>
+
+	<!-- 7-letter words -->
+	<script src="..\library\data\words\Words7a.js"></script>
+	<script src="..\library\data\words\Words7b.js"></script>
+	<script src="..\library\data\words\Words7c.js"></script>
+	<script src="..\library\data\words\Words7d.js"></script>
+	<script src="..\library\data\words\Words7e.js"></script>
+	<script src="..\library\data\words\Words7f.js"></script>
+	<script src="..\library\data\words\Words7g.js"></script>
+	<script src="..\library\data\words\Words7h.js"></script>
+	<script src="..\library\data\words\Words7i.js"></script>
+	<script src="..\library\data\words\Words7j.js"></script>
+	<script src="..\library\data\words\Words7k.js"></script>
+	<script src="..\library\data\words\Words7l.js"></script>
+	<script src="..\library\data\words\Words7m.js"></script>
+	<script src="..\library\data\words\Words7n.js"></script>
+	<script src="..\library\data\words\Words7o.js"></script>
+	<script src="..\library\data\words\Words7p.js"></script>
+	<script src="..\library\data\words\Words7q.js"></script>
+	<script src="..\library\data\words\Words7r.js"></script>
+	<script src="..\library\data\words\Words7s.js"></script>
+	<script src="..\library\data\words\Words7t.js"></script>
+	<script src="..\library\data\words\Words7u.js"></script>
+	<script src="..\library\data\words\Words7v.js"></script>
+	<script src="..\library\data\words\Words7w.js"></script>
+	<script src="..\library\data\words\Words7y.js"></script>
+	<script src="..\library\data\words\Words7z.js"></script>
+
+	<!-- 9-letter words -->
+	<script src="..\library\data\words\Words9a.js"></script>
+	<script src="..\library\data\words\Words9b.js"></script>
+	<script src="..\library\data\words\Words9c.js"></script>
+	<script src="..\library\data\words\Words9d.js"></script>
+	<script src="..\library\data\words\Words9e.js"></script>
+	<script src="..\library\data\words\Words9f.js"></script>
+	<script src="..\library\data\words\Words9g.js"></script>
+	<script src="..\library\data\words\Words9h.js"></script>
+	<script src="..\library\data\words\Words9i.js"></script>
+	<script src="..\library\data\words\Words9j.js"></script>
+	<script src="..\library\data\words\Words9k.js"></script>
+	<script src="..\library\data\words\Words9l.js"></script>
+	<script src="..\library\data\words\Words9m.js"></script>
+	<script src="..\library\data\words\Words9n.js"></script>
+	<script src="..\library\data\words\Words9o.js"></script>
+	<script src="..\library\data\words\Words9p.js"></script>
+	<script src="..\library\data\words\Words9q.js"></script>
+	<script src="..\library\data\words\Words9r.js"></script>
+	<script src="..\library\data\words\Words9s.js"></script>
+	<script src="..\library\data\words\Words9t.js"></script>
+	<script src="..\library\data\words\Words9u.js"></script>
+	<script src="..\library\data\words\Words9v.js"></script>
+	<script src="..\library\data\words\Words9w.js"></script>
+	<script src="..\library\data\words\Words9y.js"></script>
+	<script src="..\library\data\words\Words9z.js"></script>
+
+	<script src="components.js"></script>
+	<script src="components\controls.js"></script>
+
+	<!-- views -->
+	<script src="views\main.js"></script>
+
+	<script src="views\crackle.js"></script>
+	<script src="views\crackle\set.js"></script>
+	<script src="views\crackle\options.js"></script>
+	<script src="views\crackle\update.js"></script>
+	<script src="views\crackle\ledger.js"></script>
+	<script src="views\crackle\submission.js"></script>
+	<script src="views\crackle\keys.js"></script>
+
+	<script src="views\shuffle.js"></script>
+	<script src="views\shuffle\set.js"></script>
+	<script src="views\shuffle\update.js"></script>
+	<script src="views\shuffle\panel.js"></script>
+	<script src="views\shuffle\tile.js"></script>
+	<script src="views\shuffle\board.js"></script>
+
+	<script src="views\spindle.js"></script>
+	<script src="views\spindle\set.js"></script>
+	<script src="views\spindle\update.js"></script>
+
+	<script src="views\jiggle.js"></script>
+
+	<script src="views\crossle.js"></script>
+	<script src="views\crossle\selector.js"></script>
+	<script src="views\crossle\board.js"></script>
+	<script src="views\crossle\cell.js"></script>
+	<script src="views\crossle\keyboard.js"></script>
+	<script src="views\crossle\key.js"></script>
+	<script src="views\crossle\solutions.js"></script>
+	<script src="views\crossle\options.js"></script>
+
+	<script src="views\bundle.js"></script>
+	<script src="views\bundle\waveboard.js"></script>
+
+	<script src="lPuzzles.js"></script>
+
+	<script>
+
+	//Main game object
+	var Game;
+
+	function RunWordGames() {
+
+	    //Create library components
+	    LexiScape = new GenieScape();
+	    LexiGraphics = new GenieGraphics();
+	    LexiText = new GenieText();
+	    LexiRandomizer = new GenieRandomizer();
+
+	    //Set library components
+	    LexiScape.Set("PrimeCanvas");
+	    LexiGraphics.Set(LexiScape.Screen);
+	    LexiText.Set(LexiScape.Screen);
+	    LexiScape.PrimeScape.Context.font = FONT.DEFAULT;
+	    LexiScape.PrimeScape.DisableRightClickMenu();
+	    LexiScape.AddController(GAMePAD.ARROWS);
+	    Controller = LexiScape.ControllerA;
+	    LexiRandomizer.Set();
+
+	    //Load and assign graphic images
+	    ImageManager.Set(LexiImages);
+	    ImageManager.LoadImages();
+	    ImageManager.Check();				//Check if images have loaded
+
+	    //Begin as soon as images have loaded
+	    Game = new LexiPuzzles();
+	    Game.Set(LexiScape, LexiGraphics, LexiText, LexiRandomizer, Controller);
+	    Game.CheckImagesLoaded();
+	}
+
+	</script>
+   </body>
+</html>
