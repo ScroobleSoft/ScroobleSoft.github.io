@@ -15,7 +15,8 @@ TextButton.prototype.Draw = function(bPressed) {
    this.WriteLabel();
 };
 TextButton.prototype.ReLabel = function(lbl) {  //ASSUMPTION: will only be called for Enabled buttons
+
    this.Context.fillStyle = this.Specs.COLOUR || "lightgrey";		//NOTE: "lightgrey" is "rgb(211,211,211)
-   this.Context.fillRect(this.Specs.L, this.Specs.T, this.Specs.W, this.Specs.H);
+   this.Context.fillRect(this.Specs.L+this.Specs.LW, this.Specs.T+this.Specs.LW, this.Specs.W-(2*this.Specs.LW), this.Specs.H-(2*this.Specs.LW));
    this.WriteLabel(null, lbl);
 };

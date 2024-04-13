@@ -2,35 +2,50 @@
 //-------------------------------------------------
 //---------- GENIE PUSH BUTTON --------------------
 var GeniePushButton = function() {
-   var SurfacePic;
+   var EdgePics;
    var Pressed;
-   var Offset;		//of surface pic from top-left coords of control
 };
 GeniePushButton.prototype = new GenieControl();
-GeniePushButton.prototype.Set = function(canvas, specs, iEdges, pSpecs) {  //i- image
-   GenieControl.prototype.Set.call(this, canvas, specs, iEdges);
-
-   this.SurfacePic = new GenieImage();
-   this.SurfacePic.Set(this.Context, ImageManager.Pics[IMAGeINDEX.CONTROLS], pSpecs);
+GeniePushButton.prototype.Set = function(canvas, specs, iBtn) {
+   GenieControl.prototype.Set.call(this, canvas, specs, iBtn);
 
    this.Pressed = false;
-   this.Offset = new Coordinate2D();
-   this.Offset.X = (this.Pic.Specs.PATCH.W-this.SurfacePic.Specs.W)/2;
-   this.Offset.Y = (this.Pic.Specs.PATCH.H-this.SurfacePic.Specs.H)/2;
+};
+GeniePushButton.prototype.SetEdgePics = function(iEdges) {
+
+   this.EdgePics = iEdges;
 };
 GeniePushButton.prototype.Draw = function(bPressed) {
+
    this.Erase(this.Specs.BACKGROUND);
-   this.SurfacePic.Draw(this.Specs.L+this.Offset.X, this.Specs.T+this.Offset.Y);
-   if (bPressed)
-      this.Pic.DrawPatchNumber(1, this.Specs.L, this.Specs.T);
-   else
-      this.Pic.DrawPatchNumber(0, this.Specs.L, this.Specs.T);
+
+   //Draw edges
+	if (bPressed)
+		this.EdgePics.DrawPatchNumber(1, this.Specs.L, this.Specs.T);
+	else
+		this.EdgePics.DrawPatchNumber(0, this.Specs.L, this.Specs.T);
+
+	//Draw button image
+	if (this.Specs.PATCH)
+		this.Pic.DrawPatchNumber(this.Index, this.Specs.L+this.Specs.LW, this.Specs.T+this.Specs.LW);
+	else
+		this.Pic.Draw(this.Specs.L+this.Specs.LW, this.Specs.T+this.Specs.LW);
 };
 GeniePushButton.prototype.MouseDown = function() {
-   this.Pressed = true;
+
    this.Draw(PRESSED);
-   setTimeout(this.Reset.bind(this), 30);
+   setTimeout(this.Reset.bind(this), 60);
+};
+GeniePushButton.prototype.CheckPressed = function() {
+
+   if (this.Pressed) {
+      this.Pressed = false;
+      return (true);
+   } else
+      return (false);
 };
 GeniePushButton.prototype.Reset = function() {
-   this.Draw();
+
+   this.Pressed = true;
+	this.Draw();
 };
