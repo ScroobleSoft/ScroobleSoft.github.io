@@ -1,0 +1,21 @@
+
+var Words7d = [ "dancing", "darling", "dashing", "dealing", "dearest", "deathly", "debacle", "debated", "debater",
+					 "debrief", "deceive", "decency", "decibel", "decided", "decider", "decimal", "declaim", "declare", "decline",
+					 "decoded", "decoder", "default", "defiant", "deficit", "defiled", "defined", "deflate", "deflect", "defraud",
+					 "defrost", "defunct", "defused", "degrade", "deleted", "delight", "delimit", "deliver", "demonic", "demoted",
+					 "denoted", "dentist", "deplete", "deplore", "deposed", "deposit", "deprave", "depress", "deprive",
+					 "derided", "derived", "dervish", "descend", "descent", "deserts", "deserve", "desktop", "despair", "despise",
+					 "despite", "despoil", "dessert", "destine", "destiny", "destroy", "detract", "devalue", "develop", "deviant",
+					 "deviate", "devious", "devised", "devolve", "devoted", "devotee", "diagram", "dialled", "dialect", "diamond",
+					 "diarist", "dickens", "dictate", "diction", "diffuse", "digital", "dignify", "dignity", "digress", "dilated",
+					 "diluted", "dimpled", "dinette", "diocese", "dioxide", "diploma", "disable", "disavow", "disband", "discard",
+					 "discern", "discord", "discuss", "disdain", "disease", "disgust", "dishpan", "dislike", "dismiss", "disobey",
+					 "display", "dispose", "dispute", "disrobe", "disrupt", "dissect", "dissent", "distaff", "distant",
+					 "distend", "distort", "disturb", "disused", "diurnal", "diverge", "diverse", "divided", "divider", "divorce",
+					 "divulge", "dogfish", "doggone", "dogsled", "doleful", "dolphin", "donated", "doorman", "doormat", "doorway",
+					 "dormant",	"dossier", "doubled", "doubted", "doughty", "dowager", "drafted", "dragnet", "dragoon", "drained",
+					 "drapery", "drastic", "draught", "drawers", "drawing", "dreaded", "dreamer", "dredged", "dressed", "dresser",
+					 "dribble", "drifted", "drifter", "drinker", "driving", "drizzle", "drooled", "drooped", "droplet", "dropout",
+					 "dropped", "dropper", "drought", "drowned", "drummer", "drunken", "dualism", "duality", "dubious", "duchess",
+					 "dukedom", "dullard", "dumping", "dungeon", "duopoly", "durable", "dusting", "dwindle", "dynamic", "dynasty"
+];

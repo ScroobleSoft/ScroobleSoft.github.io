@@ -1,0 +1,23 @@
+
+var Words7t = [ "tableau", "tabloid", "tabular", "tachyon", "tactful", "tactile", "tadpole", "taffeta", "tainted", "talking",
+					 "tangent", "tangled", "tankard", "tannery", "tantrum", "tapered", "tapioca", "tarnish", "tasting", "tatters",
+					 "taunted", "taxable", "teacher", "tearful", "telling", "tempted", "tenable", "tenancy", "tendril", "tenfold",
+					 "tensile", "tenuous", "tenured", "tequila", "termite", "terrace", "terrain", "terrier", "terrify", "testify",
+					 "testing", "tetanus", "textile", "textual", "texture", "theatre", "theorem", "therapy", "thereby", "thermal",
+					 "thicken", "thicker", "thicket", "thimble", "thinker", "thinner", "thirdly", "thirsty", "thistle", "thither",
+					 "thought", "thrifty", "throaty", "through", "thumbed", "thumped", "thunder", "thyroid", "ticking", "tickled",
+					 "tighten", "tightly", "tingled", "tipster", "tiptoed", "titanic", "titular", "toasted", "toaster", "tobacco",
+					 "toddler", "toehold", "toenail", "toggled", "tonight", "tonnage", "tonsure", "topcoat", "topiary", "topical",
+					 "topknot", "topping", "topsoil", "topspin",	"torched", "torment", "tornado", "torpedo", "torrent", "torsion",
+					 "torture", "totally", "touched", "tourism", "tourist", "tourney", "tousled", "towards", "towered", "trachea",
+					 "tracing", "tracked", "tracker", "tractor", "trading", "traduce", "traffic", "tragedy", "trailed", "trailer",
+					 "trainee", "trainer", "traipse", "traitor", "trammel", "trample", "tranche", "transit", "transom", "trapeze",
+					 "trapped", "trapper", "trashed", "travail", "trawler", "treacle", "treason", "treated", "treetop", "trefoil",
+					 "trellis", "tremble", "tresses", "trestle", "tribune", "tribute", "triceps", "trickle", "trident", "trifled",
+					 "trigger", "trilogy", "trimmed", "trinity", "trinket", "triplet", "tripped", "triumph", "trivial", "trodden",
+					 "trolley", "trooper", "trotted", "trouble", "trounce", "truancy", "trucked", "trucker", "trudged", "trumped",
+					 "trumpet", "trundle", "trusted", "trustee", "tsunami", "tubular", "tuition", "tumbled", "tumbler", "tumulus",
+					 "tuneful", "turbine", "turmoil", "turning", "turnkey", "tussled", "twaddle", "twiddly",
+					 "twinkle", "twisted", "twister", "twitchy", "twitter", "twosome", "typhoid", "typhoon", "typical", "typing",
+					 "tyranny"
+];

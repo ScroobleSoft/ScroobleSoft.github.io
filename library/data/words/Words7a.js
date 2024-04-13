@@ -1,0 +1,23 @@
+
+var Words7a = [ "abandon", "abashed", "abdomen", "abetted", "abiding", "ability", "abolish", "aborted", "abridge", "abscess",
+					 "abscond", "absence", "absolve", "abstain", "abusive", "academy", "acclaim", "account", "accused", "acerbic",
+					 "acetate", "acetone", "achieve", "acidity", "acolyte", "acquire", "acreage", "acrobat", "acronym", "acrylic",
+					 "actuary", "actuate", "adamant", "adapted", "adaptor", "address", "adduced", "adhered", "adjourn", "adjudge",
+					 "adjunct", "admiral", "admired", "adopted", "adoring", "adorned", "advance", "adverse", "advised", "advisor",
+					 "aerobic", "aerosol", "affixed", "afflict", "affront", "against", "ageless", "agitate", "agonize", "aground",
+					 "aileron", "ailment", "aimless", "airless", "airline", "airlock", "airport", "airship", "alarmed", "albumen",
+					 "alchemy", "alcohol", "alerted", "algebra", "aligned", "alimony", "alleged", "allegro", "allergy", "allowed",
+					 "alluded", "almanac", "already", "alright", "altered", "alumnus", "amalgam", "amateur", "amazing", "ambient",
+					 "amended", "amenity", "amiable", "amnesia", "amnesty", "amorous", "amplify", "amputee", "amusing", "anaemia",
+					 "anagram", "analogy", "analyse", "analyst", "anarchy", "anatomy", "anchovy", "android", "anemone", "angelic",
+					 "angling", "anguish", "angular", "animate", "annexed", "annoyed", "annuity", "anodyne", "anomaly",
+					 "another", "antacid", "antenna", "anthrax", "antigen", "antique", "antonym", "anxiety", "anybody", "anymore",
+					 "aplenty", "apology", "apostle", "apparel", "appease", "applaud", "applied", "appoint", "apprise", "approve",
+					 "apricot", "apropos", "aquatic", "aqueous", "aquifer", "arbiter", "archaic", "archery", "archive", "archway",
+					 "arduous", "armoury", "aroused", "arraign", "arrange", "arrayed", "arrears", "arrival", "arrived", "arrowed",
+					 "arsenal", "arsenic", "article", "artisan", "artiste", "artless", "ascribe", "ashamed", "asinine", "askance",
+					 "asphalt", "aspired", "aspirin", "assault", "assuage", "assumed", "assured", "astound", "astride", "asunder",
+					 "atheism", "atheist", "athlete", "atomize", "atrophy", "attache", "attempt", "attired", "attract", "attuned",
+					 "auction", "audible", "auditor", "austere", "autopsy", "availed", "avarice", "avenged", "average", "aviator",
+					 "awfully", "awkward", "azimuth"
+];

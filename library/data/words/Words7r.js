@@ -1,0 +1,23 @@
+
+var Words7r = [ "raccoon", "racquet", "radiate", "radiant", "radical", "rafting", "ragdoll", "ragtime", "railing", "railway",
+					 "raiment", "rainbow", "raining", "raising", "rampage", "rampant", "rampart", "rancher", "rancour", "ranking",
+					 "ransack", "ranting", "rapport", "rapture", "ratchet", "rattled", "raucous", "rawhide", "reacted", "reactor",
+					 "readily", "reading", "realign", "reality", "realize", "rearing", "rebirth", "rebound", "rebuild", "rebuked",
+					 "receded", "receipt", "receive", "recital", "reclaim", "recline", "recluse", "recount", "recover", "recruit",
+					 "rectify", "rectory", "recycle", "redoubt", "redress", "reduced", "redwood", "reelect", "reenact", "referee",
+					 "refined", "reflect", "refract", "refrain", "refresh", "refugee", "refusal", "refused", "refuted", "regaled",
+					 "regatta", "regency", "regimen", "regress", "regroup", "regular", "reigned", "rejoice", "relapse", "related",
+					 "relaxed", "relayed", "release", "reliant", "relieve", "remains", "rematch", "remnant", "remorse", "removal",
+					 "reneged", "renewal", "renewed", "replace", "replete", "replica", "repress", "reprise", "reprove", "reptile",
+					 "repulse", "reputed", "request", "requiem", "require", "requite", "rescind", "rescued", "reserve", "reshape",
+					 "resided", "residue", "resolve", "resound", "respect", "respire", "respite", "respond", "restart", "restate",
+					 "restful", "restive", "restock", "restore", "resumed", "retinue", "retired", "retiree", "retrace", "retract",
+					 "retread", "retreat", "retrial", "reunify", "reunion", "reunite", "revelry", "revenge", "revenue", "revered",
+					 "reverie", "reverse", "reviled", "revised", "revisit", "revival", "revived", "revoked", "revolve",
+					 "rhombus", "rhubarb", "ribbing", "ribcage", "rickets", "rickety", "riddled", "rigging", "rightly", "rimless",
+					 "ringing", "ringlet", "riotous", "ripcord", "riposte", "risible", "risotto",	"rissole", "rivalry", "riviera",
+					 "rivulet", "roadway", "roaming", "roaring", "roasted", "robbery", "rolling",	"romance", "rooftop", "roomful",
+					 "rooster", "rosebud", "rosehip", "rosette", "rostrum", "rotated", "rotting", "rotunda", "roundel", "roughly",
+					 "rousing", "routine", "royally", "royalty", "rubbing", "rubbish", "rubella", "ruction", "ruffian", "ruffled",
+					 "ruinous", "rumbled", "rumpled", "rundown", "running", "rupture", "rustler", "rushing", "rustled", "rustler"
+];
