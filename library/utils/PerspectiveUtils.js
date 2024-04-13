@@ -113,6 +113,7 @@ PerspectiveUtilities.prototype = {
 
       switch (this.Perspective) {
 	 case PERSPECTIVE.SIDeVIEW:
+	    pnt.X -= this.ScreenRect.L;
 	    pnt.Y = (pnt.Y-this.ScreenRect.T)/this.Scale;
 	    break;
 	 case PERSPECTIVE.BIRDsEYE:
