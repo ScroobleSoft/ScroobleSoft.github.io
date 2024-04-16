@@ -17,10 +17,10 @@ var Solutions = [ [ "packaging", "jalapenos", "paddocked", "tactician",
 						[ "nanometer", "yearnings", "hackneyed", "zirconias",
 						  "ample", "oiled", "eerie", "exult", "magma", "dreck", "cadre", "raise",
 						  "impel", "creed", "route", "enter", "named", "algae", "corgi", "doing"  ],
-						[ "magnetise", "yellowish", "yesterday", "lacerated",									//<<<<<< HERE
+						[ "magnetise", "yellowish", "yesterday", "lacerated",
 						  "alias", "nines", "total", "splay", "louse", "scent", "taper", "rasta",
 						  "align", "eases", "tilde", "loyal", "atlas", "exude", "throw", "poses"  ],
-						[ "imagineer", "keystroke", "unabashed", "qualifies",
+						[ "imagineer", "keystroke", "unabashed", "qualifies",									//<<<<<< HERE
 						  "madam", "godly", "north", "eager", "cutin", "throb", "lodes", "brink",		//cut-in?
 						  "undid", "lumpy", "rogue", "hires", "facet", "enter", "labor", "drink"  ],
 						[ "sacrilege", "kabbalist", "narcotics", "unashamed",
@@ -142,5 +142,11 @@ var Solutions = [ [ "packaging", "jalapenos", "paddocked", "tactician",
 						  "audio", "earth", "onion", "smell", "lakes", "karma", "debut", "leave"  ],
 						[ "jukeboxes", "manganese", "echograms", "obsession",
 						  "usurp", "every", "octet", "extra", "optic", "cargo", "sugar", "dream",
-						  "brute", "empty", "tetra", "twang", "stoic", "otter", "sedan", "guess"  ]
-];  //48
+						  "brute", "empty", "tetra", "twang", "stoic", "otter", "sedan", "guess"  ],
+						[ "captivity", "ulcerated", "nailheads", "qualified",
+						  "arise", "tinny", "veils", "tutor", "arena", "snail", "evoke", "tuned",
+						  "union", "leery", "intel", "surge", "flats", "enema", "extra", "ounce"  ],
+						[ "verminous", "ideations", "jauntiest", "eastwards",
+						  "error", "melee", "nerve", "uncut", "mocha", "train", "sushi", "atlas",
+						  "aural", "terse", "raced", "extra", "admit", "dacha", "swami", "salon"  ]
+];  //50
