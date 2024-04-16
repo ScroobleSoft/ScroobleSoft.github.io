@@ -96,7 +96,8 @@ var CROSSLE = { COLOUR: "yellow", TYPE: { DAILY: 0, NUMBERED: 1, SYMMETRICAL: 2,
 															 COLOUR: "black", BACKGROUND: "yellow", TEXT: { COLOUR: "white" } },
 												 OK: { L: -1, T: -1, W: 40, H: 25, LW: 3, LABEL: "OK", STYLE: BUTTON.STYLE.RAISED,
 														 COLOUR: "black", BACKGROUND: "yellow", TEXT: { COLOUR: "white" } }
-											  }
+											  },
+									IMAGE: { NUMBERS: { L: 2, T: 315, W: 241, H: 121, C: 10, R: 5, PATCH: { W: 24, H: 24 } } }
 								 },
 					 BOARD: { L: 20, T: 45, W: 320, H: 320, COLOUR: "white", STATE: { NORMAL: 0, CLICKED: 1, WAITING: 2, DOUBLeCLICKED: 3 },
 								 CELL: { COUNT: 121, W: 29, H: 29, C: 11, R: 11, OFFSET: { X: 10, Y: 8 } },
