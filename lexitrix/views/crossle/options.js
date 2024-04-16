@@ -4,7 +4,8 @@
 var LexiCrossleOptionsView = function() {
 	var DailyButton, NumberedButton, SymmetricalButton, AsymmetricButton;
 	var DifficultyButtons;
-	var DigitKeys, BackspaceButton, ClearButton, OkButton;		//UNLOGGED
+	var DigitKeys, BackspaceButton, ClearButton;		//UNLOGGED - REDUNDANT
+	var NumbersImage, OkButton;
 
 	var i;
 };
@@ -72,6 +73,9 @@ LexiCrossleOptionsView.prototype.SetNumberedButtons = function() {
 	this.ClearButton.Set(this.Canvas, this.Specs.BUTTON.CLEAR, this.TextWriter);
 	this.ClearButton.SetCornersPic(RaisedCornerImages);
 	this.Controls.push(this.ClearButton);
+
+	this.NumbersImage = new GenieImage();
+	this.NumbersImage.Set(this.Context, ImageManager.Pics[IMAGeINDEX.CONTROLS], this.Specs.IMAGE.NUMBERS);
 	this.OkButton = new ImageButton();
 	this.OkButton.Set(this.Canvas, this.Specs.BUTTON.OK, this.TextWriter);
 	this.OkButton.SetCornersPic(RaisedCornerImages);
