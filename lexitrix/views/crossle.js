@@ -145,8 +145,12 @@ LexiCrossleView.prototype.DrawSeconds = function() {
 	this.GraphicsTool.DrawRectangle(300, 12, 35, 20, this.Specs.COLOUR, 0);
 	if (!this.Timer)
 		this.TextWriter.Write("0", 325, 30);
-	else 
-		this.TextWriter.Write(this.Timer, 325-(Math.floor(Math.log10(this.Timer))*8), 30);
+	else {
+		if (this.Timer==300)
+			this.TextWriter.Write(this.Timer, 325-(Math.floor(Math.log10(this.Timer))*8), 30, { COLOUR: "red" } );
+		else
+			this.TextWriter.Write(this.Timer, 325-(Math.floor(Math.log10(this.Timer))*8), 30);
+	}
 };
 LexiCrossleView.prototype.Update = function() {
 
@@ -160,7 +164,7 @@ LexiCrossleView.prototype.Update = function() {
 	this.Keyboard.UpdateKeys();
 	--this.Frames;
 	if (!this.Frames)
-		if (this.Timer<=300) {
+		if (this.Timer<300) {
 			++this.Timer;
 			this.Frames = 60;
 			this.DrawSeconds();
