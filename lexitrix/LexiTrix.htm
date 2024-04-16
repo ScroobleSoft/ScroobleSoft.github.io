@@ -2,17 +2,17 @@
 <html>
 
 <a href="https://www.instagram.com/mirrorsbytazeen/?hl=en">
-   <img src="mirrors.png" alt="Mirrors By Tazeen" width="360" height="32" >
+    <img src="mirrors.png" alt="Mirrors By Tazeen" width="360" height="64" >
 </a>
 
-   <head>
+    <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	<div id="PrimeDiv" style="position:absolute; top:40px; left:8px; z-index:2">
 	   <canvas id="PrimeCanvas" width="360" height="600"></canvas>
 	</div>
-   </head>
+    </head>
 
-   <body onload="RunWordGames()">
+    <body onload="RunWordGames()">
 
 	<!-- Data -->
 	<script src="..\library\GenieData.js"></script>
@@ -226,7 +226,11 @@
 	var Game;
 
 	function RunWordGames() {
-
+/*
+	var elmnt = document.getElementById("PrimeCanvas");
+	var cntxt = elmnt.getContext("2d");
+	cntxt.fillText("Loading . . . Please wait 2 seconds.", 5, 20);
+*/
 	    //Create library components
 	    LexiScape = new GenieScape();
 	    LexiGraphics = new GenieGraphics();
