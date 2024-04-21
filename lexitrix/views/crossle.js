@@ -8,11 +8,11 @@ var LexiCrossleView = function() {
 	var DailyDate, GameType, Difficulty;
 
 	var SelectedCell;
-	var CellImage;
+	var IntroImage;
 	var Keys, Letters, Timer, Frames;
 	var BorderIconImage, BorderIcon;
 	var InstructionsButton, SolveButton, RestartButton, QuitButton;
-	var GenerateButton;		//NOTE: will be removed on deployed app
+	var MineButton, GenerateButton;
 
 	var i;
 };
@@ -37,6 +37,11 @@ LexiCrossleView.prototype.SetComponents = function() {
 	this.Keyboard = new CrossleKeyboard();
 	this.Keyboard.Set(this.Specs.KEYBOARD, this.Context, this.Specs.COLOUR, this.Board, this);
 	this.DailyDate = new Date();
+};
+LexiCrossleView.prototype.SetImages = function() {
+
+	this.IntroImage = new GenieImage();
+	this.IntroImage.Set(this.Context, ImageManager.Pics[IMAGeINDEX.IMAGES], this.Specs.IMAGE.INTRO);
 };
 LexiCrossleView.prototype.SetControls = function() {
 
@@ -63,10 +68,15 @@ LexiCrossleView.prototype.SetControls = function() {
 	this.QuitButton.Set(this.Canvas, this.Specs.BUTTON.QUIT, this.TextWriter);
 	this.QuitButton.SetCornersPic(RoundedCornerImages);
 	this.Controls.push(this.QuitButton);
-
+/* NOTE: comment out on deployed app */
 	this.GenerateButton = new TextButton();
 	this.GenerateButton.Set(this.Canvas, { L: 265, T: 560, W: 80, H: 25, LABEL: "Generate" }, this.TextWriter);
-//	this.Controls.push(this.GenerateButton);
+	this.Controls.push(this.GenerateButton);
+
+	this.MineButton = new TextButton();
+	this.MineButton.Set(this.Canvas, { L: 5, T: 560, W: 60, H: 25, LABEL: "Mine" }, this.TextWriter);
+	this.Controls.push(this.MineButton);
+/* */
 };
 LexiCrossleView.prototype.SetDaily = function() {
 	var ms;
@@ -88,11 +98,27 @@ LexiCrossleView.prototype.SetSymmetrical = function() {
 LexiCrossleView.prototype.SetAsymmetric = function() {
 
 	this.GameType = this.Specs.TYPE.ASYMMETRIC;
-	this.Selector.SolutionIndex = this.Randomizer.GetIndex(Solutions.length);
 };
 LexiCrossleView.prototype.SetDifficulty = function(lvl) {
 
 	this.Difficulty = lvl;
+};
+LexiCrossleView.prototype.Open = function() {
+	GenieView.prototype.Open.call(this);
+	//UNLOGGED
+	this.IntroImage.Draw();
+	this.PollClick();
+};
+LexiCrossleView.prototype.PollClick = function() {
+
+	this.AnimationFrameHandle = requestAnimationFrame(this.PollClick.bind(this));
+
+	if (Mouse.CheckLeftClicked(CANVAS.PRIME)) {
+		cancelAnimationFrame(this.AnimationFrameHandle);
+		Mouse.ClearAll();
+		this.Board.DrawGrid();
+		this.Update();
+	}
 };
 LexiCrossleView.prototype.Draw = function() {
 
@@ -188,6 +214,7 @@ LexiCrossleView.prototype.UpdateButtons = function() {
 	if (this.InstructionsButton.CheckClicked()) {
 //		cancelAnimationFrame(this.AnimationFrameHandle);
 		//-launch dialog
+		alert("Coming soon.");
 	}
 
 	//Solve
@@ -203,7 +230,7 @@ LexiCrossleView.prototype.UpdateButtons = function() {
 	//Quit
 	if (this.QuitButton.CheckClicked())
 		this.Close(this.OpenMainView.bind(this), 100);
-/*
+/* NOTE: comment out on deployed app */
 	//Generate
 	if (this.GenerateButton.CheckClicked()) {
 		cancelAnimationFrame(this.AnimationFrameHandle);
@@ -211,7 +238,15 @@ LexiCrossleView.prototype.UpdateButtons = function() {
 		this.Board.SetSolution(this.Selector);
 		this.Board.Solve();
 	}
-*/
+
+	//Mine
+	if (this.MineButton.CheckClicked()) {
+		cancelAnimationFrame(this.AnimationFrameHandle);
+		this.Selector.Mine();
+		this.Board.SetSolution(this.Selector);
+		this.Board.Solve();
+	}
+/* */
 	//Border icon
 	if (this.BorderIcon.CheckPressed()) {
 		if (this.Board.BorderFlag)

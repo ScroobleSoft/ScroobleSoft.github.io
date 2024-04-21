@@ -55,7 +55,6 @@ GenieMainView.prototype.Update = function() {
 GenieMainView.prototype.LaunchCrackle = function() {
 
 	CrackleView.Open();
-	CrackleView.Update();
 };
 GenieMainView.prototype.LaunchShuffle = function() {
 
