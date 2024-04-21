@@ -95,8 +95,8 @@ CrossleWordsSelector.prototype = {
 		var i, j;
 		var iWord;
 
-		if (lttr=='q')
-			return ("dvnll");
+		if (lttr=='q' || lttr=='j')
+			return ("00000");
 
 		this.FiveLetterList.Reset();
 		for (i=0;i<this.FiveLetterWords.length;++i)
@@ -112,7 +112,7 @@ CrossleWordsSelector.prototype = {
 		var iWord, iWords;
 
 		if (lttr=='x' || lttr=='z')
-			return ("dvnll");
+			return ("00000");
 
 		iWords = lttr.charCodeAt(0) - this.a.charCodeAt(0);
 		if (iWords==24)  //amend for words starting with 'y'
@@ -126,7 +126,7 @@ CrossleWordsSelector.prototype = {
 		var iWord, iWords;
 
 		if (fLttr=='x' || fLttr=='z')
-			return ("dvnll");
+			return ("00000");
 
 		iWords = fLttr.charCodeAt(0) - this.a.charCodeAt(0);
 		if (iWords==24)  //amend for words starting with 'y'
@@ -142,6 +142,62 @@ CrossleWordsSelector.prototype = {
 		else {
 			iWord = this.Randomizer.GetIndex(this.FiveLetterList.Length);
 			return (this.FiveLetterList[iWord]);
+		}
+	},
+	Mine() {
+		//UNLOGGED
+		var i;
+		var gaps;
+
+		this.MineNineLetterWords();
+		do {
+			this.PickFiveLetterWords();
+			gaps = 0;
+			for (i=0;i<this.FiveSolutions.length;++i)
+				if (this.FiveSolutions[i]==this.DummyWord)
+					++gaps;
+		} while (gaps>2);
+	},
+	MineNineLetterWords() {
+		//UNLOGGED
+		var i;
+		var iLetter, iWord;
+		var word;
+
+		function CheckWordInvalid(wrd) {
+			//UNLOGGED
+			if (wrd[1]=="j" || wrd[1]=="q" || wrd[1]=="u" || wrd[1]=="v" || wrd[1]=="x" || wrd[1]=="z")
+				return (true);
+			if (wrd[3]=="j" || wrd[3]=="q" || wrd[3]=="u" || wrd[3]=="v" || wrd[3]=="x" || wrd[3]=="z")
+				return (true);
+			if (wrd[5]=="j" || wrd[5]=="q" || wrd[5]=="u" || wrd[5]=="v" || wrd[5]=="x" || wrd[5]=="z")
+				return (true);
+			if (wrd[7]=="j" || wrd[7]=="q" || wrd[7]=="u" || wrd[7]=="v" || wrd[7]=="x" || wrd[7]=="z")
+				return (true);
+
+			return (false);
+		}
+
+		for (i=0;i<2;++i) {
+
+			//Top and left words
+			iLetter = this.Randomizer.GetSlot(this.NineDistribution);
+			iWord = this.Randomizer.GetIndex(this.NineLetterWords[iLetter].length);
+			if (i==0)
+				this.NineSolutions[0] = this.NineLetterWords[iLetter][iWord];
+			else
+				this.NineSolutions[3] = this.NineLetterWords[iLetter][iWord];
+
+			//Right and bottom words
+			do {
+				iLetter = this.Randomizer.GetSlot(this.NineDistribution);
+				iWord = this.Randomizer.GetIndex(this.NineLetterWords[iLetter].length);
+				word = this.NineLetterWords[iLetter][iWord];
+			} while (CheckWordInvalid(word));
+			if (i==0)
+				this.NineSolutions[1] = word;
+			else
+				this.NineSolutions[2] = word;
 		}
 	}
 };

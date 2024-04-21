@@ -5,16 +5,19 @@ var LexiCrossleOptionsView = function() {
 	var DailyButton, NumberedButton, SymmetricalButton, AsymmetricButton;
 	var DifficultyButtons;
 	var DigitKeys, BackspaceButton, ClearButton;		//UNLOGGED - REDUNDANT
-	var NumbersImage, OkButton;
+	var NumbersImage, SelectionImage, OkButton;
+	var CellIndex, Col, Row;
 
 	var i;
 };
 LexiCrossleOptionsView.prototype = new GenieView();
 LexiCrossleOptionsView.prototype.Set = function(cnvs, specs, tWriter) {
 
-	this.SetLinks(null, this.TextWriter);
+	this.SetLinks(null, tWriter);
 
 	GenieView.prototype.Set.call(this, cnvs, specs);
+
+	this.CellIndex = 0;
 };
 LexiCrossleOptionsView.prototype.SetControls = function() {
 
@@ -64,7 +67,7 @@ LexiCrossleOptionsView.prototype.SetDiffcultyButtons = function() {
 };
 LexiCrossleOptionsView.prototype.SetNumberedButtons = function() {
 
-//	this.DigitKeys
+//	this.DigitKeys - TODO: might add these at some point
 	this.BackspaceButton = new ImageButton();
 	this.BackspaceButton.Set(this.Canvas, this.Specs.BUTTON.BACKSPACE, this.TextWriter);
 	this.BackspaceButton.SetCornersPic(RaisedCornerImages);
@@ -76,8 +79,10 @@ LexiCrossleOptionsView.prototype.SetNumberedButtons = function() {
 
 	this.NumbersImage = new GenieImage();
 	this.NumbersImage.Set(this.Context, ImageManager.Pics[IMAGeINDEX.CONTROLS], this.Specs.IMAGE.NUMBERS);
+	this.SelectionImage = new GenieImage();
+	this.SelectionImage.Set(this.Context, ImageManager.Pics[IMAGeINDEX.IMAGES], this.Specs.IMAGE.SELECTION);
 	this.OkButton = new ImageButton();
-	this.OkButton.Set(this.Canvas, this.Specs.BUTTON.OK, this.TextWriter);
+	this.OkButton.Set(this.Canvas, this.Specs.BUTTON.OK, ImageManager.Pics[IMAGeINDEX.CONTROLS]);
 	this.OkButton.SetCornersPic(RaisedCornerImages);
 	this.Controls.push(this.OkButton);
 };
@@ -90,7 +95,6 @@ LexiCrossleOptionsView.prototype.Open = function() {
 
 	this.DailyButton.Show();
 	this.NumberedButton.Show();
-	this.NumberedButton.Disable();		//TEMP
 	this.SymmetricalButton.Show();
 	this.AsymmetricButton.Show();
 
@@ -107,12 +111,11 @@ LexiCrossleOptionsView.prototype.Update = function() {
 	}
 	if (this.NumberedButton.CheckClicked()) {
 		cancelAnimationFrame(this.AnimationFrameHandle);
-		this.PickGameNumber();
-		this.Close(this.OpenCrossleView.bind(this), 100);
+		setTimeout(this.PickGameNumber.bind(this), 100);
 	}
 	if (this.SymmetricalButton.CheckClicked()) {
-		CrossleView.SetSymmetrical();
 		cancelAnimationFrame(this.AnimationFrameHandle);
+		CrossleView.SetSymmetrical();
 		this.Close(this.OpenCrossleView.bind(this), 100);
 	}
 	if (this.AsymmetricButton.CheckClicked()) {
@@ -129,21 +132,35 @@ LexiCrossleOptionsView.prototype.CloseOptionButtons = function() {
 	this.AsymmetricButton.Hide();
 };
 LexiCrossleOptionsView.prototype.PickGameNumber = function() {
-	//UNLOGGED
+
 	this.CloseOptionButtons();
 	this.ColourScape(null, this.Specs.COLOUR);
-	//-button panel
+	this.TextWriter.Write("Pick a number:", 60, 20);
+	this.Col = 0;
+	this.Row = 0;
+	this.DrawNumbers();
+/*
+	//Button panel - TODO: add this later
 	this.BackspaceButton.Show();
 	this.ClearButton.Show();
+*/
 	this.OkButton.Show();
 	this.UpdateNumbered();
+};
+LexiCrossleOptionsView.prototype.DrawNumbers = function() {
+	var x, y;
+
+	this.NumbersImage.Draw();
+	x = this.Specs.IMAGE.NUMBERS.X + (this.Specs.IMAGE.NUMBERS.PATCH.W*this.Col) + 1;
+	y = this.Specs.IMAGE.NUMBERS.Y + (this.Specs.IMAGE.NUMBERS.PATCH.H*this.Row) + 1;
+	this.SelectionImage.Draw(x, y);
 };
 LexiCrossleOptionsView.prototype.UpdateNumbered = function() {
 	//UNLOGGED
 
 	this.AnimationFrameHandle = requestAnimationFrame(this.UpdateNumbered.bind(this));
-
-	//-button panel
+/*
+	//Button panel - TODO: this will be added later
 	if (this.BackspaceButton.CheckClicked()) {
 	}
 	if (this.ClearButton.CheckClicked()) {
@@ -151,15 +168,25 @@ LexiCrossleOptionsView.prototype.UpdateNumbered = function() {
 	if (this.OkButton.CheckClicked()) {
 		//-call CrossleView.SetNumber(num)
 	}
+*/
+	if (Mouse.CheckLeftClicked(CANVAS.PRIME)) {
+		this.Col = Math.floor((Mouse.Click.X-this.Specs.IMAGE.NUMBERS.X)/this.Specs.IMAGE.NUMBERS.PATCH.W);
+		this.Row = Math.floor((Mouse.Click.Y-this.Specs.IMAGE.NUMBERS.Y)/this.Specs.IMAGE.NUMBERS.PATCH.H);
+		this.CellIndex = (this.Specs.IMAGE.NUMBERS.C*this.Row) + this.Col;
+		this.DrawNumbers();
+	}
+
+	if (this.OkButton.CheckClicked()) {
+		cancelAnimationFrame(this.AnimationFrameHandle);
+		CrossleView.SetNumber(this.CellIndex);
+		this.Close(this.OpenCrossleView.bind(this), 100);
+	}
 };
 LexiCrossleOptionsView.prototype.PickDifficulty = function() {
 
 	this.CloseOptionButtons();
 	this.ColourScape(null, this.Specs.COLOUR);
-//	this.DifficultyButtons.forEach(function(btn){btn.Show();});
-	var i;
-	for (i=0;i<this.DifficultyButtons.length;++i)
-		this.DifficultyButtons[i].Show();
+	this.DifficultyButtons.forEach(function(btn){btn.Show();});
 	this.UpdateDifficulty();
 };
 LexiCrossleOptionsView.prototype.UpdateDifficulty = function() {
@@ -179,5 +206,5 @@ LexiCrossleOptionsView.prototype.OpenCrossleView = function() {
 
 	CrossleView.SelectWords();
 	CrossleView.Open();
-	CrossleView.Update();
+//	CrossleView.Update();
 };

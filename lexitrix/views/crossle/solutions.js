@@ -20,14 +20,14 @@ var Solutions = [ [ "packaging", "jalapenos", "paddocked", "tactician",
 						[ "magnetise", "yellowish", "yesterday", "lacerated",
 						  "alias", "nines", "total", "splay", "louse", "scent", "taper", "rasta",
 						  "align", "eases", "tilde", "loyal", "atlas", "exude", "throw", "poses"  ],
-						[ "imagineer", "keystroke", "unabashed", "qualifies",									//<<<<<< HERE
+						[ "imagineer", "keystroke", "unabashed", "qualifies",
 						  "madam", "godly", "north", "eager", "cutin", "throb", "lodes", "brink",		//cut-in?
 						  "undid", "lumpy", "rogue", "hires", "facet", "enter", "labor", "drink"  ],
 						[ "sacrilege", "kabbalist", "narcotics", "unashamed",
 						  "atone", "reefs", "leafs", "gaper", "ultra", "sonic", "crust", "magic",
 						  "noose", "sheds", "alpha", "shrub", "alums", "eaten", "camel", "urges"  ],
 						[ "rainbirds", "racketeer", "vaporizer", "magnetise",
-						  "award", "niece", "incas", "drive", "salsa", "ditto", "sushi", "exude",
+						  "award", "niece", "incas", "drive", "salsa", "ditto", "sushi", "exude",		//incas
 						  "awake", "nudge", "china", "steak", "tased", "splat", "swept", "sauce"  ],		//10
 						[ "keystones", "ecologies", "lacerated", "magnolias",
 						  "edged", "smear", "occur", "essay", "aorta", "slate", "arena", "image", 
@@ -148,5 +148,23 @@ var Solutions = [ [ "packaging", "jalapenos", "paddocked", "tactician",
 						  "union", "leery", "intel", "surge", "flats", "enema", "extra", "ounce"  ],
 						[ "verminous", "ideations", "jauntiest", "eastwards",
 						  "error", "melee", "nerve", "uncut", "mocha", "train", "sushi", "atlas",
-						  "aural", "terse", "raced", "extra", "admit", "dacha", "swami", "salon"  ]
-];  //50
+						  "aural", "terse", "raced", "extra", "admit", "dacha", "swami", "salon"  ],		//50
+						[ "nationals", "jumpsuits", "handstand", "canoodles",
+						  "apace", "islet", "nasal", "leant", "aloha", "ached", "toast", "yearn",
+						  "avail", "overt", "snafu", "litup", "drama", "epoch", "bayou", "adapt"  ],
+						[ "ultrarich", "ballparks", "jumpsuits", "nastiness",
+						  "loose", "rotor", "rifle", "crops", "adieu", "sleep", "snafu", "meant",
+						  "afoot", "their", "flora", "easel", "nears", "swipe", "samba", "aback"  ],
+						[ "taquerias", "unclutter", "laborious", "lactating",
+						  "amity", "unmet", "relic", "anger", "polka", "canto", "sushi", "adieu",
+						  "axiom", "tryst", "login", "coral", "topic", "nylon", "start", "spice"  ],
+						[ "marijuana", "genealogy", "verbalise", "absurdist",
+						  "aided", "inter", "unlit", "nurse", "phase", "throb", "prowl", "raids",
+						  "bidet", "under", "large", "theme", "depot", "stair", "peril", "owing"  ],
+						[ "falconers", "debarking", "omissions", "panoplies",
+						  "abase", "chest", "nomad", "royal", "totem", "hurts", "khaki", "alien",
+						  "adage", "overt", "maybe", "delta", "latch", "eater", "knack", "align"  ],
+						[ "parabolas", "laudatory", "mandolins", "pandering",
+						  "arise", "alias", "offed", "abode", "media", "amend", "focal", "coven",		//offed
+						  "alibi", "dress", "flora", "dread", "rumba", "nudge", "facet", "cover"  ]
+];  //56
