@@ -151,4 +151,5 @@ GenieCrackleView.prototype.PollInstructions = function() {
 GenieCrackleView.prototype.OpenMainView = function() {
 
 	MainView.Open();
+	MainView.Update();
 };
