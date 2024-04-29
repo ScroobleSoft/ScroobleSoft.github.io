@@ -4,8 +4,7 @@
 var LexiCrossleOptionsView = function() {
 	var DailyButton, NumberedButton, SymmetricalButton, AsymmetricButton;
 	var DifficultyButtons;
-	var DigitKeys, BackspaceButton, ClearButton;		//UNLOGGED - REDUNDANT
-	var NumbersImage, SelectionImage, OkButton;
+	var CellImage, SelectionImage, OkButton;
 	var CellIndex, Col, Row;
 
 	var i;
@@ -16,14 +15,12 @@ LexiCrossleOptionsView.prototype.Set = function(cnvs, specs, tWriter) {
 	this.SetLinks(null, tWriter);
 
 	GenieView.prototype.Set.call(this, cnvs, specs);
-
-	this.CellIndex = 0;
 };
 LexiCrossleOptionsView.prototype.SetControls = function() {
 
 	this.SetOptionButtons();
 	this.SetDiffcultyButtons();
-	this.SetNumberedButtons();
+	this.SetStashComponents();
 };
 LexiCrossleOptionsView.prototype.SetOptionButtons = function() {
 
@@ -65,20 +62,10 @@ LexiCrossleOptionsView.prototype.SetDiffcultyButtons = function() {
 		this.Controls.push(this.DifficultyButtons[i]);
 	}
 };
-LexiCrossleOptionsView.prototype.SetNumberedButtons = function() {
+LexiCrossleOptionsView.prototype.SetStashComponents = function() {
 
-//	this.DigitKeys - TODO: might add these at some point
-	this.BackspaceButton = new ImageButton();
-	this.BackspaceButton.Set(this.Canvas, this.Specs.BUTTON.BACKSPACE, this.TextWriter);
-	this.BackspaceButton.SetCornersPic(RaisedCornerImages);
-	this.Controls.push(this.BackspaceButton);
-	this.ClearButton = new ImageButton();
-	this.ClearButton.Set(this.Canvas, this.Specs.BUTTON.CLEAR, this.TextWriter);
-	this.ClearButton.SetCornersPic(RaisedCornerImages);
-	this.Controls.push(this.ClearButton);
-
-	this.NumbersImage = new GenieImage();
-	this.NumbersImage.Set(this.Context, ImageManager.Pics[IMAGeINDEX.CONTROLS], this.Specs.IMAGE.NUMBERS);
+	this.CellImage = new GenieImage();
+	this.CellImage.Set(this.Context, ImageManager.Pics[IMAGeINDEX.IMAGES], this.Specs.IMAGE.CELL);
 	this.SelectionImage = new GenieImage();
 	this.SelectionImage.Set(this.Context, ImageManager.Pics[IMAGeINDEX.IMAGES], this.Specs.IMAGE.SELECTION);
 	this.OkButton = new ImageButton();
@@ -135,44 +122,58 @@ LexiCrossleOptionsView.prototype.PickGameNumber = function() {
 
 	this.CloseOptionButtons();
 	this.ColourScape(null, this.Specs.COLOUR);
-	this.TextWriter.Write("Pick a number:", 60, 20);
+	this.TextWriter.Write("Pick a number:", 60, 40, { FONT: "18px Arial" } );
 	this.Col = 0;
 	this.Row = 0;
+	this.CellIndex = 0;
 	this.DrawNumbers();
-/*
-	//Button panel - TODO: add this later
-	this.BackspaceButton.Show();
-	this.ClearButton.Show();
-*/
 	this.OkButton.Show();
 	this.UpdateNumbered();
 };
 LexiCrossleOptionsView.prototype.DrawNumbers = function() {
 	var x, y;
+	var iCell;
+	var c, r;
 
-	this.NumbersImage.Draw();
-	x = this.Specs.IMAGE.NUMBERS.X + (this.Specs.IMAGE.NUMBERS.PATCH.W*this.Col) + 1;
-	y = this.Specs.IMAGE.NUMBERS.Y + (this.Specs.IMAGE.NUMBERS.PATCH.H*this.Row) + 1;
-	this.SelectionImage.Draw(x, y);
+	iCell = 0;
+	for (r=0;r<this.Specs.NUMBERS.R;++r)
+		for (c=0;c<this.Specs.NUMBERS.C;++c) {
+			x = this.Specs.NUMBERS.X + (c*(this.Specs.NUMBERS.W-1));
+			y = this.Specs.NUMBERS.Y + (r*(this.Specs.NUMBERS.H-1));
+			this.CellImage.Draw(x, y);
+			if (this.CellIndex==iCell)
+				this.SelectionImage.DrawPatchNumber(0, x+1, y+1);			//TODO: correct patch number has to be determined (maybe should be seperate func)
+			this.DrawDigits(iCell+1, x+this.Specs.NUMBERS.OX, y+this.Specs.NUMBERS.OY);
+			++iCell;
+			if (iCell==Solutions.length)
+				return;
+		}
+};
+LexiCrossleOptionsView.prototype.DrawDigits = function(num, x, y) {
+	var i;
+	var nDgts;
+	var dgt;
+
+	if (num==0)
+		nDgts = 1;
+	else
+		nDgts = Math.floor(Math.log10(num)) + 1;
+	x += this.Specs.NUMBERS.O[nDgts-1];
+	for (i=0;i<nDgts;++i) {
+		dgt = num % 10;
+		MediumDigitImages.DrawPatchNumber(dgt, x, y);
+		num = Math.floor(num/10);
+		x -= 7;
+	}
 };
 LexiCrossleOptionsView.prototype.UpdateNumbered = function() {
-	//UNLOGGED
 
 	this.AnimationFrameHandle = requestAnimationFrame(this.UpdateNumbered.bind(this));
-/*
-	//Button panel - TODO: this will be added later
-	if (this.BackspaceButton.CheckClicked()) {
-	}
-	if (this.ClearButton.CheckClicked()) {
-	}
-	if (this.OkButton.CheckClicked()) {
-		//-call CrossleView.SetNumber(num)
-	}
-*/
+
 	if (Mouse.CheckLeftClicked(CANVAS.PRIME)) {
-		this.Col = Math.floor((Mouse.Click.X-this.Specs.IMAGE.NUMBERS.X)/this.Specs.IMAGE.NUMBERS.PATCH.W);
-		this.Row = Math.floor((Mouse.Click.Y-this.Specs.IMAGE.NUMBERS.Y)/this.Specs.IMAGE.NUMBERS.PATCH.H);
-		this.CellIndex = (this.Specs.IMAGE.NUMBERS.C*this.Row) + this.Col;
+		this.Col = Math.floor((Mouse.Click.X-(this.Specs.NUMBERS.X+1))/(this.Specs.NUMBERS.W-1));
+		this.Row = Math.floor((Mouse.Click.Y-(this.Specs.NUMBERS.Y+1))/(this.Specs.NUMBERS.H-1));
+		this.CellIndex = (this.Specs.NUMBERS.C*this.Row) + this.Col;
 		this.DrawNumbers();
 	}
 
@@ -206,5 +207,4 @@ LexiCrossleOptionsView.prototype.OpenCrossleView = function() {
 
 	CrossleView.SelectWords();
 	CrossleView.Open();
-//	CrossleView.Update();
 };

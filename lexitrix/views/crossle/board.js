@@ -9,7 +9,7 @@ var CrossleBoard = function() {
 	var Cells, SelectedCell, CellClicked;
 	var CellImage, SelectedCellImage;
 	var CellOrder, WordOrder, BorderIndices;
-	var BorderFlag;
+	var VowelsFlag, BorderFlag, SolvedFlag;
 	var State, Frames;
 };
 CrossleBoard.prototype = {
@@ -204,8 +204,19 @@ CrossleBoard.prototype = {
 				this.Cells[i].Letter = this.Cells[i].Solution;
 				this.Cells[i].Draw(true);
 			}
+		this.SolveFlag = true;
 
 		this.Crossle.TextWriter.Write("Bravo!", 200, 390, { FONT: "18px Arial" } );
+	},
+	FillVowels() {
+		var i;
+		var cell;
+//UNLOGGED
+		this.BorderFlag = true;
+		for (i=0;i<this.BorderIndices.length;++i) {
+			cell = this.Cells[this.BorderIndices[i]];
+			cell.SetLetter(cell.Solution);
+		}
 	},
 	FillBorder() {
 		var i;
