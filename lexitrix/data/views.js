@@ -74,14 +74,15 @@ var SPINDLE = { };
 var JIGGLE = { };
 var CROSSLE = { COLOUR: "yellow", TYPE: { DAILY: 0, NUMBERED: 1, SYMMETRICAL: 2, ASYMMETRIC: 3 }, MILLISECONDS: 1713028537517,
 					 IMAGE: { INTRO: { L: 604, T: 2, W: 280, H: 248, X: 40, Y: 81 } },
-					 ICON: { BORDER: { L: 110, T: 560, W: 140, H: 25, LW: 3, IMAGE: { L: 685, T: 170, W: 134, H: 19 }, BACKGROUND: "yellow" } },
-					 BUTTON: { INSTRUCTIONS: { L: 20, T: 520, W: 100, H: 25, LW: 3, LABEL: "Instructions", STYLE: BUTTON.STYLE.ROUNDED,
+					 ICON: { VOWELS: { L:  25, T: 520, W: 140, H: 25, LW: 3, IMAGE: { L: 549, T: 306, W: 134, H: 19 }, BACKGROUND: "yellow" },
+								BORDER: { L: 195, T: 520, W: 140, H: 25, LW: 3, IMAGE: { L: 685, T: 170, W: 134, H: 19 }, BACKGROUND: "yellow" }  },
+					 BUTTON: { INSTRUCTIONS: { L: 20, T: 560, W: 100, H: 25, LW: 3, LABEL: "Instructions", STYLE: BUTTON.STYLE.ROUNDED,
 														COLOUR: "black", BACKGROUND: "yellow", TEXT: { COLOUR: "white" } },
-								  SOLVE: { L: 140, T: 520, W: 60, H: 25, LW: 3, LABEL: "Solve", STYLE: BUTTON.STYLE.ROUNDED,
+								  SOLVE: { L: 140, T: 560, W: 60, H: 25, LW: 3, LABEL: "Solve", STYLE: BUTTON.STYLE.ROUNDED,
 											  COLOUR: "black", BACKGROUND: "yellow", TEXT: { COLOUR: "white" } },
-								  RESTART: { L: 210, T: 520, W: 60, H: 25, LW: 3, LABEL: "Restart", STYLE: BUTTON.STYLE.ROUNDED,
+								  RESTART: { L: 210, T: 560, W: 60, H: 25, LW: 3, LABEL: "Restart", STYLE: BUTTON.STYLE.ROUNDED,
 												 COLOUR: "black", BACKGROUND: "yellow", TEXT: { COLOUR: "white" } },
-								  QUIT: { L: 280, T: 520, W: 60, H: 25, LW: 3, LABEL: "Quit", STYLE: BUTTON.STYLE.ROUNDED,
+								  QUIT: { L: 280, T: 560, W: 60, H: 25, LW: 3, LABEL: "Quit", STYLE: BUTTON.STYLE.ROUNDED,
 											 COLOUR: "black", BACKGROUND: "yellow", TEXT: { COLOUR: "white" } }
 								},
 					 OPTIONS: { COLOUR: "yellow",
@@ -91,15 +92,12 @@ var CROSSLE = { COLOUR: "yellow", TYPE: { DAILY: 0, NUMBERED: 1, SYMMETRICAL: 2,
 												 ASYMMETRIC: { L: 97, T: 297, W: 166, H: 46, LW: 3, SX: 685, SY: 128, STYLE: BUTTON.STYLE.RAISED },
 												 DIFFICULTY: { COUNT: 6, L: 100, T: 60, W: 160, H: 40, O: 2, LW: 3,
 																	SX: 847, SY: 2, STYLE: BUTTON.STYLE.RAISED, GAP: 80 },
-												 BACKSPACE: { L: -1, T: -1, W: 80, H: 25, LW: 3, LABEL: "Backspace", STYLE: BUTTON.STYLE.RAISED,
-																  COLOUR: "black", BACKGROUND: "yellow", TEXT: { COLOUR: "white" } },
-												 CLEAR: { L: -1, T: -1, W: 60, H: 25, LW: 3, LABEL: "Clear", STYLE: BUTTON.STYLE.RAISED,
-															 COLOUR: "black", BACKGROUND: "yellow", TEXT: { COLOUR: "white" } },
-												 OK: { L: 160, T: 200, W: 40, H: 25, LW: 3, SX: 627, SY: 2, STYLE: BUTTON.STYLE.RAISED }
+												 OK: { L: 140, T: 420, W: 80, H: 30, LW: 3, SX: 685, SY: 192, STYLE: BUTTON.STYLE.RAISED }
 											  },
-									IMAGE: { NUMBERS: { L: 2, T: 315, W: 241, H: 121, X: 60, Y: 60, C: 10, R: 5, PATCH: { W: 24, H: 24 } },
-												SELECTION: { L: 360, T: 266, W: 23, H: 23 }
-											 }
+									IMAGE: { CELL: { L: 604, T: 252, W: 36, H: 36 },
+												SELECTION: { L: 642, T: 252, W: 106, H: 34, O: 2, C: 3, R: 1, PATCH: { W: 34, H: 34 } }
+											 },
+									NUMBERS: { X: 4, Y: 60, C: 10, R: 10, W: 36, H: 36, OX: 15, OY: 13, O: [ 0,4,7,11 ] }
 								 },
 					 BOARD: { L: 20, T: 45, W: 320, H: 320, COLOUR: "white", STATE: { NORMAL: 0, CLICKED: 1, WAITING: 2, DOUBLeCLICKED: 3 },
 								 CELL: { COUNT: 121, W: 29, H: 29, C: 11, R: 11, OFFSET: { X: 10, Y: 8 } },
