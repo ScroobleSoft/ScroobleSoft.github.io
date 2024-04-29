@@ -78,7 +78,7 @@ LexiCrossleView.prototype.SetControls = function() {
 	this.QuitButton.Set(this.Canvas, this.Specs.BUTTON.QUIT, this.TextWriter);
 	this.QuitButton.SetCornersPic(RoundedCornerImages);
 	this.Controls.push(this.QuitButton);
-/* NOTE: comment out on deployed app */
+/* NOTE: comment out on deployed app
 	this.GenerateButton = new TextButton();
 	this.GenerateButton.Set(this.Canvas, { L: 5, T: 475, W: 40, H: 25, LABEL: "Gen" }, this.TextWriter);
 	this.Controls.push(this.GenerateButton);
@@ -86,7 +86,7 @@ LexiCrossleView.prototype.SetControls = function() {
 	this.MineButton = new TextButton();
 	this.MineButton.Set(this.Canvas, { L: 315, T: 475, W: 40, H: 25, LABEL: "Mine" }, this.TextWriter);
 	this.Controls.push(this.MineButton);
-/* */
+*/
 };
 LexiCrossleView.prototype.SetDaily = function() {
 	var ms;
@@ -143,7 +143,7 @@ LexiCrossleView.prototype.Draw = function() {
 		this.TextWriter.Write(this.Selector.SolutionIndex+1, 325-(Math.floor(Math.log10(this.Selector.SolutionIndex+1))*10), 390, { FONT: "18px Arial" } );
 
 	//TEMP
-	this.TextWriter.Write("FPS: "+Math.round(this.Canvas.FrameRate), 200, 390);
+//	this.TextWriter.Write("FPS: "+Math.round(this.Canvas.FrameRate), 200, 390);
 
 	//Display scorecard
 	this.GraphicsTool.DrawRectangle(20, 10, 90, 30, "black", 1);
@@ -249,7 +249,7 @@ LexiCrossleView.prototype.UpdateButtons = function() {
 	//Quit
 	if (this.QuitButton.CheckClicked())
 		this.Close(this.OpenMainView.bind(this), 100);
-/* NOTE: comment out on deployed app */
+/* NOTE: comment out on deployed app
 	//Generate
 	if (this.GenerateButton.CheckClicked()) {
 		cancelAnimationFrame(this.AnimationFrameHandle);
@@ -265,7 +265,7 @@ LexiCrossleView.prototype.UpdateButtons = function() {
 		this.Board.SetSolution(this.Selector);
 		this.Board.Solve();
 	}
-/* */
+*/
 	//Vowel icon
 	if (this.VowelsIcon.CheckPressed()) {
 		if (this.Board.VowelsFlag)
