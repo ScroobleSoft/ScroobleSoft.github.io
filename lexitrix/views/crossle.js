@@ -10,9 +10,10 @@ var LexiCrossleView = function() {
 	var SelectedCell;
 	var IntroImage;
 	var Keys, Letters, Timer, Frames;
-	var BorderIconImage, BorderIcon;
+	var BorderIconImage, BorderIcon, VowelsIconImage, VowelsIcon;
 	var InstructionsButton, SolveButton, RestartButton, QuitButton;
 	var MineButton, GenerateButton;
+	var FirstOpenFlag;
 
 	var i;
 };
@@ -27,6 +28,7 @@ LexiCrossleView.prototype.Set = function(cnvs, specs, gTool, tWriter, rGenerator
 	this.Letters = 0;
 	this.Timer = 0;
 	this.Frames = 60;
+	this.FirstOpenFlag = true;
 };
 LexiCrossleView.prototype.SetComponents = function() {
 
@@ -45,6 +47,13 @@ LexiCrossleView.prototype.SetImages = function() {
 };
 LexiCrossleView.prototype.SetControls = function() {
 
+	//Icons
+	this.VowelsIconImage = new GenieImage();
+	this.VowelsIconImage.Set(this.Context, ImageManager.Pics[IMAGeINDEX.CONTROLS], this.Specs.ICON.VOWELS.IMAGE);
+	this.VowelsIcon = new GenieIcon();
+	this.VowelsIcon.Set(this.Canvas, this.Specs.ICON.VOWELS, this.VowelsIconImage);
+	this.VowelsIcon.SetCornersPic(IconCornerImages);
+	this.Controls.push(this.VowelsIcon);
 	this.BorderIconImage = new GenieImage();
 	this.BorderIconImage.Set(this.Context, ImageManager.Pics[IMAGeINDEX.CONTROLS], this.Specs.ICON.BORDER.IMAGE);
 	this.BorderIcon = new GenieIcon();
@@ -52,6 +61,7 @@ LexiCrossleView.prototype.SetControls = function() {
 	this.BorderIcon.SetCornersPic(IconCornerImages);
 	this.Controls.push(this.BorderIcon);
 
+	//Buttons
 	this.InstructionsButton = new TextButton();
 	this.InstructionsButton.Set(this.Canvas, this.Specs.BUTTON.INSTRUCTIONS, this.TextWriter);
 	this.InstructionsButton.SetCornersPic(RoundedCornerImages);
@@ -70,11 +80,11 @@ LexiCrossleView.prototype.SetControls = function() {
 	this.Controls.push(this.QuitButton);
 /* NOTE: comment out on deployed app */
 	this.GenerateButton = new TextButton();
-	this.GenerateButton.Set(this.Canvas, { L: 265, T: 560, W: 80, H: 25, LABEL: "Generate" }, this.TextWriter);
+	this.GenerateButton.Set(this.Canvas, { L: 5, T: 475, W: 40, H: 25, LABEL: "Gen" }, this.TextWriter);
 	this.Controls.push(this.GenerateButton);
 
 	this.MineButton = new TextButton();
-	this.MineButton.Set(this.Canvas, { L: 5, T: 560, W: 60, H: 25, LABEL: "Mine" }, this.TextWriter);
+	this.MineButton.Set(this.Canvas, { L: 315, T: 475, W: 40, H: 25, LABEL: "Mine" }, this.TextWriter);
 	this.Controls.push(this.MineButton);
 /* */
 };
@@ -105,9 +115,13 @@ LexiCrossleView.prototype.SetDifficulty = function(lvl) {
 };
 LexiCrossleView.prototype.Open = function() {
 	GenieView.prototype.Open.call(this);
-	//UNLOGGED
-	this.IntroImage.Draw();
-	this.PollClick();
+
+	if (this.FirstOpenFlag) {
+		this.IntroImage.Draw();
+		this.FirstOpenFlag = false;
+		this.PollClick();
+	} else
+		this.Update();
 };
 LexiCrossleView.prototype.PollClick = function() {
 
@@ -127,6 +141,9 @@ LexiCrossleView.prototype.Draw = function() {
 	this.TextWriter.Write(this.DailyDate.toDateString(), 20, 390, { FONT: "18px Arial" } );
 	if (this.GameType!=this.Specs.TYPE.ASYMMETRIC)
 		this.TextWriter.Write(this.Selector.SolutionIndex+1, 325-(Math.floor(Math.log10(this.Selector.SolutionIndex+1))*10), 390, { FONT: "18px Arial" } );
+
+	//TEMP
+	this.TextWriter.Write("FPS: "+Math.round(this.Canvas.FrameRate), 200, 390);
 
 	//Display scorecard
 	this.GraphicsTool.DrawRectangle(20, 10, 90, 30, "black", 1);
@@ -182,7 +199,7 @@ LexiCrossleView.prototype.Update = function() {
 
 	this.AnimationFrameHandle = requestAnimationFrame(this.Update.bind(this));
 
-	try {
+//	try {
 
 	this.UpdateClick();
 	this.UpdateButtons();
@@ -193,13 +210,15 @@ LexiCrossleView.prototype.Update = function() {
 		if (this.Timer<300) {
 			++this.Timer;
 			this.Frames = 60;
-			this.DrawSeconds();
+			if (!this.Board.SolvedFlag)
+				this.DrawSeconds();
 		}
-
+/*
 	} catch {
 		cancelAnimationFrame(this.AnimationFrameHandle);
 		alert("Crossle has crashed - sorry!");
 	}
+*/
 };
 LexiCrossleView.prototype.UpdateClick = function() {
 
@@ -247,6 +266,14 @@ LexiCrossleView.prototype.UpdateButtons = function() {
 		this.Board.Solve();
 	}
 /* */
+	//Vowel icon
+	if (this.VowelsIcon.CheckPressed()) {
+		if (this.Board.VowelsFlag)
+			this.VowelsIcon.Draw(PRESSED);
+		else
+			this.Board.FillVowels();
+	}
+
 	//Border icon
 	if (this.BorderIcon.CheckPressed()) {
 		if (this.Board.BorderFlag)
