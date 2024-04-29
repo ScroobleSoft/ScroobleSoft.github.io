@@ -221,7 +221,7 @@ var Solutions = [ [ "packaging", "jalapenos", "paddocked", "tactician",
 						[ "rebranded", "facecloth", "taekwondo", "harmonist",
 						  "event", "roach", "nasal", "elude", "sauna", "speck", "intro", "paced",
 						  "arena", "match", "scuba", "liege", "nests", "spume", "impel", "tacit"  ],
-						[ "hardships", "vestibule", "imbeciles", "happening"
+						[ "hardships", "vestibule", "imbeciles", "happening",
 						  "acorn", "dwell", "haste", "prise", "opium", "nooks", "swami", "revue",
 						  "alone", "penal", "swipe", "event", "sieve", "naive", "scrub", "anvil"  ]
 ];  //75
