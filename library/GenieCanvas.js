@@ -8,6 +8,7 @@ var GenieCanvas = function () {
 	var Element, Context;
 	var View;
 	var Controls, MouseDownControl;
+	var FrameRate, StartTime, Iterations;
 	var MousePresentFlag, InputFlag, TrackPadFlag;
 	var Scale;														//floating point
 
@@ -39,6 +40,16 @@ GenieCanvas.prototype = {
 		this.Element.addEventListener("touchmove", this.TouchMove.bind(this));
 		this.Element.addEventListener("touchend", this.TouchEnd.bind(this));
 		this.Element.addEventListener("touchcancel", this.TouchCancel.bind(this));
+	},
+	SetFrameRateMeasurement() {
+
+		this.Iterations = 0;
+		this.StartTime = performance.now();
+	},
+	UpdateFrameRateMeasurement() {
+
+		++this.Iterations;
+		this.FrameRate = 1000 / ((performance.now()-this.StartTime)/this.Iterations);
 	},
 	SetAntiAliasing() {
 
