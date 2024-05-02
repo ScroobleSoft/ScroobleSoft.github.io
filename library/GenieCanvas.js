@@ -127,7 +127,7 @@ GenieCanvas.prototype = {
 			if (this.View.Controls)
 
 				for (this.i=0;this.i<this.View.Controls.length;++this.i)
-					if (this.View.Controls[this.i].Enabled) {
+					if (this.View.Controls[this.i].Enabled && !this.View.Controls[this.i].DeActivated) {
 						if (this.View.Controls[this.i].CheckClickedOn()) {
 							this.View.Controls[this.i].ClickedOn();
 							return;
@@ -136,7 +136,7 @@ GenieCanvas.prototype = {
 
 				if (this.View.NestedView)
 					for (this.i=0;this.i<this.View.NestedView.Controls.length;++this.i)
-						if (this.View.NestedView.Controls[this.i].Enabled) {
+						if (this.View.NestedView.Controls[this.i].Enabled && !this.View.NestedView.Controls[this.i].DeActivated) {
 							if (this.View.NestedView.Controls[this.i].CheckClickedOn()) {
 								this.View.NestedView.Controls[this.i].ClickedOn();
 								return;
@@ -145,7 +145,7 @@ GenieCanvas.prototype = {
 		} else {
 			if (this.Controls)
 				for (this.i=0;this.i<this.Controls.length;++this.i)
-					if (this.Controls[this.i].Enabled) {
+					if (this.Controls[this.i].Enabled && !this.Controls[this.i].DeActivated) {
 						if (this.Controls[this.i].CheckClickedOn()) {
 							this.Controls[this.i].ClickedOn();
 							return;
@@ -191,7 +191,7 @@ GenieCanvas.prototype = {
 		if (this.View) {
 			if (this.View.Controls)
 				for (this.i=0;this.i<this.View.Controls.length;++this.i)
-					if (this.View.Controls[this.i].Enabled)
+					if (this.View.Controls[this.i].Enabled && !this.View.Controls[this.i].DeActivated)
 						if (SpaceUtils.CheckPointInBox(Mouse.Down, this.View.Controls[this.i].Specs)) {
 							this.View.Controls[this.i].MouseDown();
 							return;
@@ -199,7 +199,7 @@ GenieCanvas.prototype = {
 		} else {
 			if (this.Controls)
 				for (this.i=0;this.i<this.Controls.length;++this.i)
-					if (this.Controls[this.i].Enabled)
+					if (this.Controls[this.i].Enabled && !this.Controls[this.i].DeActivated)
 						if (SpaceUtils.CheckPointInBox(Mouse.Down, this.Controls[this.i].Specs)) {
 							this.Controls[this.i].MouseDown();
 							return;
@@ -220,7 +220,7 @@ GenieCanvas.prototype = {
 		if (this.View) {
 			if (this.View.Controls)
 				for (this.i=0;this.i<this.View.Controls.length;++this.i)
-					if (this.View.Controls[this.i].Enabled)
+					if (this.View.Controls[this.i].Enabled && !this.View.Controls[this.i].DeActivated)
 						if (SpaceUtils.CheckPointInBox( { X: event.offsetX, Y: event.offsetY }, this.View.Controls[this.i].Specs)) {
 							this.View.Controls[this.i].MouseUp();
 							return;
@@ -228,7 +228,7 @@ GenieCanvas.prototype = {
 		} else {
 			if (this.Controls)
 				for (this.i=0;this.i<this.Controls.length;++this.i)
-					if (this.Controls[this.i].Enabled)
+					if (this.Controls[this.i].Enabled && !this.Controls[this.i].DeActivated)
 						if (SpaceUtils.CheckPointInBox( { X: event.offsetX, Y: event.offsetY }, this.Controls[this.i].Specs)) {
 							this.Controls[this.i].MouseUp();
 							return;

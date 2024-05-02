@@ -7,7 +7,7 @@ var GenieControl = function() {
 	var Specs;
 	var Pic;
 	var Clicked, MouseDowned, MouseUpped;	//TODO: these should have 'Flag' suffix
-	var Enabled, Visible;						//TODO: these should have 'Flag' suffix
+	var Enabled, Visible, DeActivated;		//TODO: these should have 'Flag' suffix
 	var ToolTip;
 
 	var i, x, y, rct;
@@ -75,6 +75,14 @@ GenieControl.prototype = {
 			this.Enabled = false;
 			this.DrawDisabled();
 		}
+	},
+	DeActivate() {
+
+		this.DeActivated = true;
+	},
+	Activate() {
+
+		this.DeActivated = false;
 	},
 	MouseOver() {
 /*
