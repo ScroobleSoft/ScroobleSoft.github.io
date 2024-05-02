@@ -85,6 +85,21 @@ var CROSSLE = { COLOUR: "yellow", TYPE: { DAILY: 0, NUMBERED: 1, SYMMETRICAL: 2,
 								  QUIT: { L: 280, T: 560, W: 60, H: 25, LW: 3, LABEL: "Quit", STYLE: BUTTON.STYLE.ROUNDED,
 											 COLOUR: "black", BACKGROUND: "yellow", TEXT: { COLOUR: "white" } }
 								},
+					 BOARD: { L: 20, T: 45, W: 320, H: 320, COLOUR: "white", STATE: { NORMAL: 0, CLICKED: 1, WAITING: 2, DOUBLeCLICKED: 3 },
+								 CELL: { COUNT: 121, W: 29, H: 29, C: 11, R: 11, OFFSET: { X: 10, Y: 8 } },
+								 IMAGE: { CELL: { L: 330, T: 230, W: 30, H: 30 },
+											 SELECTED: { L: 330, T: 262, W: 28, H: 28 }
+										  }
+							  },
+					 KEYBOARD: { X: 2, Y: 400, ROWS: [ 0,10,19 ], OFFSETS: [ 0,18,54 ],
+									 KEY: { COUNT: 26, W: 32, H: 32, LW: 3, GAP: 4,
+											  STATE: { UnPRESSED: 0, CLICKED: 1, SINGLeCLICKED: 2, DOUBLeCLICKED: 3, PRESSED: 4 } },
+									 IMAGE: { KEY: { BUTTONS: { L: 490, T: 131, W: 66, H: 32, O: 2, C: 2, R: 1, PATCH: { W: 32, H: 32 } },
+														  LETTERS: { L: 368, T: 187, W: 231, H: 45, O: 3, C: 13, R: 2, PATCH: { W: 15, H: 21 } },
+														  PRESSED: { L: 362, T: 234, W: 154, H: 30, O: 2, C: 13, R: 2, PATCH: { W: 10, H: 14 } }
+														},
+											  }
+								  },
 					 OPTIONS: { COLOUR: "yellow",
 									BUTTON: { DAILY: { L: 97, T: 57, W: 166, H: 46, LW: 3, SX: 685, SY: 2, STYLE: BUTTON.STYLE.RAISED },
 												 NUMBERED: { L: 97, T: 137, W: 166, H: 46, LW: 3, SX: 685, SY: 44, STYLE: BUTTON.STYLE.RAISED },
@@ -99,21 +114,17 @@ var CROSSLE = { COLOUR: "yellow", TYPE: { DAILY: 0, NUMBERED: 1, SYMMETRICAL: 2,
 											 },
 									NUMBERS: { X: 4, Y: 60, C: 10, R: 10, W: 36, H: 36, OX: 15, OY: 13, O: [ 0,4,7,11 ] }
 								 },
-					 BOARD: { L: 20, T: 45, W: 320, H: 320, COLOUR: "white", STATE: { NORMAL: 0, CLICKED: 1, WAITING: 2, DOUBLeCLICKED: 3 },
-								 CELL: { COUNT: 121, W: 29, H: 29, C: 11, R: 11, OFFSET: { X: 10, Y: 8 } },
-								 IMAGE: { CELL: { L: 330, T: 230, W: 30, H: 30 },
-											 SELECTED: { L: 330, T: 262, W: 28, H: 28 }
-										  }
-							  },
-					 KEYBOARD: { X: 2, Y: 400, ROWS: [ 10,9,7 ], OFFSETS: [ 0,18,54 ],
-									 KEY: { COUNT: 26, W: 32, H: 32, LW: 3, GAP: 4,
-											  STATE: { UnPRESSED: 0, CLICKED: 1, SINGLeCLICKED: 2, DOUBLeCLICKED: 3, PRESSED: 4 } },
-									 IMAGE: { KEY: { BUTTONS: { L: 490, T: 131, W: 66, H: 32, O: 2, C: 2, R: 1, PATCH: { W: 32, H: 32 } },
-														  LETTERS: { L: 368, T: 187, W: 231, H: 45, O: 3, C: 13, R: 2, PATCH: { W: 15, H: 21 } },
-														  PRESSED: { L: 362, T: 234, W: 154, H: 30, O: 2, C: 13, R: 2, PATCH: { W: 10, H: 14 } }
-														},
-											  }
-								  }
+					 INSTRUCTIONS: { L: 20, T: 20, W: 320, H: 520, COLOUR: PAINT.SKY,
+										  IMAGE: { EMPTY: { L: 1, T: 1, W: 88, H: 88, X: 242, Y: 66 },
+													  KEY: { L: 120, T: 91, W: 32, H: 32, X: 30, Y: 119 },
+													  FAINT: { L: 91, T: 1, W: 88, H: 88, X: 242, Y: 175 },
+													  SOLID: { L: 120, T: 125, W: 30, H: 30, X: 199, Y: 231 },
+													  ALL: { L: 1, T: 91, W: 117, H: 117, X: 213, Y: 279 },
+													  INCORRECT: { L: 120, T: 157, W: 30, H: 30, X: 228, Y: 410 },
+													  CLEAR: { L: 120, T: 189, W: 30, H: 30, X: 228, Y: 454 }
+													},
+										  BUTTON: { OK: { L: 160, T: 495, W: 40, H: 25, LW: 3, LABEL: "Ok", BACKGROUND: GREY.LIGHT, STYLE: BUTTON.STYLE.RAISED } }
+										}
 };
 var BUNDLE = {	COLOUR: "rgb(143,223,255)",
 					BOARD: { L: -1, T: -1, W: -1, H: -1,
