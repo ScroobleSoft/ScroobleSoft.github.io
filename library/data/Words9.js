@@ -1,5 +1,5 @@
 
-var Words9a = [ "aardvarks", "abandoned", "abandoner", "abasement", "abashedly", "abashment", "abattoirs", "abdicable", "abdicants", "abdicated",
+var Words9a = [ "aardvarks", "abandoned", "abandoner", "abasement", "abashedly", "abashment", "abattoirs", "abdicated",
 					 "abdicates", "abdominal", "abduction", "aberrance", "abeyances", "abhorrent", "abidingly", "abilities", "ablutions", "abnegated",
 					 "abnegates", "abolished", "abolishes", "abolition", "aborigine", "abounding", "abrasions", "abridging", "abrogated", "abrogates",
 					 "abruption", "abscessed", "abscesses", "absconded", "absconder", "absentees", "absolutes", "absolving", "absorbent", "absorbers",
@@ -12,7 +12,7 @@ var Words9a = [ "aardvarks", "abandoned", "abandoner", "abasement", "abashedly",
 ]; //8
 
 var Words9b = [ "babblings", "baboonery", "baboonish", "babushkas", "babydolls", "babyproof", "baccarats", "bacchanal", "bachelors", "bachaches",
-					 "backbeats", "backbends", "backbiter", "backbites", "backboard", "backbones", "backchats", "backcourt", "backdated", "backdates",
+					 "backbiter", "backbites", "backboard", "backbones", "backchats", "backcourt", "backdated", "backdates",
 					 "backdoors", "backdraft", "backdrops", "backfired", "backfires", "backflips", "backhands", "backpacks", "backrests", "backrooms",
 					 "backseats", "backsides", "backslaps", "backslash", "backslide", "backspace", "backstabs", "backstage", "backstops", "backstory",
 					 "backswept", "backswing", "backtrack", "backwards", "backwater", "backwoods", "backyards", "bacterial", "bacterium", "badgering",
@@ -23,7 +23,7 @@ var Words9b = [ "babblings", "baboonery", "baboonish", "babushkas", "babydolls",
 					 "bantering", "baptising", "baptismal", "barbarian", "barbarism", "barbarity", "barbarous", "barbecued", "barbecues", "barefaced"
 ];  //7
 
-var Words9c = [ "cabalists", "cabdriver", "cabinetry", "cablecast", "cablegram", "caboodles", "cabriolet", "cacophony", "caddishly", "caesarean",
+var Words9c = [ "cabalists", "cabdriver", "cabinetry", "cablecast", "cablegram", "caboodles", "cabriolet", "cacophony", "caesarean",
 					 "cafeteria", "caffeines", "cakewalks", "calamaris", "calcified", "calcifies", "calculate", "calendars", "calfskins", "calibrate",
 					 "callbacks", "calliopes", "calloused", "callouses", "callously", "callusing", "calorific", "calumnies", "camcorder", "camelback",
 					 "camelhair", "camellias", "cameraman", "cameramen", "camisoles", "campaigns", "campfires", "campiness", "campsites", "cancelled",
@@ -83,7 +83,7 @@ var Words9g = [ "gaberdine", "gainfully", "galactoid", "galavants", "gallantly",
 					 "glimpsing", "glistened", "glittered", "glitziest", "gloomiest", "glorified", "glorifies", "glossiest", "glowering", "glowingly"
 ];  //11
 
-var Words9h = [ "habitable", "habitancy", "haciendas", "hackathon", "hackneyed", "haggardly", "hailstone", "hailstorm", "hairballs", "hairbrush",
+var Words9h = [ "habitable", "haciendas", "hackathon", "hackneyed", "haggardly", "hailstone", "hailstorm", "hairballs", "hairbrush",
 					 "haircloth", "hairiness", "hairlines", "hairpiece", "hairspray", "hairstyle", "hairweave", "halfbacks", "halfmoons", "halfpence",
 					 "halfpenny", "halftones", "halitosis", "hallmarks", "hallowing", "haltingly", "hamburger", "hammering", "hamminess", "hampering",
 					 "hamstring", "hamstrung", "handballs", "handbooks", "handcuffs", "handgrips", "handhelds", "handholds", "handicaps", "handiness",
@@ -103,7 +103,8 @@ var Words9i = [ "ibuprofen", "icehouses", "icemakers", "iconology", "idealists",
 					 "immolates", "immorally", "immortals", "immovable", "immunized", "immutable", "impactful", "impacting", "impairing", "impartial",
 					 "imparting", "impassive", "impatient", "impeached", "impeaches", "impedance", "imperfect", "imperials", "imperiled", "imperious",
 					 "impetuous", "impieties", "impinging", "impiously", "implanted", "implement", "implicate", "imploding", "imploring", "implosion",
-					 "important", "importune", "impostors", "impotence", "impounded", "imprecate", "imprecise", "impressed", "impresses", "imprinted"
+					 "important", "importune", "impostors", "impotence", "impounded", "imprecate", "imprecise", "impressed", "impresses", "imprinted",
+					 "imprisons", "impromptu", "improving", "improvise", "imprudent", "impudence", "impugning", "impulsive", "inability", "inanimate"
 ];  //6
 
 var Words9j = [ "jabbering", "jackaroos", "jackasses", "jackboots", "jackfruit", "jackknife", "jadedness", "jailbirds", "jailbreak", "jailhouse",
@@ -129,7 +130,8 @@ var Words9l = [ "labelling", "laborious", "labouring", "labyrinth", "lacerated",
 					 "lankiness", "larcenies", "larcenist", "larcenous", "larkspurs", "larrikins", "laryngeal", "lassitude", "latchkeys", "latecomer",
 					 "latencies", "laterally", "lathering", "latitudes", "laudatory", "laughable", "laughably", "launchers", "launching", "launchpad",
 					 "laundered", "launderer", "laundress", "laundries", "laureates", "lavishing", "lawgivers", "lawlessly", "lawmakers", "lawnmower",
-					 "laxatives", "layabouts", "layperson", "lazybones", "leadfoots", "leakproof", "leapfrogs", "leasehold", "leavening", "lecherous"
+					 "laxatives", "layabouts", "layperson", "lazybones", "leadfoots", "leakproof", "leapfrogs", "leasehold", "leavening", "lecherous",
+					 "lecturers", "lecturing", "leeriness", "leeringly", "leftovers", "legalized", "legalizes", "legendary", "legionary", "legislate"
 ];  //7
 
 var Words9m = [ "macadamia", "macarenas", "macaronis", "macaroons", "machinery", "machinist", "macintosh", "mackerels", "macrocosm", "maddening",
@@ -140,7 +142,8 @@ var Words9m = [ "macadamia", "macarenas", "macaronis", "macaroons", "machinery",
 					 "manganite", "mangonels", "mangroves", "manhandle", "manicotti", "manicured", "manicures", "manifesto", "manifests", "manifolds",
 					 "manliness", "mannequin", "mannerism", "manoeuvre", "manticore", "mantissas", "mapmakers", "marathons", "marauders", "marauding",
 					 "marbelise", "margarine", "mariachis", "marigolds", "marijuana", "marinated", "marinates", "maritally", "markdowns", "marketers",
-					 "marketing", "marmalade", "marmosets", "marriages", "marshland", "marsupial", "martyrdom", "marvelled", "marvelous", "masculine"
+					 "marketing", "marmalade", "marmosets", "marriages", "marshland", "marsupial", "martyrdom", "marvelled", "marvelous", "masculine",
+					 "masochism", "masochist", "massacred", "massacres", "massaging", "massively", "masterful", "mastering", "masticate", "mastodons"
 ];  //8
 
 var Words9n = [ "nailbrush", "nailheads", "naiveness", "nakedness", "nameplate", "namesakes", "nanograms", "nanometer", "nanorobot", "nanoscale",
@@ -151,8 +154,9 @@ var Words9n = [ "nailbrush", "nailheads", "naiveness", "nakedness", "nameplate",
 					 "neologism", "neopagans", "neophytes", "nephritic", "nephritis", "nepotists", "nerveless", "nervously", "networked", "neurology",
 					 "neutering", "neutrally", "neutrinos", "neverland", "nevermore", "newcomers", "newlyweds", "newsagent", "newsbreak", "newscasts",
 					 "newsdesks", "newsgroup", "newshound", "newsmaker", "newspaper", "newsprint", "newsreels", "newsrooms", "newsstand", "nicknamed",
-					 "nicknames", "nightcaps", "nightclub", "nightfall", "nightgown", "nighthawk", "nightlife", "nightmare", "nightspot", "nihilists"
-];  //7
+					 "nicknames", "nightcaps", "nightclub", "nightfall", "nightgown", "nighthawk", "nightlife", "nightmare", "nightspot", "nihilists",
+					 "ninetieth", "nitpicked", "nitpicker", "nocturnal", "noiseless", "noisiness", "nominally", "nominated", "nominates", "nonbinary"
+];  //8
 
 var Words9o = [ "obedience", "obeisance", "obfuscate", "objectify", "objectors", "oblations", "obligated", "obligates",
 					 "obliquely", "oblivions", "oblivious", "oblongish", "obnoxious", "obscenely", "obscenity", "obscurant", "obscurely", "obscuring",
@@ -162,7 +166,8 @@ var Words9o = [ "obedience", "obeisance", "obfuscate", "objectify", "objectors",
 					 "octagonal", "octuplets", "odalisque", "oddsmaker", "odometers", "offenders", "offending", "offensive", "offerings", "officials",
 					 "officiate", "officious", "offloaded", "offscreen", "offshoots", "offspring", "ointments", "oleanders", "olfactory", "oligarchs",
 					 "oligarchy", "oligopoly", "ombudsman", "ombudsmen", "omelettes", "ominously", "omissible", "omissions", "omnivores", "ominously",
-					 "omissions", "omnivores", "onerously", "onionskin", "onlookers", "onrushing", "onslaught", "operating", "operation", "operative"
+					 "omissions", "omnivores", "onerously", "onionskin", "onlookers", "onrushing", "onslaught", "operating", "operation", "operative",
+					 "operators", "opponents", "opportune", "opposites", "oppressed", "oppresses", "oppressor", "opticians", "optimally", "optimists"
 ];  //7
 
 var Words9p = [ "pacemaker", "pachyderm", "pacifiers", "pacifists", "pacifying", "packagers", "packaging", "packhorse", "paddocked", "padlocked",
@@ -172,8 +177,9 @@ var Words9p = [ "pacemaker", "pachyderm", "pacifiers", "pacifists", "pacifying",
 					 "panoplies", "panoramas", "panoramic", "pantheist", "pantsuits", "pantyhose", "papalists", "paperback", "paperboys", "paperless",
 					 "paperwork", "papyruses", "parabolas", "parabolic", "parachute", "paradigms", "paradises", "paradoxes", "paraglide", "paragraph",
 					 "parakeets", "paralegal", "parallels", "paralysis", "paralyzed", "paralyzes", "paramedic", "parameter", "paramount", "paramours",
-					 "paranoias", "parapated", "parasails", "parasites", "parasitic", "parcelled", "parchment", "pardoning", "parentage", "parenting"
-];  //7
+					 "paranoias", "parapated", "parasails", "parasites", "parasitic", "parcelled", "parchment", "pardoning", "parentage", "parenting",
+					 "parochial", "parodying", "paroxysms", "parqueted", "parricide", "parroting", "parsimony", "parsonage", "partaking", "partially"
+];  //8
 
 var Words9q = [ "quadrants", "quadratic", "quadricep", "quadruple", "quaintest", "qualified", "qualifier", "qualifies", "qualities", "quarreled",
 					 "quarrying", "quarryman", "quarrymen", "quartered", "quarterly", "quartiles", "quatrains", "quavering", "queesiest", "queendoms",
@@ -190,8 +196,9 @@ var Words9r = [ "rabidness", "racehorse", "racetrack", "racketeer", "raconteur",
 					 "ravishing", "razorback", "reabsorbs", "reachable", "reacquire", "reactants", "reactions", "readiness", "readjourn", "readjusts",
 					 "readymade", "reaffirms", "realigned", "realising", "realistic", "realities", "reanimate", "reappoint", "rearguard", "rearrests",
 					 "reascends", "reasoning", "reasserts", "reassigns", "reassured", "reassures", "reattempt", "reawakens", "rebelling", "rebellion",
-					 "rebooting", "rebounded", "rebranded", "rebuffing", "rebuttals", "rebutting", "recalling", "recanting", "recapping", "recapture"
-];  //7
+					 "rebooting", "rebounded", "rebranded", "rebuffing", "rebuttals", "rebutting", "recalling", "recanting", "recapping", "recapture",
+					 "receivers", "receiving", "recension", "reception", "receptive", "receptors", "recession", "recessive", "recharged", "recharges"
+];  //8
 
 var Words9s = [ "sabotaged", "sabotages", "saboteurs", "saccharin", "sacrament", "sacrifice", "sacrilege", "saddening", "saddlebag", "safeguard",
 					 "sagacious", "sagebrush", "sagginess", "sailboard", "sailboats", "sailcloth", "sailplane", "sainthood", "salacious", "salerooms",
@@ -201,8 +208,9 @@ var Words9s = [ "sabotaged", "sabotages", "saboteurs", "saccharin", "sacrament",
 					 "sappiness", "sapsucker", "sarabands", "sarcastic", "sartorial", "sashaying", "sassiness", "satellite", "satiating", "satiation",
 					 "satirical", "satirists", "satirized", "satisfied", "satisfies", "saturated", "saturates", "saturnine", "saucepans", "sauciness",
 					 "sauntered", "savannahs", "savoriest", "savouring", "savviness", "saxophone", "scabbards", "scaffolds", "scallions", "scalloped",
-					 "scallywag", "scampered", "scantiest", "scapegoat", "scarecrow", "scattered", "scavenged", "scavenger", "scenarios", "sceptered"
-];  //7
+					 "scallywag", "scampered", "scantiest", "scapegoat", "scarecrow", "scattered", "scavenged", "scavenger", "scenarios", "sceptered",
+					 "sceptical", "scheduled", "schedules", "schematic", "scholarly", "schooling", "schooners", "scientist", "scimitars", "scintilla"
+];  //9
 
 var Words9t = [ "tablefuls", "tableland", "tabletops", "tableware", "tabulated", "tabulates", "tackiness", "tactfully", "tactician", "taekwondo",
 					 "tailbones", "tailcoats", "tailgated", "taillight", "tailoring", "tailpipes", "tailwinds", "takeaways", "takedowns", "takeovers",
@@ -212,19 +220,21 @@ var Words9t = [ "tablefuls", "tableland", "tabletops", "tableware", "tabulated",
 					 "teachable", "teachings", "teahouses", "teakettle", "teammates", "teamsters", "tearaways", "teardowns", "teardrops", "tearfully",
 					 "teariness", "tearstain", "teasingly", "teaspoons", "technical", "technique", "technopop", "tectonics", "tediously", "teenagers",
 					 "teensiest", "teetering", "teethings", "teetotals", "telecasts", "teledrama", "telegenic", "telegrams", "telegraph", "telemetry",
-					 "telepathy", "telephone", "telephony", "teleplays", "teleports", "telescope", "telethons", "televised", "tellingly", "telltales"
-];  //7
+					 "telepathy", "telephone", "telephony", "teleplays", "teleports", "telescope", "telethons", "televised", "tellingly", "telltales",
+					 "temperate", "templates", "temporary", "temptress", "tenacious", "tenderise", "tenements", "tentacles", "tentative", "tenuously"
+];  //8
 
 var Words9u = [ "ufologist", "ulcerated", "ultimates", "ultimatum", "ultrachic", "ultracool", "ultrarich", "ululating", "umbilical", "umbrellas",
-					 "umpteenth", "unabashed", "unabating", "unabiding", "unaccrued", "unaligned", "unallowed",
+					 "umpteenth", "unabashed", "unabating", "unabiding", "unaccrued", "unaligned",
 					 "unaltered", "unanimity", "unanimous", "unashamed", "unassured", "unaudited", "unbalance", "unbeknown", "unbending", "unblocked",
 					 "unblotted", "unbounded", "unbraided", "unbranded", "unbridled", "unbuckled", "unbuckles", "unburdens", "unbuttons", "uncannily",
 					 "uncasking", "uncertain", "unchained", "unchanged", "uncharged", "uncharted", "unchecked", "unclaimed", "uncloaked", "unclogged",
 					 "unclothed", "unclutter", "uncoaxing", "uncoiling", "uncommits", "uncounted", "uncoupled", "uncovered", "uncreased", "uncrowned",
 					 "uncurated", "uncurious", "undamaged", "undatable", "undaunted", "undefined", "undeleted", "underarms", "underbids", "underbite",
 					 "underboss", "undercard", "underdone", "underflow", "underfoot", "underfund", "undergoes", "underhand", "underline", "underling",
-					 "undermine", "underpaid", "underpass", "underplay", "underrate", "undersoil", "undersold", "undertake", "undertone", "undertook"
-];  //12
+					 "undermine", "underpaid", "underpass", "underplay", "underrate", "undersoil", "undersold", "undertake", "undertone", "undertook",
+					 "underused", "underwear", "underwent", "undesired", "undiluted", "undoubted", "undressed", "undresses", "undulated", "undulates"
+];  //14
 
 var Words9v = [ "vacancies", "vacations", "vaccinate", "vacillate", "vacuously", "vacuuming", "vagabonds", "vagueness", "valentine", "valiantly",
 					 "validated", "validates", "valuables", "valuation", "valueless", "vampirish", "vampirism", "vandalism", "vandalize", "vanguards",
@@ -234,8 +244,9 @@ var Words9v = [ "vacancies", "vacations", "vaccinate", "vacillate", "vacuously",
 					 "venerates", "vengeance", "venomless", "ventilate", "ventricle", "venturing", "verandahs", "verbalise", "verbosely", "verbosity",
 					 "verdigris", "verifying", "veritable", "veritably", "verminous", "versatile", "vertebrae", "vertebral", "verticals", "vestibule",
 					 "vestigial", "vestments", "viability", "vibrantly", "vibrating", "vibration", "vicarages", "vicarious", "viceregal", "viciously",
-					 "victimise", "victories", "videocall", "videogame", "videotape", "viewpoint", "vigilance", "vigilante", "vignettes", "vilifying"
-];  //8
+					 "victimise", "victories", "videocall", "videogame", "videotape", "viewpoint", "vigilance", "vigilante", "vignettes", "vilifying",
+					 "villagers", "vindicate", "vineyards", "violating", "violation", "violently", "violinist", "virtually", "virtuosos", "viscosity"
+];  //9
 
 var Words9w = [ "wackiness", "waferlike", "waggoning", "wagonette", "wainscots", "waistband", "waistcoat", "waistline", "waitering", "waitlists",
 					 "waitstaff", "wakefully", "walkabout", "walkathon", "walkovers", "wallabies", "walloping", "wallowing", "wallpaper", "wanderers",
@@ -245,8 +256,9 @@ var Words9w = [ "wackiness", "waferlike", "waggoning", "wagonette", "wainscots",
 					 "weaklings", "wealthier", "weaponize", "wearables", "weariness", "wearingly", "wearisome", "weaseling", "weathered", "webcaster",
 					 "webcomics", "webisodes", "webmaster", "weekender", "weeknight", "weepiness", "weepingly", "weightier", "weirdness", "welcoming",
 					 "westbound", "westerner", "westwards", "whackiest", "whereupon", "whichever", "whimpered", "whimsical", "whirligig", "whirlpool",
-					 "whirlwind", "whispered", "whistling", "whitening", "whitewash", "whittling", "wholesale", "wholesome", "whooshing", "whosoever"
-];  //7
+					 "whirlwind", "whispered", "whistling", "whitening", "whitewash", "whittling", "wholesale", "wholesome", "whooshing", "whosoever",
+					 "wickedest", "widowhood", "wildcards", "wildfires", "willfully", "willingly", "windblown", "windfalls", "windfarms", "windmills"
+];  //8
 
 var Words9y = [ "yachtsman", "yachtsmen", "yammering", "yardstick", "yarmulkes", "yearbooks", "yearlings", "yearnings", "yeastless", "yellowish",
 					 "yesterday", "yodelling", "youngster"
