@@ -9,7 +9,6 @@ var CrossleBoard = function() {
 	var Cells, SelectedCell, CellClicked;
 	var CellImage, SelectedCellImage;
 	var CellOrder, WordOrder, BorderIndices;
-	var VowelsFlag, BorderFlag, SolvedFlag;
 	var State, Frames;
 };
 CrossleBoard.prototype = {
@@ -54,6 +53,7 @@ CrossleBoard.prototype = {
 									  111,112,113,114,115,116,117,118,119,			//bottom word
 									  11,22,33,44,55,66,77,88,99						//left word
 									];
+		this.Vowels = [ "a","e","i","o","u" ];
 	},
 	SetImages() {
 
@@ -204,25 +204,20 @@ CrossleBoard.prototype = {
 				this.Cells[i].Letter = this.Cells[i].Solution;
 				this.Cells[i].Draw(true);
 			}
-		this.SolveFlag = true;
 
 		this.Crossle.TextWriter.Write("Bravo!", 200, 390, { FONT: "18px Arial" } );
 	},
 	FillVowels() {
 		var i;
-		var cell;
-//UNLOGGED
-		this.BorderFlag = true;
-		for (i=0;i<this.BorderIndices.length;++i) {
-			cell = this.Cells[this.BorderIndices[i]];
-			cell.SetLetter(cell.Solution);
-		}
+
+		for (i=0;i<this.Cells.length;++i)
+			if (this.Vowels.includes(this.Cells[i].Solution))
+				this.Cells[i].SetLetter(this.Cells[i].Solution);
 	},
 	FillBorder() {
 		var i;
 		var cell;
 
-		this.BorderFlag = true;
 		for (i=0;i<this.BorderIndices.length;++i) {
 			cell = this.Cells[this.BorderIndices[i]];
 			cell.SetLetter(cell.Solution);
@@ -243,6 +238,5 @@ CrossleBoard.prototype = {
 
 		this.Cells.forEach(function(cell) { cell.Reset(); });
 		this.SelectedCell = this.Cells[1];
-		this.BorderFlag = false;
 	}
 };

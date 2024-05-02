@@ -6,7 +6,7 @@ var CrossleKeyboard = function() {
 	var Specs;
 	var Screen;
 	var BackgroundColour;
-	var Keys, ClickedKey;
+	var Keys, ClickedKey, VowelKeys;
 	var KeyButtonImages, KeyLetterImages, PressedLetterImages;
 
 	var i;
@@ -43,21 +43,22 @@ CrossleKeyboard.prototype = {
 			this.Keys[i].Set(this.Specs.KEY, lttrs[i], i, this);
 
 			//Determine row
-			if (i>=this.Specs.ROWS[0]) {
-				if (i>=(this.Specs.ROWS[0]+this.Specs.ROWS[1]))
-					row = 2;
-				else
-					row = 1;
-			} else
+			if (i<this.Specs.ROWS[1])
 				row = 0;
+			else if (i<this.Specs.ROWS[2])
+				row = 1;
+			else
+				row = 2;
 
 			//Determine location
-			x = this.Specs.X + this.Specs.OFFSETS[row] + ((this.Specs.KEY.W+this.Specs.KEY.GAP)*(i % this.Specs.ROWS[row]));
+			x = this.Specs.X + this.Specs.OFFSETS[row] + ((this.Specs.KEY.W+this.Specs.KEY.GAP)*(i-this.Specs.ROWS[row]));
 			y = this.Specs.Y + ((this.Specs.KEY.H+this.Specs.KEY.GAP)*row);
 			this.Keys[i].SetLocation(x, y);
 
 			this.Keys[i].SetImages(this.KeyButtonImages, this.KeyLetterImages, this.PressedLetterImages);
 		}
+
+		this.VowelKeys = [ 2,6,7,8,10 ];
 	},
 	UpdateKeys() {
 
@@ -71,7 +72,6 @@ CrossleKeyboard.prototype = {
 	UpdateClick() {
 
 		for (this.i=0;this.i<this.Specs.KEY.COUNT;++this.i)
-//			if (this.Keys[this.i].State!=this.Specs.KEY.STATE.PRESSED)
 			if (!this.Keys[this.i].CheckPressed())
 				if (this.Keys[this.i].CheckClicked()) {
 					if (this.ClickedKey) {  //process 'mouse down' events only for one key
@@ -82,6 +82,12 @@ CrossleKeyboard.prototype = {
 					this.ClickedKey.Click();
 					break;
 				}
+	},
+	PressVowelKeys() {
+		var i;
+
+		for (i=0;i<this.VowelKeys.length;++i)
+			this.Keys[this.VowelKeys[i]].Press();
 	},
 	Reset() {
 

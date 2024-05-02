@@ -122,7 +122,7 @@ LexiCrossleOptionsView.prototype.PickGameNumber = function() {
 
 	this.CloseOptionButtons();
 	this.ColourScape(null, this.Specs.COLOUR);
-	this.TextWriter.Write("Pick a number:", 60, 40, { FONT: "18px Arial" } );
+	this.TextWriter.Write("Pick a number:", 5, 40, { FONT: "24px Arial" } );
 	this.Col = 0;
 	this.Row = 0;
 	this.CellIndex = 0;

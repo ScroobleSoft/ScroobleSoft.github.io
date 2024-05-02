@@ -1,33 +1,75 @@
 
-CrossleInstructionView.prototype.DisplayInstructions = function() {
-	var i;
-
-	//Background and border
-	this.Context.fillStyle = this.Specs.COLOUR.BACKGROUND;
-	this.Context.fillRect(this.Specs.L, this.Specs.T, this.Specs.W, this.Specs.H);
-	this.GraphicsTool.DrawRectangle(this.Specs.L, this.Specs.T, this.Specs.W, this.Specs.H, this.Specs.COLOUR.FRAME, 3);
-
-	this.TextWriter.Write("Drag letters to empty tiles.", 60, 150);
-
-	this.InstructionImages.DrawPatchNumber(0, 40, 160);
-	this.InstructionImages.DrawPatchNumber(1, 190, 160);
-	for (i=0;i<3;++i)
-		this.TileImages.DrawPatchNumber(i, 40, 300+(50*i));
-	this.TextWriter.Write("Green indicates a letter", 90, 315);
-	this.TextWriter.Write("is in the right position.", 90, 330);
-	this.TextWriter.Write("Yellow means it is in the right row or", 90, 365);
-	this.TextWriter.Write("column, but in a different position.", 90, 380);
-	this.TextWriter.Write("Red appears when the letter is not", 90, 415);
-	this.TextWriter.Write("in the row or column at all.", 90, 430);
-
-	this.InstructOkButton.Show();
+//----------------------------------------------------------------
+//----------- LEXI INSTRUCTION CROSSLE VIEW ----------------------
+var LexiCrossleInstructionView = function() {
+	var EmptyGridImage, FaintImage, AllImage;
+	var KeyImage, SolidImage, IncorrectImage, ClearImage;
 };
-CrossleInstructionView.prototype.PollInstructions = function() {
+LexiCrossleInstructionView.prototype = new GenieDialogView();
+LexiCrossleInstructionView.prototype.Set = function(cnvs, specs, pView, gTool, tWriter) {
 
-	this.AnimationFrameHandle = requestAnimationFrame(this.PollInstructions.bind(this));
+	this.SetLinks(gTool, tWriter);
 
-	if (this.InstructOkButton.CheckClicked()) {
-		cancelAnimationFrame(this.AnimationFrameHandle);
-		this.ParentView.Open();
-	}
+	GenieDialogView.prototype.Set.call(this, cnvs, specs, pView);
+};
+LexiCrossleInstructionView.prototype.SetImages = function() {
+
+	this.EmptyGridImage = new GenieImage();
+	this.EmptyGridImage.Set(this.Context, ImageManager.Pics[IMAGeINDEX.INSTRUCTIONS], this.Specs.IMAGE.EMPTY);
+	this.KeyImage = new GenieImage();
+	this.KeyImage.Set(this.Context, ImageManager.Pics[IMAGeINDEX.INSTRUCTIONS], this.Specs.IMAGE.KEY);
+	this.FaintImage = new GenieImage();
+	this.FaintImage.Set(this.Context, ImageManager.Pics[IMAGeINDEX.INSTRUCTIONS], this.Specs.IMAGE.FAINT);
+	this.SolidImage = new GenieImage();
+	this.SolidImage.Set(this.Context, ImageManager.Pics[IMAGeINDEX.INSTRUCTIONS], this.Specs.IMAGE.SOLID);
+	this.AllImage = new GenieImage();
+	this.AllImage.Set(this.Context, ImageManager.Pics[IMAGeINDEX.INSTRUCTIONS], this.Specs.IMAGE.ALL);
+	this.IncorrectImage = new GenieImage();
+	this.IncorrectImage.Set(this.Context, ImageManager.Pics[IMAGeINDEX.INSTRUCTIONS], this.Specs.IMAGE.INCORRECT);
+	this.ClearImage = new GenieImage();
+	this.ClearImage.Set(this.Context, ImageManager.Pics[IMAGeINDEX.INSTRUCTIONS], this.Specs.IMAGE.CLEAR);
+};
+LexiCrossleInstructionView.prototype.Draw = function() {
+
+	this.GraphicsTool.DrawRectangle(this.Specs.L, this.Specs.T, this.Specs.W, this.Specs.H, "black", 3);
+
+	this.DrawImages();
+	this.WriteText();
+};
+LexiCrossleInstructionView.prototype.DrawImages = function() {
+
+	this.EmptyGridImage.Draw();
+	this.FaintImage.Draw();
+	this.AllImage.Draw();
+	this.KeyImage.Draw();
+	this.SolidImage.Draw();
+	this.IncorrectImage.Draw();
+	this.ClearImage.Draw();
+};
+LexiCrossleInstructionView.prototype.WriteText = function() {
+
+	this.TextWriter.Write("Aim of the game: solve the 'crossword' with", 30, 35);
+	this.TextWriter.Write("the fewest double-clicks and incorrect clicks.", 30, 55);
+
+	this.TextWriter.Write("Click/tap a cell to select it", 30, 80);
+	this.TextWriter.Write("(indicated by blue outline).", 30, 100);
+	this.TextWriter.Write("Click a key to place", 70, 130);
+	this.TextWriter.Write("a letter in the cell.", 70, 150);
+
+	this.TextWriter.Write("A singles click writes", 30, 185);
+	this.TextWriter.Write("the letter in faint ink.", 30, 205);
+	this.TextWriter.Write("If there isn't a second click", 30, 225);
+	this.TextWriter.Write("within a second, the letter", 30, 245);
+	this.TextWriter.Write("is re-written in solid ink.", 30, 265);
+
+	this.TextWriter.Write("But a second click", 30, 295);
+	this.TextWriter.Write("(double-click) reveals all", 30, 315);
+	this.TextWriter.Write("instances of that letter.", 30, 335);
+	this.TextWriter.Write("A correct single click also", 30, 365);
+	this.TextWriter.Write("displays all occurrences.", 30, 385);
+
+	this.TextWriter.Write("An incorrect entry is indicated", 30, 420);
+	this.TextWriter.Write("by a red background.", 30, 440);
+
+	this.TextWriter.Write("Double-clicking a cell clears it.", 30, 475);
 };
