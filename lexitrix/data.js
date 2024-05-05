@@ -5,14 +5,16 @@
 var LexiImages = [
 	"LexiImages.png",
 	"LexiControls.png",
+	"Instructions.png",
 	"../library/GenieImages.png",
 	"../library/GenieControls.png"
 ];
 var IMAGeINDEX = {
 	IMAGES:			0,
 	CONTROLS:		1,
-	GENIeIMAGES:	2,
-	GENIeCONTROLS: 3
+	INSTRUCTIONS:	2,
+	GENIeIMAGES:	3,
+	GENIeCONTROLS: 4
 };
 
 //-------------------------------------
