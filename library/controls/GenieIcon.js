@@ -4,7 +4,7 @@
 var GenieIcon = function() {
 	var CornersPic;
 	var Pressed;
-	var MouseDownFlag;
+	var MouseDownFlag;	//TODO: probably REDUNDANT
 	var Colour, LightColour, DarkColour;
 	var ToolTip;		//???
 };
@@ -87,7 +87,7 @@ GenieIcon.prototype.MouseDown = function() {
 
 	this.Draw(this.Pressed);
 };
-GenieIcon.prototype.CheckMouseDown = function() {
+GenieIcon.prototype.CheckMouseDown = function() {  //TODO: is this being used anywhere? REDUNDANT?
 
 	if (!this.MouseDownFlag)
 		return (false);
@@ -109,4 +109,8 @@ GenieIcon.prototype.UnPress = function() {
 	} else
 		this.Context.clearRect(this.Specs.L, this.Specs.T, this.Specs.W, this.Specs.H);
 	this.Draw();
+};
+GenieIcon.prototype.Reset = function() {
+
+	this.Pressed = false;
 };
