@@ -22,7 +22,7 @@ var MobileControlImages, MobileControlEdgeImages, MobileController;  //UNLOGGED
 //---------- IMAGES -------------------
 
 var ShuffleTileImages, ShuffleLetterImages;
-var UpperCaseLetterImages;
+var UpperCaseLetterImages, MediumDigitImages;
 
 //---------------------------------
 //---------- FX -------------------
@@ -35,7 +35,7 @@ var UpperCaseLetterImages;
 
 var MainView;
 var CrackleView, ShuffleView, SpindleView, JiggleView, BundleView;
-var CrossleView, CrossleOptionsView;
+var CrossleView, CrossleOptionsView, CrossleInstructionsView;
 
 //----------------------------------------------
 //---------- LEXI COMPONENTS -------------------
@@ -119,6 +119,7 @@ LexiComponents.prototype = {
 		ShuffleTileImages = new GenieImage();
 		ShuffleLetterImages = new GenieImage();
 		UpperCaseLetterImages = new GenieImage();
+		MediumDigitImages = new GenieImage();
 	},
 	SetImages() {
 
@@ -127,6 +128,7 @@ LexiComponents.prototype = {
 		ShuffleTileImages.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.IMAGES], SHUFFLeTILEIMAGEs);
 		ShuffleLetterImages.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.IMAGES], SHUFFLeLETTErIMAGEs);
 		UpperCaseLetterImages.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.GENIeIMAGES], MEDIUmLETTErIMAGES);
+		MediumDigitImages.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.GENIeIMAGES], MEDIUmDIGITsIMAGE);
 	},
 	CreateFX() {
 	},
@@ -149,6 +151,7 @@ LexiComponents.prototype = {
 
 		CrossleView  = new LexiCrossleView();
 		CrossleOptionsView = new LexiCrossleOptionsView();
+		CrossleInstructionsView = new LexiCrossleInstructionView();
 
 		BundleView  = new GenieBundleView();
 	},
@@ -165,6 +168,7 @@ LexiComponents.prototype = {
 
 		CrossleView.Set(this.Interface.PrimeScape, CROSSLE, this.GraphicsTool, this.TextWriter, this.Randomizer);
 		CrossleOptionsView.Set(this.Interface.PrimeScape, CROSSLE.OPTIONS, this.TextWriter);
+		CrossleInstructionsView.Set(this.Interface.PrimeScape, CROSSLE.INSTRUCTIONS, CrossleView, this.GraphicsTool, this.TextWriter);
 
 		BundleView.Set(this.Interface.PrimeScape, BUNDLE, this.GraphicsTool, this.TextWriter, this.Randomizer);
 	}
