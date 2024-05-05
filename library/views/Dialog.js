@@ -37,7 +37,7 @@ GenieDialogView.prototype.Close = function() {
 
 	this.OkButton.Hide();
 	this.ParentView.Open();
-	this.ParentView.Update();
+	this.ParentView.ActivateControls();
 };
 GenieDialogView.prototype.ColourScape = function() {
 
