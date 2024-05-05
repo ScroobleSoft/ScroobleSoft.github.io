@@ -171,8 +171,8 @@ var Solutions = [ [ "packaging", "jalapenos", "paddocked", "tactician",
 						  "breed", "titan", "udder", "tales", "tiara", "onset", "colic", "magma",
 						  "agent", "laden", "delta", "resin", "outdo", "traps", "comma", "luged"  ],
 						[ "imploding", "jellyfish", "occultism", "joyriders",
-						  "medal", "lined", "dirge", "night", "cubic", "adieu", "great", "ideas",
-						  "olden", "ruled", "ridge", "extol", "dacha", "rabbi", "grief", "evens"  ],
+						  "medal", "lined", "dirge", "ninja", "cubic", "adieu", "great", "ideas",
+						  "olden", "ruled", "rinse", "email", "dacha", "rabbi", "grief", "evens"  ],
 						[ "viciously", "saltiness", "raconteur", "tablefuls",
 						  "ingot", "inner", "uncut", "lingo", "tibia", "hello", "abbot", "snafu",
 						  "argon", "later", "conga", "trout", "fetch", "label", "arson", "brass"  ],
@@ -235,5 +235,14 @@ var Solutions = [ [ "packaging", "jalapenos", "paddocked", "tactician",
 						  "ethos", "sorry", "alibi", "sushi", "totem", "noted", "testy", "onion"  ],
 						[ "sandboxes", "rampagers", "pacifying", "accustoms",
 						  "amend", "demur", "oaths", "exact", "polka", "corgi", "salty", "urban",
-						  "cream", "udder", "tiara", "setup", "topic", "molar", "stung", "labor"  ]
-];  //79
+						  "cream", "udder", "tiara", "setup", "topic", "molar", "stung", "labor"  ],
+						[ "tasseling", "garnetted", "sacrament", "eastwards",
+						  "afoot", "spear", "leads", "nurse", "gamma", "rider", "broom", "deign",
+						  "abode", "tutor", "aorta", "stern", "anger", "domed", "bidet", "olive"  ],	//80
+						[ "parameter", "unbranded", "technopop", "raconteur",
+						  "about", "augur", "erase", "eight", "write", "lunch", "outdo", "gusto",
+						  "among", "otter", "argon", "enter", "towel", "union", "organ", "taste"  ],
+						[ "eastwards", "unbranded", "viewpoint", "glassware",
+						  "aisle", "testy", "acrid", "depot", "sushi", "sinew", "macho", "scorn",
+						  "loses", "seedy", "ripen", "deter", "watts", "resin", "mason", "close"  ]
+];	//82
