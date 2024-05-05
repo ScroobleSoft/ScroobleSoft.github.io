@@ -123,7 +123,7 @@ var CROSSLE = { COLOUR: "yellow", TYPE: { DAILY: 0, NUMBERED: 1, SYMMETRICAL: 2,
 													  INCORRECT: { L: 120, T: 157, W: 30, H: 30, X: 228, Y: 410 },
 													  CLEAR: { L: 120, T: 189, W: 30, H: 30, X: 228, Y: 454 }
 													},
-										  BUTTON: { OK: { L: 160, T: 495, W: 40, H: 25, LW: 3, LABEL: "Ok", BACKGROUND: GREY.LIGHT, STYLE: BUTTON.STYLE.RAISED } }
+										  BUTTON: { OK: { L: 160, T: 500, W: 40, H: 25, LW: 3, LABEL: "Ok", BACKGROUND: GREY.LIGHT, STYLE: BUTTON.STYLE.RAISED } }
 										}
 };
 var BUNDLE = {	COLOUR: "rgb(143,223,255)",
