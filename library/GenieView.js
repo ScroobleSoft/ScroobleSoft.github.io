@@ -102,9 +102,9 @@ GenieView.prototype = {
 		if (GAME.CONTROLLER & GAMePAD.TOUChSCREEN)
 			TouchScreen.ClearAll();
 
-		//Disable controls
+		//De-activate controls
 		if (this.Controls.length)
-			this.Controls.forEach( function(cntrl) {cntrl.Enabled=false;} );
+			this.Controls.forEach( function(cntrl) {cntrl.DeActivate();} );
 
 		//Close sub-views
 		if (this.InfoView)
@@ -126,19 +126,17 @@ GenieView.prototype = {
 	Disable() {
 
 		cancelAnimationFrame(this.AnimationFrameHandle);
-		this.DisableControls();
-		this.Darken();
-	},
-	DisableControls() {
 
 		if (this.Controls.length)
-			this.Controls.forEach(function(cntrl){cntrl.Disable();});
+			this.Controls.forEach(function(cntrl){cntrl.DeActivate();});
+		if (this.NestedView)
+			this.NestedView.Controls.forEach(function(cntrl){cntrl.DeActivate();});
+		this.Darken();
+
 		if (this.InfoView)
 			this.InfoView.Disable();
 		if (this.ConsoleView)
 			this.ConsoleView.Disable();
-		if (this.NestedView)
-			this.NestedView.Controls.forEach(function(cntrl){cntrl.Disable();});
 	},
 	Draw() {  //NOTE: meant to be over-ridden
 	},

@@ -58,6 +58,7 @@ GenieControl.prototype = {
 		this.Enabled = true;
 		this.Draw();
 		this.Visible = true;
+		this.DeActivated = false;
 	},
 	Hide(colour) {  //TODO: should have the option as in ::DrawDisabled to state colour in specs
 
