@@ -6,7 +6,7 @@ var CrossleBoard = function() {
 	var Specs;
 	var Screen;
 	var GraphicsTool;
-	var Cells, SelectedCell, CellClicked;
+	var Cells, SelectedCell, SelectedCellLetter, CellClicked;
 	var CellImage, SelectedCellImage;
 	var CellOrder, WordOrder, BorderIndices;
 	var State, Frames;
@@ -112,6 +112,14 @@ CrossleBoard.prototype = {
 			}
 
 		this.SelectedCell.DrawSelectionSquare();
+	},
+	DrawLetters() {
+		var i;
+
+		for (i=0;i<this.Specs.CELL.COUNT;++i)
+			if (this.Cells[i].Letter)
+				if (this.Cells[i].Letter==this.Cells[i].Solution)
+					this.Cells[i].DisplayLetter();
 	},
 	UpdateClick() {
 		var cell;

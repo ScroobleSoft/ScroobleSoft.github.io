@@ -244,5 +244,14 @@ var Solutions = [ [ "packaging", "jalapenos", "paddocked", "tactician",
 						  "among", "otter", "argon", "enter", "towel", "union", "organ", "taste"  ],
 						[ "eastwards", "unbranded", "viewpoint", "glassware",
 						  "aisle", "testy", "acrid", "depot", "sushi", "sinew", "macho", "scorn",
-						  "loses", "seedy", "ripen", "deter", "watts", "resin", "mason", "close"  ]
-];	//82
+						  "loses", "seedy", "ripen", "deter", "watts", "resin", "mason", "close"  ],
+						[ "verandahs", "fashioned", "weeknight", "paintball",
+						  "ended", "awoke", "devil", "haste", "spate", "crank", "corgi", "lunch",
+						  "audio", "nudge", "vista", "leech", "basic", "llama", "cello", "rinse"  ],
+						[ "ghostings", "bacterial", "favouring", "captivate",
+						  "hoard", "sully", "inset", "gully", "delta", "outdo", "meter", "train",
+						  "avail", "today", "salsa", "tryst", "video", "tolet", "motor", "tiara"  ],
+						[ "videogame", "decimates", "facemasks", "mailrooms"
+						  "incur", "entry", "grins", "mauls", "larva", "dance", "manna", "greek",
+						  "ascot", "lorry", "inure", "sushi", "ogled", "moron", "magma", "niece"  ]
+];	//85
