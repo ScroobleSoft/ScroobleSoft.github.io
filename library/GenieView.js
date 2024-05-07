@@ -54,6 +54,14 @@ GenieView.prototype = {
 	},
 	SetComponents() {  //NOTE: meant to be over-ridden (optionally)
 	},
+	DeActivateControls() {
+
+		this.Controls.forEach( function(cntrl) {cntrl.DeActivate();} );
+	},
+	ActivateControls() {
+
+		this.Controls.forEach( function(cntrl) {cntrl.Activate();} );
+	},
 	Scale(scale) {
 
 		this.Scale = scale;
