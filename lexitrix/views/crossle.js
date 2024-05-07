@@ -7,7 +7,6 @@ var LexiCrossleView = function() {
 	var Selector;
 	var DailyDate, GameType, Difficulty;
 
-	var SelectedCell;
 	var IntroImage;
 	var Keys, Letters, Timer, Frames;
 	var BorderIconImage, BorderIcon, VowelsIconImage, VowelsIcon;
@@ -30,7 +29,7 @@ LexiCrossleView.prototype.Set = function(cnvs, specs, gTool, tWriter, rGenerator
 	this.Timer = 0;
 	this.Frames = 60;
 	this.FirstOpenFlag = true;
-	this.DeveloperFlag = false;
+	this.DeveloperFlag = true;
 };
 LexiCrossleView.prototype.SetComponents = function() {
 
@@ -162,7 +161,7 @@ LexiCrossleView.prototype.Draw = function() {
 	this.TextWriter.Write("Seconds: ", 225, 30);
 	this.DrawSeconds();
 };
-LexiCrossleView.prototype.DeActivateControls = function() {
+LexiCrossleView.prototype.DeActivateControls = function() {  //REDUNDANT
 
 	this.BorderIcon.DeActivate();
 	this.VowelsIcon.DeActivate();
@@ -171,7 +170,7 @@ LexiCrossleView.prototype.DeActivateControls = function() {
 	this.RestartButton.DeActivate();
 	this.QuitButton.DeActivate();
 };
-LexiCrossleView.prototype.ActivateControls = function() {
+LexiCrossleView.prototype.ActivateControls = function() {  //REDUNDANT
 
 	this.BorderIcon.Activate();
 	this.VowelsIcon.Activate();
