@@ -251,7 +251,7 @@ var Solutions = [ [ "packaging", "jalapenos", "paddocked", "tactician",
 						[ "ghostings", "bacterial", "favouring", "captivate",
 						  "hoard", "sully", "inset", "gully", "delta", "outdo", "meter", "train",
 						  "avail", "today", "salsa", "tryst", "video", "tolet", "motor", "tiara"  ],
-						[ "videogame", "decimates", "facemasks", "mailrooms"
+						[ "videogame", "decimates", "facemasks", "mailrooms",
 						  "incur", "entry", "grins", "mauls", "larva", "dance", "manna", "greek",
 						  "ascot", "lorry", "inure", "sushi", "ogled", "moron", "magma", "niece"  ]
 ];	//85
