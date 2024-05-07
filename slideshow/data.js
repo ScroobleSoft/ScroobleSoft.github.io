@@ -23,10 +23,10 @@ var IMAGeINDEX = {
 //---------- SOUNDS -------------------
 
 var SlideSounds = [
-	"soundtrack1.wav",
-	"soundtrack2.wav",
-	"soundtrack3.wav",
-	"soundtrack4.wav"
+	"soundtrack1.mp3",
+	"soundtrack2.mp3",
+	"soundtrack3.mp3",
+	"soundtrack4.mp3"
 ];
 var SOUNdINDEX = {
 	SOUNDTRACK1: 0,

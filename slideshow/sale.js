@@ -41,7 +41,7 @@ SaleGalleryView.prototype.Open = function() {
 SaleGalleryView.prototype.Draw = function() {
 	var i;
 
-	this.TextWriter.Write("Choose a painting:", 230, 30, { FONT: "18px Arial", COLOUR: "blue" } );
+	this.TextWriter.Write("Choose a painting:", 230, 25, { FONT: "18px Arial", COLOUR: "blue" } );
 	for (i=0;i<9;++i) {
 		this.GraphicsTool.DrawRectangle(this.ImageMaps[i].L-4, this.ImageMaps[i].T-4, 168, 168, "blue", 4);
 		this.ThumbnailImages.DrawPatchNumber(i, this.ImageMaps[i].L, this.ImageMaps[i].T);
