@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+    <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<div id="PrimeDiv" style="position:absolute; top:8px; left:8px; z-index:1">
+	    <canvas id="PrimeCanvas" width="600" height="600"></canvas>
+	</div>
+	<div id="ZoomDiv" style="position:absolute; top:8px; left:612px; z-index:2">
+	    <canvas id="ZoomCanvas" width="240" height="540"></canvas>
+	</div>
+	<div id="ConsoleDiv" style="position:absolute; top:552px; left:612px; z-index:3">
+	    <canvas id="ConsoleCanvas" width="240" height="60"></canvas>
+	</div>
+    </head>
+
+    <body onload="RunSlideshow()">
+
+	<!-- Data -->
+	<script src="..\library\GenieData.js"></script>
+	<script src="..\library\data\Colours.js"></script>
+	<script src="..\library\data\Consts.js"></script>
+	<script src="..\library\data\Geo.js"></script>
+	<script src="..\library\data\IO.js"></script>
+	<script src="..\library\data\Controls.js"></script>
+
+	<!-- Types -->
+	<script src="..\library\GenieTypes.js"></script>
+	<script src="..\library\GenieArray.js"></script>
+	<script src="..\library\GenieList.js"></script>
+
+	<!-- Utilities -->
+	<script src="..\library\GenieUtils.js"></script>
+	<script src="..\library\utils\ArrayUtils.js"></script>
+	<script src="..\library\utils\SpaceUtils.js"></script>
+	<script src="..\library\utils\StringUtils.js"></script>
+
+	<!-- Controls -->
+	<script src="..\library\GenieControl.js"></script>
+	<script src="..\library\controls\GenieButton.js"></script>
+	<script src="..\library\controls\TextButton.js"></script>
+	<script src="..\library\controls\ImageButton.js"></script>
+	<script src="..\library\controls\PushButton.js"></script>
+
+	<!-- Tools -->
+	<script src="..\library\GenieRandom.js"></script>
+	<script src="..\library\GenieText.js"></script>
+
+	<!-- Graphics -->
+	<script src="..\library\GenieImage.js"></script>
+	<script src="..\library\ImageMap.js"></script>
+	<script src="..\library\GenieGraphics.js"></script>
+
+	<!-- Interface -->
+	<script src="..\library\GenieMouse.js"></script>
+	<script src="..\library\TouchScreen.js"></script>
+	<script src="..\library\GenieKeyboard.js"></script>
+	<script src="..\library\GenieGamepad.js"></script>
+	<script src="..\library\GenieSound.js"></script>
+
+	<!-- Framework -->
+	<script src="..\library\ImageManager.js"></script>
+	<script src="..\library\GenieCanvas.js"></script>
+	<script src="..\library\GenieScape.js"></script>
+	<script src="..\library\GenieView.js"></script>
+	<script src="..\library\views\SubView.js"></script>
+	<script src="..\library\views\Dialog.js"></script>
+	<script src="..\library\GenieGame.js"></script>
+
+	<script src="data.js"></script>
+
+	<script src="timer.js"></script>
+
+	<!-- views -->
+	<script src="gallery.js"></script>
+	<script src="thumbnail.js"></script>
+	<script src="slideview.js"></script>
+	<script src="update.js"></script>
+	<script src="info.js"></script>
+	<script src="console.js"></script>
+	<script src="sale.js"></script>
+	<script src="details.js"></script>
+
+	<script src="components.js"></script>
+
+	<script src="intro.js"></script>
+
+	<script src="iShow.js"></script>
+
+	<script>
+
+	//Main game object
+	var Game;
+
+	function RunSlideshow() {
+
+	    //Create library components
+	    SliderScape = new GenieScape();
+	    SliderGraphics = new GenieGraphics();
+	    SliderText = new GenieText();
+	    SliderRandomizer = new GenieRandomizer();
+
+	    //Set library components
+	    SliderScape.Set("PrimeCanvas", "ZoomCanvas", "ConsoleCanvas");
+	    SliderGraphics.Set(SliderScape.Screen, SliderScape.InfoBox, SliderScape.ControlPanel);
+	    SliderText.Set(SliderScape.Screen, null, SliderScape.InfoBox, SliderScape.ControlPanel);
+	    SliderRandomizer.Set();
+
+	    //Load and assign graphic images
+	    ImageManager.Set(SlideImages);
+	    ImageManager.LoadImages();
+	    ImageManager.Check();				//Check if images have loaded
+
+	    //Begin as soon as images have loaded
+	    Game = new SlidingGallery();
+	    Game.Set(SliderScape, SliderGraphics, SliderText, SliderRandomizer);
+	    Game.CheckImagesLoaded();
+	}
+
+	</script>
+    </body>
+</html>
