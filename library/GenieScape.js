@@ -63,7 +63,7 @@ GenieScape.prototype = {
 
 		this.Width = window.innerWidth;
 		this.Height = window.innerHeight;
-		if (this.Width<this.Height)
+		if (this.Width>this.Height)
 			this.Orientation = ORIENTATION.LANDSCAPE;
 		else
 			this.Orientation = ORIENTATION.PORTRAIT;
@@ -220,6 +220,10 @@ GenieScape.prototype = {
 				this.ReOrientedFlag = true;
 			this.Orientation = ORIENTATION.LANDSCAPE;
 		}
+
+		//TODO: this portion will be configured in Game.Options, and meant for mobile platforms
+		if (this.ReOrientedFlag)
+			this.ReOrient();
 	},
 	CheckReSized() {
 
@@ -236,6 +240,36 @@ GenieScape.prototype = {
 			return (true);
 		} else
 			return (false);
+	},
+	CheckLandscape() {
+
+		return (this.Orientation==ORIENTATION.LANDSCAPE);
+	},
+	CheckPortrait() {
+
+		return (this.Orientation==ORIENTATION.PORTRAIT);
+	},
+	ReOrient() {  //TODO: have to adjust for Prime Canvas position, which may not be 8px (get using document.getElementById("PrimeDiv").style.top)
+
+		if (this.Orientation==ORIENTATION.LANDSCAPE) {
+			document.getElementById("ZoomDiv").style.left = SCREEN.WIDTH + 12 + "px";
+			document.getElementById("ZoomDiv").style.top = "8px";
+			this.ZoomScape.Element.width = INFoBOX.WIDTH;
+			this.ZoomScape.Element.height = INFoBOX.HEIGHT;
+			document.getElementById("ConsoleDiv").style.left  = SCREEN.WIDTH + 12 + "px";
+			document.getElementById("ConsoleDiv").style.top  = INFoBOX.HEIGHT + 12 + "px";
+			this.Console.Element.width = CONTROlPANEL.WIDTH;
+			this.Console.Element.height = CONTROlPANEL.HEIGHT;
+		} else {
+			document.getElementById("ZoomDiv").style.left = "8px";
+			document.getElementById("ZoomDiv").style.top = SCREEN.HEIGHT + 12 + "px";
+			this.ZoomScape.Element.width = INFoBOX.HEIGHT;
+			this.ZoomScape.Element.height = INFoBOX.WIDTH;
+			document.getElementById("ConsoleDiv").style.left  = INFoBOX.WIDTH + 12 + "px";
+			document.getElementById("ConsoleDiv").style.top  = SCREEN.HEIGHT + 12 + "px";
+			this.Console.Element.width = CONTROlPANEL.HEIGHT;
+			this.Console.Element.height = CONTROlPANEL.WIDTH;
+		}
 	},
 	Expand() {
 
