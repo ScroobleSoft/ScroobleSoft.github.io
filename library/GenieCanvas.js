@@ -8,7 +8,7 @@ var GenieCanvas = function () {
 	var Element, Context;
 	var View;
 	var Controls, MouseDownControl;
-	var FrameRate, StartTime, Iterations;
+	var FPS, StartTime, Iterations;
 	var MousePresentFlag, InputFlag, TrackPadFlag;
 	var Scale;														//floating point
 
@@ -49,7 +49,7 @@ GenieCanvas.prototype = {
 	UpdateFrameRateMeasurement() {
 
 		++this.Iterations;
-		this.FrameRate = 1000 / ((performance.now()-this.StartTime)/this.Iterations);
+		this.FPS = 1000 / ((performance.now()-this.StartTime)/this.Iterations);
 	},
 	SetAntiAliasing() {
 
