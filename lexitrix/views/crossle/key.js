@@ -71,7 +71,7 @@ CrossleKey.prototype = {
 				break;
 			case this.Specs.STATE.SINGLeCLICKED:
 				if (this.Keyboard.Board.SelectedCell.Solution==this.Letter) {
-					this.Keyboard.Board.SelectedCell.SetLetter(this.Keyboard.Board.SelectedCellLetter);		//HERE
+					this.Keyboard.Board.SelectedCell.SetLetter(this.Keyboard.Board.SelectedCellLetter);
 					this.Keyboard.Board.FillLetter(this.Letter);
 					this.Press();
 				} else {
@@ -82,7 +82,7 @@ CrossleKey.prototype = {
 				this.Keyboard.ClickedKey = null;
 				break;
 			case this.Specs.STATE.DOUBLeCLICKED:
-				this.Keyboard.Board.SelectedCell.SetLetter(this.Keyboard.Board.SelectedCellLetter);			//HERE
+				this.Keyboard.Board.SelectedCell.SetLetter(this.Keyboard.Board.SelectedCellLetter);
 				this.Keyboard.Board.FillLetter(this.Letter);
 				this.Keyboard.Crossle.IncrementKeyCount();
 				this.Keyboard.ClickedKey = null;

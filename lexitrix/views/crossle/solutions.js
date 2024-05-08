@@ -253,5 +253,8 @@ var Solutions = [ [ "packaging", "jalapenos", "paddocked", "tactician",
 						  "avail", "today", "salsa", "tryst", "video", "tolet", "motor", "tiara"  ],
 						[ "videogame", "decimates", "facemasks", "mailrooms",
 						  "incur", "entry", "grins", "mauls", "larva", "dance", "manna", "greek",
-						  "ascot", "lorry", "inure", "sushi", "ogled", "moron", "magma", "niece"  ]
-];	//85
+						  "ascot", "lorry", "inure", "sushi", "ogled", "moron", "magma", "niece"  ],
+						[ "hatchling", "varnishes", "teensiest", "addresses",
+						  "along", "canal", "lamps", "nadir", "route", "pylon", "swami", "urges",
+						  "drown", "regal", "media", "sarin", "syrup", "equal", "shuns", "argue"  ]
+];	//86
