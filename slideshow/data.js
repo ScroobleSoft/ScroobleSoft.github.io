@@ -49,7 +49,7 @@ var CONTROlPANEL = { WIDTH: 240, HEIGHT: 60 };
 //---------- GAME DATA -------------------
 
 var BATCH = { COUNT: 4, C: 2, R: 2 };
-var Batches = [ { COUNT: 30, START: 0, END: 29 }, { COUNT: 30, START: 30, END: 59 }, { COUNT: 30, START: 60, END: 89 }, { COUNT: 23, START: 90, END: 112 } ];
+var Batches = [ { COUNT: 30, START: 0, END: 29 }, { COUNT: 30, START: 30, END: 59 }, { COUNT: 30, START: 60, END: 89 }, { COUNT: 28, START: 90, END: 117 } ];
 
 //---------------------------------------
 //---------- CONTROLS -------------------
@@ -57,25 +57,26 @@ var Batches = [ { COUNT: 30, START: 0, END: 29 }, { COUNT: 30, START: 30, END: 5
 //--------------------------------------
 //---------- IMAGES --------------------
 
-var Art = [ "paintings/1.jpg",  "paintings/2.jpg",  "paintings/3.jpg",  "paintings/4.jpg",  "paintings/5.jpg",  "paintings/6.jpg",
-				"paintings/7.jpg",  "paintings/8.jpg",  "paintings/9.jpg",  "paintings/10.jpg", "paintings/11.jpg", "paintings/12.jpg",
-				"paintings/13.jpg", "paintings/14.jpg", "paintings/15.jpg", "paintings/16.jpg", "paintings/17.jpg", "paintings/18.jpg",
-				"paintings/19.jpg", "paintings/20.jpg", "paintings/21.jpg", "paintings/22.jpg", "paintings/23.jpg", "paintings/24.jpg",
-				"paintings/25.jpg", "paintings/26.jpg", "paintings/27.jpg", "paintings/28.jpg", "paintings/29.jpg", "paintings/30.jpg",
-				"paintings/31.jpg", "paintings/32.jpg", "paintings/33.jpg", "paintings/34.jpg", "paintings/35.jpg", "paintings/36.jpg",
-				"paintings/37.jpg", "paintings/38.jpg", "paintings/39.jpg", "paintings/40.jpg", "paintings/41.jpg", "paintings/37.jpg",
-				"paintings/43.jpg", "paintings/44.jpg", "paintings/45.jpg", "paintings/46.jpg", "paintings/47.jpg", "paintings/48.jpg",
-				"paintings/49.jpg", "paintings/50.jpg", "paintings/51.jpg", "paintings/52.jpg", "paintings/53.jpg", "paintings/54.jpg",
-				"paintings/55.jpg", "paintings/56.jpg", "paintings/57.jpg", "paintings/58.jpg", "paintings/59.jpg", "paintings/60.jpg",
-				"paintings/61.jpg", "paintings/62.jpg", "paintings/63.jpg", "paintings/64.jpg", "paintings/65.jpg", "paintings/66.jpg",
-				"paintings/67.jpg", "paintings/68.jpg", "paintings/69.jpg", "paintings/70.jpg", "paintings/71.jpg", "paintings/72.jpg",
-				"paintings/73.jpg", "paintings/74.jpg", "paintings/75.jpg", "paintings/76.jpg", "paintings/77.jpg", "paintings/78.jpg",
-				"paintings/79.jpg", "paintings/80.jpg", "paintings/81.jpg", "paintings/82.jpg", "paintings/83.jpg", "paintings/84.jpg",
-				"paintings/85.jpg", "paintings/86.jpg", "paintings/87.jpg", "paintings/88.jpg", "paintings/89.jpg", "paintings/90.jpg",
-				"paintings/91.jpg", "paintings/92.jpg", "paintings/93.jpg", "paintings/94.jpg", "paintings/95.jpg", "paintings/96.jpg",
-				"paintings/97.jpg", "paintings/98.jpg", "paintings/99.jpg", "paintings/100.jpg", "paintings/101.jpg", "paintings/102.jpg",
+var Art = [ "paintings/1.jpg",   "paintings/2.jpg",   "paintings/3.jpg",   "paintings/4.jpg",   "paintings/5.jpg",   "paintings/6.jpg",
+				"paintings/7.jpg",   "paintings/8.jpg",   "paintings/9.jpg",   "paintings/10.jpg",  "paintings/11.jpg",  "paintings/12.jpg",
+				"paintings/13.jpg",  "paintings/14.jpg",  "paintings/15.jpg",  "paintings/16.jpg",  "paintings/17.jpg",  "paintings/18.jpg",
+				"paintings/19.jpg",  "paintings/20.jpg",  "paintings/21.jpg",  "paintings/22.jpg",  "paintings/23.jpg",  "paintings/24.jpg",
+				"paintings/25.jpg",  "paintings/26.jpg",  "paintings/27.jpg",  "paintings/28.jpg",  "paintings/29.jpg",  "paintings/30.jpg",
+				"paintings/31.jpg",  "paintings/32.jpg",  "paintings/33.jpg",  "paintings/34.jpg",  "paintings/35.jpg",  "paintings/36.jpg",
+				"paintings/37.jpg",  "paintings/38.jpg",  "paintings/39.jpg",  "paintings/40.jpg",  "paintings/41.jpg",  "paintings/37.jpg",
+				"paintings/43.jpg",  "paintings/44.jpg",  "paintings/45.jpg",  "paintings/46.jpg",  "paintings/47.jpg",  "paintings/48.jpg",
+				"paintings/49.jpg",  "paintings/50.jpg",  "paintings/51.jpg",  "paintings/52.jpg",  "paintings/53.jpg",  "paintings/54.jpg",
+				"paintings/55.jpg",  "paintings/56.jpg",  "paintings/57.jpg",  "paintings/58.jpg",  "paintings/59.jpg",  "paintings/60.jpg",
+				"paintings/61.jpg",  "paintings/62.jpg",  "paintings/63.jpg",  "paintings/64.jpg",  "paintings/65.jpg",  "paintings/66.jpg",
+				"paintings/67.jpg",  "paintings/68.jpg",  "paintings/69.jpg",  "paintings/70.jpg",  "paintings/71.jpg",  "paintings/72.jpg",
+				"paintings/73.jpg",  "paintings/74.jpg",  "paintings/75.jpg",  "paintings/76.jpg",  "paintings/77.jpg",  "paintings/78.jpg",
+				"paintings/79.jpg",  "paintings/80.jpg",  "paintings/81.jpg",  "paintings/82.jpg",  "paintings/83.jpg",  "paintings/84.jpg",
+				"paintings/85.jpg",  "paintings/86.jpg",  "paintings/87.jpg",  "paintings/88.jpg",  "paintings/89.jpg",  "paintings/90.jpg",
+				"paintings/91.jpg",  "paintings/92.jpg",  "paintings/93.jpg",  "paintings/94.jpg",  "paintings/95.jpg",  "paintings/96.jpg",
+				"paintings/97.jpg",  "paintings/98.jpg",  "paintings/99.jpg",  "paintings/100.jpg", "paintings/101.jpg", "paintings/102.jpg",
 				"paintings/103.jpg", "paintings/104.jpg", "paintings/105.jpg", "paintings/106.jpg", "paintings/107.jpg", "paintings/108.jpg",
-				"paintings/109.jpg", "paintings/110.jpg", "paintings/111.jpg", "paintings/112.jpg", "paintings/113.jpg"
+				"paintings/109.jpg", "paintings/110.jpg", "paintings/111.jpg", "paintings/112.jpg", "paintings/113.jpg", "paintings/114.jpg",
+				"paintings/115.jpg", "paintings/116.jpg", "paintings/117.jpg", "paintings/118.jpg"
 ];
 
 //--------------------------------------

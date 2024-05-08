@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <html>
+
+<a href="https://www.youtube.com/watch?v=fti3stLt11k">
+    <img src="minarets.png" alt="The Minarets" width="600" height="64" >
+</a>
+
     <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-	<div id="PrimeDiv" style="position:absolute; top:8px; left:8px; z-index:1">
+	<div id="PrimeDiv" style="position:absolute; top:40px; left:8px; z-index:1">
 	    <canvas id="PrimeCanvas" width="600" height="600"></canvas>
 	</div>
 	<div id="ZoomDiv" style="position:absolute; top:8px; left:612px; z-index:2">
@@ -104,6 +109,9 @@
 	    SliderGraphics.Set(SliderScape.Screen, SliderScape.InfoBox, SliderScape.ControlPanel);
 	    SliderText.Set(SliderScape.Screen, null, SliderScape.InfoBox, SliderScape.ControlPanel);
 	    SliderRandomizer.Set();
+
+	    if (SliderScape.CheckPortrait())
+		SliderScape.ReOrient();
 
 	    //Load and assign graphic images
 	    ImageManager.Set(SlideImages);

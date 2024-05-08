@@ -1,16 +1,17 @@
 
 //-------------------------------------------------
-//---------- SALE GALLERY VIEW --------------------  UNLOGGED
+//---------- SALE GALLERY VIEW --------------------
 var SaleGalleryView = function() {
 	var ThumbnailImages;
 	var ImageMaps;
+	var FirstOpenFlag;
 
 	var i;
 };
 SaleGalleryView.prototype = new GenieView();
-SaleGalleryView.prototype.Set = function(cnvs, specs, gTool, tWriter) {
+SaleGalleryView.prototype.Set = function(cnvs, specs, gTool, tWriter, rGenerator) {
 
-	this.SetLinks(gTool, tWriter);
+	this.SetLinks(gTool, tWriter, rGenerator);
 
 	GenieView.prototype.Set.call(this, cnvs, specs);
 
@@ -53,6 +54,17 @@ SaleGalleryView.prototype.Update = function() {
 
 	//Check image clicks
 	if (Mouse.CheckDowned(CANVAS.PRIME)) {
+
+		//Start music
+		if (!this.FirstOpenFlag) {
+			this.i = this.Randomizer.GetIndex(Soundtracks.length);
+			if (Soundtracks[this.i].Playable) {
+				Soundtracks[this.i].Play();
+				this.FirstOpenFlag = true;
+			}
+		}
+
+		//Check if images clicked
 		for (this.i=0;this.i<9;++this.i)
 			if (SpaceUtils.CheckPointInBox(Mouse.Down, this.ImageMaps[this.i])) {
 				cancelAnimationFrame(this.AnimationFrameHandle);

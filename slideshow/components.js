@@ -201,7 +201,7 @@ SlideComponents.prototype = {
 		SlideInfoView.Set(this.Interface.ZoomScape, VIEW.SLIDeSHOW.INFO);
 		SlideConsoleView.Set(this.Interface.Console, VIEW.SLIDeSHOW.CONSOLE);
 		SlideView.SetSubViews(SlideInfoView, SlideConsoleView);
-		SaleView.Set(this.Interface.PrimeScape, VIEW.SALE, this.GraphicsTool, this.TextWriter);
+		SaleView.Set(this.Interface.PrimeScape, VIEW.SALE, this.GraphicsTool, this.TextWriter, this.Randomizer);
 		DetailsView.Set(this.Interface.PrimeScape, VIEW.DETAILS, SaleView, this.GraphicsTool, this.TextWriter);
 	}
 };
