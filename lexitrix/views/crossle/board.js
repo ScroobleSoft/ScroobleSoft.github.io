@@ -170,6 +170,7 @@ CrossleBoard.prototype = {
 				break;
 			case this.Specs.STATE.DOUBLeCLICKED:
 				this.CellClicked.Clear();
+				this.SelectedCellLetter = "";
 				this.State = this.Specs.STATE.NORMAL;
 				break;
 		}
@@ -236,6 +237,8 @@ CrossleBoard.prototype = {
 
 		for (i=0;i<this.CellOrder.length;++i)
 			if (this.Cells[this.CellOrder[i]].CheckClear()) {
+				if (!this.Cells[this.CellOrder[i]].Solution)
+					continue;
 				this.SelectedCell.ClearSelectionSquare();
 				this.SelectedCell = this.Cells[this.CellOrder[i]];
 				this.SelectedCell.DrawSelectionSquare();

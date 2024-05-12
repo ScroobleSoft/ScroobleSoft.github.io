@@ -54,7 +54,7 @@ CrossleKey.prototype = {
 					this.Keyboard.Board.SelectedCellLetter = this.Keyboard.Board.SelectedCell.Letter;
 					this.Keyboard.Board.SelectedCell.PlaceLetter(this.Letter);
 					this.State = this.Specs.STATE.CLICKED;
-					this.Frames = 60;
+					this.Frames = this.Keyboard.Crossle.FPS;
 					this.DrawPressed();
 					setTimeout(this.Draw.bind(this), 60);
 				}
