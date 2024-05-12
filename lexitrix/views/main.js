@@ -29,10 +29,14 @@ GenieMainView.prototype.Open = function() {
 	this.TextWriter.Write("Jiggle",  239, 390, { COLOUR: "blue", FONT: "24px Arial" } );
 	this.TextWriter.Write("Spindle",  49, 590, { COLOUR: "blue", FONT: "24px Arial" } );
 	this.TextWriter.Write("Bundle",  232, 590, { COLOUR: "blue", FONT: "24px Arial" } );
+
+	this.Canvas.SetFrameRateMeasurement();
 };
 GenieMainView.prototype.Update = function() {
 
    this.AnimationFrameHandle = requestAnimationFrame(this.Update.bind(this));
+
+	this.Canvas.UpdateFrameRateMeasurement();
 
 	if (CracklePushButton.CheckPressed())
 		this.Close(this.LaunchCrackle.bind(this), 100);
@@ -87,6 +91,7 @@ GenieMainView.prototype.LaunchJiggle = function() {
 };
 GenieMainView.prototype.LaunchCrossle = function() {
 
+	CrossleView.CalibrateFrameRate();
 	CrossleOptionsView.Open();
 	CrossleOptionsView.Update();
 };

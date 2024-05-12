@@ -12,6 +12,7 @@ var LexiCrossleView = function() {
 	var BorderIconImage, BorderIcon, VowelsIconImage, VowelsIcon;
 	var InstructionsButton, SolveButton, RestartButton, QuitButton;
 	var MineButton, GenerateButton;
+	var FPS;
 	var FirstOpenFlag, VowelsFlag, BorderFlag;
 	var DeveloperFlag;
 
@@ -29,7 +30,7 @@ LexiCrossleView.prototype.Set = function(cnvs, specs, gTool, tWriter, rGenerator
 	this.Timer = 0;
 	this.Frames = 60;
 	this.FirstOpenFlag = true;
-	this.DeveloperFlag = true;
+	this.DeveloperFlag = false;
 };
 LexiCrossleView.prototype.SetComponents = function() {
 
@@ -115,6 +116,13 @@ LexiCrossleView.prototype.SetDifficulty = function(lvl) {
 
 	this.Difficulty = lvl;
 };
+LexiCrossleView.prototype.CalibrateFrameRate = function() {
+	//UNLOGGED
+	if (this.Canvas.FPS>90)
+		this.FPS = this.Canvas.FPS
+	else
+		this.FPS = 60;
+};
 LexiCrossleView.prototype.Open = function() {
 	GenieView.prototype.Open.call(this);
 
@@ -150,7 +158,7 @@ LexiCrossleView.prototype.Draw = function() {
 
 	//TEMP
 	if (this.DeveloperFlag)
-	this.TextWriter.Write("FPS: "+Math.round(this.Canvas.FrameRate), 200, 390);
+	this.TextWriter.Write("FPS: "+Math.round(this.Canvas.FPS), 200, 390);
 
 	//Display scorecard
 	this.GraphicsTool.DrawRectangle(20, 10, 90, 30, "black", 1);
@@ -160,24 +168,6 @@ LexiCrossleView.prototype.Draw = function() {
 	this.GraphicsTool.DrawRectangle(220, 10, 120, 30, "black", 1);
 	this.TextWriter.Write("Seconds: ", 225, 30);
 	this.DrawSeconds();
-};
-LexiCrossleView.prototype.DeActivateControls = function() {  //REDUNDANT
-
-	this.BorderIcon.DeActivate();
-	this.VowelsIcon.DeActivate();
-	this.InstructionsButton.DeActivate();
-	this.SolveButton.DeActivate();
-	this.RestartButton.DeActivate();
-	this.QuitButton.DeActivate();
-};
-LexiCrossleView.prototype.ActivateControls = function() {  //REDUNDANT
-
-	this.BorderIcon.Activate();
-	this.VowelsIcon.Activate();
-	this.InstructionsButton.Activate();
-	this.SolveButton.Activate();
-	this.RestartButton.Activate();
-	this.QuitButton.Activate();
 };
 LexiCrossleView.prototype.SelectWords = function() {
 
