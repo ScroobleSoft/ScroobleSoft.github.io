@@ -1,6 +1,6 @@
 
 //---------------------------------------------------------
-//----------- SLIDESHOW DETAILS VIEW ----------------------  UNLOGGED
+//----------- SLIDESHOW DETAILS VIEW ----------------------
 var SlideshowDetailsView = function() {
 	var PaintingIndex;
 	var Paintings, Titles, Dimensions, Prices;
@@ -17,10 +17,11 @@ SlideshowDetailsView.prototype.Set = function(cnvs, specs, pView, gTool, tWriter
 };
 SlideshowDetailsView.prototype.SetData = function() {
 
-	this.Paintings = [ 111, 112, 113, 114, 115, 116, 117, 118, 111 ];
-	this.Titles = [ "2 Ladies.", "Pink Flowers.", "Purple Flowers.", "Pink Shrub.", "Lilies.", "Two Roses.", "Blue Vase.", "Tulip Field.", "" ];
-	this.Dimensions = [ "32x20", "18x24", "18x24", "19x23", "21x19", "21x19", "19x22", "30x24", "0x0" ];
-	this.Prices = [ 60, 30, 30, 40, 40, 40, 40, 50, -1 ];
+	this.Paintings = [ 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121 ];
+	this.Titles = [ "2 Ladies.", "Pink Flowers.", "Purple Flowers.", "Pink Shrub.", "Lilies.", "Two Roses.", "Blue Vase.", "Tulip Field.",
+						 "2 Roses.", "Violet Flowers.", "Orange/Yellow Flowers." ];
+	this.Dimensions = [ "32x20", "18x24", "18x24", "19x23", "21x19", "21x19", "19x22", "30x24", "0x0", "0x0", "0x0" ];
+	this.Prices = [ 60, 30, 30, 40, 40, 40, 40, 50, 40, 30, 50 ];
 };
 SlideshowDetailsView.prototype.Draw = function() {
 

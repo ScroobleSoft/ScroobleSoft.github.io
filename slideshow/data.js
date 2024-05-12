@@ -49,7 +49,7 @@ var CONTROlPANEL = { WIDTH: 240, HEIGHT: 60 };
 //---------- GAME DATA -------------------
 
 var BATCH = { COUNT: 4, C: 2, R: 2 };
-var Batches = [ { COUNT: 30, START: 0, END: 29 }, { COUNT: 30, START: 30, END: 59 }, { COUNT: 30, START: 60, END: 89 }, { COUNT: 28, START: 90, END: 117 } ];
+var Batches = [ { COUNT: 30, START: 0, END: 29 }, { COUNT: 30, START: 30, END: 59 }, { COUNT: 30, START: 60, END: 89 }, { COUNT: 30, START: 90, END: 119 } ];
 
 //---------------------------------------
 //---------- CONTROLS -------------------
@@ -76,7 +76,8 @@ var Art = [ "paintings/1.jpg",   "paintings/2.jpg",   "paintings/3.jpg",   "pain
 				"paintings/97.jpg",  "paintings/98.jpg",  "paintings/99.jpg",  "paintings/100.jpg", "paintings/101.jpg", "paintings/102.jpg",
 				"paintings/103.jpg", "paintings/104.jpg", "paintings/105.jpg", "paintings/106.jpg", "paintings/107.jpg", "paintings/108.jpg",
 				"paintings/109.jpg", "paintings/110.jpg", "paintings/111.jpg", "paintings/112.jpg", "paintings/113.jpg", "paintings/114.jpg",
-				"paintings/115.jpg", "paintings/116.jpg", "paintings/117.jpg", "paintings/118.jpg"
+				"paintings/115.jpg", "paintings/116.jpg", "paintings/117.jpg", "paintings/118.jpg", "paintings/119.jpg", "paintings/120.jpg",
+				"paintings/121.jpg"
 ];
 
 //--------------------------------------
@@ -127,8 +128,11 @@ var VIEW = { GALLERY: { BATCH: { COUNT: 4, C: 2, R: 2 }, COLOUR: GREY.FAINT,
 														}
 											}
 								},
-				 SALE: { COLOUR: GREY.LIGHT,
-							IMAGE: { THUMBNAILS: { L: 3, T: 3, W: 486, H: 486, O: 3, C: 3, R: 3, PATCH: { W: 160, H: 160 } } },
+				 SALE: { COLOUR: GREY.LIGHT, PICS: 11, PAGE: { COUNT: 2, PICS: 9 },
+							BUTTON: { MORE: { L: 518, T: 5, W: 55, H: 26, SX: 84, SY: 124, LW: 3, STYLE: BUTTON.STYLE.RAISED, BACKGROUND: GREY.LIGHT },
+										 BACK: { L: 512, T: 5, W: 49, H: 27, SX: 135, SY: 124, LW: 3, STYLE: BUTTON.STYLE.RAISED, BACKGROUND: GREY.LIGHT }
+									  },
+							IMAGE: { THUMBNAILS: { L: 3, T: 3, W: 486, H: 649, O: 3, C: 3, R: 4, PATCH: { W: 160, H: 160 } } },
 						 },
 				 DETAILS: { L: 0, T: 0, W: 600, H: 600, COLOUR: PAINT.SKY,
 								BUTTON: { OK: { L: 500, T: 560, W: 50, H: 25, LW: 3, LABEL: "Ok", BACKGROUND: GREY.LIGHT, STYLE: BUTTON.STYLE.RAISED } }

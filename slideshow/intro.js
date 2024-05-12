@@ -23,7 +23,7 @@ SlideIntro.prototype = {
 		this.Screen.fillRect(0, 0, SCREEN.WIDTH, SCREEN.HEIGHT);
 
 		this.TextWriter.Write("Loading Paintings . . . ", 20, 40, { FONT: "18px Arial", COLOUR: "blue" } );
-		this.TextWriter.Write("(Please wait 5 seconds.)", 20, 60, { FONT: "18px Arial", COLOUR: "blue" } );
+		this.TextWriter.Write("(Please wait 5 seconds.)", 20, 65, { FONT: "18px Arial", COLOUR: "blue" } );
 
 		this.LoadPaintings();
 	},
