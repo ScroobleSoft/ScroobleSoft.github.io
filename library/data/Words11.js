@@ -22,12 +22,16 @@ var Words11 = [ "abandonment", "abandonware", "abbreviated", "abbreviates", "abd
 					 "galavanting", "gallantries", "gallbladder", "galvanizing", "gamechanger", "gangbusters", "garrulously", "gaseousness",
  "gaslighting", "gastronomic", "gemologists",  //3
 					 "haberdasher", "habitations", "hacktivists", "hagiography", "harebrained", "hairbrushes", "hairdresser", "hairstyling",
- "hairstylist", "halfhearted", //1
+ "hairstylist", "halfhearted",  //1
 					 "icebreakers", "iconoclasts", "iconography", "identically", "identifiers", "identifying", "ideological", "idiotically",
  "ignominious", "illiterates",  //2 
 					 "immigration", "incarcerate", "industrious", "intelligent",
+					 "kettledrums", "keyboardist", "kilovoltage", "kindhearted", "kinesiology", "kingfishers", "kitchenette", "kleptocracy",
+ "kleptocrats", "kleptomania",  //3
 					 "knickknacks",
-					 "landscaping", "leafblowers",
+					 "laboriously", "lacerations", "laconically", "ladyfingers", "lamebrained", "lamentation", "landholding", "landscaping",
+ "languishing", "laundrettes",  //4
+					 "leafblowers",
 					 "mountaineer",
 					 "nonchalance",
 					 "occurrences", "ornithology",
