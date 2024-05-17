@@ -3,7 +3,6 @@
 //---------- MAIN OBJECTS -------------------
 
 var SliderScape, SliderGraphics, SliderText, SliderRandomizer;		//library
-var Intro;		//sim
 
 //-----------------------------------
 //---------- DATA -------------------
@@ -49,9 +48,6 @@ SlideComponents.prototype = {
 		this.TextWriter = tWriter;
 		this.Randomizer = rGenerator;
 
-		this.SetData();
-
-		this.CreateTools();
 		this.CreateControls();
 		this.CreateImageMaps();
 		this.CreateImages();
@@ -59,10 +55,8 @@ SlideComponents.prototype = {
 		this.CreateAgents();
 		this.CreateSounds();
 		this.CreateCoreObjects();
-		this.CreateSimObjects();
 		this.CreateViews();
 
-		this.SetTools();
 		this.SetControls();
 		this.SetImageMaps();
 		this.SetImages();
@@ -70,50 +64,13 @@ SlideComponents.prototype = {
 		this.SetAgents();
 		this.SetSounds();
 		this.SetCoreObjects();
-		this.SetSimObjects();
 		this.SetViews();
-	},
-	SetData() {
 	},
 	CreateCoreObjects() {
 	},
 	SetCoreObjects() {
 	},
-	CreateSimObjects() {
-
-		//UNLOGGED
-
-		Intro = new SlideIntro();
-	},
-	SetSimObjects() {
-
-		//UNLOGGED
-
-		Intro.Set(this.Screen, this.InfoBox, this.ControlPanel, this.GraphicsTool, this.TextWriter, this.Randomizer, this.ScreenRect);
-	},
-	CreateTools() {
-
-		//UNLOGGED
-
-	},
-	SetTools() {
-
-		//UNLOGGED
-
-	},
-	CreateViews() {
-
-		//UNLOGGED
-
-	},
-	SetViews() {
-
-		//UNLOGGED
-
-	},
 	CreateControls() {
-
-		//UNLOGGED
 
 		//Images
 		RaisedCornerImages = new GenieImage();
@@ -121,31 +78,17 @@ SlideComponents.prototype = {
 	},
 	SetControls() {
 
-		//UNLOGGED
-
 		//Images
 		RaisedCornerImages.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.GENIeCONTROLS], RAISEdBUTTOnCORNErIMAGEs);
 		RoundedCornerImages.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.GENIeCONTROLS], ROUNDEdBUTTOnCORNErIMAGEs);
 	},
 	CreateImageMaps() {
-
-		//UNLOGGED
-
 	},
 	SetImageMaps() {
-
-		//UNLOGGED
-
 	},
 	CreateImages() {
-
-		//UNLOGGED
-
 	},
 	SetImages() {
-
-		//UNLOGGED
-
 	},
 	CreateSprites() {
 	},
@@ -165,14 +108,10 @@ SlideComponents.prototype = {
 	},
 	CreateViews() {
 
-		//UNLOGGED
-
 		SaleView = new SaleGalleryView();
 		DetailsView = new SlideshowDetailsView();
 	},
 	SetViews() {
-
-		//UNLOGGED
 
 		SaleView.Set(this.Interface.PrimeScape, VIEW.SALE, this.GraphicsTool, this.TextWriter, this.Randomizer);
 		DetailsView.Set(this.Interface.PrimeScape, VIEW.DETAILS, SaleView, this.GraphicsTool, this.TextWriter);
