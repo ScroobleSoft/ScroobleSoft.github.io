@@ -28,16 +28,17 @@ GenieDialogView.prototype.Update = function() {
 
 	this.AnimationFrameHandle = requestAnimationFrame(this.Update.bind(this));
 
-	if (this.OkButton.CheckClicked()) {
-		cancelAnimationFrame(this.AnimationFrameHandle);
-		setTimeout(this.Close.bind(this), 100);
-	}
+	if (this.OkButton.CheckClicked())
+		this.Close();
 };
 GenieDialogView.prototype.Close = function() {
+	GenieView.prototype.Close.call(this);
 
-	this.OkButton.Hide();
+	setTimeout(this.OpenParentView.bind(this), 100);
+};
+GenieDialogView.prototype.OpenParentView = function() {
+
 	this.ParentView.Open();
-	this.ParentView.ActivateControls();
 };
 GenieDialogView.prototype.ColourScape = function() {
 
