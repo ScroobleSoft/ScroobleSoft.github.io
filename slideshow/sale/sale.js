@@ -84,7 +84,7 @@ SaleGalleryView.prototype.Draw = function() {
 	}
 
 	//Show thumbnails
-	this.TextWriter.Write("Choose a painting:", 5, 30, { FONT: "18px Arial", COLOUR: "blue" } );
+	this.TextWriter.Write("Choose a painting:", 5, 30, { FONT: "18px Arial", COLOUR: BROWN.GINGErBREAD } );
 	if (this.PageNo==(this.Specs.PAGE.COUNT-1))
 		nPics = this.Specs.PICS % this.Specs.PAGE.PICS;
 	else

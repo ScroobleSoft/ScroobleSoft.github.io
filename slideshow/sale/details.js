@@ -3,6 +3,7 @@
 //----------- SLIDESHOW DETAILS VIEW ----------------------
 var SlideshowDetailsView = function() {
 	var PaintingIndex;
+	var PaintingInfo;
 	var Titles, Dimensions, Prices;
 	var Ratio, Height;
 
@@ -17,12 +18,21 @@ SlideshowDetailsView.prototype.Set = function(cnvs, specs, pView, gTool, tWriter
 };
 SlideshowDetailsView.prototype.SetData = function() {
 
-	this.Titles = [ "Courtesan.", "Montreal Botanical.", "Montreal Botanical Gardens 2.", "Bougainvillea Munira.",
-						 "Flowers in Vase a la Van Gogh.", "Spray of Roses.", "Portrait in Charcoal.", "Sunset and a Field of Poppies.",
-						 "2 Abstract Flowers.", "Purple Lilies.", "Flower Bouquet.", "Transparent Jars.",
-						 "Maroon Flowers.", "Abstract Lilies in Vase." ];
-	this.Dimensions = [ "32x20", "18x24", "18x24", "19x23", "21x19", "21x19", "22x30", "30x24", "18x24", "12x24", "14x17", "24x12", "24x18", "24x18" ];
-	this.Prices = [ 25, 35, 35, 20, 25, 25, 50, 25, 20, 15, 25, 25, 20, 60 ];
+	this.PaintingInfo = [ [ "Courtesan.", "32x20", 25 ],
+								 [ "Montreal Botanical.", "18x24", 35 ],
+								 [ "Montreal Botanical Gardens 2.", "18x24", 35 ],
+								 [ "Bougainvillea Munira.", "19x23", 20 ],
+								 [ "Flowers in Vase a la Van Gogh.", "21x19", 25 ],
+								 [ "Spray of Roses.", "21x19", 25 ],
+								 [ "Portrait in Charcoal.", "22x30", 50 ],
+								 [ "Sunset and a Field of Poppies.", "30x24", 25 ],
+								 [ "2 Abstract Flowers.", "18x24", 20 ],
+								 [ "Purple Lilies.", "12x24", 25 ],
+								 [ "Flower Bouquet.", "14x17", 15 ],
+								 [ "Transparent Jars.", "24x18", 25 ],
+								 [ "Maroon Flowers.", "12x24", 25 ],
+								 [ "Abstract Lilies in Vase.", "18x24", 20 ]
+							  ];
 };
 SlideshowDetailsView.prototype.Open = function() {
 	//UNLOGGED
@@ -64,13 +74,7 @@ SlideshowDetailsView.prototype.DrawPic = function() {
 };
 SlideshowDetailsView.prototype.WriteText = function() {
 
-	if (this.Height) {
-		this.TextWriter.Write(this.Titles[this.PaintingIndex], 20, this.Height+40, { FONT: "18px Arial" } );
-		this.TextWriter.Write(this.Dimensions[this.PaintingIndex]+" in", 20, this.Height+60, { FONT: "18px Arial" } );
-		this.TextWriter.Write(this.Prices[this.PaintingIndex]+",000 Rs", 20, this.Height+80, { FONT: "18px Arial" } );
-	} else {
-		this.TextWriter.Write(this.Titles[this.PaintingIndex], 20, 380, { FONT: "18px Arial" } );
-		this.TextWriter.Write(this.Dimensions[this.PaintingIndex]+" in.", 20, 400, { FONT: "18px Arial" } );
-		this.TextWriter.Write(this.Prices[this.PaintingIndex]+",000 Rs.", 20, 420, { FONT: "18px Arial" } );
-	}
+	this.TextWriter.Write(this.PaintingInfo[this.PaintingIndex][0], 20, this.Height+40, { FONT: "18px Arial" } );
+	this.TextWriter.Write(this.PaintingInfo[this.PaintingIndex][1]+" in", 20, this.Height+60, { FONT: "18px Arial" } );
+	this.TextWriter.Write(this.PaintingInfo[this.PaintingIndex][2]+",000 Rs", 20, this.Height+80, { FONT: "18px Arial" } );
 };
