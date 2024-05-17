@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<div id="PrimeDiv" style="position:absolute; top:40px; left:8px; z-index:1">
+	    <canvas id="PrimeCanvas" width="360" height="600"></canvas>
+	</div>
+    </head>
+
+    <a href="https://www.youtube.com/watch?v=fti3stLt11k">
+	<img src="sale\minarets.png" alt="The Minarets" width="360" height="64" >
+    </a>
+
+    <body onload="RunSlideshow()">
+
+	<!-- Data -->
+	<script src="..\library\GenieData.js"></script>
+	<script src="..\library\data\Colours.js"></script>
+	<script src="..\library\data\Consts.js"></script>
+	<script src="..\library\data\Geo.js"></script>
+	<script src="..\library\data\IO.js"></script>
+	<script src="..\library\data\Controls.js"></script>
+
+	<!-- Types -->
+	<script src="..\library\GenieTypes.js"></script>
+	<script src="..\library\GenieArray.js"></script>
+	<script src="..\library\GenieList.js"></script>
+
+	<!-- Utilities -->
+	<script src="..\library\GenieUtils.js"></script>
+	<script src="..\library\utils\ArrayUtils.js"></script>
+	<script src="..\library\utils\SpaceUtils.js"></script>
+	<script src="..\library\utils\StringUtils.js"></script>
+
+	<!-- Controls -->
+	<script src="..\library\GenieControl.js"></script>
+	<script src="..\library\controls\GenieButton.js"></script>
+	<script src="..\library\controls\TextButton.js"></script>
+	<script src="..\library\controls\ImageButton.js"></script>
+
+	<!-- Tools -->
+	<script src="..\library\GenieRandom.js"></script>
+	<script src="..\library\GenieText.js"></script>
+
+	<!-- Graphics -->
+	<script src="..\library\GenieImage.js"></script>
+	<script src="..\library\ImageMap.js"></script>
+	<script src="..\library\GenieGraphics.js"></script>
+
+	<!-- Interface -->
+	<script src="..\library\GenieMouse.js"></script>
+	<script src="..\library\TouchScreen.js"></script>
+	<script src="..\library\GenieKeyboard.js"></script>
+	<script src="..\library\GenieGamepad.js"></script>
+
+	<!-- Framework -->
+	<script src="..\library\ImageManager.js"></script>
+	<script src="..\library\GenieCanvas.js"></script>
+	<script src="..\library\GenieScape.js"></script>
+	<script src="..\library\GenieView.js"></script>
+	<script src="..\library\views\Dialog.js"></script>
+	<script src="..\library\GenieGame.js"></script>
+
+	<script src="sale\data.js"></script>
+
+	<!-- views -->
+	<script src="sale\sale.js"></script>
+	<script src="sale\details.js"></script>
+
+	<script src="sale\components.js"></script>
+
+	<script src="sale\fRaiser.js"></script>
+
+	<script>
+
+	//Main game object
+	var Game;
+
+	function RunSlideshow() {
+
+	    //Create library components
+	    SliderScape = new GenieScape();
+	    SliderGraphics = new GenieGraphics();
+	    SliderText = new GenieText();
+	    SliderRandomizer = new GenieRandomizer();
+
+	    //Set library components
+	    SliderScape.Set("PrimeCanvas");
+	    SliderGraphics.Set(SliderScape.Screen);
+	    SliderText.Set(SliderScape.Screen);
+	    SliderRandomizer.Set();
+
+	    //Load and assign graphic images
+	    ImageManager.Set(SlideImages);
+	    ImageManager.LoadImages();
+	    ImageManager.Check();				//Check if images have loaded
+
+	    //Begin as soon as images have loaded
+	    Game = new FundRaiser();
+	    Game.Set(SliderScape, SliderGraphics, SliderText, SliderRandomizer);
+	    Game.CheckImagesLoaded();
+	}
+
+	</script>
+    </body>
+</html>
