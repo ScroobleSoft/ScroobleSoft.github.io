@@ -30,9 +30,9 @@ var SCREEN = { WIDTH: 360, HEIGHT: 600 };
 //--------------------------------------
 //---------- IMAGES --------------------
 
-var Art = [ "paintings/111.jpg", "paintings/112.jpg", "paintings/113.jpg", "paintings/114.jpg", "paintings/115.jpg", "paintings/116.jpg",
+var Art = [ "paintings/125.jpg", "paintings/112.jpg", "paintings/113.jpg", "paintings/114.jpg", "paintings/115.jpg", "paintings/116.jpg",
 				"paintings/122.jpg", "paintings/118.jpg", "paintings/119.jpg", "paintings/120.jpg",	"paintings/121.jpg", "paintings/123.jpg",
-				"paintings/124.jpg", "paintings/125.jpg"
+				"paintings/124.jpg", "paintings/111.jpg"
 ];
 
 //--------------------------------------

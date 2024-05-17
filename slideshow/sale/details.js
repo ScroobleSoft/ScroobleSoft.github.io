@@ -18,7 +18,7 @@ SlideshowDetailsView.prototype.Set = function(cnvs, specs, pView, gTool, tWriter
 };
 SlideshowDetailsView.prototype.SetData = function() {
 
-	this.PaintingInfo = [ [ "Courtesan.", "32x20", 25 ],
+	this.PaintingInfo = [ [ "Abstract Lilies in Vase.", "18x24", 20 ],
 								 [ "Montreal Botanical.", "18x24", 35 ],
 								 [ "Montreal Botanical Gardens 2.", "18x24", 35 ],
 								 [ "Bougainvillea Munira.", "19x23", 20 ],
@@ -31,7 +31,7 @@ SlideshowDetailsView.prototype.SetData = function() {
 								 [ "Flower Bouquet.", "14x17", 15 ],
 								 [ "Transparent Jars.", "24x18", 25 ],
 								 [ "Maroon Flowers.", "12x24", 25 ],
-								 [ "Abstract Lilies in Vase.", "18x24", 20 ]
+								 [ "Courtesan.", "32x20", 0 ]
 							  ];
 };
 SlideshowDetailsView.prototype.Open = function() {
@@ -76,5 +76,6 @@ SlideshowDetailsView.prototype.WriteText = function() {
 
 	this.TextWriter.Write(this.PaintingInfo[this.PaintingIndex][0], 20, this.Height+40, { FONT: "18px Arial" } );
 	this.TextWriter.Write(this.PaintingInfo[this.PaintingIndex][1]+" in", 20, this.Height+60, { FONT: "18px Arial" } );
-	this.TextWriter.Write(this.PaintingInfo[this.PaintingIndex][2]+",000 Rs", 20, this.Height+80, { FONT: "18px Arial" } );
+	if (this.PaintingInfo[this.PaintingIndex][2])
+		this.TextWriter.Write(this.PaintingInfo[this.PaintingIndex][2]+",000 Rs", 20, this.Height+80, { FONT: "18px Arial" } );
 };
