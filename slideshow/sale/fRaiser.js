@@ -58,11 +58,7 @@ FundRaiser.prototype.LoadPaintings = function() {
 	this.PollLoaded();
 };
 FundRaiser.prototype.ImageLoaded = function() {
-	var specs;
 
-	Paintings[this.ImagesLoaded] = new GenieImage();
-	specs = { L: 0, T: 0, W: this.Pics[this.ImagesLoaded].width, H: this.Pics[this.ImagesLoaded].height };
-	Paintings[this.ImagesLoaded].Set(this.Screen, this.Pics[this.ImagesLoaded], specs);
 	++this.ImagesLoaded;
 };
 FundRaiser.prototype.PollLoaded = function() {
@@ -71,6 +67,17 @@ FundRaiser.prototype.PollLoaded = function() {
 
 	if (this.ImagesLoaded==VIEW.SALE.PICS) {
 		cancelAnimationFrame(this.AnimationFrameHandle);
+		this.CreatePaintingArray();
 		SaleView.Open();
+	}
+};
+FundRaiser.prototype.CreatePaintingArray = function() {
+	var i;
+	var specs;
+
+	for (i=0;i<this.ImagesLoaded;++i) {
+		Paintings[i] = new GenieImage();
+		specs = { L: 0, T: 0, W: this.Pics[i].width, H: this.Pics[i].height };
+		Paintings[i].Set(this.Screen, this.Pics[i], specs);
 	}
 };
