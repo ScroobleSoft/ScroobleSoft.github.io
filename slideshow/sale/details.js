@@ -31,7 +31,7 @@ SlideshowDetailsView.prototype.SetData = function() {
 								 [ "Flower Bouquet.", "14x17", 15 ],
 								 [ "Transparent Jars.", "24x18", 25 ],
 								 [ "Maroon Flowers.", "12x24", 25 ],
-								 [ "Courtesan.", "32x20", 0 ]
+								 [ "Blue Vase.", "19x22", 15 ]
 							  ];
 };
 SlideshowDetailsView.prototype.Open = function() {
@@ -75,7 +75,7 @@ SlideshowDetailsView.prototype.DrawPic = function() {
 SlideshowDetailsView.prototype.WriteText = function() {
 
 	this.TextWriter.Write(this.PaintingInfo[this.PaintingIndex][0], 20, this.Height+40, { FONT: "18px Arial" } );
-	this.TextWriter.Write(this.PaintingInfo[this.PaintingIndex][1]+" in", 20, this.Height+60, { FONT: "18px Arial" } );
+	this.TextWriter.Write(this.PaintingInfo[this.PaintingIndex][1]+" in.", 20, this.Height+60, { FONT: "18px Arial" } );
 	if (this.PaintingInfo[this.PaintingIndex][2])
-		this.TextWriter.Write(this.PaintingInfo[this.PaintingIndex][2]+",000 Rs", 20, this.Height+80, { FONT: "18px Arial" } );
+		this.TextWriter.Write(this.PaintingInfo[this.PaintingIndex][2]+",000 Rs.", 20, this.Height+80, { FONT: "18px Arial" } );
 };
