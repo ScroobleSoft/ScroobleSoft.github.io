@@ -18,20 +18,30 @@ SlideshowDetailsView.prototype.Set = function(cnvs, specs, pView, gTool, tWriter
 };
 SlideshowDetailsView.prototype.SetData = function() {
 
-	this.PaintingInfo = [ [ "Abstract Lilies in Vase.", "18x24", 20 ],
-								 [ "Montreal Botanical.", "18x24", 35 ],
-								 [ "Montreal Botanical Gardens 2.", "18x24", 35 ],
-								 [ "Bougainvillea Munira.", "19x23", 20 ],
-								 [ "Flowers in Vase a la Van Gogh.", "21x19", 25 ],
-								 [ "Spray of Roses.", "21x19", 25 ],
-								 [ "Portrait in Charcoal.", "22x30", 50 ],
-								 [ "Sunset and a Field of Poppies.", "30x24", 25 ],
-								 [ "2 Abstract Flowers.", "18x24", 20 ],
-								 [ "Purple Lilies.", "12x24", 25 ],
-								 [ "Flower Bouquet.", "14x17", 15 ],
-								 [ "Transparent Jars.", "24x18", 25 ],
-								 [ "Maroon Flowers.", "12x24", 25 ],
-								 [ "Blue Vase.", "19x22", 15 ]
+	this.PaintingInfo = [ [ "Abstract Lilies in Vase.", "18x24", 20, true ],
+								 [ "Montreal Botanical.", "18x24", 35, false ],
+								 [ "Montreal Botanical Gardens 2.", "18x24", 35, false ],
+								 [ "Bougainvillea Munira.", "19x23", 20, false ],
+								 [ "Flowers in Vase a la Van Gogh.", "21x19", 25, false ],
+								 [ "Spray of Roses.", "21x19", 25, true ],
+								 [ "Portrait in Charcoal.", "22x30", 50, false ],
+								 [ "Sunset and a Field of Poppies.", "30x24", 25, false ],
+								 [ "2 Abstract Flowers.", "18x24", 20, true ],
+								 [ "Purple Lilies.", "12x24", 20, false ],
+								 [ "Flower Bouquet.", "14x17", 15, false ],
+								 [ "Transparent Jars.", "24x18", 25, false ],
+								 [ "Maroon Flowers.", "12x24", 20, false ],
+								 [ "Blue Vase.", "19x22", 15, false ],
+								 [ "Flowers on a Window Sill.", "", 0, true ],
+								 [ "3 Roses.", "", 0, true ],
+								 [ "Mosque Arch.", "", 0, true ],
+								 [ "Village Girl.", "", 0, true ],
+								 [ "Vines.", "", 0, true ],
+								 [ "Woman with Child.", "", 0, true ],
+								 [ "Yellow and Red Flowers.", "", 0, true ],
+								 [ "Lady and the Lamp.", "", 0, true ],
+								 [ "Lady by the Window.", "", 0, true ],
+								 [ "Maldives Beach.", "", 0, true ]
 							  ];
 };
 SlideshowDetailsView.prototype.Open = function() {
@@ -75,7 +85,8 @@ SlideshowDetailsView.prototype.DrawPic = function() {
 SlideshowDetailsView.prototype.WriteText = function() {
 
 	this.TextWriter.Write(this.PaintingInfo[this.PaintingIndex][0], 20, this.Height+40, { FONT: "18px Arial" } );
-	this.TextWriter.Write(this.PaintingInfo[this.PaintingIndex][1]+" in.", 20, this.Height+60, { FONT: "18px Arial" } );
+	if (this.PaintingInfo[this.PaintingIndex][1]!="")
+		this.TextWriter.Write(this.PaintingInfo[this.PaintingIndex][1]+" in.", 20, this.Height+60, { FONT: "18px Arial" } );
 	if (this.PaintingInfo[this.PaintingIndex][2])
 		this.TextWriter.Write(this.PaintingInfo[this.PaintingIndex][2]+",000 Rs.", 20, this.Height+80, { FONT: "18px Arial" } );
 };

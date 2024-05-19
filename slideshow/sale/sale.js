@@ -3,7 +3,7 @@
 //---------- SALE GALLERY VIEW --------------------
 var SaleGalleryView = function() {
 	var MoreButton, BackButton;
-	var ThumbnailImages;
+	var ThumbnailImages, SoldImage;
 	var ImageMaps;
 	var PageNo, PicIndex;
 
@@ -23,6 +23,8 @@ SaleGalleryView.prototype.SetImages = function() {
 
 	this.ThumbnailImages = new GenieImage();
 	this.ThumbnailImages.Set(this.Context, ImageManager.Pics[IMAGeINDEX.SALE], this.Specs.IMAGE.THUMBNAILS);
+	this.SoldImage = new GenieImage();
+	this.SoldImage.Set(this.Context, ImageManager.Pics[IMAGeINDEX.IMAGES], this.Specs.IMAGE.SOLD);
 
 	this.ImageMaps = ArrayUtils.Create(9, GenieRect);
 };
@@ -51,12 +53,6 @@ SaleGalleryView.prototype.Open = function() {
 
 	this.Draw();
 	this.Canvas.View = this;
-/*
-	if (this.PageNo==0)
-		this.MoreButton.Show();
-	else
-		this.BackButton.Show();
-*/
 	this.Canvas.ResumeInput();
 
 	this.Update();
@@ -74,10 +70,11 @@ SaleGalleryView.prototype.Draw = function() {
 			this.BackButton.Hide(this.Specs.COLOUR);
 			break;
 		case 1:
+		case 2:
 			this.MoreButton.Show();
 			this.BackButton.Show();
 			break;
-		case 2:
+		case 3:
 			this.MoreButton.Hide(this.Specs.COLOUR);
 			this.BackButton.Show();
 			break;
@@ -85,14 +82,16 @@ SaleGalleryView.prototype.Draw = function() {
 
 	//Show thumbnails
 	this.TextWriter.Write("Choose a painting:", 5, 30, { FONT: "18px Arial", COLOUR: BROWN.GINGErBREAD } );
-	if (this.PageNo==(this.Specs.PAGE.COUNT-1))
-		nPics = this.Specs.PICS % this.Specs.PAGE.PICS;
-	else
+//	if (this.PageNo==(this.Specs.PAGE.COUNT-1))
+//		nPics = this.Specs.PICS % this.Specs.PAGE.PICS;
+//	else
 		nPics = this.Specs.PAGE.PICS;
+	nStart = this.Specs.PAGE.PICS * this.PageNo;
 	for (i=0;i<nPics;++i) {
 		this.GraphicsTool.DrawRectangle(this.ImageMaps[i].L-4, this.ImageMaps[i].T-4, 168, 168, BROWN.GINGErBREAD, 4);
-		nStart = this.Specs.PAGE.PICS * this.PageNo;
 		this.ThumbnailImages.DrawPatchNumber(nStart+i, this.ImageMaps[i].L, this.ImageMaps[i].T);
+		if (DetailsView.PaintingInfo[nStart+i][3])
+			this.SoldImage.Draw(this.ImageMaps[i].L, this.ImageMaps[i].T);
 	}
 };
 SaleGalleryView.prototype.Update = function() {
