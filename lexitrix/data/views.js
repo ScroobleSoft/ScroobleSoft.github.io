@@ -70,7 +70,68 @@ var SHUFFLE = { COLOUR: GREY.SILVER,
 								 TILES: { L: 376, T: 131, W: 112, H: 36, O: 2, C: 3, R: 1, PATCH: { W: 36, H: 36 } }
 							  }
 };
-var SPINDLE = { };
+var SPINDLE = { COLOUR: "rgb(143,111,239)", TYPE: { DAILY: 0, ELEVEN: 1, NINE: 2, SEVEN: 3, RANDOM: 4, MINUTE: 5 }, MILLISECONDS: 1717521288033,
+					 IMAGE: { INTRO: { L: 181, T: 2, W: 280, H: 224, X: 40, Y: 40 } },
+					 BUTTON: { HINT: { L: 4, T: 510, W: 60, H: 25, LW: 3, LABEL: "Hint", STYLE: BUTTON.STYLE.ROUNDED,
+											 COLOUR: "rgb(079,000,159)", BACKGROUND: "rgb(143,111,239)", TEXT: { COLOUR: "rgb(255,223,255)" } },
+								  SOLVE: { L: 4, T: 540, W: 60, H: 25, LW: 3, LABEL: "Solve", STYLE: BUTTON.STYLE.ROUNDED,
+											  COLOUR: "rgb(079,000,159)", BACKGROUND: "rgb(143,111,239)", TEXT: { COLOUR: "rgb(255,223,255)" } },
+								  RESET: { L: 4, T: 570, W: 60, H: 25, LW: 3, LABEL: "Reset", STYLE: BUTTON.STYLE.ROUNDED,
+											  COLOUR: "rgb(079,000,159)", BACKGROUND: "rgb(143,111,239)", TEXT: { COLOUR: "rgb(255,223,255)" } },
+								  RESTART: { L: 296, T: 510, W: 60, H: 25, LW: 3, LABEL: "Restart", STYLE: BUTTON.STYLE.ROUNDED,
+												 COLOUR: "rgb(079,000,159)", BACKGROUND: "rgb(143,111,239)", TEXT: { COLOUR: "rgb(255,223,255)" } },
+								  QUIT: { L: 296, T: 540, W: 60, H: 25, LW: 3, LABEL: "Quit", STYLE: BUTTON.STYLE.ROUNDED,
+											 COLOUR: "rgb(079,000,159)", BACKGROUND: "rgb(143,111,239)", TEXT: { COLOUR: "rgb(255,223,255)" } },
+								  HELP: { L: 296, T: 570, W: 60, H: 25, LW: 3, LABEL: "Help", STYLE: BUTTON.STYLE.ROUNDED,
+											 COLOUR: "rgb(079,000,159)", BACKGROUND: "rgb(143,111,239)", TEXT: { COLOUR: "rgb(255,223,255)" } }
+								},
+					 LEDGER: { CELL: { COLOUR: "rgb(207,207,255)", TYPE: { SPINE: 0, ROW: 1 },
+											 STATUS: { CLEAR: 0, FILLED: 1, WRONG: 2, SOLVED: 3 },
+											 SPINE: { COUNT: 11, L: 158, T: 10, W: 41, H: 41, O: { X: 10, Y: 6 } },
+											 ROW: { COUNT: 88, L: 34, R: 197, T: 14, GAP: 39, W: 33, H: 33, C: 4, O: { X: 9, Y: 6 } },
+										  },
+								  IMAGE: { CELL: { LARGE: { L: 750, T: 252, W: 41, H: 41 },
+														 SMALL: { L: 793, T: 252, W: 33, H: 33 }  },
+											  SELECTION: { LARGE: { L: 642, T: 288, W: 37, H: 37 },
+																SMALL: { L: 681, T: 288, W: 29, H: 29 }  },
+											  LETTERS: { LARGE: { L: 2, T: 296, W: 620, H: 28, O: 4, C: 26, R: 1, PATCH: { W: 20, H: 28 } },
+															 SMALL: { L: 85, T: 206, W: 231, H: 45, O: 3, C: 13, R: 2, PATCH: { W: 15, H: 21 } }
+														  }
+											}
+								},
+					 KEYBOARD: { ROW: { TOP: { X: 100, Y: 470, KEYS: 5 },
+											  LOWER: { X: 68, Y: 502, KEYS: 7, COUNT: 3 }
+											},
+									 KEY: { COUNT: 26, W: 32, H: 32, LW: 3, O: { X: 0, Y: 0 },
+											  STATE: { UnPRESSED: 0, CLICKED: 1, PRESSED: 2 } },
+									 IMAGE: { KEY: { BUTTONS: { L: 518, T: 234, W: 66, H: 32, O: 2, C: 2, R: 1, PATCH: { W: 32, H: 32 } } } }
+								  },
+					 OPTIONS: { COLOUR: "rgb(143,111,239)",
+									BUTTON: { DAILY: { L: 97, T: 57, W: 166, H: 46, LW: 3, LABEL: "Daily", STYLE: BUTTON.STYLE.RAISED,
+															 COLOUR: "rgb(079,000,159)", TEXT: { COLOUR: "rgb(255,223,255)" } },
+												 ELEVEN: { L: 97, T: 137, W: 166, H: 46, LW: 3, LABEL: "Eleven", STYLE: BUTTON.STYLE.RAISED,
+															  COLOUR: "rgb(079,000,159)", TEXT: { COLOUR: "rgb(255,223,255)" } },
+												 NINE: { L: 97, T: 217, W: 166, H: 46, LW: 3, LABEL: "Nine", STYLE: BUTTON.STYLE.RAISED,
+															COLOUR: "rgb(079,000,159)", TEXT: { COLOUR: "rgb(255,223,255)" } },
+												 SEVEN: { L: 97, T: 297, W: 166, H: 46, LW: 3, LABEL: "Seven", STYLE: BUTTON.STYLE.RAISED,
+															 COLOUR: "rgb(079,000,159)", TEXT: { COLOUR: "rgb(255,223,255)" } },
+												 MINUTE: { L: 97, T: 377, W: 166, H: 46, LW: 3, LABEL: "Minute", STYLE: BUTTON.STYLE.RAISED,
+															  COLOUR: "rgb(079,000,159)", TEXT: { COLOUR: "rgb(255,223,255)" } }
+											  }
+								 },
+					 HELP: { L: 40, T: 40, W: 280, H: 480, COLOUR: "rgb(255,223,255)",
+								IMAGE: { LEDGER: { L: 463, T: 2, W: 103, H: 151, X: 55, Y: 90 },
+											UnSELECTED: { L: 463, T: 155, W: 29, H: 29, X: 55, Y: 255 },
+											SELECTED: { L: 494, T: 155, W: 29, H: 29, X: 90, Y: 255 },
+											CORRECT: { L: 525, T: 155, W: 29, H: 29, X: 55, Y: 345 },
+											WRONG: { L: 463, T: 186, W: 29, H: 29, X: 55, Y: 425 },
+											KEY: { L: 494, T: 186, W: 32, H: 32, X: 55, Y: 300 }
+										 },
+								BUTTON: { OK: { L: 160, T: 475, W: 40, H: 25, LW: 3, LABEL: "Ok", STYLE: BUTTON.STYLE.RAISED,
+													 BACKGROUND: "rgb(255,223,255)", COLOUR: "rgb(143,111,239)", TEXT: { COLOUR: "rgb(255,223,255)" } }
+										  }
+							 }
+};
 var JIGGLE = { };
 var CROSSLE = { COLOUR: "yellow", TYPE: { DAILY: 0, NUMBERED: 1, SYMMETRICAL: 2, ASYMMETRIC: 3 }, MILLISECONDS: 1713028537517,
 					 IMAGE: { INTRO: { L: 604, T: 2, W: 280, H: 248, X: 40, Y: 81 } },
