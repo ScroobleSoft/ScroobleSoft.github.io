@@ -1,98 +1,125 @@
-/*
- *  UNLOGGED
- */
-//-----------------------------------------------------
-//----------- GENIE SPINDLE VIEW ----------------------
-var GenieSpindleView = function() {
-	var PlayArea, Spindle, Tray;
-	var FirstTile, SecondTile;
-	var Words;
-	var FourWords;												//solution (array)
-	var Spine, TopRow, MiddleRow, BottomRow;			//ditto above
-	var Moves;
 
-	var letter;		//scratch variables
+//----------------------------------------------------
+//----------- LEXI SPINDLE VIEW ----------------------
+var LexiSpindleView = function() {
+	var Ledger, Keyboard;
+	var Selector;
+	var DailyDate, GameType;
+
+	var IntroImage;
+	var Errors, Timer, FPS, Frames;
+	var HintButton, SolveButton, ResetButton, RestartButton, QuitButton, HelpButton;
+	var FirstOpenFlag;
 };
-GenieSpindleView.prototype = new GenieView();
-GenieSpindleView.prototype.Set = function(cnvs, specs, gTool, tWriter, rGenerator) {
-	GenieView.prototype.Set.call(this, cnvs, specs);
+LexiSpindleView.prototype = new GenieView();
+LexiSpindleView.prototype.Set = function(cnvs, specs, gTool, tWriter, rGenerator) {
 
 	this.SetLinks(gTool, tWriter, rGenerator);
-//	this.SetData();
-//	this.SetInfoPanel();
-};
-GenieSpindleView.prototype.SetComponents = function() {
 
-	this.SetSpindle();
-	this.SetTray();
+	GenieView.prototype.Set.call(this, cnvs, specs);
+	this.Errors = 0;
+	this.Timer = 0;
+	this.FPS = 60;
+	this.Frames = this.FPS;
+	this.FirstOpenFlag = true;
 };
-GenieSpindleView.prototype.SetControls = function() {
-
+LexiSpindleView.prototype.Open = function() {
 	//UNLOGGED
 /*
-	this.Controls.push(HintButton);
-	this.Controls.push(SolveButton);
-	this.Controls.push(RestartButton);
-	this.Controls.push(QuitButton);
+	this.GameType = this.Specs.TYPE.ELEVEN;
+	this.Selector.SelectWords();
 */
-};
-GenieSpindleView.prototype.Open = function() {
 	GenieView.prototype.Open.call(this);
 
-	//UNLOGGED
-
-	var i, j;
-	var aWords, word;
-	var aLetters, aLists;
-
-	//-pick a random 7-letter word
-	this.Words = [ Words7a, Words7b, Words7c, Words7d, Words7e, Words7f, Words7g, Words7h, Words7i, Words7j, Words7k, Words7l, Words7m,
-						Words7n, Words7o, Words7p, Words7q, Words7r, Words7s, Words7t, Words7u, Words7v, Words7w, Words7y, Words7z ];
-	word = this.Randomizer.Get2DElement(this.Words);
-	aWords = new Array(4);
-
-	function CreateWordList(lttr, iLttr, arry2d) {
-		var i, j;
-		var lst;
-
-		lst = new Array();
-		for (i=0;i<arry2d.length;++i)
-			for (j=0;j<arry2d[i].length;++j)
-				if (arry2d[i][j][iLttr]==lttr)
-					lst.push(arry2d[i][j]);
-
-		return (lst);
-	}
-
-	//-pick 3 words whose middle letter is the 2nd/4th/6th letter of the first word
-	//--create a list of words with matching middle letter; don't generate a new list if a letter is repeated
-	aLetters = [ word[1], word[3], word[5] ];
-	aLists = new Array(3);
-	aLists[0] = CreateWordList(aLetters[0], 3, this.Words);
-	if (aLetters[1]==aLetters[0])
-		aLists[1] = aLists[0];
-	else
-		aLists[1] = CreateWordList(aLetters[1], 3, this.Words);
-	if (aLetters[2]==aLetters[0])
-		aLists[2] = aLists[0];
-	else if (aLetters[2]==aLetters[1])
-		aLists[2] = aLists[1];
-	else
-		aLists[2] = CreateWordList(aLetters[2], 3, this.Words);
-
-	aWords[0] = word;
-	for (i=0;i<aLists.length;++i)
-		aWords[i+1] = aLists[i][this.Randomizer.GetIndex(aLists[i].length)];
+	if (this.FirstOpenFlag) {
+		this.DeActivateControls();
+		this.IntroImage.Draw();
+		this.PollClick();
+	} else
+		this.Update();
 };
-GenieSpindleView.prototype.Update = function() {
+LexiSpindleView.prototype.Update = function() {
 
 	this.AnimationFrameHandle = requestAnimationFrame(this.Update.bind(this));
 
-//try {
-	if (!this.UpdateControls())
-		this.UpdateInterface();
-//} catch {
-//	cancelAnimationFrame(this.AnimationFrameHandle);
-//	alert("Spindle has crashed - sorry!");
-//}
+//	try {
+		this.UpdateClick();
+		this.UpdateButtons();
+		this.Keyboard.UpdateKeys();
+		--this.Frames;
+		if (!this.Frames)
+			if (this.Timer<(5*this.FPS)) {
+				this.Frames = this.FPS;
+				if (!this.Ledger.SolvedFlag)
+					this.UpdateSeconds();
+			}
+//	} catch {
+//		cancelAnimationFrame(this.AnimationFrameHandle);
+//		alert("Spindle has crashed - sorry!");
+//	}
+};
+LexiSpindleView.prototype.PollClick = function() {
+
+	this.AnimationFrameHandle = requestAnimationFrame(this.PollClick.bind(this));
+
+	if (Mouse.CheckLeftClicked(CANVAS.PRIME)) {
+		cancelAnimationFrame(this.AnimationFrameHandle);
+		this.FirstOpenFlag = false;
+		Mouse.ClearAll();
+		this.Open();
+/*
+		this.ColourScape();
+		this.Draw();
+		this.ShowControls();
+		this.Update();
+*/
+	}
+};
+LexiSpindleView.prototype.Draw = function() {
+
+	this.Ledger.DrawFrame();
+	this.Ledger.ShowVowels();
+	this.Ledger.SelectedCell.DrawSelectionSquare();
+	this.Keyboard.Draw();
+	this.DrawScorecard();
+};
+LexiSpindleView.prototype.DrawScorecard = function() {
+	var x;
+	var mins;
+
+	this.DailyDate = new Date();
+	this.TextWriter.Write(this.DailyDate.toDateString(), 80, 462, { FONT: "18px Arial", COLOUR: "rgb(255,223,255)" } );
+	if (this.GameType==this.Specs.TYPE.DAILY) {
+		x = 270 - (Math.floor(Math.log10(this.Selector.WordIndex+1))*10);
+		this.TextWriter.Write(this.Selector.WordIndex+1, x, 462, { FONT: "18px Arial", COLOUR: "rgb(255,223,255)" } );
+	} else if (this.GameType==this.Specs.TYPE.MINUTE) {
+		mins = this.DailyDate.getMinutes();
+		this.TextWriter.Write(mins, 255, 462, { FONT: "18px Arial", COLOUR: "rgb(255,223,255)" } );
+	}
+	this.GraphicsTool.DrawRectangle(5, 445, 60, 50, "rgb(255,223,255)", 1);
+	this.TextWriter.Write("Errors: ", 10, 465, { COLOUR: "rgb(255,223,255)" } );
+	this.TextWriter.Write(this.Errors, 10, 485, { COLOUR: "rgb(255,223,255)" } );
+	this.GraphicsTool.DrawRectangle(295, 445, 60, 50, "rgb(255,223,255)", 1);
+	this.TextWriter.Write("Secs: ", 300, 465, { COLOUR: "rgb(255,223,255)" } );
+	this.TextWriter.Write(this.Timer, 300, 485, { COLOUR: "rgb(255,223,255)" } );
+};
+LexiSpindleView.prototype.Solved = function() {
+
+	this.HintButton.Disable();
+	this.SolveButton.Disable();
+	this.ResetButton.Disable();
+};
+LexiSpindleView.prototype.Reset = function() {
+
+	this.Errors = 0;
+	this.Timer = 0;
+	this.FPS = 60;
+	this.Frames = this.FPS;
+	this.Ledger.Reset();
+	this.Keyboard.Reset();
+};
+LexiSpindleView.prototype.OpenSpindleOptionsView = function() {
+
+	this.Reset();
+	SpindleOptionsView.Open();
 };
