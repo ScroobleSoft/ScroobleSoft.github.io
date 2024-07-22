@@ -15,10 +15,10 @@ GenieMainView.prototype.SetControls = function() {
 
 	this.Controls.push(CracklePushButton);
 	this.Controls.push(ShufflePushButton);
-	this.Controls.push(SpindlePushButton);
-	this.Controls.push(JigglePushButton);
 	this.Controls.push(CrosslePushButton);
 	this.Controls.push(BundlePushButton);
+	this.Controls.push(SpindlePushButton);
+	this.Controls.push(SaddlePushButton);
 };
 GenieMainView.prototype.Open = function() {
 	GenieView.prototype.Open.call(this);
@@ -26,9 +26,9 @@ GenieMainView.prototype.Open = function() {
 	this.TextWriter.Write("Crackle",  49, 190, { COLOUR: "blue", FONT: "24px Arial" } );
 	this.TextWriter.Write("Shuffle", 232, 190, { COLOUR: "blue", FONT: "24px Arial" } );
 	this.TextWriter.Write("Crossle",  51, 390, { COLOUR: "blue", FONT: "24px Arial" } );
-	this.TextWriter.Write("Jiggle",  239, 390, { COLOUR: "blue", FONT: "24px Arial" } );
+	this.TextWriter.Write("Bundle",  239, 390, { COLOUR: "blue", FONT: "24px Arial" } );
 	this.TextWriter.Write("Spindle",  49, 590, { COLOUR: "blue", FONT: "24px Arial" } );
-	this.TextWriter.Write("Bundle",  232, 590, { COLOUR: "blue", FONT: "24px Arial" } );
+	this.TextWriter.Write("Saddle",  232, 590, { COLOUR: "blue", FONT: "24px Arial" } );
 
 	this.Canvas.SetFrameRateMeasurement();
 };
@@ -44,17 +44,17 @@ GenieMainView.prototype.Update = function() {
 	if (ShufflePushButton.CheckPressed())
 		this.Close(this.LaunchShuffle.bind(this), 100);
 
-	if (SpindlePushButton.CheckPressed())
-		this.Close(this.LaunchSpindle.bind(this), 100);
-
-	if (JigglePushButton.CheckPressed())
-		this.Close(this.LaunchJiggle.bind(this), 100);
-
 	if (CrosslePushButton.CheckPressed())
 		this.Close(this.LaunchCrossle.bind(this), 100);
 
 	if (BundlePushButton.CheckPressed())
 		this.Close(this.LaunchBundle.bind(this), 100);
+
+	if (SpindlePushButton.CheckPressed())
+		this.Close(this.LaunchSpindle.bind(this), 100);
+
+	if (SaddlePushButton.CheckPressed())
+		this.Close(this.LaunchSaddle.bind(this), 100);
 };
 GenieMainView.prototype.LaunchCrackle = function() {
 
@@ -64,30 +64,6 @@ GenieMainView.prototype.LaunchShuffle = function() {
 
 	ShuffleView.Open();
 	ShuffleView.Update();
-};
-GenieMainView.prototype.LaunchSpindle = function() {
-
-	//UNLOGGED
-
-	alert("Coming soon - please be patient.");
-	this.Open();
-	this.Update();
-	return;
-
-	SpindleView.Open();
-	SpindleView.Update();
-};
-GenieMainView.prototype.LaunchJiggle = function() {
-
-	//UNLOGGED
-
-	alert("Coming soon - please be patient.");
-	this.Open();
-	this.Update();
-	return;
-
-	JiggleView.Open();
-	JiggleView.Update();
 };
 GenieMainView.prototype.LaunchCrossle = function() {
 
@@ -106,4 +82,20 @@ GenieMainView.prototype.LaunchBundle = function() {
 
 	BundleView.Open();
 	BundleView.Update();
+};
+GenieMainView.prototype.LaunchSpindle = function() {
+
+	SpindleOptionsView.Open();
+};
+GenieMainView.prototype.LaunchSaddle = function() {
+
+	//UNLOGGED
+
+	alert("Coming soon - please be patient.");
+	this.Open();
+	this.Update();
+	return;
+
+	JiggleView.Open();
+	JiggleView.Update();
 };
