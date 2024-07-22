@@ -7,17 +7,17 @@
  *  TODO: this could do with some cleanup and removal of redundancies (such as not using ::DrawControl in ::Draw)
  *  TODO: there is an inconsistency between using i and this.i
  */
-//---------------------------------------------------
-//---------- GENIE RADIO CONTROL --------------------  Specs: { L: -1, T: -1, W: -1, H: -1, GAP: -1, ORIENT: -1, OPTIONS: ["",""], SELECT: -1 };
-var GenieRadioControl = function() {
+//----------------------------------------------------
+//---------- GENIE RADIO CONTROLS --------------------  Specs: { L: -1, T: -1, W: -1, H: -1, GAP: -1, ORIENT: -1, OPTIONS: ["",""], SELECT: -1 };
+var GenieRadioControls = function() {
 	var Selected;				//index
 	var DisabledOptions;
 	var OptionRects;
 
 	var optn;
 };
-GenieRadioControl.prototype = new GenieControl();
-GenieRadioControl.prototype.Set = function(cnvs, specs, img) {
+GenieRadioControls.prototype = new GenieControl();
+GenieRadioControls.prototype.Set = function(cnvs, specs, img) {
 	GenieControl.prototype.Set.call(this, cnvs, specs, img);
 
 	this.Selected = this.Specs.SELECT;
@@ -25,7 +25,7 @@ GenieRadioControl.prototype.Set = function(cnvs, specs, img) {
 	this.DisabledOptions = new Array(this.Specs.OPTIONS.length);
 	this.SetBoxes();
 };
-GenieRadioControl.prototype.SetBoxes = function() {
+GenieRadioControls.prototype.SetBoxes = function() {
 	var i;
 	var w;
 
@@ -56,7 +56,7 @@ GenieRadioControl.prototype.SetBoxes = function() {
 		this.Specs.H = (this.Specs.OPTIONS.length*this.Pic.Specs.PATCH.H) + ((this.Specs.OPTIONS.length-1)*this.Specs.GAP);
 	}
 };
-GenieRadioControl.prototype.Draw = function() {
+GenieRadioControls.prototype.Draw = function() {
 	var i;
 	var x, y;
 
@@ -94,7 +94,7 @@ GenieRadioControl.prototype.Draw = function() {
 	}
 	this.TextWriter.RestoreContext();
 };
-GenieRadioControl.prototype.DrawControl = function(iCntrl, bSlctd) {
+GenieRadioControls.prototype.DrawControl = function(iCntrl, bSlctd) {
 
 	if (this.Specs.ORIENT==ORIENTATION.HORIZONTAL) {
 		this.x = this.Specs.L + ((this.Pic.Specs.PATCH.W+this.Specs.GAP)*iCntrl);
@@ -108,12 +108,12 @@ GenieRadioControl.prototype.DrawControl = function(iCntrl, bSlctd) {
 	this.Pic.Context = this.Context;
 	this.Pic.DrawPatchNumber((bSlctd ? 1 : 0), this.x, this.y);
 };
-GenieRadioControl.prototype.MouseDown = function() {
+GenieRadioControls.prototype.MouseDown = function() {
 	GenieControl.prototype.MouseDown.call(this);
 
 	this.ClickedOn();
 };
-GenieRadioControl.prototype.ClickedOn = function() {
+GenieRadioControls.prototype.ClickedOn = function() {
 
 	//Get radio control clicked
 	for (this.i=0;this.i<this.Specs.OPTIONS.length;++this.i) {
@@ -131,7 +131,7 @@ GenieRadioControl.prototype.ClickedOn = function() {
 		this.Selected = this.i;
 	}
 };
-GenieRadioControl.prototype.DisableOptions = function(aOptions, bDraw) {  //NOTE: copying rather than assigning entire array to avoid garbage collection
+GenieRadioControls.prototype.DisableOptions = function(aOptions, bDraw) {  //NOTE: copying rather than assigning entire array to avoid garbage collection
 
 	//TODO: instead of re-drawing the entire control, do re-draw relevant options (bDraw option will be REDUNDANT, not being used anywhere)
 	//ISSUE: this may be enabling already disabled options (something that may not be desired)
@@ -145,13 +145,13 @@ GenieRadioControl.prototype.DisableOptions = function(aOptions, bDraw) {  //NOTE
 	if (bDraw)
 		this.Draw();
 };
-GenieRadioControl.prototype.DisableOption = function(iOption, bDraw) {
+GenieRadioControls.prototype.DisableOption = function(iOption, bDraw) {
 
 	this.DisabledOptions[iOption] = true;
 	if (bDraw)
 		this.DrawControl(iOption);
 };
-GenieRadioControl.prototype.EnableOptions = function(aOptions) {
+GenieRadioControls.prototype.EnableOptions = function(aOptions) {
 
 	for (this.i=0;this.i<this.DisabledOptions.length;++this.i)
 		if (aOptions.includes(this.i)) {
@@ -162,7 +162,7 @@ GenieRadioControl.prototype.EnableOptions = function(aOptions) {
 					this.DrawControl(this.i);
 		}
 };
-GenieRadioControl.prototype.EnableOptionsExclusively = function(aOptions, bDraw) {
+GenieRadioControls.prototype.EnableOptionsExclusively = function(aOptions, bDraw) {
 
 	for (this.i=0;this.i<this.DisabledOptions.length;++this.i)
 		if (aOptions.includes(this.i))
@@ -173,5 +173,5 @@ GenieRadioControl.prototype.EnableOptionsExclusively = function(aOptions, bDraw)
 	if (bDraw)
 		this.Draw();
 };
-GenieRadioControl.prototype.SelectOption = function() {
+GenieRadioControls.prototype.SelectOption = function() {
 };
