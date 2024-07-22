@@ -19,7 +19,7 @@ GenieCrackleView.prototype.SetOptions = function() {
 
 	this.RadioControlImage = new GenieImage();
 	this.RadioControlImage.Set(this.Context, ImageManager.Pics[IMAGeINDEX.GENIeCONTROLS], RADIoCONTROlIMAGE);
-	this.TypeRadioOptions = new GenieRadioControl();
+	this.TypeRadioOptions = new GenieRadioControls();
 	this.TypeRadioOptions.Set(this.Canvas, this.Specs.TYPES, this.RadioControlImage);
 	this.TypeRadioOptions.SetLinks(null, this.TextWriter);
 	this.Controls.push(this.TypeRadioOptions);
