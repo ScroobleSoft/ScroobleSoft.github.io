@@ -22,42 +22,42 @@ LexiComponents.prototype.CreatePushButtons = function() {
 	//Images
 	ShufflePushButtonImage = new GenieImage();
 	CracklePushButtonImage = new GenieImage();
-	SpindlePushButtonImage = new GenieImage();
-	JigglePushButtonImage = new GenieImage();
 	CrosslePushButtonImage = new GenieImage();
 	BundlePushButtonImage = new GenieImage();
+	SpindlePushButtonImage = new GenieImage();
+	SaddlePushButtonImage = new GenieImage();
 
 	//Buttons
 	ShufflePushButton = new GeniePushButton();
 	CracklePushButton = new GeniePushButton();
-	SpindlePushButton = new GeniePushButton();
-	JigglePushButton = new GeniePushButton();
 	CrosslePushButton = new GeniePushButton();
 	BundlePushButton = new GeniePushButton();
+	SpindlePushButton = new GeniePushButton();
+	SaddlePushButton = new GeniePushButton();
 };
 LexiComponents.prototype.SetPushButtons = function() {
 
 	//Images
 	ShufflePushButtonImage.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.CONTROLS], SHUFFLePUShBUTTOnIMAGE);
 	CracklePushButtonImage.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.CONTROLS], CRACKLePUShBUTTOnIMAGE);
-	SpindlePushButtonImage.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.CONTROLS], SPINDLePUShBUTTOnIMAGE);
-	JigglePushButtonImage.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.CONTROLS], JIGGLePUShBUTTOnIMAGE);
 	CrosslePushButtonImage.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.CONTROLS], CROSSLePUShBUTTOnIMAGE);
 	BundlePushButtonImage.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.CONTROLS], BUNDLePUShBUTTOnIMAGE);
+	SpindlePushButtonImage.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.CONTROLS], SPINDLePUShBUTTOnIMAGE);
+	SaddlePushButtonImage.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.CONTROLS], SADDLePUShBUTTOnIMAGE);
 
 	//Buttons
 	ShufflePushButton.Set(this.Interface.PrimeScape, SHUFFLePUShBUTTON, ShufflePushButtonImage, GamePushButtonImages);
 	ShufflePushButton.SetEdgePics(GamePushButtonImages);
 	CracklePushButton.Set(this.Interface.PrimeScape, CRACKLePUShBUTTON, CracklePushButtonImage, GamePushButtonImages);
 	CracklePushButton.SetEdgePics(GamePushButtonImages);
-	SpindlePushButton.Set(this.Interface.PrimeScape, SPINDLePUShBUTTON, SpindlePushButtonImage, GamePushButtonImages);
-	SpindlePushButton.SetEdgePics(GamePushButtonImages);
-	JigglePushButton.Set(this.Interface.PrimeScape, JIGGLePUShBUTTON, JigglePushButtonImage, GamePushButtonImages);
-	JigglePushButton.SetEdgePics(GamePushButtonImages);
 	CrosslePushButton.Set(this.Interface.PrimeScape, CROSSLePUShBUTTON, CrosslePushButtonImage, GamePushButtonImages);
 	CrosslePushButton.SetEdgePics(GamePushButtonImages);
 	BundlePushButton.Set(this.Interface.PrimeScape, BUNDLePUShBUTTON, BundlePushButtonImage, GamePushButtonImages);
 	BundlePushButton.SetEdgePics(GamePushButtonImages);
+	SpindlePushButton.Set(this.Interface.PrimeScape, SPINDLePUShBUTTON, SpindlePushButtonImage, GamePushButtonImages);
+	SpindlePushButton.SetEdgePics(GamePushButtonImages);
+	SaddlePushButton.Set(this.Interface.PrimeScape, SADDLePUShBUTTON, SaddlePushButtonImage, GamePushButtonImages);
+	SaddlePushButton.SetEdgePics(GamePushButtonImages);
 };
 LexiComponents.prototype.CreateButtons = function() {
 
