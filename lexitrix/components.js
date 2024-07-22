@@ -4,6 +4,11 @@
 
 var LexiScape, LexiGraphics, LexiText, LexiRandomizer, Controller;			//library
 
+//-----------------------------------
+//---------- DATA -------------------
+
+var Solutions;		//crossle
+
 //------------------------------------
 //---------- TOOLS -------------------
 
@@ -12,7 +17,7 @@ var LexiScape, LexiGraphics, LexiText, LexiRandomizer, Controller;			//library
 
 var GamePushButtonImages;
 var ShufflePushButtonImage, CracklePushButtonImage, SpindlePushButtonImage, JigglePushButtonImage, CrosslePushButtonImage, BundlePushButtonImage;
-var ShufflePushButton, CracklePushButton, SpindlePushButton, JigglePushButton, CrosslePushButton, BundlePushButton;
+var ShufflePushButton, CracklePushButton, CrosslePushButton, BundlePushButton, SpindlePushButton, SaddlePushButton;
 var ShallowCornerImages, RaisedCornerImages, RoundedCornerImages, CrossleButtonCornerImages;
 var HintButton, SolveButton, RestartButton, QuitButton, InstructionsButton;																		//common buttons
 var IconCornerImages, ExpandIconImage, ExpandIcon, ControllerIconImage, ControllerIcon, FullScreenIconImage, FullScreenIcon;		//icons
@@ -23,6 +28,7 @@ var MobileControlImages, MobileControlEdgeImages, MobileController;  //UNLOGGED
 
 var ShuffleTileImages, ShuffleLetterImages;
 var UpperCaseLetterImages, MediumDigitImages;
+var KeyLetterImages, PressedLetterImages;	//UNLOGGED
 
 //---------------------------------
 //---------- FX -------------------
@@ -34,8 +40,9 @@ var UpperCaseLetterImages, MediumDigitImages;
 //---------- VIEWS -------------------
 
 var MainView;
-var CrackleView, ShuffleView, SpindleView, JiggleView, BundleView;
+var CrackleView, ShuffleView, JiggleView, BundleView;
 var CrossleView, CrossleOptionsView, CrossleInstructionsView;
+var SpindleView, SpindleOptionsView, SpindleHelpView;
 
 //----------------------------------------------
 //---------- LEXI COMPONENTS -------------------
@@ -73,6 +80,10 @@ LexiComponents.prototype = {
 		this.SetViews();
 	},
 	SetData() {
+
+		//UNLOGGED
+
+		Solutions = Solutions0.concat(Solutions100);
 	},
 	CreateCoreObjects() {
 	},
@@ -120,6 +131,8 @@ LexiComponents.prototype = {
 		ShuffleLetterImages = new GenieImage();
 		UpperCaseLetterImages = new GenieImage();
 		MediumDigitImages = new GenieImage();
+		KeyLetterImages = new GenieImage();
+		PressedLetterImages = new GenieImage();
 	},
 	SetImages() {
 
@@ -129,6 +142,8 @@ LexiComponents.prototype = {
 		ShuffleLetterImages.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.IMAGES], SHUFFLeLETTErIMAGEs);
 		UpperCaseLetterImages.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.GENIeIMAGES], MEDIUmLETTErIMAGES);
 		MediumDigitImages.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.GENIeIMAGES], MEDIUmDIGITsIMAGE);
+		KeyLetterImages.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.IMAGES], KEyLETTErIMAGES);
+		PressedLetterImages.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.IMAGES], KEyPRESSEdIMAGES);
 	},
 	CreateFX() {
 	},
@@ -146,12 +161,15 @@ LexiComponents.prototype = {
 
 		CrackleView = new GenieCrackleView();
 		ShuffleView = new GenieShuffleView();
-		SpindleView = new GenieSpindleView();
 		JiggleView  = new GenieJiggleView();
 
 		CrossleView  = new LexiCrossleView();
 		CrossleOptionsView = new LexiCrossleOptionsView();
 		CrossleInstructionsView = new LexiCrossleInstructionView();
+
+		SpindleView = new LexiSpindleView();
+		SpindleOptionsView = new LexiSpindleOptionsView();
+		SpindleHelpView = new LexiSpindleHelpView();
 
 		BundleView  = new GenieBundleView();
 	},
@@ -163,12 +181,15 @@ LexiComponents.prototype = {
 
 		CrackleView.Set(this.Interface.PrimeScape, CRACKLE, this.GraphicsTool, this.TextWriter, this.Randomizer);
 		ShuffleView.Set(this.Interface.PrimeScape, SHUFFLE, this.GraphicsTool, this.TextWriter, this.Randomizer);
-		SpindleView.Set(this.Interface.PrimeScape, SPINDLE, this.GraphicsTool, this.TextWriter, this.Randomizer);
 		JiggleView.Set(this.Interface.PrimeScape, JIGGLE, this.GraphicsTool, this.TextWriter, this.Randomizer);
 
 		CrossleView.Set(this.Interface.PrimeScape, CROSSLE, this.GraphicsTool, this.TextWriter, this.Randomizer);
 		CrossleOptionsView.Set(this.Interface.PrimeScape, CROSSLE.OPTIONS, this.TextWriter);
 		CrossleInstructionsView.Set(this.Interface.PrimeScape, CROSSLE.INSTRUCTIONS, CrossleView, this.GraphicsTool, this.TextWriter);
+
+		SpindleView.Set(this.Interface.PrimeScape, SPINDLE, this.GraphicsTool, this.TextWriter, this.Randomizer);
+		SpindleOptionsView.Set(this.Interface.PrimeScape, SPINDLE.OPTIONS, this.TextWriter);
+		SpindleHelpView.Set(this.Interface.PrimeScape, SPINDLE.HELP, SpindleView, this.GraphicsTool, this.TextWriter);
 
 		BundleView.Set(this.Interface.PrimeScape, BUNDLE, this.GraphicsTool, this.TextWriter, this.Randomizer);
 	}
