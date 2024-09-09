@@ -8,10 +8,10 @@ var ROUNDEdBUTTOnCORNErIMAGEs = { L: 2, T: 35, W: 38, H: 3, O: 2, R: 1, C: 8, PA
 var BUTTON = { STYLE: { PLAIN: 0, SHALLOW: 1, RAISED: 2, ROUNDED: 3, KEyPAD: 4, OCTAGONAL: 5 },
 					STATE: { DISABLED: 0, ENABLED: 1, PUSHED: 2 }, ANIMATED: { F: 15, TOGGLED: false } };
 
-var NEwGAMeBUTTON =   { L:   8, T:  18, W: 96, H: 64, COLOUR: BLUE.INDIGO, LABEL: "New Game",   TEXT: { COLOUR: "white", FONT: "18px Arial" } };
-var TUTORIAlBUTTON =  { L: 124, T:  18, W: 96, H: 64, COLOUR: BLUE.INDIGO, LABEL: "Tutorial",   TEXT: { COLOUR: "white", FONT: "18px Arial" } };
-var DEMoBUTTON =      { L:   8, T: 101, W: 96, H: 64, COLOUR: BLUE.INDIGO, LABEL: "Demo",       TEXT: { COLOUR: "white", FONT: "18px Arial" } };
-var MINiGAMEsBUTTON = { L: 124, T: 101, W: 96, H: 64, COLOUR: BLUE.INDIGO, LABEL: "Mini-Games", TEXT: { COLOUR: "white", FONT: "18px Arial" } };
+var NEwGAMeBUTTON =   { L:   8, T:  18, W: 96, H: 64, COLOUR: BLUE.INDIGO, LW: 3, LABEL: "New Game",   TEXT: { COLOUR: "white", FONT: "18px Arial" } };
+var TUTORIAlBUTTON =  { L: 124, T:  18, W: 96, H: 64, COLOUR: BLUE.INDIGO, LW: 3, LABEL: "Tutorial",   TEXT: { COLOUR: "white", FONT: "18px Arial" } };
+var DEMoBUTTON =      { L:   8, T: 101, W: 96, H: 64, COLOUR: BLUE.INDIGO, LW: 3, LABEL: "Demo",       TEXT: { COLOUR: "white", FONT: "18px Arial" } };
+var MINiGAMEsBUTTON = { L: 124, T: 101, W: 96, H: 64, COLOUR: BLUE.INDIGO, LW: 3, LABEL: "Mini-Games", TEXT: { COLOUR: "white", FONT: "18px Arial" } };
 
 //-- ICONS--
 
@@ -23,9 +23,7 @@ var ICON = { COLOUR: { MAIN: GREY.ASH, LIGHT: GREY.LIGHT, DARK: GREY.DARK } };
 var RADIoCONTROlIMAGE = { L: 79, T: 16, W: 23, H: 11, O: 1, R: 1, C: 2, PATCH: { W: 11, H: 11 } };
 var RADIoCONTROlUnCHECKEdIMAGE = { L: 53, T: 16, W: 12, H: 12 };	//TODO: make REDUNDANT
 var RADIoCONTROlCHECKEdIMAGE = { L: 66, T: 16, W: 12, H: 12 };		//TODO: make REDUNDANT
-var CHECkBOxCHECKEdIMAGE = { L: 97, T: 1, W: 15, H: 14 };		//TODO: replace this and one below with one specs entry
-var CHECkBOxUnCHECKEdIMAGE = { L: 113, T: 1, W: 15, H: 14 };
-var CHECkBOxIMAGE = { L: 97, T: 1, W: 15, H: 14, O: 1, R: 1, C: 2, PATCH: { W: 15, H: 14 } };
+var CHECkBOxIMAGE = { L: 1, T: 1, W: 32, H: 14, O: 2, R: 1, C: 2, PATCH: { W: 15, H: 14 } };
 var DROpLIStBUTTOnIMAGE = { L: 1, T: 28, W: 23, H: 21, O: 1, R: 1, C: 2, PATCH: { W: 23, H: 21 } };
 var SCROLlBArARROWsIMAGE = { L: 1, T: 71, W: 79, H: 17, O: 1, R: 1, C: 4, PATCH: { W: 19, H: 17 } };
 var SCROLlBArTHUMbIMAGE = { L: 81, T: 71, W: 19, H: 11, O: 1, R: 3, C: 1, PATCH: { W: 19, H: 3 } };
@@ -47,7 +45,8 @@ var DROpDOWnLIST = { FIELD: { W: 100, H: 23 }, BUTTON: { W: 23, H: 21 }, ENTRY: 
 var LIStBOX = { COLOUR: { SELECTION: GREY.MEDIUM, PAGE: "rgb(000,175,239)" } };
 var GENIeRADIoCONTROL = { SX: 79, SY: 16, W: 11, H: 11, O: 1 };		//TODO: this and below
 var GENIeCHECkBOX = { L: 79, T: 16, W: 11, H: 11, O: 1 };		//	maybe REDUNDANT
-var PAGINATION = { PATCH: { W: 18, H: 18, }, COLOUR: { STRIP: "rgb(175,191,191)", SELECTION: "rgb(127,127,127)", PAGE: "rgb(000,175,239)" } };
+var PAGINATION = { PATCH: { W: 18, H: 18, },
+						 COLOUR: { STRIP: "rgb(175,191,191)", SELECTION: "rgb(127,127,127)", PAGE: "rgb(000,175,239)", BACKGROUND: "rgb(000,000,255)" } };
 var TOUChBAR = { COLOUR: { KEY: "rgb(175,191,191)", SELECTION: "rgb(063,191,223)" } };			 
 var TABS = { COLOUR: { TAB: "lightgray", PAGE: "white" } };
 var SPInCONTROlBUTTOnIMAGEs = { L: 102, T: 72, W: 54, H: 10, O: 2, C: 4, R: 1, PATCH: { W: 12, H: 10 } };

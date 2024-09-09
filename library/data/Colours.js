@@ -9,7 +9,7 @@ var BLUE = { INDIGO: "rgb(0,0,255)", MEDIUM: "rgb(0,63,255)", AZURE: "rgb(0,127,
 				 CYAN: "rgb(0,255,255)", CERULEAN: "rgb(0,127,191)", AQuaMARINE: "rgb(127,255,255)", ULTRaMARINE: "rgb(15,15,143)",
 				 DARK: "rgb(0,0,191)", NAVY: "rgb(0,0,127)", SAPPHIRE: "rgb(0,0,111)", MIDNIGHtEXPRESS: "rgb(0,0,63)",
 				 MIDNIGHT: "rgb(31,31,95)", OXFORD: "rgb(0,31,63)", PRUSSIAN: "rgb(000,047,111)", LAPIsLAZULI: "rgb(31,95,159)",
-				 ROYAL: "rgb(63,111,223)", AZURE: "rgb(63,111,223)", SILVErLAKE: "rgb(95,127,191)", COBALT: "rgb(0,63,175)",
+				 ROYAL: "rgb(63,111,223)", AZURE: "rgb(015,159,255)", SILVErLAKE: "rgb(95,127,191)", COBALT: "rgb(0,63,175)",
 				 SEA: "rgb(000,159,255)", SKY: "rgb(000,162,232)", POWDER: "rgb(063,191,223)", TURQUOISE: "rgb(000,239,255)" };
 
 //-- SECONDARY --
