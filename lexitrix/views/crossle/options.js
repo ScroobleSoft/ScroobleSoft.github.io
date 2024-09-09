@@ -1,18 +1,18 @@
 
-//----------------------------------------------------
+//------------------------------------------------------------
 //----------- LEXI CROSSLE OPTIONS VIEW ----------------------
 var LexiCrossleOptionsView = function() {
 	var DailyButton, NumberedButton, SymmetricalButton, AsymmetricButton;
 	var DifficultyButtons;
-	var CellImage, SelectionImage, OkButton;
+	var CellImage, SelectionImage, StashIcons, OkButton;
 	var CellIndex, Col, Row;
 
 	var i;
 };
 LexiCrossleOptionsView.prototype = new GenieView();
-LexiCrossleOptionsView.prototype.Set = function(cnvs, specs, tWriter) {
+LexiCrossleOptionsView.prototype.Set = function(cnvs, specs, gTool, tWriter) {
 
-	this.SetLinks(null, tWriter);
+	this.SetLinks(gTool, tWriter);
 
 	GenieView.prototype.Set.call(this, cnvs, specs);
 };
@@ -64,10 +64,18 @@ LexiCrossleOptionsView.prototype.SetDiffcultyButtons = function() {
 };
 LexiCrossleOptionsView.prototype.SetStashComponents = function() {
 
+	//Images
 	this.CellImage = new GenieImage();
 	this.CellImage.Set(this.Context, ImageManager.Pics[IMAGeINDEX.IMAGES], this.Specs.IMAGE.CELL);
 	this.SelectionImage = new GenieImage();
 	this.SelectionImage.Set(this.Context, ImageManager.Pics[IMAGeINDEX.IMAGES], this.Specs.IMAGE.SELECTION);
+
+	this.StashIcons = new GenieIconPanel();
+	this.StashIcons.Set(this.Canvas, this.Specs.ICONS.STASH, this.Specs.ICONS.STASH.IMAGE);
+	this.StashIcons.SetLinks(this.GraphicsTool);
+	this.StashIcons.SetCornersPic(IconCornerImages);
+	this.Controls.push(this.StashIcons);
+
 	this.OkButton = new ImageButton();
 	this.OkButton.Set(this.Canvas, this.Specs.BUTTON.OK, ImageManager.Pics[IMAGeINDEX.CONTROLS]);
 	this.OkButton.SetCornersPic(RaisedCornerImages);
@@ -122,11 +130,12 @@ LexiCrossleOptionsView.prototype.PickGameNumber = function() {
 
 	this.CloseOptionButtons();
 	this.ColourScape(null, this.Specs.COLOUR);
-	this.TextWriter.Write("Pick a number:", 5, 40, { FONT: "24px Arial" } );
+	this.TextWriter.Write("Pick a number:", 5, 30, { FONT: "24px Arial" } );
 	this.Col = 0;
 	this.Row = 0;
 	this.CellIndex = 0;
 	this.DrawNumbers();
+	this.StashIcons.Show();
 	this.OkButton.Show();
 	this.UpdateNumbered();
 };
@@ -135,18 +144,21 @@ LexiCrossleOptionsView.prototype.DrawNumbers = function() {
 	var iCell;
 	var c, r;
 
+	this.Context.fillStyle = this.Specs.COLOUR;
+	this.Context.fillRect(this.Specs.NUMBERS.X, this.Specs.NUMBERS.Y, this.Specs.NUMBERS.W*this.Specs.NUMBERS.C, this.Specs.NUMBERS.H*this.Specs.NUMBERS.R);
+
 	iCell = 0;
 	for (r=0;r<this.Specs.NUMBERS.R;++r)
 		for (c=0;c<this.Specs.NUMBERS.C;++c) {
+			if ((iCell+(100*this.StashIcons.DepressedIcon))>=Solutions.length)
+				return;
 			x = this.Specs.NUMBERS.X + (c*(this.Specs.NUMBERS.W-1));
 			y = this.Specs.NUMBERS.Y + (r*(this.Specs.NUMBERS.H-1));
 			this.CellImage.Draw(x, y);
 			if (this.CellIndex==iCell)
 				this.SelectionImage.DrawPatchNumber(0, x+1, y+1);			//TODO: correct patch number has to be determined (maybe should be seperate func)
-			this.DrawDigits(iCell+1, x+this.Specs.NUMBERS.OX, y+this.Specs.NUMBERS.OY);
 			++iCell;
-			if (iCell==Solutions.length)
-				return;
+			this.DrawDigits(iCell+(100*this.StashIcons.DepressedIcon), x+this.Specs.NUMBERS.OX, y+this.Specs.NUMBERS.OY);
 		}
 };
 LexiCrossleOptionsView.prototype.DrawDigits = function(num, x, y) {
@@ -173,13 +185,21 @@ LexiCrossleOptionsView.prototype.UpdateNumbered = function() {
 	if (Mouse.CheckLeftClicked(CANVAS.PRIME)) {
 		this.Col = Math.floor((Mouse.Click.X-(this.Specs.NUMBERS.X+1))/(this.Specs.NUMBERS.W-1));
 		this.Row = Math.floor((Mouse.Click.Y-(this.Specs.NUMBERS.Y+1))/(this.Specs.NUMBERS.H-1));
-		this.CellIndex = (this.Specs.NUMBERS.C*this.Row) + this.Col;
-		this.DrawNumbers();
+		if (this.Col<this.Specs.NUMBERS.C && this.Col>=0 && this.Row<this.Specs.NUMBERS.R && this.Row>=0) {		//check within numbers frame
+			this.indx = (this.Specs.NUMBERS.C*this.Row) + this.Col;
+			if ((this.indx+(100*this.StashIcons.DepressedIcon))<Solutions.length) {		//check if valid cell is clicked
+				this.CellIndex = this.indx;
+				this.DrawNumbers();
+			}
+		}
 	}
+
+	if (this.StashIcons.CheckIconChanged())
+		this.DrawNumbers();
 
 	if (this.OkButton.CheckClicked()) {
 		cancelAnimationFrame(this.AnimationFrameHandle);
-		CrossleView.SetNumber(this.CellIndex);
+		CrossleView.SetNumber((100*this.StashIcons.DepressedIcon)+this.CellIndex);
 		this.Close(this.OpenCrossleView.bind(this), 100);
 	}
 };
