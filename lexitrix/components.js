@@ -83,7 +83,7 @@ LexiComponents.prototype = {
 
 		//UNLOGGED
 
-		Solutions = Solutions0.concat(Solutions100);
+		Solutions = Solutions0.concat(Solutions100, Solutions200);
 	},
 	CreateCoreObjects() {
 	},
@@ -184,7 +184,7 @@ LexiComponents.prototype = {
 		JiggleView.Set(this.Interface.PrimeScape, JIGGLE, this.GraphicsTool, this.TextWriter, this.Randomizer);
 
 		CrossleView.Set(this.Interface.PrimeScape, CROSSLE, this.GraphicsTool, this.TextWriter, this.Randomizer);
-		CrossleOptionsView.Set(this.Interface.PrimeScape, CROSSLE.OPTIONS, this.TextWriter);
+		CrossleOptionsView.Set(this.Interface.PrimeScape, CROSSLE.OPTIONS, this.GraphicsTool, this.TextWriter);
 		CrossleInstructionsView.Set(this.Interface.PrimeScape, CROSSLE.INSTRUCTIONS, CrossleView, this.GraphicsTool, this.TextWriter);
 
 		SpindleView.Set(this.Interface.PrimeScape, SPINDLE, this.GraphicsTool, this.TextWriter, this.Randomizer);
