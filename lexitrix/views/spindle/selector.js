@@ -81,10 +81,10 @@ SpindleWordsSelector.prototype = {
 				this.SpineWord = Words11[this.Randomizer.GetIndex(Words11.length)];
 				break;
 			case this.Spindle.Specs.TYPE.NINE:
-				this.SelectCentralWord(this.NineDistribution, this.NineLetterWords);
+				this.SpineWord = this.SelectCentralWord(this.NineDistribution, this.NineLetterWords);
 				break;
 			case this.Spindle.Specs.TYPE.SEVEN:
-				this.SelectCentralWord(this.SevenDistribution, this.SevenLetterWords);
+				this.SpineWord = this.SelectCentralWord(this.SevenDistribution, this.SevenLetterWords);
 				break;
 			case this.Spindle.Specs.TYPE.MINUTE:
 				this.Spindle.DailyDate = new Date();

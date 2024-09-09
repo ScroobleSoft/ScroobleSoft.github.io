@@ -37,9 +37,9 @@ LexiSpindleView.prototype.UpdateButtons = function() {
 
 	//Help
 	if (this.HelpButton.CheckClicked()) {
-		cancelAnimationFrame(this.AnimationFrameHandle);
+//		cancelAnimationFrame(this.AnimationFrameHandle);
 		SpindleHelpView.Open();
-		SpindleHelpView.Update();
+//		SpindleHelpView.Update();
 	}
 };
 LexiSpindleView.prototype.UpdateErrors = function() {
