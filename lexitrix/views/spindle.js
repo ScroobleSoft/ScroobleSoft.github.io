@@ -24,11 +24,6 @@ LexiSpindleView.prototype.Set = function(cnvs, specs, gTool, tWriter, rGenerator
 	this.FirstOpenFlag = true;
 };
 LexiSpindleView.prototype.Open = function() {
-	//UNLOGGED
-/*
-	this.GameType = this.Specs.TYPE.ELEVEN;
-	this.Selector.SelectWords();
-*/
 	GenieView.prototype.Open.call(this);
 
 	if (this.FirstOpenFlag) {
@@ -122,4 +117,10 @@ LexiSpindleView.prototype.OpenSpindleOptionsView = function() {
 
 	this.Reset();
 	SpindleOptionsView.Open();
+};
+LexiSpindleView.prototype.OpenMainView = function() {
+
+	this.Reset();
+	MainView.Open();
+	MainView.Update();
 };
