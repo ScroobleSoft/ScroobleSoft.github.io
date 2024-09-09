@@ -2,17 +2,17 @@
 //------------------------------------------------
 //----------- GENIE NESTED VIEW ------------------  NOTE: only small changes from GenieView
 var GenieNestedView = function() {
-	var MainView;
+	var ParentView;
 };
 GenieNestedView.prototype = new GenieView();
-GenieNestedView.prototype.Set = function(cnvs, specs, mView) {
+GenieNestedView.prototype.Set = function(cnvs, specs, pView) {
 	GenieView.prototype.Set.call(this, cnvs, specs)
 
-	this.MainView = mView;
+	this.ParentView = pView;
 };
 GenieNestedView.prototype.Open = function() {
 
-	this.MainView.NestedView = this;
+	this.ParentView.NestedView = this;
 	if (this.Specs.COLOUR) {
 		if (this.Specs.W) {
 			this.Context.fillStyle = this.Specs.COLOUR;
@@ -21,7 +21,7 @@ GenieNestedView.prototype.Open = function() {
 			this.ColourScape(null, this.Specs.COLOUR);
 	}
 	this.Draw();
-	this.Controls.forEach(function(cntrl) {cntrl.Show();});
+	this.ShowControls();
 };
 GenieNestedView.prototype.Update = function() {  //NOTE: often over-ridden, but not always
 };

@@ -20,9 +20,12 @@ GenieDialogView.prototype.SetControls = function() {
 };
 GenieDialogView.prototype.Open = function() {
 
+	cancelAnimationFrame(this.ParentView.AnimationFrameHandle);
 	this.ParentView.Disable();
 
 	GenieView.prototype.Open.call(this);
+
+	this.Update();
 };
 GenieDialogView.prototype.Update = function() {
 
