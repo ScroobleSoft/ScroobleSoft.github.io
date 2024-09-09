@@ -51,7 +51,7 @@ GenieGraphics.prototype = {
 		 this.Context = this.InfoBox;
 		 break;
 	 case CANVAS.CONSOLE:
-		 this.Context = this.ControlPanel.Canvas.Context;
+		 this.Context = this.ControlPanel;
 		 break;
 		}
 	},
@@ -59,7 +59,7 @@ GenieGraphics.prototype = {
 		this.Context = this.InfoBox;
 	},
 	SwitchToControlPanel() {
-		this.Context = this.ControlPanel.Canvas.Context;
+		this.Context = this.ControlPanel;
 	},
 	RestoreContext() {
 		this.Context = this.Screen;

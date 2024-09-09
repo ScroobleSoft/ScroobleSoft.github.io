@@ -8,7 +8,7 @@ var GenieGame = function () {
 	var Randomizer;
 	var View;
 	var Components;
-	var Settings, Level;
+	var Settings, Level, Type;			//NOTE: .Type is mostly for random/scheduled etc.
 	var AnimationFrameHandle;
 };
 GenieGame.prototype = {
@@ -34,8 +34,12 @@ GenieGame.prototype = {
 		if (ImageManager.AllLoaded) {
 			cancelAnimationFrame(this.AnimationFrameHandle);
 			this.SetComponents();
-			Intro.Start();
+			this.Start();
 		}
+	},
+	Start() {
+
+		Intro.Start();
 	},
 	SetView(view) {
 

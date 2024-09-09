@@ -119,8 +119,8 @@ GenieRandomizer.prototype = {
 		//Populate array
 		for (this.i=0;this.i<quantity;++this.i) {
 			do {
-//				this.Value = this.GetInRange(start, end);
-				this.Value = start + Math.floor(((end-start)+1)*Math.random());
+				this.Value = this.GetInRange(start, end);
+//				this.Value = start + Math.floor(((end-start)+1)*Math.random());  TODO: this will be REDUNDANT if there is no thrashing
 			} while (aNum.includes(this.Value));
 			aNum[this.i] = this.Value;
 		}

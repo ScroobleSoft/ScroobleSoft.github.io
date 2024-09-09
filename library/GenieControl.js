@@ -62,6 +62,7 @@ GenieControl.prototype = {
 	},
 	Hide(colour) {  //TODO: should have the option as in ::DrawDisabled to state colour in specs
 
+		colour = colour || this.Specs.BACKGROUND;
 		this.Enabled = false;
 		this.Erase(colour);
 		this.Visible = false;
@@ -148,12 +149,22 @@ GenieControl.prototype = {
 	},
 	DrawDisabled() {
 
-		this.Context.globalAlpha = 0.5;
+		this.Context.fillStyle = "white";
+		this.Context.fillRect(this.Specs.L, this.Specs.T, this.Specs.W, this.Specs.H);
+		this.Context.globalAlpha = 0.1;
 		this.Draw();
 		this.Context.globalAlpha = 1.0;
 	},
 	CheckDisabled() {
 
 		return (!this.Enabled);
+	},
+	CheckEnabled() {
+
+		return (this.Enabled);
+	},
+	CheckActivated() {
+
+		return (!this.DeActivated);
 	}
 };

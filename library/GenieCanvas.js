@@ -124,25 +124,26 @@ GenieCanvas.prototype = {
 
 		//Check controls to see if any of them were clicked
 		if (this.View) {
-			if (this.View.Controls)
 
-				for (this.i=0;this.i<this.View.Controls.length;++this.i)
-					if (this.View.Controls[this.i].Enabled && !this.View.Controls[this.i].DeActivated) {
-						if (this.View.Controls[this.i].CheckClickedOn()) {
-							this.View.Controls[this.i].ClickedOn();
+//			if (this.View.Controls)
+			for (this.i=0;this.i<this.View.Controls.length;++this.i)
+				if (this.View.Controls[this.i].Enabled && !this.View.Controls[this.i].DeActivated) {
+					if (this.View.Controls[this.i].CheckClickedOn()) {
+						this.View.Controls[this.i].ClickedOn();
+						return;
+					}
+				}
+
+			if (this.View.NestedView)
+				for (this.i=0;this.i<this.View.NestedView.Controls.length;++this.i)
+					if (this.View.NestedView.Controls[this.i].Enabled && !this.View.NestedView.Controls[this.i].DeActivated) {
+						if (this.View.NestedView.Controls[this.i].CheckClickedOn()) {
+							this.View.NestedView.Controls[this.i].ClickedOn();
 							return;
 						}
 					}
-
-				if (this.View.NestedView)
-					for (this.i=0;this.i<this.View.NestedView.Controls.length;++this.i)
-						if (this.View.NestedView.Controls[this.i].Enabled && !this.View.NestedView.Controls[this.i].DeActivated) {
-							if (this.View.NestedView.Controls[this.i].CheckClickedOn()) {
-								this.View.NestedView.Controls[this.i].ClickedOn();
-								return;
-							}
-						}
 		} else {
+
 			if (this.Controls)
 				for (this.i=0;this.i<this.Controls.length;++this.i)
 					if (this.Controls[this.i].Enabled && !this.Controls[this.i].DeActivated) {
@@ -161,6 +162,7 @@ GenieCanvas.prototype = {
 				Mouse.RightClicked = true;
 				break;
 		}
+		Mouse.Downed = false;
 	},
 	MouseDoubleClicked(event) {  //NOTE: not passing message to controls
 
@@ -175,8 +177,8 @@ GenieCanvas.prototype = {
 				break;
 		}
 
-		Mouse.Click.X = event.offsetX / this.Scale;
-		Mouse.Click.Y = event.offsetY / this.Scale;
+		Mouse.DoubleClick.X = event.offsetX / this.Scale;
+		Mouse.DoubleClick.Y = event.offsetY / this.Scale;
 		Mouse.CanvasId = this.Id;
 	},
 	MouseDown(event) {  //NOTE: only used for right clicks
@@ -196,6 +198,15 @@ GenieCanvas.prototype = {
 							this.View.Controls[this.i].MouseDown();
 							return;
 						}
+
+			if (this.View.NestedView)
+				for (this.i=0;this.i<this.View.NestedView.Controls.length;++this.i)
+					if (this.View.NestedView.Controls[this.i].Enabled && !this.View.NestedView.Controls[this.i].DeActivated) {
+						if (SpaceUtils.CheckPointInBox(Mouse.Down, this.View.NestedView.Controls[this.i].Specs)) {
+							this.View.NestedView.Controls[this.i].MouseDown();
+							return;
+						}
+					}
 		} else {
 			if (this.Controls)
 				for (this.i=0;this.i<this.Controls.length;++this.i)

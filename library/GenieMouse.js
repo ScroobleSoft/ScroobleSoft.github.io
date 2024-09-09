@@ -3,7 +3,7 @@
 //---------- GENIE MOUSE --------------------
 var GenieMouse = function () {
 	var X, Y;
-	var Click, Down, Up;									//coords
+	var Click, DoubleClick, Down, Up;				//coords
 	var Downed, Moved, Upped;							//flags
 	var LeftClicked, RightClicked;					//flags
 	var LeftDoubleClicked, RightDoubleClicked;	//flags
@@ -12,6 +12,7 @@ var GenieMouse = function () {
 GenieMouse.prototype = {
 	Set() {
 		this.Click = new Coordinate2D();
+		this.DoubleClick = new Coordinate2D();
 		this.Down = new Coordinate2D();
 		this.Up = new Coordinate2D();
 	},
@@ -121,14 +122,14 @@ GenieMouse.prototype = {
 	},
 	CheckBoxClicked(rct) {
 
-		return (Utilities.PointInBox( { X: this.Click.X, Y: this.Click.Y }, rct ));
+		return (Utils.PointInBox( { X: this.Click.X, Y: this.Click.Y }, rct ));
 	},
 	CheckOverCircle(cCentre, cRadius, cnvs) {
 
 		if (this.CanvasId==cnvs)
-	 return (Utilities.CheckPointInCircle(this, cCentre, cRadius));
+			return (Utils.CheckPointInCircle(this, cCentre, cRadius));
 		else
-	 return (false);
+			return (false);
 	},
 	ClearClicks() {
 

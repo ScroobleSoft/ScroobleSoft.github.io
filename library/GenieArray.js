@@ -2,170 +2,179 @@
 //-------------------------------------------
 //---------- GENIE ARRAY --------------------
 var GenieArray = function() {
-   var Empty;	//index of next open slot
+	var Empty;	//index of next open slot . . . TODO: looks REDUNDANT, and not properly implemented anyway
 };
 GenieArray.prototype = new Array();  //NOTE: declaring size here will never work
 GenieArray.prototype.Set = function(quantity, type, indxd) {
-   var i;
-   var element;
-   var aArray;  //a- arguments
+	var i;
+	var element;
+	var aArray;  //a- arguments
 
-   this.Empty = 0;
+	this.Empty = 0;
 
-   if (arguments.length>3) {
-      aArray = new Array(arguments.length-3);
-      for (i=0;i<aArray.length;++i)
+	if (arguments.length>3) {
+		aArray = new Array(arguments.length-3);
+		for (i=0;i<aArray.length;++i)
 	 aArray[i] = arguments[i+3];
-   }
+	}
 
-   for (i=0;i<quantity;++i) {
-      if (arguments[1]) {
+	for (i=0;i<quantity;++i) {
+		if (arguments[1]) {
 	 element = new type();
 	 if (indxd)
-	    element.Index = i;
+		 element.Index = i;
 	 if (element.Set)
-	    element.Set.apply(element, aArray);
-      } else
+		 element.Set.apply(element, aArray);
+		} else
 	 element = 0;
-      this.push(element);
-   }
+		this.push(element);
+	}
 };
 GenieArray.prototype.GetSubArray = function(start, end) {
-   var i;
-   var sArray;  //s- sub
+	var i;
+	var sArray;  //s- sub
 
-   //UNLOGGED - UNTESTED
+	//UNLOGGED - UNTESTED
 
-   sArray = new Array((end-start)+1);
-   for (i=start;i<=end;++i)
-      sArray[i-start] = this[i];
+	sArray = new Array((end-start)+1);
+	for (i=start;i<=end;++i)
+		sArray[i-start] = this[i];
 
-   return (sArray);
+	return (sArray);
 };
 GenieArray.prototype.Insert = function(elmnt, eIndx) {
-   this.splice(eIndx, 0, elmnt);
+	this.splice(eIndx, 0, elmnt);
 };
 GenieArray.prototype.InsertAtFront = function(elmnt) {
-   this.unshift(elmnt);
+	this.unshift(elmnt);
+};
+GenieArray.prototype.Add = function(elmnt) {
+
+	this.push(elmnt);
 };
 GenieArray.prototype.AddSafe = function(elmnt) {
-   if (this.Empty==this.length)
-      this.push(elmnt);
-   else
-      this[this.Empty] = elmnt;
-   ++this.Empty;
+	if (this.Empty==this.length)
+		this.push(elmnt);
+	else
+		this[this.Empty] = elmnt;
+	++this.Empty;
 };
 GenieArray.prototype.AddUnique = function(elmnt) {
-   if (!this.includes[elmnt])
-      this.push(elmnt);
+
+	if (!this.includes[elmnt])
+		this.push(elmnt);
 };
 GenieArray.prototype.Remove = function(eIndx, nItems) {
-   nItems = nItems || 1;
-   this.splice(eIndx, nItems);
+
+	nItems = nItems || 1;
+	this.splice(eIndx, nItems);
 };
 GenieArray.prototype.RemoveAll = function() {  //NOTE: this could be re-written if a better garbage collection method is found
-   this.length = 0;
+
+	this.length = 0;
 };
 GenieArray.prototype.RemoveElement = function(elmnt) {  //NOTE: returns 'false' is element not found
-   var i;
+	var i;
 
-   for (i=0;i<this.length;++i)
-      if (this[i]===elmnt) {
-	 this.Remove(i);
-	 return (true);
-      }
-   return (true);
+	for (i=0;i<this.length;++i)
+		if (this[i]===elmnt) {
+			this.Remove(i);
+			return (true);
+		}
+
+	return (true);
 };
 GenieArray.prototype.Extract = function(eIndx) {  //e- element . . . NOTE: only one item retrieved
-   return (this.splice(eIndx, 1)[0]);
+
+	return (this.splice(eIndx, 1)[0]);
 };
 GenieArray.prototype.Swap = function(eIndx1, eIndx2) {  //e- element
-   var element;
+	var element;
 
-   element = this.splice(eIndx1, 1);
-   this.splice(eIndx2, 0, element[0]);
-   if (eIndx1<eIndx2)
-      element = this.splice(eIndx2-1, 1);
-   else
-      element = this.splice(eIndx2+1, 1);
-   this.splice(eIndx1, 0, element[0]);
+	element = this.splice(eIndx1, 1);
+	this.splice(eIndx2, 0, element[0]);
+	if (eIndx1<eIndx2)
+		element = this.splice(eIndx2-1, 1);
+	else
+		element = this.splice(eIndx2+1, 1);
+	this.splice(eIndx1, 0, element[0]);
 };
 GenieArray.prototype.Flush = function(val) {  //TODO: can instead just use .fill() if a value is supplied
-   var i;
+	var i;
 
-   val = val || 0;
-   for (i=0;i<this.length;++i)
-      this[i] = val;
+	val = val || 0;
+	for (i=0;i<this.length;++i)
+		this[i] = val;
 };
 GenieArray.prototype.GetMinIndex = function() {  //returns index of smallest entry (assuming all entries are numbers)
-   var i;
-   var val;
-   var indx;
+	var i;
+	var val;
+	var indx;
 
-   //NOTE: if there are duplicate minimum values, one with the lowest index is returned
+	//NOTE: if there are duplicate minimum values, one with the lowest index is returned
 
-   indx = 0;
-   val = this[indx];
-   for (i=1;i<this.length;++i)
-      if (this[i]<val) {
+	indx = 0;
+	val = this[indx];
+	for (i=1;i<this.length;++i)
+		if (this[i]<val) {
 	 val = this[i];
 	 indx = i;
-      }
-   return(indx);
+		}
+	return(indx);
 };
 GenieArray.prototype.RotateLeft = function(nElmnts) {
-   var i, j;
-   var elmnt;
+	var i, j;
+	var elmnt;
 
-   if (nElmnts==0)
-      return;
+	if (nElmnts==0)
+		return;
 
-   for (i=0;i<nElmnts;++i) {
-      elmnt = this[0];
-      for (j=0;j<this.length-1;++j)
+	for (i=0;i<nElmnts;++i) {
+		elmnt = this[0];
+		for (j=0;j<this.length-1;++j)
 	 this[j] = this[j+1];
-      this[this.length-1] = elmnt;
-   }
+		this[this.length-1] = elmnt;
+	}
 };
 GenieArray.prototype.RotateRight = function(nElmnts) {
-   var i, j;
-   var elmnt;
+	var i, j;
+	var elmnt;
 
-   if (nElmnts==0)
-      return;
+	if (nElmnts==0)
+		return;
 
-   for (i=0;i<nElmnts;++i) {
-      elmnt = this[this.length-1];
-      for (j=this.length-1;j>0;--j)
+	for (i=0;i<nElmnts;++i) {
+		elmnt = this[this.length-1];
+		for (j=this.length-1;j>0;--j)
 	 this[j] = this[j-1];
-      this[0] = elmnt;
-   }
+		this[0] = elmnt;
+	}
 };
 GenieArray.prototype.RotateSectionLeft = function(nElmnts, start, end) {  //UNTESTED
-   var i, j;
-   var elmnt;
+	var i, j;
+	var elmnt;
 
-   if (nElmnts==0 || start<0 || end>=this.length || nElements!=((end-start)+1))
-      return;
+	if (nElmnts==0 || start<0 || end>=this.length || nElements!=((end-start)+1))
+		return;
 
-   for (i=0;i<nElmnts;++i) {
-      elmnt = this[start];
-      for (j=start;j<end;++j)
+	for (i=0;i<nElmnts;++i) {
+		elmnt = this[start];
+		for (j=start;j<end;++j)
 	 this[j] = this[j+1];
-      this[end] = elmnt;
-   }
+		this[end] = elmnt;
+	}
 };
 GenieArray.prototype.RotateSectionRight = function(nElmnts, start, end) {  //UNTESTED
-   var i, j;
-   var elmnt;
+	var i, j;
+	var elmnt;
 
-   if (nElmnts==0 || start<0 || end>=this.length || nElements!=((end-start)+1))
-      return;
+	if (nElmnts==0 || start<0 || end>=this.length || nElements!=((end-start)+1))
+		return;
 
-   for (i=0;i<nElmnts;++i) {
-      elmnt = this[end];
-      for (j=end;j>start;--j)
+	for (i=0;i<nElmnts;++i) {
+		elmnt = this[end];
+		for (j=end;j>start;--j)
 	 this[j] = this[j-1];
-      this[start] = elmnt;
-   }
+		this[start] = elmnt;
+	}
 };

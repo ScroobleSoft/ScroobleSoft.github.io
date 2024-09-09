@@ -1,9 +1,10 @@
 
 //---------------------------------------------
-//----------- GENIE VIEW ----------------------  NOTE: meant as main view
+//----------- GENIE VIEW ----------------------
 var GenieView = function() {
+	var NestedView;
 	var Canvas, Context;
-	var InfoScape, ConsoleScape;						//REDUNDANT?
+	var ZoomScape, Console;
 	var GraphicsTool, TextWriter, Randomizer;
 	var ScreenRect, Perspective;
 	var Specs;
@@ -11,7 +12,7 @@ var GenieView = function() {
 	var AnimationFrameHandle;
 	var InfoView, ConsoleView, NestedView;
 	var ToggleFlag, Scrolling;						//.Scrolling REDUNDANT? should be .ScrollingFlag if not
-	var Scale, State, Frames;
+	var Scale, State, Frames, Option;
 };
 GenieView.prototype = {
 	Set(cnvs, specs, sRect) {
@@ -32,10 +33,10 @@ GenieView.prototype = {
 		this.TextWriter = tWriter;
 		this.Randomizer = rGenerator;
 	},
-	SetSubScapes(iScape, cScape) {	//TODO: probably REDUNDANT
+	SetSubScapes(zScape, cScape) {
 
-		this.InfoScape = iScape;
-		this.ConsoleScape = cScape;
+		this.ZoomScape = zScape;
+		this.Console = cScape;
 	},
 	SetSubViews(iView, cView) {  //NOTE: applicable only to main view
 
@@ -78,7 +79,7 @@ GenieView.prototype = {
 		if (this.Specs.COLOUR)
 			this.ColourScape(null, this.Specs.COLOUR);
 		this.Draw();
-		this.Controls.forEach(function(cntrl) {cntrl.Show();});
+		this.ShowControls();
 		if (this.InfoView)
 			this.InfoView.Open();
 		if (this.ConsoleView)
@@ -126,6 +127,10 @@ GenieView.prototype = {
 		if ( func && ms )
 			setTimeout(func, ms);
 	},
+	ShowControls() {
+
+		this.Controls.forEach(function(cntrl) {cntrl.Show();});
+	},
 	Enable() {
 
 		this.Open();
@@ -151,14 +156,13 @@ GenieView.prototype = {
 	ColourScape(scape, colour) {
 
 		colour = colour || this.Specs.COLOUR;
+		scape = scape || this.Canvas;
 
-		if (scape) {
-			scape.Context.fillStyle = colour;
-			scape.Context.fillRect(0, 0, scape.Element.width, scape.Element.height);
-		} else {
-			this.Context.fillStyle = colour;
-			this.Context.fillRect(0, 0, this.Canvas.Element.width, this.Canvas.Element.height);
-		}
+		scape.Context.fillStyle = colour;
+		if (this.Specs.W)
+			scape.Context.fillRect(this.Specs.L, this.Specs.T, this.Specs.W, this.Specs.H);
+		else
+			scape.Context.fillRect(0, 0, this.Canvas.Element.width, this.Canvas.Element.height);
 	},
 	Darken() {
 		var opcty;

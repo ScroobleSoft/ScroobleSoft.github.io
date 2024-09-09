@@ -4,15 +4,15 @@
 //--------------------------------------
 //---------- GENIE TEXT ----------------
 var GenieText = function() {
-   var Context;
-   var Screen, ControlPanel, InfoBox, Ticker, Tabloid;
-   var Specs;
-   var Font;
+	var Context;
+	var Screen, ControlPanel, InfoBox, Ticker, Tabloid;
+	var Specs;
+	var Font, Colour;
 
-   var cntxt;		//scratch variables
+	var cntxt;		//scratch variables
 };
 GenieText.prototype = {
-   Set(cntxt, specs, iBox, cPanel, tTape, tRoll) {
+	Set(cntxt, specs, iBox, cPanel, tTape, tRoll) {
 		this.Context = cntxt;
 		this.Screen = cntxt;
 		this.InfoBox = iBox;
@@ -24,14 +24,14 @@ GenieText.prototype = {
 			this.Specs.FONT = FONT.DEFAULT;
 		if (!this.Specs.COLOUR)
 			this.Specs.COLOUR = "black";
-   },
-   SetContext(cntxt) {
+	},
+	SetContext(cntxt) {
 
-      this.Context = cntxt;
-   },
-   SwitchContext(cnvs) {
+		this.Context = cntxt;
+	},
+	SwitchContext(cnvs) {
 
-      switch (cnvs) {
+		switch (cnvs) {
 			case CANVAS.PRIME:
 				this.Context = this.Screen;
 				break;
@@ -47,33 +47,50 @@ GenieText.prototype = {
 			case CANVAS.HELP:
 				this.Context = this.Tabloid;
 				break;
-      }
-   },
-   ResetContext() {	//TODO: will replace ::RestoreContext
+		}
+	},
+	ResetContext() {	//TODO: will replace ::RestoreContext
 
-      this.Context = this.Screen;
-   },
-   RestoreContext(cntxt) {
+		this.Context = this.Screen;
+	},
+	RestoreContext(cntxt) {
 
-      if (cntxt)
+		if (cntxt)
 			this.Context = cntxt;
-      else
+		else
 			this.Context = this.Screen;
-   },
-   SetFont(fnt) {
+	},
+	SetFont(fnt) {
 
-      this.Font = this.Specs.FONT;
-      this.Specs.FONT = fnt;
-   },
-   RestoreFont() {
+		this.Font = this.Specs.FONT;
+		this.Specs.FONT = fnt;
+	},
+	ResetFont() {	//TODO: will replace ::RestoreFont
 
-      this.Specs.FONT = this.Font;
-   },
-   Write(strng, x, y, specs, cnvs) {
-      var tLength;  //t- text
+		this.Specs.FONT = this.Font;
+	},
+	RestoreFont() {
 
-      //Switch context if thus specified
-      if (cnvs) {	//ASSUMPTION: cnvs is passed only if writing to other than Screen
+		this.Specs.FONT = this.Font;
+	},
+	SetColour(clr) {
+
+		this.Colour = clr;
+	},
+	ResetColour() {	//TODO: will replace ::RestoreColour
+
+		this.Colour = null;
+	},
+	RestoreColour() {
+
+		this.Colour = null;
+	},
+	Write(strng, x, y, specs, cnvs) {
+		var tLength;  //t- text
+		var colour;
+
+		//Switch context if thus specified
+		if (cnvs) {	//ASSUMPTION: cnvs is passed only if writing to other than Screen
 			this.cntxt = this.Context;
 			switch (cnvs) {
 				case CANVAS.PRIME:
@@ -92,42 +109,46 @@ GenieText.prototype = {
 					this.Context = this.Tabloid;
 					break;
 			}
-      }
+		}
 
-      if (specs) {
-	 this.Context.font = specs.FONT || this.Specs.FONT;
-	 this.Context.fillStyle = specs.COLOUR || this.Specs.COLOUR;
-	 if (specs.STYLE) {
-	    if (specs.STYLE & FONT.STYLE.BOLD)
-	       this.Context.font = "bold " + this.Context.font;
-	    if (specs.STYLE & FONT.STYLE.ITALICS)
-	       this.Context.font = "italic " + this.Context.font;
-	    if (specs.STYLE & FONT.STYLE.UNDERLINED) {
-	       tLength = this.Context.measureText(strng).width;
-	       this.Context.beginPath();
-	       this.Context.strokeStyle = "black";
-	       this.Context.lineWidth = 2;
-	       this.Context.moveTo(x, y+4);
-	       this.Context.lineTo(Math.round(x+tLength), y+4);
-	       this.Context.stroke();
-	       this.Context.closePath();
-	    }
-	 }
-      } else {
-	 this.Context.font = this.Specs.FONT;
-	 this.Context.fillStyle = this.Specs.COLOUR;
-      }
-      this.Context.fillText(strng, x, y);
+		//Set correct colour
+		colour = this.Colour || this.Specs.COLOUR;
+		if (specs)
+			colour = specs.COLOUR || colour;
+		this.Context.fillStyle = colour;
+		this.Context.strokeStyle = colour;
 
-      //Restore original settings
-      this.Context.font = this.Specs.FONT;
-      this.Context.fillStyle = this.Specs.COLOUR;
-      if (this.cntxt) {
-	 this.Context = this.cntxt;
-	 this.cntxt = null;
-      }
-   },
-   WriteArray(aStrng, x, y, specs, cnvs) {
-      //TODO: spacing is the only issue, delineated in specs with a default behaviour
-   }
+		if (specs) {
+			this.Context.font = specs.FONT || this.Specs.FONT;
+			if (specs.STYLE) {
+				if (specs.STYLE & FONT.STYLE.BOLD)
+					this.Context.font = "bold " + this.Context.font;
+				if (specs.STYLE & FONT.STYLE.ITALICS)
+					this.Context.font = "italic " + this.Context.font;
+				if (specs.STYLE & FONT.STYLE.UNDERLINED) {
+					tLength = this.Context.measureText(strng).width;
+					this.Context.beginPath();
+					this.Context.lineWidth = 2;
+					this.Context.moveTo(x, y+4);
+					this.Context.lineTo(Math.round(x+tLength), y+4);
+					this.Context.stroke();
+					this.Context.closePath();
+				}
+			}
+		} else
+			this.Context.font = this.Specs.FONT;
+		this.Context.fillText(strng, x, y);
+
+		//Restore original settings
+		this.Context.font = this.Specs.FONT;
+		this.Context.fillStyle = this.Colour || this.Specs.COLOUR;
+		this.Context.strokeStyle = this.Colour || this.Specs.COLOUR;
+		if (this.cntxt) {
+			this.Context = this.cntxt;
+			this.cntxt = null;
+		}
+	},
+	WriteArray(aStrng, x, y, specs, cnvs) {
+		//TODO: spacing is the only issue, delineated in specs with a default behaviour
+	}
 };
