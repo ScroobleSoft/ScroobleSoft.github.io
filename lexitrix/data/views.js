@@ -168,12 +168,16 @@ var CROSSLE = { COLOUR: "yellow", TYPE: { DAILY: 0, NUMBERED: 1, SYMMETRICAL: 2,
 												 ASYMMETRIC: { L: 97, T: 297, W: 166, H: 46, LW: 3, SX: 685, SY: 128, STYLE: BUTTON.STYLE.RAISED },
 												 DIFFICULTY: { COUNT: 6, L: 100, T: 60, W: 160, H: 40, O: 2, LW: 3,
 																	SX: 847, SY: 2, STYLE: BUTTON.STYLE.RAISED, GAP: 80 },
-												 OK: { L: 140, T: 420, W: 80, H: 30, LW: 3, SX: 685, SY: 192, STYLE: BUTTON.STYLE.RAISED }
+												 OK: { L: 140, T: 455, W: 80, H: 30, LW: 3, SX: 685, SY: 192, STYLE: BUTTON.STYLE.RAISED }
 											  },
+									ICONS: { STASH: { L: 20, T: 35, W: 315, H: 48, LW: 3, ICONS: 10, ICON: { W: 57, H: 18 }, R: 2, C: 5, PRESS: 0,
+															IMAGE: { L: 2, T: 315, W: 293, H: 38, O: 2, R: 2, C: 5, PATCH: { W: 57, H: 18 } }
+														 }
+											 },
 									IMAGE: { CELL: { L: 604, T: 252, W: 36, H: 36 },
 												SELECTION: { L: 642, T: 252, W: 106, H: 34, O: 2, C: 3, R: 1, PATCH: { W: 34, H: 34 } }
 											 },
-									NUMBERS: { X: 4, Y: 60, C: 10, R: 10, W: 36, H: 36, OX: 15, OY: 13, O: [ 0,4,7,11 ] }
+									NUMBERS: { X: 4, Y: 95, C: 10, R: 10, W: 36, H: 36, OX: 15, OY: 13, O: [ 0,4,7,11 ] }
 								 },
 					 INSTRUCTIONS: { L: 20, T: 20, W: 320, H: 520, COLOUR: PAINT.SKY,
 										  IMAGE: { EMPTY: { L: 1, T: 1, W: 88, H: 88, X: 242, Y: 66 },
