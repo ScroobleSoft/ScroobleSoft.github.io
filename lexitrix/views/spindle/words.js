@@ -1,4 +1,4 @@
-
+//+1
 var SpindleWords = [ "knickknacks", "nonchalance", "fabrication", "acclamation", "cohabitates", "singularity", "concurrence", "calligraphy",
 							"termination", "persnickety", "reconnoitre", "demarcation", "beleaguered", "chronometer", "magnificent", "beneficiary",
 							"abomination", "reminiscent", "caffeinated", "anticipated", "incinerated", "edification", "magnanimous", "combustible",
@@ -8,7 +8,7 @@ var SpindleWords = [ "knickknacks", "nonchalance", "fabrication", "acclamation",
 							"mountaineer", "acrimonious", "gastronomic", "reprimanded", "narcoleptic", "ideological", "dilapidated", "cacophonous",
 							"machination", "callousness", "spokesmodel", "paperweight", "entertainer", "immigration", "landscaping", "needlepoint",
 							"beleaguered", "information", "appropriate", "traditional", "responsible", "substantial", "opportunity", "eradication",
-							"comfortable", "immediately", "complicated", "cornerstone", "highlighter", "cataclysmic", "rainforests",	"fascination",		//80
+							"comfortable", "immediately", "complicated", "cornerstone", "highlighter", "cataclysmic", "rainforests", "fascination",		//80
 							"independent", "abracadabra", "rapscallion", "battlefield", "declaration", "sacramental", "egotistical", "serendipity",
 							"generations", "candlelight", "electricity", "inscription", "hallucinate", "geopolitics", "electronics", "safecracker",
 							"candlestick", "insouciance", "mathematics", "handwriting", "geometrical", "scrumptious", "legislation", "deferential",
@@ -21,63 +21,69 @@ var SpindleWords = [ "knickknacks", "nonchalance", "fabrication", "acclamation",
 							"information", "draughtsman", "breadwinner", "aerodynamic", "masculinity", "emancipated", "lightweight", "bibliophile",		//160
 							"speedometer", "outmaneuver", "whereabouts", "godforsaken", "tonsillitis", "metaphysics", "trustworthy", "disembodied",
 							"stipulation", "considerate", "inheritance", "planetarium", "impeachment", "humiliation", "scaffolding", "dreadnought",
-							"superiority", "intentional", "sleepwalked", "demonstrate", "transparent", "dislocation", "preparation", "apocalyptic"
+							"superiority", "intentional", "sleepwalked", "demonstrate", "transparent", "dislocation", "preparation", "apocalyptic",
+							"collectable", "nightingale", "industrious", "supermarket", "compartment", "indignation", "regurgitate", "affectation",
+							"persistence", "commodities", "perceptible", "assimilated", "impersonate", "speculation", "atmospheric", "fundamental",
+							"appointment", "measurement", "abstraction", "demographic", "pterodactyl", "optometrist", "floodlights", "segregation",
+							"confederacy", "trendsetter", "commiserate", "aristocracy", "lubrication", "transponder", "gingerbread", "replacement",
+							"contraption", "association", "moisturizer", "brainwashed", "presumption", "constituent", "consecrated", "trailblazer",
+							"unbreakable", "incremental", "thermometer", "cartography", "incongruous", "submersible", "enunciation", "oscillating",
+							"disembarked", "unconscious", "dumbfounded", "resourceful", "catchphrase", "ghostwriter", "retaliation", "disseminate",		//240
+							"untouchable", "documentary", "collaborate", "indigestion", "insecticide", "incarnation", "dermatology", "microscopic",
+							"photography", "archipelago", "fragmentary", "subordinate", "butterflies", "restriction", "interpreter", "illusionist",
+							"infomercial", "thickheaded", "diagnostics", "spontaneous", "adolescence", "furthermore", "predisposed", "hydrocarbon",
+							"correlation", "freemasonry", "grasshopper", "sweepstakes", "contributor", "orthoscopic", "endorsement", "prohibition",
+							"conspicuous", "resplendent", "refurbished", "antibiotics", "integration", "displeasure", "predicament", "belligerent",
+							"megalomania", "remonstrate", "destruction", "mathematics", "bulletproof", "hibernation", "unblemished", "enchantment",
+							"theoretical", "compunction", "libertarian", "scattershot", "crestfallen", "progression", "opportunity", "complacency",
+							"grandmother", "supposition", "embellished", "transmitter", "denunciated", "perforation", "discrepancy", "wintergreen",
+							"torchbearer", "composition", "impertinent", "renumerated", "leapfrogged", "flirtatious", "nourishment", "citizenship",
+							"repetitious", "charismatic", "intractable", "omniscience", "cosmetology", "prepackaged", "comportment", "persecution",		//320
+							"sensational", "cheerleader", "implausible", "afficionado", "indifferent", "uninhibited", "remorseless", "authorities",
+							"mollycoddle", "utilitarian", "corporation", "marginalize", "sympathetic", "computation", "loudspeaker", "suspenseful",
+							"condolences", "personalize", "recuperated", "firefighter", "respectable", "collectible", "mesmerising", "unvarnished",
+							"snakebitten", "placeholder", "cliffhanger", "insinuation", "woodchipper", "ditchdigger", "reenactment", "stakeholder",
+							"consolation", "meritocracy", "shortcoming", "osteopathic", "arbitration", "instruction", "resignation", "unfortunate",
+							"smithereens", "luminescent", "illuminated", "infatuation", "contaminant", "concordance", "marshmallow", "strategized",
+							"cockroaches", "insincerity", "searchlight", "chambermaid", "incinerator", "reincarnate", "tamperproof", "condominium",
+							"unsolicited", "directorate", "merchandise", "thoughtless", "clandestine", "bombardment", "distraction", "transporter",
+							"infantryman", "titillating", "coefficient", "inspiration", "storyteller", "disgraceful", "premonition", "technophile",
+							"stimulating", "enhancement", "spendthrift", "distasteful", "orchestrate", "distinguish", "personality", "tattletales",		//400
+							"altercation", "percentages", "unspecified", "cybernetics", "microcredit", "thunderbolt", "discography", "malfeasance",
+							"stagestruck", "refrigerate", "celebration", "institution", "peacekeeper", "meaningless", "toastmaster", "copyrighted",
+							"incarcerate", "rudimentary", "prehistoric", "electrician", "crowdfunded", "outdoorsman", "dereliction", "influential",
+							"wherewithal", "centrifugal", "impractical", "theological", "impregnable", "sublimation", "application", "permutation",
+							"archaeology", "meteorology", "perfunctory", "disobedient", "poltergeist", "bureaucracy", "proliferate", "commandment",
+							"scholarship", "disoriented", "minesweeper", "troublesome", "colonialism", "matriculate", "unflappable", "coincidence",
+							"subsistence", "incontinent", "wheelbarrow", "consistency", "intermingle", "uninitiated", "indomitable", "touchscreen",
+							"pollination", "wrongheaded", "liposuction", "syndication", "caterpillar", "flamboyance", "pretentious", "credentials",
+							"transfusion", "cauliflower", "iridescence", "sustainable", "conurbation", "melancholic", "ambiguities", "rectangular",
+							"uncertainty", "comeuppance", "mantelpiece", "chairperson", "intolerable", "nonsensical", "sentimental", "brotherhood",		//480
+							"arrangement", "misinformed", "inopportune", "motorsports", "unrepentant", "crematorium", "mockingbird", "punctuation",
+							"marketplace", "malpractice", "haemoglobin", "inefficient", "mountaintop", "foreclosure", "formalities", "infatuation",
+							"trepidation", "incorporate", "chamberlain", "sugarcoated", "contemplate", "predestined", "contingency", "millionaire",
+							"blockbuster", "proceedings", "telecommute", "infestation", "triangulate", "dysfunction", "physicality", "preferences",
+							"matrimonial", "inferiority", "promulgated", "distinction", "reclamation", "consignment", "consumption", "millisecond",
+							"innumerable", "certificate", "combination", "personified", "unbeknownst", "enlightened", "procurement", "instability",
+							"compilation", "reciprocate", "communicate", "masterpiece", "triceratops", "detrimental", "psychedelic", "forthcoming",
+							"unrealistic", "bittersweet", "incompetent", "proficiency", "disciplined", "certifiable", "seismograph", "established",
+							"reliability", "indubitably", "peripatetic", "clothesline", "susceptible", "counterfeit", "proprietary", "problematic",
+							"cheesesteak", "prestigious", "discredited", "pressurized", "grandparent", "corroborate", "pessimistic", "malfunction",		//560
+							"circulation", "photocopier", "spreadsheet", "catastrophe", "intercessor", "bellybutton", "incredulous", "remembrance",
+							"degradation", "proletariat", "respiration", "prosecution", "coordinates", "installment", "stigmatized", "inclination",
+							"retribution", "disgruntled", "reciprocity", "rattlesnake", "methodology", "switchblade", "mustachioed", "subtraction",
+							"tempestuous", "romanticise", "ineffectual", "countryside", "transaction", "sponsorship", "resemblance", "commonplace",
+							"disregarded", "monstrosity", "unification", "coffeemaker", "forbearance", "terminology", "proletarian", "hitchhiking",
+							"sociologist", "munificence", "cooperation", "pescatarian", "unwillingly", "instigation", "tribulation", "pontificate",
+							"protagonist", "acupuncture", "defenceless", "refreshment", "criminalist", "disposition", "premeditate", "temperature",
+							"steamrolled", "unmitigated", "granularity", "unpalatable", "disinfected", "transformer", "sensibility", "scuttlebutt",
+							"geomagnetic", "shuttlecock", "treacherous", "moneylender", "stenography", "predominant", "misconstrue", "aphrodisiac",
+							"unimportant", "fashionable", "powerbroker", "ameliorated", "restitution", "predecessor", "policewoman", "recruitment",		//640
+							"firecracker", "musclebound", "grandfather", "nonetheless", "pericardium", "engineering", "accommodate", "desperation",
+							"preliminary", "temperament", "unfulfilled", "significant", "dehydration", "fingerprint", "partnership", "peculiarity",
+							"competition", "androgynous", "snowboarder", "performance", "intimidated", "outstanding", "putrescence", "complacency",
+							"substandard", "unrelenting", "negotiation", "paratrooper", "anachronism", "duplication", "contentious", "destitution",
+							"description", "irrefutable", "predictable", "annihilated", "empowerment", "outnumbered", "subtropical", "coordinated",
+							"housebroken", "destination", "grandmaster", "deteriorate", "honeysuckle", "lightheaded", "destabilize", "accumulated",
+							"accountable"
 ];
-
-// "tamperproof", "tattletales", "technophile", "abstraction", "belligerent", "bellybutton", "malfunction", "opportunity", "perfunctory"
-// "defenceless", "electrician", "fashionable", "illuminated", "malpractice", "omniscience", "orchestrate", "scattershot"
-// "fingerprint", "firecracker", "geomagnetic", "illusionist", "leapfrogged", "negotiation", "competition", "scholarship", "telecommute"
-// "nightingale", "indubitably", "scuttlebutt", "optometrist", "complacency", "paratrooper", "temperament", "temperature", "tempestuous"
-// "partnership", "rattlesnake", "accommodate", "accountable", "accumulated", "acupuncture", "adolescence", "ambiguities"
-// "affectation", "afficionado", "altercation", "ameliorated", "anachronism", "androgynous", "annihilated", "antibiotics", "aphrodisiac"
-// "application", "appointment", "arbitration", "archaeology", "archipelago", "aristocracy", "arrangement", "assimilated", "association", "atmospheric"
-// "authorities", "bittersweet", "blockbuster", "bombardment", "brainwashed", "brotherhood", "bulletproof"
-// "bureaucracy", "butterflies", "cartography", "catastrophe", "catchphrase", "caterpillar", "cauliflower", "celebration", "centrifugal"
-// "certifiable", "certificate", "chairperson", "chamberlain", "chambermaid", "charismatic", "cheerleader", "cheesesteak", "circulation"
-// "citizenship", "clandestine", "cliffhanger", "clothesline", "cockroaches", "coefficient", "coffeemaker", "coincidence", "collaborate", "collectable"
-// "colonialism", "combination", "comeuppance", "commandment", "commiserate", "commodities", "commonplace", "communicate", "compartment", "compilation"
-// "complacency", "comportment", "composition", "compunction", "computation", "concordance", "condolences", "condominium" 
-// "confederacy", "consecrated", "consignment", "consistency", "consolation", "conspicuous", "constituent", "consumption"
-// "contaminant", "contemplate", "contentious", "contingency", "contraption", "contributor", "conurbation", "cooperation", "coordinated"
-// "coordinates", "copyrighted", "corporation", "correlation", "corroborate", "cosmetology", "counterfeit", "countryside", "credentials", "crematorium"
-// "crestfallen", "criminalist", "crowdfunded", "cybernetics", "degradation", "dehydration", "demographic", "denunciated",
-// "dereliction", "dermatology", "description", "desperation", "destabilize", "destination", "destitution", "destruction", "deteriorate",
-// "detrimental", "diagnostics", "directorate", "disciplined", "discography", "discredited", "discrepancy", "disembarked", "dysfunction", 
-// "disgraceful", "disgruntled", "disinfected", "disobedient", "disoriented", "displeasure", "disposition", "disregarded", "disseminate", 
-// "distasteful", "distinction", "distinguish", "distraction", "ditchdigger", "documentary",
-// "dumbfounded", "duplication", "embellished", "empowerment", "enchantment", "endorsement", "engineering", "enhancement", "enlightened", "enunciation", 
-// "firefighter", "flamboyance", "flirtatious", "floodlights", "forbearance", "foreclosure", "formalities", "forthcoming", "fragmentary",
-// "freemasonry", "fundamental", "furthermore", "established", "ghostwriter", "gingerbread", "grandparent",
-// "grandfather", "grandmaster", "grandmother", "granularity", "grasshopper", "haemoglobin", "hibernation", "hitchhiking", "honeysuckle", "housebroken",
-// "hydrocarbon", "impersonate", "impertinent", "implausible", "impractical", "impregnable", "incarcerate",
-// "incarnation", "incinerator", "inclination", "incompetent", "incongruous", "incontinent", "incorporate", "incredulous", "incremental", "indifferent",
-// "indigestion", "indignation", "indomitable", "industrious", "ineffectual", "inefficient", "infantryman", "infatuation", "inferiority", "infestation",
-// "influential", "infomercial", "innumerable", "inopportune", "insecticide", "insincerity",
-// "insinuation", "inspiration", "instability", "installment", "instigation", "institution", "instruction", "integration", "intercessor",
-// "intermingle", "interpreter", "intimidated", "intolerable", "intractable", "iridescence", "irrefutable", "libertarian", "lightheaded",
-// "liposuction", "loudspeaker", "lubrication", "luminescent", "mantelpiece", "marginalize", "marketplace", "marshmallow",
-// "masterpiece", "mathematics", "matriculate", "matrimonial", "meaningless", "measurement", "megalomania", "melancholic", "merchandise", "meritocracy",
-// "mesmerising", "meteorology", "methodology", "microcredit", "microscopic", "millionaire", "millisecond", "minesweeper", 
-// "misconstrue", "misinformed", "mockingbird", "moisturizer", "mollycoddle", "moneylender", "monstrosity", "motorsports", "mountaintop", "munificence",
-// "musclebound", "mustachioed", "nonetheless", "nonsensical", "nourishment", "orthoscopic", "oscillating", "osteopathic", "outdoorsman",
-// "outnumbered", "outstanding", "peacekeeper", "peculiarity", "percentages", "perceptible", "perforation", "performance", "pericardium", "peripatetic",
-// "permutation", "persecution", "persistence", "personality", "personalize", "personified", "pescatarian", "pessimistic", "photocopier", "photography",
-// "physicality", "placeholder", "policewoman", "pollination", "poltergeist", "pontificate", "powerbroker", "predecessor", "predestined",
-// "predicament", "predictable", "predisposed", "predominant", "preferences", "prehistoric", "preliminary", "premeditate", "premonition", "prepackaged",
-// "pressurized", "prestigious", "presumption", "pretentious", "problematic", "proceedings", "procurement", "proficiency", "progression",
-// "prohibition", "proletarian", "proletariat", "proliferate", "promulgated", "proprietary", "prosecution", "protagonist", "psychedelic", "pterodactyl",
-// "punctuation", "putrescence", "reciprocate", "reciprocity", "reclamation", "recruitment", "rectangular", "recuperated", "reenactment", "refreshment",
-// "refrigerate", "refurbished", "regurgitate", "reincarnate", "reliability", "remembrance", "remonstrate", "remorseless",
-// "renumerated", "repetitious", "replacement", "resemblance", "resignation", "resourceful", "respectable", "respiration", "resplendent", "restitution",
-// "restriction", "retaliation", "retribution", "romanticise", "rudimentary", "searchlight", "segregation", "seismograph", "sensational", "sensibility",
-// "sentimental", "shortcoming", "shuttlecock", "significant", "smithereens", "snakebitten", "snowboarder", "sociologist", "speculation",
-// "spendthrift", "sponsorship", "spontaneous", "spreadsheet", "stagestruck", "stakeholder", "steamrolled", "stenography", "stigmatized",
-// "stimulating", "storyteller", "strategized", "sublimation", "submersible", "subordinate",
-// "subsistence", "substandard", "subtraction", "subtropical", "sugarcoated", "supermarket", "supposition", "susceptible",
-// "suspenseful", "sustainable", "sweepstakes", "switchblade", "sympathetic", "syndication", "terminology", "theological", "theoretical", "thermometer",
-// "thickheaded", "thoughtless", "thunderbolt", "titillating", "toastmaster", "torchbearer", "touchscreen",
-// "trailblazer", "transaction", "transformer", "transfusion", "transmitter", "transponder", "transporter", "treacherous", "trendsetter",
-// "trepidation", "triangulate", "tribulation", "triceratops", "troublesome", "unbeknownst", "unblemished", "unbreakable", "uncertainty",
-// "unconscious", "unflappable", "unfortunate", "unfulfilled", "unification", "unimportant", "uninhibited", "uninitiated", "unmitigated", "unpalatable",
-// "unrealistic", "unrelenting", "unrepentant", "unsolicited", "unspecified", "untouchable", "unvarnished", "unwillingly", "utilitarian", "wheelbarrow",
-// "wherewithal", "wintergreen", "woodchipper", "wrongheaded"
