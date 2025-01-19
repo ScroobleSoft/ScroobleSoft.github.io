@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+    <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<canvas id="PrimeCanvas" width="600" height="600"></canvas>
+	<div id="CanvasDiv" style="position:absolute; top:8px; left:612px; z-index:2">
+	    <canvas id="ZoomCanvas" width="300" height="240"></canvas>
+	</div>
+	<div id="ConsoleDiv" style="position:absolute; top:252px; left:612px; z-index:2">
+	    <canvas id="ConsoleCanvas" width="300" height="320"></canvas>
+	</div>
+    </head>
+
+    <button type="button" id="StartButton" onclick="EventHandler(0)">Start</button>
+    <button type="button" id="LoadButton"  onclick="EventHandler(1)">Load</button>
+    <button type="button" id="SaveButton"  onclick="EventHandler(2)">Save</button>
+    <button type="button" id="TestButton"  onclick="EventHandler(3)">Test</button>
+
+    <textarea id="LeagueTextArea" rows="10" cols="50">
+    League Info
+    </textarea>
+
+    <textarea id="RosterTextArea" rows="10" cols="50">
+    Rosters and Practice Squads
+    </textarea>
+
+    <textarea id="FreeAgentTextArea" rows="10" cols="50">
+    Free Agents
+    </textarea>
+
+    <body onload="RunProFootballGame()">
+
+	<!-- Data -->
+	<script src="..\library\GenieData.js"></script>
+	<script src="..\library\data\Consts.js"></script>
+	<script src="..\library\data\Colours.js"></script>
+	<script src="..\library\data\Controls.js"></script>
+	<script src="..\library\data\Geo.js"></script>
+	<script src="..\library\data\Agents.js"></script>
+	<script src="..\library\data\IO.js"></script>
+	<script src="..\library\data\Images.js"></script>
+	<script src="..\library\data\Sprites.js"></script>
+
+	<!-- Types -->
+	<script src="..\library\GenieTypes.js"></script>
+	<script src="..\library\GenieArray.js"></script>
+	<script src="..\library\GenieList.js"></script>
+	<script src="..\library\AgentArray.js"></script>
+
+	<!-- Utilities -->
+	<script src="..\modules\GenieUtils.js"></script>
+	<script src="..\library\GenieUtils.js"></script>
+	<script src="..\library\utils\BitUtils.js"></script>
+	<script src="..\library\utils\ArrayUtils.js"></script>
+	<script src="..\library\utils\GeoUtils.js"></script>
+	<script src="..\library\utils\SpaceUtils.js"></script>
+	<script src="..\library\utils\StringUtils.js"></script>
+
+	<!-- Controls -->
+	<script src="..\library\GenieControl.js"></script>
+	<script src="..\library\controls\GenieButton.js"></script>
+	<script src="..\library\controls\TextButton.js"></script>
+	<script src="..\library\controls\ImageButton.js"></script>
+	<script src="..\library\controls\IconPanel.js"></script>
+	<script src="..\library\controls\GenieRadio.js"></script>
+	<script src="..\library\controls\GenieTouchBar.js"></script>
+	<script src="..\library\controls\GenieTextArea.js"></script>
+	<script src="..\library\controls\GenieCheckBox.js"></script>
+	<script src="..\library\controls\GenieDropList.js"></script>
+	<script src="..\library\controls\GeniePagination.js"></script>
+	<script src="..\library\controls\ScrollBar.js"></script>
+	<script src="..\library\controls\GenieTabs.js"></script>
+
+	<!-- Tools -->
+	<script src="..\library\GenieRandom.js"></script>
+	<script src="..\library\GenieBuffer.js"></script>
+	<script src="..\library\ScreenManager.js"></script>
+	<script src="..\library\GenieCalcPad.js"></script>
+	<script src="..\library\GenieText.js"></script>
+
+	<!-- Graphics -->
+	<script src="..\library\GenieImage.js"></script>
+	<script src="..\library\ImageMap.js"></script>
+	<script src="..\library\GenieGraphics.js"></script>
+	<script src="..\library\GenieShape.js"></script>
+	<script src="..\library\shapes\GenieLine.js"></script>
+	<script src="..\library\shapes\GenieRectangle.js"></script>
+	<script src="..\library\shapes\GenieEllipse.js"></script>
+
+	<!-- Sprites -->
+	<script src="..\library\GenieSprite.js"></script>
+	<script src="..\library\sprites\AnimatedSprite.js"></script>
+	<script src="..\library\sprites\GeometricSprite.js"></script>
+	<script src="..\library\sprites\CompositeSprite.js"></script>
+	<script src="..\library\sprites\AnimatedCompositeSprite.js"></script>
+
+	<!-- Agents -->
+	<script src="..\library\MobileObject.js"></script>
+	<script src="..\library\GenieAgent.js"></script>
+	<script src="..\library\agent\Draw.js"></script>
+	<script src="..\library\agent\Update.js"></script>
+	<script src="..\library\agent\Animation.js"></script>
+	<script src="..\library\agent\Space.js"></script>
+	<script src="..\library\agent\Collision.js"></script>
+
+	<!-- Interface -->
+	<script src="..\library\GenieMouse.js"></script>
+	<script src="..\library\TouchScreen.js"></script>
+	<script src="..\library\GenieKeyboard.js"></script>
+	<script src="..\library\GenieGamepad.js"></script>
+
+	<!-- Framework -->
+	<script src="..\library\ImageManager.js"></script>
+	<script src="..\library\GenieCanvas.js"></script>
+	<script src="..\library\GenieScape.js"></script>
+	<script src="..\library\GenieView.js"></script>
+	<script src="..\library\views\SubView.js"></script>
+	<script src="..\library\views\NestedView.js"></script>
+	<script src="..\library\views\Dialog.js"></script>
+	<script src="..\library\views\OptionsDialog.js"></script>
+	<script src="..\library\GenieGame.js"></script>
+
+	<!-- data -->
+	<script src="data.js"></script>
+	<script src="data\formation.js"></script>
+	<script src="data\roster.js"></script>
+	<script src="data\names.js"></script>
+	<script src="data\game.js"></script>
+	<script src="data\controls.js"></script>
+	<script src="data\views.js"></script>
+	<script src="data\seeds.js"></script>
+
+	<!-- tools -->
+	<script src="utils.js"></script>
+
+	<!-- gridders -->
+	<script src="gridder.js"></script>
+	<script src="gridder\QB.js"></script>
+	<script src="gridder\RB.js"></script>
+	<script src="gridder\WR.js"></script>
+	<script src="gridder\TE.js"></script>
+	<script src="gridder\OL.js"></script>
+	<script src="gridder\DE.js"></script>
+	<script src="gridder\DT.js"></script>
+	<script src="gridder\LB.js"></script>
+	<script src="gridder\S.js"></script>
+	<script src="gridder\CB.js"></script>
+	<script src="gridder\training.js"></script>
+	<script src="gridder\value.js"></script>
+
+	<script src="gamegridder.js"></script>
+
+	<script src="play.js"></script>
+	<script src="plays\pass.js"></script>
+	<script src="plays\run.js"></script>
+
+	<!-- sideview -->
+	<script src="sideview\field.js"></script>
+	<script src="sideview\gridder.js"></script>
+	<script src="sideview\QB.js"></script>
+	<script src="sideview\WR.js"></script>
+	<script src="sideview\OL.js"></script>
+	<script src="sideview\DL.js"></script>
+	<script src="sideview\CB.js"></script>
+
+	<script src="match\scoreboard.js"></script>
+	<script src="sideview\match.js"></script>
+
+	<!-- league -->
+	<script src="league.js"></script>
+	<script src="draft.js"></script>
+
+	<!-- team -->
+	<script src="team.js"></script>
+	<script src="roster.js"></script>
+	<script src="roster\generate.js"></script>
+	<script src="roster\ratings.js"></script>
+	<script src="practicesquad.js"></script>
+	<script src="freeagency.js"></script>
+
+	<script src="components.js"></script>
+	<script src="components\agents.js"></script>
+
+	<!-- views -->
+
+	<script src="views\league.js"></script>
+	<script src="views\league\info.js"></script>
+	<script src="views\league\console.js"></script>
+
+	<script src="views\team.js"></script>
+	<script src="views\team\info.js"></script>
+	<script src="views\team\console.js"></script>
+	<script src="views\team\update.js"></script>
+
+	<script src="views\table.js"></script>
+
+	<script src="views\draftpreview.js"></script>
+	<script src="views\draft.js"></script>
+	<script src="views\draft\info.js"></script>
+	<script src="views\draft\console.js"></script>
+	<script src="views\draft\draw.js"></script>
+	<script src="views\draft\update.js"></script>
+	<script src="views\draft\set.js"></script>
+	<script src="views\draft\select.js"></script>
+	<script src="views\draft\tradeup.js"></script>
+	<script src="views\draft\tradedown.js"></script>
+	<script src="views\draft\projects.js"></script>
+	<script src="views\draft\camp.js"></script>
+
+	<script src="views\roster.js"></script>
+	<script src="views\roster\retirement.js"></script>
+	<script src="views\roster\trade.js"></script>
+
+	<script src="views\practicesquad.js"></script>
+	<script src="views\gridder.js"></script>
+	<script src="views\pending.js"></script>
+	<script src="views\freeagency.js"></script>
+
+	<script src="demo.js"></script>
+
+	<script src="tutorial.js"></script>
+
+	<script src="minigames.js"></script>
+
+	<script src="intro.js"></script>
+
+	<script src="testing.js"></script>
+	<script src="testing\name.js"></script>
+	<script src="testing\progress.js"></script>
+	<script src="testing\sprites.js"></script>
+	<script src="testing\curve.js"></script>
+
+	<script src="gGridiron.js"></script>
+
+	<script>
+
+	//Main game object
+	var Game;
+
+	  function RunProFootballGame() {
+
+	    //Create library components
+	    ZFLScape = new GenieScape();
+	    ZFLCalcPad = new GenieCalcPad();
+	    ZFLGraphics = new GenieGraphics();
+	    ZFLText = new GenieText();
+	    ZFLRandomizer = new GenieRandomizer();
+
+	    //Set library components
+	    ZFLScape.Set("PrimeCanvas", "ZoomCanvas", "ConsoleCanvas", null, null, ZFLControls);
+	    ZFLCalcPad.Set();
+	    ZFLGraphics.Set(ZFLScape.Screen, ZFLScape.InfoBox, ZFLScape.ControlPanel);
+	    ZFLText.Set(ZFLScape.Screen, null, ZFLScape.InfoBox, ZFLScape.ControlPanel);
+	    ZFLScape.PrimeScape.Context.font = FONT.DEFAULT;
+	    ZFLScape.AddController(GAMePAD.ARROWS);
+	    Controller = ZFLScape.ControllerA;
+	    ZFLRandomizer.Set();
+
+	    //Load and assign graphic images
+	    ImageManager.Set(ZFLImages);
+	    ImageManager.LoadImages();
+	    ImageManager.Check();				//Check if images have loaded
+
+	    //Begin as soon as images have loaded
+	    Game = new GridironGame();
+	    Game.Set(ZFLScape, ZFLGraphics, ZFLCalcPad, ZFLText, ZFLRandomizer, Controller);
+	    Game.CheckImagesLoaded();
+	}
+
+	function EventHandler(EventNumber) {
+
+	    switch (EventNumber) {
+		case EVENT.STARtBUTTOnCLICKED:
+		    //Game.ShowButtons();
+		    //Game.PollButtons();
+		    break;
+		case EVENT.LOAdBUTTOnCLICKED:
+		    Game.Load = true;
+		    break;
+		case EVENT.SAVeBUTTOnCLICKED:
+		    League.Dump();
+		    break;
+		case EVENT.TEStBUTTOnCLICKED:
+		    cancelAnimationFrame(Intro.AnimationFrameHandle);
+		    Intro.HideButtons();
+		    ZFLScape.ZoomScape.Context.fillStyle = "rgb(047,159,255)";
+		    ZFLScape.ZoomScape.Context.fillRect(0, 0, INFoBOX.WIDTH, INFoBOX.HEIGHT);
+		    Testing.Start();
+		    break;
+	    }
+	};
+
+	</script>
+    </body>
+</html>
