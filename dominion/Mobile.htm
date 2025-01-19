@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+
+<a href="https://www.hitc.com/topic/hitc-sevens/?hl=en">
+    <img src="mobile\banner.png" alt="HITC Sevens" width="400" height="64" >
+</a>
+
+    <head>
+	<div id="PrimeDiv" style="position:absolute; top:40px; left:8px; z-index:1">
+	    <canvas id="PrimeCanvas" width="400" height="400"></canvas>
+	</div>
+	<div id="InfoDiv" style="position:absolute; top:444px; left:8px; z-index:2">
+	    <canvas id="InfoCanvas" width="240" height="240"></canvas>
+	</div>
+	<div id="ConsoleDiv" style="position:absolute; top:444px; left:252px; z-index:3">
+	    <canvas id="ConsoleCanvas" width="156" height="240"></canvas>
+	</div>
+    </head>
+
+    <body style="background-color:grey;">
+    <body onload="RunMobileDominion()">
+
+	<!-- Data -->
+	<script src="..\library\GenieData.js"></script>
+	<script src="..\library\data\Consts.js"></script>
+	<script src="..\library\data\Colours.js"></script>
+	<script src="..\library\data\Geo.js"></script>
+	<script src="..\library\data\IO.js"></script>
+	<script src="..\library\data\Controls.js"></script>
+	<script src="..\library\data\Images.js"></script>
+	<script src="..\library\data\Sprites.js"></script>
+	<script src="..\library\data\Agents.js"></script>
+	<script src="..\library\data\Weapons.js"></script>
+
+	<!-- Types -->
+	<script src="..\library\GenieTypes.js"></script>
+	<script src="..\library\GenieColour.js"></script>
+	<script src="..\library\GenieArray.js"></script>
+	<script src="..\library\GenieList.js"></script>
+	<script src="..\library\AgentArray.js"></script>
+
+	<!-- Utilities -->
+	<script src="..\library\GenieUtils.js"></script>
+	<script src="..\library\utils\ArrayUtils.js"></script>
+	<script src="..\library\utils\BitUtils.js"></script>
+	<script src="..\library\utils\GeoUtils.js"></script>
+	<script src="..\library\utils\SpaceUtils.js"></script>
+	<script src="..\library\utils\StringUtils.js"></script>
+
+	<!-- Controls -->
+	<script src="..\library\GenieControl.js"></script>
+	<script src="..\library\controls\GenieButton.js"></script>
+	<script src="..\library\controls\TextButton.js"></script>
+	<script src="..\library\controls\ImageButton.js"></script>
+	<script src="..\library\controls\PushButton.js"></script>
+	<script src="..\library\controls\ButtonPanel.js"></script>
+	<script src="..\library\controls\GenieIcon.js"></script>
+	<script src="..\library\controls\IconPanel.js"></script>
+	<script src="..\library\controls\GenieCheckBox.js"></script>
+	<script src="..\library\controls\GenieTouchBar.js"></script>
+	<script src="..\library\controls\GenieBarChart.js"></script>
+	<script src="..\library\controls\GeniePieChart.js"></script>
+	<script src="..\library\controls\GenieGauge.js"></script>
+	<script src="..\library\controls\LinearGauge.js"></script>
+	<script src="..\library\controls\TimeMeter.js"></script>
+	<script src="..\library\controls\ImagePanel.js"></script>
+
+	<!-- Objects -->
+	<script src="..\library\GenieBuffer.js"></script>
+	<script src="..\library\GenieStructure.js"></script>
+	<script src="..\library\MobileObject.js"></script>
+	<script src="..\library\DiplomacyTable.js"></script>
+	<script src="..\library\GenieSpectrum.js"></script>
+
+	<!-- Tools -->
+	<script src="..\library\GenieRandom.js"></script>
+	<script src="..\library\ScreenManager.js"></script>
+	<script src="..\library\GenieCalcPad.js"></script>
+	<script src="..\library\GenieText.js"></script>
+	<script src="..\library\GenieGraphics.js"></script>
+	<script src="..\library\GenieColourizer.js"></script>
+
+	<!-- Graphics -->
+	<script src="..\library\GenieImage.js"></script>
+	<script src="..\library\ImageMap.js"></script>
+	<script src="..\library\GenieShape.js"></script>
+	<script src="..\library\shapes\GenieLine.js"></script>
+	<script src="..\library\shapes\GenieRectangle.js"></script>
+	<script src="..\library\shapes\GenieOctagon.js"></script>
+	<script src="..\library\shapes\GeniePolygon.js"></script>
+
+	<!-- Sprites -->
+	<script src="..\library\GenieSprite.js"></script>
+	<script src="..\library\sprites\AnimatedSprite.js"></script>
+	<script src="..\library\sprites\GeometricSprite.js"></script>
+	<script src="..\library\sprites\CompositeSprite.js"></script>
+	<script src="..\library\sprites\AnimatedCompositeSprite.js"></script>
+
+	<!-- Agents -->
+	<script src="..\library\GenieAgent.js"></script>
+	<script src="..\library\agent\Draw.js"></script>
+	<script src="..\library\agent\Update.js"></script>
+	<script src="..\library\agent\Space.js"></script>
+	<script src="..\library\agent\Collision.js"></script>
+
+	<!-- FX -->
+	<script src="..\library\GenieSound.js"></script>
+	<script src="..\library\FXList.js"></script>
+	<script src="..\library\GenieFX.js"></script>
+	<script src="..\library\FX\GenieProjectile.js"></script>
+
+	<!-- Interface -->
+	<script src="..\library\GenieMouse.js"></script>
+	<script src="..\library\GenieKeyboard.js"></script>
+	<script src="..\library\GenieGamepad.js"></script>
+	<script src="..\library\TouchScreen.js"></script>
+	<script src="..\library\TrackPad.js"></script>
+
+	<!-- Framework -->
+	<script src="..\library\ImageManager.js"></script>
+	<script src="..\library\GenieCanvas.js"></script>
+	<script src="..\library\GenieScape.js"></script>
+	<script src="..\library\GenieView.js"></script>
+	<script src="..\library\views\SubView.js"></script>
+	<script src="..\library\views\NestedView.js"></script>
+	<script src="..\library\views\Dialog.js"></script>
+	<script src="..\library\views\OptionsDialog.js"></script>
+	<script src="..\library\GenieIntro.js"></script>
+	<script src="..\library\GenieGame.js"></script>
+
+	<!-- data -->
+	<script src="data.js"></script>
+	<script src="data\names.js"></script>
+	<script src="data\colours.js"></script>
+	<script src="data\nations.js"></script>
+	<script src="data\map.js"></script>
+	<script src="data\controls.js"></script>
+	<script src="data\imagemaps.js"></script>
+	<script src="data\images.js"></script>
+	<script src="data\sprites.js"></script>
+	<script src="data\agents.js"></script>
+	<script src="data\views.js"></script>
+	<script src="data\theatres.js"></script>
+
+	<script src="types.js"></script>
+
+	<!-- help -->
+	<script src="help\intro.js"></script>
+
+	<script src="utils.js"></script>
+
+	<!-- controls -->
+	<script src="controls\day.js"></script>
+	<script src="controls\fortnight.js"></script>
+	<script src="controls\map.js"></script>
+	<script src="controls\speed.js"></script>
+
+	<!-- units -->
+	<script src="unit.js"></script>
+	<script src="units\jet.js"></script>
+	<script src="units\jets\bomber.js"></script>
+	<script src="units\jets\fighter.js"></script>
+	<script src="units\jets\interdictor.js"></script>
+
+	<!-- fx -->
+	<script src="FX\ward.js"></script>
+	<script src="FX\AAM.js"></script>
+
+	<script src="draft.js"></script>
+
+	<!-- maps -->
+	<script src="map.js"></script>
+	<script src="maps\continent.js"></script>
+	<script src="atoll.js"></script>
+	<script src="maps\world.js"></script>
+	<script src="maps\province.js"></script>
+	<script src="maps\city.js"></script>
+	<script src="maps\street.js"></script>
+
+	<!-- nations -->
+	<script src="nation.js"></script>
+	<script src="nations\power.js"></script>
+	<script src="nations\allied.js"></script>
+	<script src="nations\citystate.js"></script>
+	<script src="nations\city.js"></script>
+
+	<!-- ministries -->
+	<script src="ministry.js"></script>
+	<script src="ministries\agriculture.js"></script>
+	<script src="ministries\finance.js"></script>
+	<script src="ministries\defence.js"></script>
+	<script src="ministries\energy.js"></script>
+	<script src="ministries\foreign.js"></script>
+	<script src="ministries\health.js"></script>
+	<script src="ministries\industry.js"></script>
+	<script src="ministries\information.js"></script>
+
+	<!-- alliances -->
+
+	<!-- military -->
+	<script src="military\army.js"></script>
+	<script src="military\airforce.js"></script>
+	<script src="military\navy.js"></script>
+	<script src="military\missilery.js"></script>
+
+	<!-- government -->
+	<script src="government.js"></script>
+	<script src="government\anarchy.js"></script>
+	<script src="government\democracy.js"></script>
+	<script src="government\dictatorship.js"></script>
+	<script src="government\federation.js"></script>
+	<script src="government\feudalism.js"></script>
+	<script src="government\marxism.js"></script>
+	<script src="government\monarchy.js"></script>
+	<script src="government\republic.js"></script>
+	<script src="government\theocracy.js"></script>
+	<script src="government\commonwealth.js"></script>
+
+	<!-- views -->
+	<script src="views\alliance.js"></script>
+	<script src="views\auction.js"></script>
+	<script src="views\expansion.js"></script>
+
+	<script src="views\conquest.js"></script>
+	<script src="views\conquest\info.js"></script>
+	<script src="views\conquest\console.js"></script>
+	<script src="views\conquest\air.js"></script>
+	<script src="views\conquest\land.js"></script>
+	<script src="views\conquest\sea.js"></script>
+	<script src="views\fleet.js"></script>
+
+	<script src="views\purchase.js"></script>
+	<script src="views\grant.js"></script>
+	<script src="views\investment.js"></script>
+	<script src="views\pact.js"></script>
+	<script src="views\treaty.js"></script>
+	<script src="views\intrigue.js"></script>
+
+	<script src="views\global.js"></script>
+	<script src="views\sub\gazetteer.js"></script>
+	<script src="views\sub\votes.js"></script>
+	<script src="views\sub\budget.js"></script>
+	<script src="views\sub\reserves.js"></script>
+	<script src="views\sub\relations.js"></script>
+	<script src="views\sub\cash.js"></script>
+	<script src="views\sub\arms.js"></script>
+	<script src="views\sub\events.js"></script>
+	<script src="views\sub\action.js"></script>
+
+	<script src="views\missions.js"></script>
+	<script src="views\office.js"></script>
+	<script src="views\selection.js"></script>
+
+	<!-- missions -->
+	<script src="missions\air.js"></script>
+	<script src="missions\blockade_old.js"></script>
+	<script src="missions\blockade.js"></script>
+	<script src="missions\champions.js"></script>
+	<script src="missions\interdiction.js"></script>
+	<script src="missions\sabotage.js"></script>
+
+	<!-- theatres -->
+	<script src="theatre.js"></script>
+	<script src="theatres\land.js"></script>
+	<script src="theatres\beachhead.js"></script>
+	<script src="theatres\sea.js"></script>
+
+	<!-- components -->
+	<script src="components.js"></script>
+	<script src="components\data.js"></script>
+	<script src="components\core.js"></script>
+	<script src="components\images.js"></script>
+	<script src="components\sprites.js"></script>
+	<script src="components\agents.js"></script>
+	<script src="components\FX.js"></script>
+
+	<script src="demo.js"></script>
+
+	<script src="tutorial.js"></script>
+
+	<script src="minigames.js"></script>
+	<script src="minigames\interdiction.js"></script>
+	<script src="minigames\alliances.js"></script>
+
+	<script src="intro.js"></script>
+
+	<script src="oNations.js"></script>
+
+	<script>
+
+	    //Main game object
+	    var Mobile;
+
+	    function RunMobileDominion() {
+
+		//Create library components
+		DominionScape = new GenieScape();
+		DominionCalcPad = new GenieCalcPad();
+		DominionGraphics = new GenieGraphics();
+		DominionText = new GenieText();
+		DominionRandomizer = new GenieRandomizer();
+
+		//Set library components
+		DominionScape.Set("PrimeCanvas", "InfoCanvas", "ConsoleCanvas");
+		DominionCalcPad.Set();
+		DominionGraphics.Set(DominionScape.Screen, DominionScape.InfoBox, DominionScape.ControlPanel);
+		DominionText.Set(DominionScape.Screen, null, DominionScape.InfoBox, DominionScape.ControlPanel);
+		DominionScape.AddController(GAMePAD.ARROWS);
+		Controller = DominionScape.ControllerA;
+		DominionRandomizer.Set();
+
+		//Load and assign graphic images
+		ImageManager.Set(DominionImages);
+		ImageManager.LoadImages();
+		ImageManager.Check();				//Check if images have loaded
+
+		//Begin as soon as images have loaded
+		Game = new OctagonalNations();
+		Game.Set(DominionScape, DominionGraphics, DominionCalcPad, DominionText, DominionRandomizer, Controller);
+		Game.SetMobile();
+		Game.CheckImagesLoaded();
+	    }
+
+	</script>
+    </body>
+</html>

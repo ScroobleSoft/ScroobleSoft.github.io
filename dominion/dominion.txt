@@ -1,0 +1,113 @@
+
+ ** DESIGN/IMPLEMENTATION: still to be seen, but might need to create 2 objects from 1 sprite (should be possible) for planes due to their uniquely complex implementation
+ * there will now be 8 levels of buoys producing Lavenoil at various rates
+ ** might nix exploration angle for Lavenoil, unless it is to see depth of deposit
+ * RE-DESIGN: now that there are 20 City-States again, investment dynamic will be totally revised and in fact will be the same as GJ TRILLIONAIRE, except volatilities will occur per fortnight, and changes will be purely random, and not informed by intelligence, a table of City-State names being kept ordered by price, quite like a Premier League table, and all City-States having a volatility rank; one change is that the City-States won't have funds invested in their economies per se, but will manage investments in various companies and sectors throughout the Dominion Patch, although capture of the City-State could lead to loss of investment
+ ** Hornet either take a neighbouring satellite, or invade a linked satellite on another continent (50%)
+ ** some Powers may choose a lot of nominal alliances, others at the other end might prefer small impregnable ones
+ * 1 module (unit) of investment in Research improves tech level in that field by 1% per fortnight, 100M being the unit amount
+ * RE-DESIGN: this is a major one - the 20 City-States have very educated and civilized populations, and are the only ones trusted by CASH, so were the only ones entrusted to manufacture arms (or deal in them as intermediaries), and also provide clearing service for all commodities, so each state has its own specialty:
+	military (4) - the 4 different arms of the armed forces
+	research (8) - tech in each area
+	commodities (8) - surplus for cash
+in this case, the City-States will have to double as elite weapon manufacturers (TODO)
+ ** forces will always be distributed among all bases equally, but invasion armadas have to be taken from a specific base set (planes being accompanying aerial escort), so their number cannot exceed units per base, this including any missiles launched pre-emptively or in coordination, unit numbers then immediately being levelled off after assignment; idea right now is to have separate carrier fleets designed to hunt Raiders, but maybe also attack cities
+ * TODO: uneven distribution of base units for Powers and Allieds (particularly naval) has to be managed when militaries are set (set bonus fields in Base objects)
+ ** STRATEGY: since Allieds will have almost half the number of units per base that Powers will use to invade (can employ all contents of a base quartet), victory is mostly assured, so 2 turns captures an Allied State (by taking a province and capital in turn)
+ ** STRATEGY: a trade-off between positioning Champion and Hero weapons in capitals (for greater security), or in an outer provinces to be within striking distance of other continents?
+ ** BUG: it's really bizarre - anti-aliasing works when drawing fighters using old buffering technique, but doesn't when using new GeometricSprite
+ ** ALLIEDS: a bellicose one could try swallowing up all other Allieds in its ring with the ambition of becoming a Power; Power's could be expected to play the role of central peacekeeper
+ ** LARTS: if there is going to be depreciation, then all colours should be affected, both light and dark
+ ** TRADE: CTU (Cargo Transportation Unit) is a commonly used unit, and can be equivalent to a unit of commodities (have to figure out how many CTUs a freighter can carry)
+ ** THEATREs: Champions' Duel could be best of 3/5/7/9 . . . etc by arrangement between the 2 parties
+ ** HORNET: with the current rough prices of all units, it will take Hornet about 51 turns to max out base capacity (going from 0.25 to 1.0 full)
+ ** AUCTION: weapons and tech only? an sell the following,
+	- carriers	- high-end fighters	- level 8 satellites	- ICBMs
+ ** GAMEPLAY: might a nation which has captured a city-state offer financial rewards to new subjects to win their loyalty for duration of subsidies? that would explain how taking a strategic point allows one to hold the entity for a while
+ ** THEATRE LAND: narrow roads may ensure that squads move and fight in columns
+ ** SUBMARINEs: for interdiction only? purchased by Information ministry, maybe even Foreign Ministry alongwith Interdictors and Spy costs?
+ ** ALLIANCEs: forming a defence pact with an Allieds involves setting up a base of their soil, so should that always be located in the capital? alternatively, distribute units, or even have levels of commitment in terms of units?
+ ** THEATRE DUEL: could store 90deg turn sprite data in code, using TransformBuffer for all in-between degree turning
+ ** SCENARIO: City-States could amass enough wealth to 'buy' an Allied, using this as a springboard to craft their own empire
+ * ALLIANCE: offer from Allieds is based in descending order on,
+	- government form
+	- belligerence
+	- specialty focus
+	- proximity (maybe)
+ ** have to determine size of Pact force - may just be contents of base (all 4 of them)
+ * triangles don't work for aerial units, so City-State Jets will be 8-sides like Tomcat (REDUNDANT)
+ * Raider jets will also be 8-sided
+ ** could even make Champion Fighters 10X more expensive than regular ones because of their value in winning duels
+ * even though the plan was to allow everything on a base to used in an invasion, think it will be prudent to limit land/air/sea contingents to 128/32/8 units, so in fact can have up to 8 battalions/squadrons/fleets to attack serially
+ * DESIGN: this is a unique implementation - GunImage's for Fighter will be drawn by rotating the Control Panel canvas within the code, enabling GenieImage's to be used
+ * DESIGN: Firebrands and Silklights fired will be shown disappearing in Control Panel, and not with movement and plumes as such, while Cannon Set will be shown rotating if it's direction of firing changes, and also 'shotgun' style firing action will be depicted; amendment - a short plume burst can be shown before the missile disappears
+ ** only 2 cities to be captured to get to and take capital for Allieds, 3 for Powers, 1 for City-States
+ * START: jet distribution will be like this - there will be an equal number of fighters and planes of other types combined; actually, powers will have 9 fighters and 1 jet of each other type
+ * not just fighters, but there will be 9 levels of bombers, interdictors, interceptors, recon, refuellers, strafers, transporters
+ * all surplus units (ones not divisible by number of bases) are available for invasion sorties irrespective of base picked
+ ** interesting that CityStates have offensive capabilities while Allieds don't
+ ** why can't nations be called Conster, Imagi, Do, Hiber, Coro, Machi, Origi, Nomi, Domi, Alie, Ordi, Into, Deto, Lami etc.?
+ ** AIR MISSION: at the moment, this is about bombing, so the one way it will differ from Dogfight Theatre in that lower pane will toggle between jet close-up view and ground target view
+ ** office ministry actions:
+//agriculture - shows food transport, maybe to break a blockade
+//defense - sortie/mission
+//Finance -
+//Foreign - 
+//Information - spy mission
+//Interior
+//Science
+//Energy - investing in exploration, which has a certain probability of success (maybe only 20%)
+/* tickers
+ * multiple tickers at varying speeds - investments (red background), news alerts (green bg), pop culture news and trivialities, such as results of sports tournaments (blue); note that the last ones, as well as newspaper (and blue ticker will also have such-and-such news outlet reports such and such item) are meant to create a greek chorus to add to the sense of a living, breathing world, and in fact a Stadler and Waldorf type pair, or better yet a commentating trio, can pop-up from time-to-time to pass remarks on player's performance
+ * there'll be a lot of info on ticker, so it should be colour-coded according to importance, red being urgent
+*/
+ ** having Enhanced Fighters allows for an arcade angle to be added so incoming missiles can be dodged (requiring lightning reflexes) as soon as they come into view in inset box (with a spectral metre showing how close they are - so now there will be a display of incoming projectiles below fuselage display)
+ ** only 1 carrier per fleet? (don't think such a restriction is needed)
+ ** max 16 of 1 type of jet in a squadron? all 32 might be OK
+ ** can still use triangles for raiders, a condensation of insets perhaps needed, or could even use a separate sprite for these
+ ** some open issues:
+	- foreign ministry grants could go to NGOs, these grants raising the popularity of that foreign power; foreign ministry could also play a cruical role funding and securing captured cities
+	- Transport transporting a dignitary to take over a country?
+	- Air Mission about bombing a Missile Base?
+	- Interceptor can launch simultaneous missiles?
+ * all jet arsenals will be bit-packed for all jets even in limited number of mostly visual objects, because it is more fun that way
+ ** can have jets with up to 8 flares and/or chaffs
+ ** for jets, at the moment there are no shields, so 1 shot destroys
+ ** fast-charging short and long-cannons can swivel and fire backwards
+ ** with AAMs being 4.0 time faster than jets (to match up with the 4 panels in Air Theatre), they will shoot off the screen too fast within insets, and be barely visible, so they will have speed 1.0 relative to speed of jets when launched, but will be at full speed when closing on target (and so harder to see)
+ ** need a warning light on jets that have a missile (and maybe even shells) heading towards them, maybe even with a number showing how many are incoming
+ * invasion in 5 parts:	missiles launch=>dogfight (using only players in range, either directly, or using refuellers - 1 doubles a squadron's distance - to extend range, or via carriers)=>naval battle=>beachhead=>land
+ ** there will be no time clock, but a fortnight clock
+ ** could have progressively more effective counter-intediction pulses w/ increasing radii
+ ** 'Step' button can also be labelled 'Next'
+ ** might never need more than 1 Recon and 4 Refuellers in Air Theatre, with a max of 32 for the rest except for Transport, which may max out at 16
+ * F22 Total Air War: "If resources allow, a well structured Interdiction Mission should include an escort flight, wild-weasel flight and a strike flight. Each of these should arrive at the target at a different altitude: the strike flight low to avoid detection, the escort flight should stay high to provide cover for the
+strike flight and the wild-weasel higher still so it can light-up and destroy any SAM defences it encounters well before they threaten the strike flight."
+ ** even if Allieds' governments can be random, colour combinations will be fixed, although could have an option later where they are completely juggled (using / and % on .Index for primary and secondary, but may not do this at all)
+ ** ALLIED: in every game an Allied could make a bid to become a Power, but that is probably only possible to do if a scientific leap is made via research (which is an issue since Allieds don't actually conduct research, so it could be a chance discovery, or an immigrating scientist from off-world)
+ * city-states will have abbreviations on ticker
+ ** Raiders will attack every fortnight, emerging from one of the 8 Atoll portals, and since Allieds greatly outnumber Powers, they are much more frequent victims of such attacks, which causes shortages, requiring appeals for aid in the form of Donations, Raiders picking a nation, then a city as their target and destination
+ ** Lavenoil drilling could be on land too, making some provinces more valuable than others
+ ** provincial conquests shown with smaller flags
+ ** INVESTING -	.stocks generally rise with the occasional sharp drop (which can be anticipated via reasearch)
+		.top investing Powers will have to keep their portfolios secret to avoid copying by others (which opens espionage opportunities)
+		.might need to make a 1-time payment, equal to 10 times commodity grant (actually, this may be something else - speculative investment to get vote)
+ ** City-States need to have a research 'portfolio,' i.e. an array, since they could potentially do research in several different areas
+ ** still to be settled but City-States will offer arms, buoys, satellites and radars in initial auction
+ ** could have City-States research into arms/buoys/satellites/radars, and Allieds be the ones who research into improving commodity productivity
+ ** have to decide if duplicate names will be allowed (could keep a master list for quick check to avoid copies)
+ ** STOCK price dynamics still to be decided, possibly steadily rising, unless they are occupied, at which time the price could drop, or decline steadily
+ ** INTERNAL and EXTERNAL rivals will be from within the same political system, intrigue and subterfuge coming from one of the other 8 government systems
+ ** SURPLUS: changing it up so that there is no actual Ringit amount mentioned in the budget, instead 10 surplus units are generated by Powers (20 for Tomcat), all of which are adjustable in terms of distribution (so 1 unit of each is no longer necessary, but recommended in case of shortfalls in an area caused by raids and such)
+ ** ALLIEDs: their surplus goes to maintaining their research facilities (Powers don't have any), which is why they don't have any surplus; actually surplus could be saved for rainy days, i.e. arms replacement in event of an attack, or to purchase Lavenoil, etc., or even to acquire champions
+ * CITIES: this is a major change - all cities will now be the same size (600K population) no matter the type of nation, and so the Allieds' population jumps to 3M
+ ** ALLIEDS: still to be finalized, but notion is that Allieds have no surplus because all goods are sold to traders for funds directed towards upkeep of research facilities
+ ** CITY-STATES: instead of purchases, there VOTE could be won by the power that has the most money INVESTED
+ * Carrier groups will be set-up separately (carriers will be bought at Start, along with their cohorts, so there will be another step to Start in additon to auction - buying/constructing a group)
+ ** ANARCHY: should Head of State simply be titled 'Captain?'
+ ** could have titles for daily games, such as 'The Corinth Caper'
+ ** the two governments that have not used are Oligarchy and Technocracy
+ ** HORNET's populace might be Ok with a dictatorship, the nature of which vacillates between benevolent and autocratic, there of course being a preference for the former, there being unrest when it swings to the latter, perhaps leading to a coup
+
+dominions\interface.js (files processed till there)
+
