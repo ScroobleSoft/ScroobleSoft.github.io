@@ -68,6 +68,7 @@ GenieText.prototype = {
 	ResetFont() {	//TODO: will replace ::RestoreFont
 
 		this.Specs.FONT = this.Font;
+		this.Context.font = this.Font;
 	},
 	RestoreFont() {
 

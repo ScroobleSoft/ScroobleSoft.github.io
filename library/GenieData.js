@@ -8,7 +8,7 @@ var AXIS = { X: 0, Y: 1, BOTH: 2 };
 var ASSET = { AGENT: 0, STRUCTURE: 1, FEATURE: 2 };
 var GRADE = { Aplus: 0, A: 1, Aminus: 2, Bplus: 3, B: 4, Bminus: 5, Cplus: 6, C: 7, Cminus: 8, Dplus: 9, D: 10, Dminus: 11,
 				  Eplus: 12, E: 13, Eminus: 14, Fplus: 15, F: 16, Fminus: 17, Gplus: 18, G: 19, Gminus: 20, Hplus: 21, H: 22, Hminus: 23,
-				  Iplus: 24, I: 25, Iminus: 26, Jplus: 27, J: 28, Jminus: 29 };
+				  Iplus: 24, I: 25, Iminus: 26, Jplus: 27, J: 28, Jminus: 29, Kplus: 30 };
 var FONT = { STYLE: { NONE: 0, BOLD: 1, ITALICS: 2, UNDERLINED: 4, OVERLINED: 8, LINeTHROUGH: 16 },
 				 DEFAULT: "14px Arial" };
 var TEXT = { FONT: "14px Arial", COLOUR: "black" };

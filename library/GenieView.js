@@ -2,7 +2,6 @@
 //---------------------------------------------
 //----------- GENIE VIEW ----------------------
 var GenieView = function() {
-	var NestedView;
 	var Canvas, Context;
 	var ZoomScape, Console;
 	var GraphicsTool, TextWriter, Randomizer;
@@ -23,8 +22,8 @@ GenieView.prototype = {
 		this.Controls = new Array();
 		this.ToggleFlag = true;
 		this.SetData();
-		this.SetControls();
 		this.SetImages();
+		this.SetControls();
 		this.SetComponents();
 	},
 	SetLinks(gTool, tWriter, rGenerator) {
@@ -80,6 +79,8 @@ GenieView.prototype = {
 			this.ColourScape(null, this.Specs.COLOUR);
 		this.Draw();
 		this.ShowControls();
+		if (this.NestedView)
+			this.NestedView.Open();
 		if (this.InfoView)
 			this.InfoView.Open();
 		if (this.ConsoleView)
@@ -96,7 +97,7 @@ GenieView.prototype = {
 		if (this.ConsoleView)
 			this.ConsoleView.Update();
 		if (this.NestedView)
-			this.NestedView.Close();
+			this.NestedView.Update();
 	},
 	Close(func, ms) {
 
@@ -126,6 +127,20 @@ GenieView.prototype = {
 		//Call supplied function
 		if ( func && ms )
 			setTimeout(func, ms);
+	},
+	OpenInfoView(iView) {
+
+		if (this.InfoView)
+			this.InfoView.Close();
+		iView.Open();
+		this.InfoView = iView;
+	},
+	OpenConsoleView(cView) {
+
+		if (this.ConsoleView)
+			this.ConsoleView.Close();
+		cView.Open();
+		this.ConsoleView = cView;
 	},
 	ShowControls() {
 
@@ -213,5 +228,63 @@ GenieView.prototype = {
 		// will disable the view and launch a subview whose specs will include their size, so all mouse activity within this sub-window will be ignored
 		//-will there be multiple sub-windows and sub-views . . . no plans as such, but might need to expand this feature
 		//-eventually might even have subsubviews of subviews
+	},
+	SetTextButton(specs, iCrnrs, tWriter) {
+		var btn;
+
+		btn = new TextButton();
+		btn.Set(this.Canvas, specs, tWriter);
+		btn.SetCornersPic(iCrnrs);
+		this.Controls.push(btn);
+
+		return (btn);
+	},
+	SetImageButton(specs, img, iCrnrs) {
+		var btn;
+
+		btn = new ImageButton();
+		btn.Set(this.Canvas, specs, img);
+		btn.SetCornersPic(iCrnrs);
+		this.Controls.push(btn);
+
+		return (btn);
+	},
+	SetCornersIcon(specs, img, iSpecs, cImg) {
+		var iIcon;
+		var icon;
+
+		iIcon = new GenieImage();
+		iIcon.Set(this.Context, img, iSpecs);
+		icon = new GenieIcon();
+		icon.Set(this.Canvas, specs, iIcon);
+		icon.SetCornersPic(cImg);
+		this.Controls.push(icon);
+
+		return (icon);
+	},
+	SetCornersIconPanel(specs, iSpecs, cImg, gTool) {
+		var iPnl;
+
+		iPnl = new GenieIconPanel();
+		iPnl.Set(this.Canvas, specs, iSpecs);
+		iPnl.SetCornersPic(cImg);
+		iPnl.SetLinks(gTool);
+		this.Controls.push(iPnl);
+
+		return (iPnl);
+	},
+	SetBevelledIconPanel(specs, iSpecs, bSpecs) {
+		var iPnl;
+		var iBvl;
+
+		iBvl = new GenieImage();
+		iBvl.Set(this.Context, ImageManager.Pics[IMAGeINDEX.CONTROLS], bSpecs);
+
+		iPnl = new GenieIconPanel();
+		iPnl.Set(this.Canvas, specs, iSpecs);
+		iPnl.SetBevelPic(iBvl);
+		this.Controls.push(iPnl);
+
+		return (iPnl);
 	}
 };

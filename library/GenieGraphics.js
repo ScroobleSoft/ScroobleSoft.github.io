@@ -43,16 +43,17 @@ GenieGraphics.prototype = {
 			this.Context = cntxt;
 	},
 	SwitchContextByID(id) {
+
 		switch (id) {
-	 case CANVAS.PRIME:
-		 this.Context = this.Screen;
-		 break;
-	 case CANVAS.ZOOM:
-		 this.Context = this.InfoBox;
-		 break;
-	 case CANVAS.CONSOLE:
-		 this.Context = this.ControlPanel;
-		 break;
+			case CANVAS.PRIME:
+				this.Context = this.Screen;
+				break;
+			case CANVAS.ZOOM:
+				this.Context = this.InfoBox;
+				break;
+			case CANVAS.CONSOLE:
+				this.Context = this.ControlPanel;
+				break;
 		}
 	},
 	SwitchToInfoBox() {
@@ -61,7 +62,12 @@ GenieGraphics.prototype = {
 	SwitchToControlPanel() {
 		this.Context = this.ControlPanel;
 	},
-	RestoreContext() {
+	RestoreContext() {  //REDUNDANT - switch to below
+
+		this.Context = this.Screen;
+	},
+	ResetContext() {
+
 		this.Context = this.Screen;
 	},
 	SetOpacity(opcty) {
@@ -346,7 +352,7 @@ GenieGraphics.prototype = {
 		//Draw rows
 		for (this.i=1;this.i<specs.R;++this.i) {
 			this.coords.X = x;
-			this.coords.Y = y + Math.round((this.i*(specs.H/specs.R)));
+			this.coords.Y = y + Math.round((this.i*((specs.H-specs.LW.FRAME)/specs.R)));
 			this.DrawHorizontalLine(this.coords, specs.W, specs.COLOUR || "black", specs.LW.PARTITION || 1);
 		}
 

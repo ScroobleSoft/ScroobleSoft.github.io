@@ -16,8 +16,10 @@ GenieIntro.prototype = {
 		this.Screen = this.Interface.PrimeScape.Context;
 		this.InfoBox = this.Interface.ZoomScape.Context;
 		this.ControlPanel = this.Interface.Console.Context;
-		this.Ticker = this.Interface.Dashboard.Context;
-		this.Tabloid = this.Interface.HelpDeck.Context;
+		if (!Game.CheckMobile()) {
+			this.Ticker = this.Interface.Dashboard.Context;
+			this.Tabloid = this.Interface.HelpDeck.Context;
+		}
 		this.GraphicsTool = gTool;
 		this.TextWriter = tWriter;
 		this.Randomizer = rGenerator;

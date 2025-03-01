@@ -82,28 +82,34 @@ GenieAgent.prototype.Set = function(specs, sprite) {
 	this.SetFootprint();
 
 	if (this.Specs) {
-
-		if (this.Specs.TRANSFORM) {
-	 this.Status = this.Specs.TRANSFORM.METHOD;
-	 this.Form = { Type: this.Specs.TRANSFORM.TYPE };
-	 switch (this.Form.Type) {
-		 case SPRITeFORM.ROTATED:
-			 this.Form.Angle = 0;
-			 break;
-		 case SPRITeFORM.FLIPPED:
-			 this.Form.Orientation = 0;
-			 break;
-		 case SPRITeFORM.SCALED:
-			 this.Form.Scale = 1.0;
-			 break;
-	 }
-		}
-
+		this.SetTransform();
 		if (this.Specs.PEAK)
 			this.SetPeak();
 		this.ActivatePacks();
 		if (GAME.TILES)
 			this.Tile = new GenieTile();
+	}
+};
+GenieAgent.prototype.SetTransform = function() {
+
+	if (this.Specs.TRANSFORM) {
+		this.Status += this.Specs.TRANSFORM.METHOD;
+		this.Form = { Type: this.Specs.TRANSFORM.TYPE };
+		if (this.Status==STATUS.TRANSFORM.InMETHOD) {
+			if (this.Form.Type & SPRITeFORM.SCALED || this.Form.Type & SPRITeFORM.FLIPPED)
+				this.Scale = new Coordinate2D();
+		} else
+			switch (this.Form.Type) {
+				 case SPRITeFORM.ROTATED:
+					 this.Form.Angle = 0;
+					 break;
+				 case SPRITeFORM.FLIPPED:
+					 this.Form.Orientation = 0;
+					 break;
+				 case SPRITeFORM.SCALED:
+					 this.Form.Scale = 1.0;
+					 break;
+			}
 	}
 };
 GenieAgent.prototype.SetSprite = function(sprite) {
@@ -304,6 +310,14 @@ GenieAgent.prototype.ActivatePacks = function() {
 		this.PelletPelter = new GeniePelter();
 		this.PelletPelter.Set(this.Specs.PELTER, this);
 	}
+};
+GenieAgent.prototype.SetAngle = function(angl) {
+
+	this.Angle = angl;
+};
+GenieAgent.prototype.SetScale = function(scl) {
+
+	this.Scale.Set(scl.X, scl.Y);
 };
 GenieAgent.prototype.Select = function() {
 

@@ -270,6 +270,12 @@ GenieScape.prototype = {
 			this.Console.Element.width = CONTROlPANEL.HEIGHT;
 			this.Console.Element.height = CONTROlPANEL.WIDTH;
 		}
+
+		//Re-draw views since re-sizing canvases erases them
+		if (this.ZoomScape.Element.View)
+			this.ZoomScape.Element.View.Draw();
+		if (this.Console.Element.View)
+			this.Console.Element.View.Draw();
 	},
 	Expand() {
 
