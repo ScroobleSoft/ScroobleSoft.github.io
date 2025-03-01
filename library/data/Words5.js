@@ -1,4 +1,4 @@
-//+1
+//+5
 var Words5a = [ "aback", "abase", "abate", "abbey", "abbot", "abhor", "abide", "abode", "abort", "about", "above", "abuse", "abyss", "ached",
 					 "acorn", "acrid", "acute", "adage", "adapt", "adder", "adept", "adieu", "admit", "adopt", "adore", "adorn", "adult", "aegis",
 					 "aerie", "affix", "afoot", "after", "again", "agape", "agate", "agent", "agile", "aglow", "agony", "agree", "ahead", "aided",
@@ -26,11 +26,11 @@ var Words5b = [ "bacon", "badge", "badly", "bagel", "baggy", "baize", "baker", "
 					 "burnt", "burst", "bushy", "butch", "buyer"
 ];
 
-var Words5c = [ "cabal", "caber", "cabin", "cable", "cache", "cadet", "cadge", "cagey", "cairn", "caked", "calyx", "camel", "cameo", "canal",
+var Words5c = [ "cabal", "caber", "cabin", "cable", "cache", "cacti", "cadet", "cadge", "cagey", "cairn", "caked", "calyx", "camel", "cameo", "canal",
 					 "candy", "canny", "canoe", "canon", "canto", "caper", "carat", "cared", "carer", "cargo", "carol", "carry", "carve", "cased",
 					 "caste", "catch", "cater", "catty", "cause", "caved", "cavil", "cease", "cedar", "cello", "chafe", "chaff", "chain", "chair",
 					 "chalk", "champ", "chant", "chaos", "chaps", "charm", "chart", "chase", "chasm", "cheap", "cheat", "check", "cheek", "cheep",
-					 "cheer", "chess", "chest", "chewy", "chick", "chide", "chief", "chide", "chill", "chime", "china", "chink", "chirp", "choir",
+					 "cheer", "chess", "chest", "chewy", "chick", "chide", "chief", "chide", "chili", "chill", "chime", "china", "chink", "chirp", "choir",
 					 "choke", "chomp", "chord", "chore", "chose", "chuck", "chump", "chunk", "churn", "chute", "cider", "cigar", "cinch", "circa",
 					 "cited", "civet", "civic", "civil", "claim", "clamp", "clash", "clasp", "class", "clean", "clear", "cleat", "cleft", "clerk",
 					 "click", "cliff", "climb", "clime", "cling", "clink", "cloak", "clock", "clone", "close", "cloth", "cloud", "clout", "clove",
@@ -168,7 +168,7 @@ var Words5s = [ "sable", "sabre", "safer", "saggy", "saint", "salad", "sally", "
 					 "seven", "sewed", "sewer", "shack", "shade", "shady", "shaft", "shake", "shaky", "shale", "shall", "shame", "shank",
 					 "shape", "share", "shark", "sharp", "shave", "shawl", "sheaf", "shear", "sheen", "sheep", "sheer", "sheet", "shelf", "shell",
 					 "sherd", "shied", "shift", "shine", "shiny", "shire", "shirk", "shirt", "shoal", "shock", "shone", "shock", "shoot", "shore",
-					 "shorn", "short", "shout", "shove", "shown", "showy", "shred", "shrew", "shrub", "shrug", "shunt", "shush", "siege", "sieve",
+					 "shorn", "short", "shout", "shove", "shown", "showy", "shred", "shrew", "shrub", "shrug", "shunt", "shush", "sidle", "siege", "sieve",
 					 "sight", "silky", "silly", "silty", "since", "singe", "siren", "sissy", "sitar", "sixth", "sixty", "skate", "skier", "skiff",
 					 "skill", "skimp", "skirt", "skulk", "skull", "skunk", "slack", "slain", "slake", "slang", "slant", "slash", "slate", "slave",
 					 "sleek", "sleep", "sleet", "slept", "slice", "slick", "slide", "slime", "slimy", "sling", "slink", "sloop", "slope", "slosh",
@@ -191,7 +191,7 @@ var Words5s = [ "sable", "sabre", "safer", "saggy", "saint", "salad", "sally", "
 
 var Words5t = [ "tabby", "table", "taboo", "tacit", "tacky", "taffy", "taint", "taken", "tally", "talon", "tamed", "tamer", "tangy",
 					 "tango", "taped", "taper", "tardy", "tarot", "tarry", "taste", "tasty", "taunt", "taupe", "tawny", "taxed", "teach", "teary",
-					 "tease", "teeth", "tempo", "tempt", "tenet", "tenor", "tense", "tenth", "tepid", "terse", "testy", "thank", "theft",
+					 "tease", "teeth", "tempo", "tempt", "tenet", "tenor", "tense", "tenth", "tepid", "terra", "terse", "testy", "thank", "theft",
 					 "their", "theme", "there", "these", "thick", "thief", "thigh", "thing", "think", "third", "thong", "thorn", "those", "three",
 					 "throb", "throw", "thumb", "thump", "thyme", "tiara", "tibia", "tidal", "tiger", "tight", "tilde", "tiled", "timed", "timer",
 					 "timid", "tinge", "tinny", "tipsy", "tired", "titan", "tithe", "title", "tizzy", "toady", "toast", "today", "token", "tonal",
