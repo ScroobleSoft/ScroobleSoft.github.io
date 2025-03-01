@@ -2,7 +2,7 @@
 //-----------------------------------------------
 //---------- ARRAY UTILITIES --------------------
 var ArrayUtilities = function() {
-	var i;
+	var i, val;
 };
 ArrayUtilities.prototype = {
 	Set() {
@@ -91,6 +91,22 @@ ArrayUtilities.prototype = {
 
 		return (this.GetSum(arry)/arry.length);
 	},
+	GetMaxValue(arry) {
+
+		this.val = arry[0];
+		for (this.i=1;this.i<arry.length;++this.i)
+			this.val = Math.max(this.val, arry[this.i]);
+
+		return (this.val);
+	},
+	GetKeyMaxValue(arry, iKey) {
+
+		this.val = arry[0][iKey];
+		for (this.i=1;this.i<arry.length;++this.i)
+			this.val = Math.max(this.val, arry[this.i][iKey]);
+
+		return (this.val);
+	},
 	GetColumn(arry, nCol) {
 		var i;
 		var aCol;
@@ -110,6 +126,33 @@ ArrayUtilities.prototype = {
 	Rotate(arry) {  //UNTESTED
 
 		this.InsertAtFront(arry, arry.pop());
+	},
+	SwapElements(aElmnts, iElmnt1, iElmnt2) {  //TODO: remove from GenieUtils
+
+		this.val = aElmnts[iElmnt2];
+		aElmnts[iElmnt2] = aElmnts[iElmnt1];
+		aElmnts[iElmnt1] = this.val;
+	},
+	GetSwappedArray(aElmnts, iElmnt1, iElmnt2) {
+		var arry;
+
+		//Create duplicate array
+		arry = new Array(aElmnts.length);
+		for (this.i=0;this.i<arry.length;++this.i)
+			arry[this.i] = aElmnts[this.i];
+
+		this.SwapElements(arry, iElmnt1, iElmnt2);
+
+		return (arry);
+	},
+	CreateDuplicate(arry) {  //UNLOGGED
+		var aElmnts;
+
+		aElmnts = new Array(arry.length);
+		for (this.i=0;this.i<arry.length;++this.i)
+			aElmnts[this.i] = arry[this.i];
+
+		return (aElmnts);
 	}
 };
 
