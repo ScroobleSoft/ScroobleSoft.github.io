@@ -18,5 +18,6 @@ TextButton.prototype.ReLabel = function(lbl) {  //ASSUMPTION: will only be calle
 
    this.Context.fillStyle = this.Specs.COLOUR || "lightgrey";		//NOTE: "lightgrey" is "rgb(211,211,211)
    this.Context.fillRect(this.Specs.L+this.Specs.LW, this.Specs.T+this.Specs.LW, this.Specs.W-(2*this.Specs.LW), this.Specs.H-(2*this.Specs.LW));
+	this.Specs.LABEL = lbl;
    this.WriteLabel(null, lbl);
 };

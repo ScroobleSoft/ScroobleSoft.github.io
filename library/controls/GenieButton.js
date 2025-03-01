@@ -67,7 +67,9 @@ GenieButton.prototype.Draw = function(bPressed) {
 };
 GenieButton.prototype.DrawDisabled = function() {
 
-	this.Context.globalAlpha = 0.5;
+	this.Context.fillStyle = "white";
+	this.Context.fillRect(this.Specs.L, this.Specs.T, this.Specs.W, this.Specs.H);
+	this.Context.globalAlpha = 0.1;
 	this.Draw(!PRESSED);
 	this.Context.globalAlpha = 1.0;
 };
@@ -205,7 +207,7 @@ GenieButton.prototype.MouseUp = function() {
 */
 GenieButton.prototype.ClickedOn = function() {  //NOTE: dummy function to over-ride default behaviour
 };
-GenieButton.prototype.WriteLabel = function(offset, lbl) {
+GenieButton.prototype.WriteLabel = function(offset) {
 
 	if (!this.Enabled) {
 		this.Context.clearRect(this.Specs.L+this.Specs.LW, this.Specs.T+this.Specs.LW, this.Specs.W-(2*this.Specs.LW), this.Specs.H-(2*this.Specs.LW));
@@ -234,16 +236,13 @@ GenieButton.prototype.WriteLabel = function(offset, lbl) {
 	//Write
 	this.TextWriter.cntxt = this.TextWriter.Context;
 	this.TextWriter.Context = this.Context;
-	this.TextWriter.Write(lbl || this.Specs.LABEL, this.x, this.y, this.Specs.TEXT);
+	this.TextWriter.Write(this.Specs.LABEL, this.x, this.y, this.Specs.TEXT);
 	this.TextWriter.RestoreContext(this.TextWriter.cntxt);
 
 	if (!this.Enabled)
 		this.Context.globalAlpha = 1.0;
 };
 GenieButton.prototype.DrawImage = function() {
-
-	if (!this.Enabled)
-		this.Context.globalAlpha = 0.5;
 
 	if (this.Specs.O) {
 		if (!this.Enabled)
@@ -272,5 +271,6 @@ GenieButton.prototype.MouseOver = function() {
 */
 GenieButton.prototype.Reset = function() {
 
-	this.Draw();
+	if (this.CheckEnabled() && this.CheckActivated())
+		this.Draw();
 };

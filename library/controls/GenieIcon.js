@@ -1,6 +1,6 @@
 
 //-----------------------------------------
-//---------- GENIE ICON -------------------	specs: { L: -1, T: -1, W: -1, H: -1, BACKGROUND: "", COLOUR: { MAIN: "", LIGHT: "", DARK: "" } }
+//---------- GENIE ICON -------------------	specs: { L: -1, T: -1, W: -1, H: -1, LW: -1, BACKGROUND: "", COLOUR: { MAIN: "", LIGHT: "", DARK: "" } }
 var GenieIcon = function() {
 	var CornersPic;
 	var Pressed;

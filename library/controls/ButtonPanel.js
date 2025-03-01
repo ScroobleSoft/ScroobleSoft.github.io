@@ -1,5 +1,7 @@
-
-//--------------------------------------------------	Specs: { L: -1, T: -1, W: -1, H: -1, C: -1, R: -1,
+/*
+ *		** need a 'spacing out' Option for gaps between buttons
+ */
+//--------------------------------------------------	Specs: { L: -1, T: -1, W: -1, H: -1, C: -1, R: -1, LW: -1,
 //---------- GENIE BUTTON PANEL --------------------				BUTTON: { W: -1, H: -1 }, OFFSETS: { X: -1, Y: -1 } };
 var GenieButtonPanel = function() {
 	var ButtonPics;
@@ -12,7 +14,11 @@ GenieButtonPanel.prototype.Set = function(canvas, specs, img) {
 
 	this.ButtonPressed = -1;
 };
-GenieButtonPanel.prototype.SetExtraLinks = function(bPics) {
+GenieButtonPanel.prototype.SetExtraLinks = function(bPics) {  //REDUNDANT - use next function
+
+	this.ButtonPics = bPics;
+};
+GenieButtonPanel.prototype.SetButtonPics = function(bPics) {
 
 	this.ButtonPics = bPics;
 };
@@ -34,8 +40,13 @@ GenieButtonPanel.prototype.Draw = function() {  //TODO: patch from .ButtonPics w
 GenieButtonPanel.prototype.DrawButton = function(c, r, bPressed) {
 	var x, y;
 
-	x = this.Specs.L + (c*this.Specs.BUTTON.W) + this.Specs.OFFSETS.X;
-	y = this.Specs.T + (r*this.Specs.BUTTON.H) + this.Specs.OFFSETS.Y;
+	if (this.Specs.LW) {
+		x = this.Specs.L + (c*this.Specs.BUTTON.W) + this.Specs.LW;
+		y = this.Specs.T + (r*this.Specs.BUTTON.H) + this.Specs.LW;
+	} else {
+		x = this.Specs.L + (c*this.Specs.BUTTON.W) + this.Specs.OFFSETS.X;
+		y = this.Specs.T + (r*this.Specs.BUTTON.H) + this.Specs.OFFSETS.Y;
+	}
 	if (bPressed) {
 		this.Pic.DrawPatchNumber(1, this.Specs.L+(c*this.Specs.BUTTON.W), this.Specs.T+(r*this.Specs.BUTTON.H));
 		++x;
@@ -66,5 +77,6 @@ GenieButtonPanel.prototype.CheckButtonPressed = function() {
 };
 GenieButtonPanel.prototype.ResetButton = function() {
 
-	this.DrawButton(this.ButtonPressed % this.Specs.C, Math.floor(this.ButtonPressed/this.Specs.C), !PRESSED);
+	if (this.CheckEnabled() && this.CheckActivated())
+		this.DrawButton(this.ButtonPressed % this.Specs.C, Math.floor(this.ButtonPressed/this.Specs.C), !PRESSED);
 };
