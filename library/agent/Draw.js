@@ -169,67 +169,52 @@ GenieAgent.prototype.DrawTransformed = function(state) {
 		}
 	}
 };
-GenieAgent.prototype.DrawInMethodTransformed = function(state) {
+GenieAgent.prototype.DrawInMethodTransformed = function(state) {  //NOTE: FLIPPED will be used exclusively, and not in conjunction w/ ROTATED/SCALED
 
-	//UNLOGGED - re-sized may also be implemented
-
-	switch (this.Form.Type) {
-		case SPRITeFORM.ROTATED:
-			this.Sprite.Context.translate(this.ScreenCoords.X+this.CentreOffset.X, this.ScreenCoords.Y+this.CentreOffset.Y);
+	if (this.Form.Type==SPRITeFORM.FLIPPED)
+		this.DrawInMethodFlipped();
+	else {
+		this.Sprite.Context.translate(this.ScreenCoords.X+this.CentreOffset.X, this.ScreenCoords.Y+this.CentreOffset.Y);
+		if (this.Form.Type & SPRITeFORM.ROTATED)
 			this.Sprite.Context.rotate(this.Angle*(Math.PI/180));
-			this.DrawSprites(this.state, -this.CentreOffset.X, this.CentreOffset.Y + this.Sprite.Specs.H);
+		if (this.Form.Type & SPRITeFORM.SCALED)
+			this.Sprite.Context.scale(this.Scale.X, this.Scale.Y);
+			this.DrawSprites(this.state, -this.CentreOffset.X, this.CentreOffset.Y);
+		if (this.Form.Type & SPRITeFORM.SCALED)
+			this.Sprite.Context.scale(1/this.Scale.X, 1/this.Scale.Y);
+		if (this.Form.Type & SPRITeFORM.ROTATED)
 			this.Sprite.Context.rotate(-this.Angle*(Math.PI/180));
-			this.Sprite.Context.translate(-(this.ScreenCoords.X+this.CentreOffset.X), -(this.ScreenCoords.Y+this.CentreOffset.Y));
-			break;
-		case SPRITeFORM.FLIPPED:
-
-	 //Flip canvas and draw
-	 if (this.Form.Orientation==FLIPPED.BOTH) {
-		 this.Sprite.Context.scale(-1, -1);
-		 if (this.PreAttachedSprites)
-			 this.PreAttachedSprites.forEach(function(aSprite){aSprite.X=-aSprite.X;aSprite.Y=-aSprite.Y;});
-		 if (this.AttachedSprites)
-			 this.AttachedSprites.forEach(function(aSprite){aSprite.X=-aSprite.X;aSprite.Y=-aSprite.Y;});
-		 this.DrawSprites(this.state, -this.ScreenCoords.X, -this.ScreenCoords.Y);
-	 }
-	 if (this.Form.Orientation==FLIPPED.HORIZONTAL) {
-		 this.Sprite.Context.scale(-1, 1);
-		 if (this.PreAttachedSprites)
-			 this.PreAttachedSprites.forEach(function(aSprite){aSprite.X=-aSprite.X;});
-		 if (this.AttachedSprites)
-			 this.AttachedSprites.forEach(function(aSprite){aSprite.X=-aSprite.X;});
-		 this.DrawSprites(this.state, -this.ScreenCoords.X, this.ScreenCoords.Y);
-	 }
-	 if (this.Form.Orientation==FLIPPED.VERTICAL) {
-		 this.Sprite.Context.scale(1, -1);
-		 if (this.PreAttachedSprites)
-			 this.PreAttachedSprites.forEach(function(aSprite){aSprite.Y=-aSprite.Y;});
-		 if (this.AttachedSprites)
-			 this.AttachedSprites.forEach(function(aSprite){aSprite.Y=-aSprite.Y;});
-		 this.DrawSprites(this.state, this.ScreenCoords.X, -this.ScreenCoords.Y);
-	 }
-
-	 //Restore canvas
-	 if (this.Form.Orientation==FLIPPED.BOTH)
-		 this.Sprite.Context.scale(-1, -1);
-		 if (this.PreAttachedSprites)
-			 this.PreAttachedSprites.forEach(function(aSprite){aSprite.X=-aSprite.X;aSprite.Y=-aSprite.Y;});
-		 if (this.AttachedSprites)
-			 this.AttachedSprites.forEach(function(aSprite){aSprite.X=-aSprite.X;aSprite.Y=-aSprite.Y;});
-	 if (this.Form.Orientation==FLIPPED.HORIZONTAL)
-		 this.Sprite.Context.scale(-1, 1);
-		 if (this.PreAttachedSprites)
-			 this.PreAttachedSprites.forEach(function(aSprite){aSprite.X=-aSprite.X;});
-		 if (this.AttachedSprites)
-			 this.AttachedSprites.forEach(function(aSprite){aSprite.X=-aSprite.X;});
-	 if (this.Form.Orientation==FLIPPED.VERTICAL)
-		 this.Sprite.Context.scale(1, -1);
-		 if (this.PreAttachedSprites)
-			 this.PreAttachedSprites.forEach(function(aSprite){aSprite.Y=-aSprite.Y;});
-		 if (this.AttachedSprites)
-			 this.AttachedSprites.forEach(function(aSprite){aSprite.Y=-aSprite.Y;});
-	 break;
+		this.Sprite.Context.translate(-(this.ScreenCoords.X+this.CentreOffset.X), -(this.ScreenCoords.Y+this.CentreOffset.Y));
 	}
+};
+GenieAgent.prototype.DrawInMethodFlipped = function() {
+
+	//Set scale
+	switch (this.Form.Orientation) {
+		case FLIPPED.BOTH:
+			this.Scale.Set(-1, -1);
+			break;
+		case FLIPPED.HORIZONTAL:
+			this.Scale.Set(-1, 1);
+			break;
+		case FLIPPED.VERTICAL:
+			this.Sprite.Context.scale(1, -1);
+	}
+
+	//Flip canvas and draw
+	this.Sprite.Context.scale(this.Scale.X, this.Scale.Y);
+	if (this.PreAttachedSprites)
+		this.PreAttachedSprites.forEach(function(aSprite){aSprite.X=aSprite.X*this.Scale.X;aSprite.Y=aSprite.Y*this.Scale.Y;});
+	if (this.AttachedSprites)
+		this.AttachedSprites.forEach(function(aSprite){aSprite.X=aSprite.X*this.Scale.X;aSprite.Y=aSprite.Y*this.Scale.Y;});
+	this.DrawSprites(this.state, this.ScreenCoords.X*this.Scale.X, this.ScreenCoords.Y*this.Scale.Y);
+
+	//Restore canvas
+	this.Sprite.Context.scale(this.Scale.X, this.Scale.Y);
+	if (this.PreAttachedSprites)
+		this.PreAttachedSprites.forEach(function(aSprite){aSprite.X=aSprite.X*this.Scale.X;aSprite.Y=aSprite.Y*this.Scale.Y;});
+	if (this.AttachedSprites)
+		this.AttachedSprites.forEach(function(aSprite){aSprite.X=aSprite.X*this.Scale.X;aSprite.Y=aSprite.Y*this.Scale.Y;});
 };
 GenieAgent.prototype.StartTransform = function() {  //NOTE: both horizontal and vertical flipping is not implemented - a 180deg rotation will be preferred
 
@@ -239,22 +224,22 @@ GenieAgent.prototype.StartTransform = function() {  //NOTE: both horizontal and 
 
 		//Adjust for rotation
 		if (this.Form.Type==SPRITeFORM.ROTATED) {
-	 this.Sprite.Context.translate(this.ScreenCoords.X+this.CentreOffset.X, this.ScreenCoords.Y+this.CentreOffset.Y);
-	 this.Sprite.Context.rotate(this.Form.Angle*(Math.PI/180));
-	 this.ScreenCoords.X = -this.CentreOffset.X;
-	 this.ScreenCoords.Y = this.CentreOffset.Y + this.Sprite.Specs.H;
+			this.Sprite.Context.translate(this.ScreenCoords.X+this.CentreOffset.X, this.ScreenCoords.Y+this.CentreOffset.Y);
+			this.Sprite.Context.rotate(this.Form.Angle*(Math.PI/180));
+			this.ScreenCoords.X = -this.CentreOffset.X;
+			this.ScreenCoords.Y = this.CentreOffset.Y + this.Sprite.Specs.H;
 		}
 
 		//Adjust for flipping
 		if (this.Form.Type==SPRITeFORM.FLIPPED) {
-	 if (this.Form.Orientation==FLIPPED.HORIZONTAL) {
-		 this.Sprite.Context.scale(-1, 1);
-		 this.ScreenCoords.X = -this.ScreenCoords.X;
-	 }
-	 if (this.Form.Orientation==FLIPPED.VERTICAL) {
-		 this.Sprite.Context.scale(1, -1);
-		 this.ScreenCoords.Y = -this.ScreenCoords.Y;
-	 }
+			if (this.Form.Orientation==FLIPPED.HORIZONTAL) {
+				this.Sprite.Context.scale(-1, 1);
+				this.ScreenCoords.X = -this.ScreenCoords.X;
+			}
+			if (this.Form.Orientation==FLIPPED.VERTICAL) {
+				this.Sprite.Context.scale(1, -1);
+				this.ScreenCoords.Y = -this.ScreenCoords.Y;
+			}
 		}
 	}
 };
@@ -266,8 +251,8 @@ GenieAgent.prototype.EndTransform = function() {
 
 		//Adjust for rotation
 		if (this.Form.Type==SPRITeFORM.ROTATED) {
-	 this.Sprite.Context.rotate(-this.Form.Angle*(Math.PI/180));
-	 this.Sprite.Context.translate(-(this.ScreenCoords.X+this.CentreOffset.X), -(this.ScreenCoords.Y+this.CentreOffset.Y));
+			this.Sprite.Context.rotate(-this.Form.Angle*(Math.PI/180));
+			this.Sprite.Context.translate(-(this.ScreenCoords.X+this.CentreOffset.X), -(this.ScreenCoords.Y+this.CentreOffset.Y));
 		}
 
 		//Adjust for flipping
