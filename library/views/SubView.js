@@ -24,6 +24,9 @@ GenieSubView.prototype.Open = function() {
 	this.ShowControls();
 };
 GenieSubView.prototype.Update = function() {  //NOTE: often over-ridden, but not always
+
+	if (this.NestedView)
+		this.NestedView.Update();
 };
 GenieSubView.prototype.Close = function() {
 
