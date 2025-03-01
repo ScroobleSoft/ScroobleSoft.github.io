@@ -21,6 +21,7 @@ GeometricSprite.prototype.Set = function(cntxt, specs, cPad) {
 	this.SetShapesArray();
 };
 GeometricSprite.prototype.SetContext = function(cntxt) {
+	GenieSprite.prototype.SetContext.call(this, cntxt);		//NOTE: necessary as is used by GenieAgent for Transform
 
 	for (this.i=0;this.i<this.Shapes.length;++this.i)
 		this.Shapes[this.i].Context = cntxt;
