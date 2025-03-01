@@ -12,16 +12,6 @@
 	</div>
     </head>
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-6ZT357GL7W"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-6ZT357GL7W');
-</script>
-
     <body onload="RunWordGames()">
 
 	<!-- Data -->
@@ -47,7 +37,7 @@
 
 	<!-- Tools -->
 	<script src="..\library\GenieRandom.js"></script>
-	<script src="..\modules\GenieText.js"></script>
+	<script src="..\library\GenieText.js"></script>
 
 	<!-- Graphics -->
 	<script src="..\library\GenieGraphics.js"></script>
@@ -82,6 +72,9 @@
 
 	<script src="data.js"></script>
 	<script src="data\views.js"></script>
+
+	<script src="key.js"></script>
+	<script src="keyboard.js"></script>
 
 	<!-- words -->
 	<script src="..\library\data\Words3.js"></script>
@@ -126,7 +119,19 @@
 	<script src="views\spindle\options.js"></script>
 	<script src="views\spindle\help.js"></script>
 
-	<script src="views\jiggle.js"></script>
+	<!-- fiddle -->
+	<script src="views\fiddle.js"></script>
+	<script src="views\fiddle\cell.js"></script>
+	<script src="views\fiddle\board.js"></script>
+	<script src="views\fiddle\selector.js"></script>
+	<script src="views\fiddle\options.js"></script>
+	<script src="views\fiddle\stash.js"></script>
+	<script src="views\fiddle\guide.js"></script>
+	<script src="views\fiddle\instructions.js"></script>
+	<script src="views\fiddle\solutions1.js"></script>
+	<script src="views\fiddle\solutions2.js"></script>
+	<script src="views\fiddle\solutions3.js"></script>
+	<script src="views\fiddle\solutions4.js"></script>
 
 	<!-- crossle -->
 	<script src="views\crossle.js"></script>
@@ -140,13 +145,26 @@
 	<script src="views\crossle\solutions1.js"></script>
 	<script src="views\crossle\solutions2.js"></script>
 	<script src="views\crossle\solutions3.js"></script>
+	<script src="views\crossle\solutions4.js"></script>
 
 	<!-- bundle -->
 	<script src="views\bundle.js"></script>
 	<script src="views\bundle\waveboard.js"></script>
 
+	<!-- turtle -->
+	<script src="views\turtle.js"></script>
+	<script src="views\turtle\cell.js"></script>
+	<script src="views\turtle\shell.js"></script>
+	<script src="views\turtle\selector.js"></script>
+	<script src="views\turtle\solutions1.js"></script>
+	<script src="views\turtle\options.js"></script>
+	<script src="views\turtle\stash.js"></script>
+	<script src="views\turtle\guide.js"></script>
+	<script src="views\turtle\instructions.js"></script>
+
 	<script src="components.js"></script>
 	<script src="components\controls.js"></script>
+	<script src="components\views.js"></script>
 
 	<script src="lPuzzles.js"></script>
 

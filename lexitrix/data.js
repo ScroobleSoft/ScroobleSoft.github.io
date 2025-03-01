@@ -36,17 +36,17 @@ var LEXiPUShBUTTOnIMAGEs = { L: 1, T: 1, W: 322, H: 160, O: 2, C: 2, R: 1, PATCH
 var CRACKLePUShBUTTOnIMAGE = { L: 1, T: 163, W: 150, H: 150 };
 var SHUFFLePUShBUTTOnIMAGE = { L: 153, T: 163, W: 150, H: 150 };
 var CROSSLePUShBUTTOnIMAGE = { L: 475, T: 2, W: 150, H: 150 };
-var BUNDLePUShBUTTOnIMAGE = { L: 533, T: 154, W: 150, H: 150 };
+var TURTLePUShBUTTOnIMAGE = { L: 533, T: 154, W: 150, H: 150 };
 var SPINDLePUShBUTTOnIMAGE = { L: 323, T: 2, W: 150, H: 150 };
-var SADDLePUShBUTTOnIMAGE = { L: 381, T: 154, W: 150, H: 150 };
+var FIDDLePUShBUTTOnIMAGE = { L: 381, T: 154, W: 150, H: 150 };
 
 //Push buttons
 var CRACKLePUShBUTTON = { L:  10, T:  10, W: 160, H: 160, LW: 5, BACKGROUND: PAINT.SKY };
 var SHUFFLePUShBUTTON = { L: 190, T:  10, W: 160, H: 160, LW: 5, BACKGROUND: PAINT.SKY };
 var CROSSLePUShBUTTON = { L:  10, T: 210, W: 160, H: 160, LW: 5, BACKGROUND: PAINT.SKY };
-var BUNDLePUShBUTTON =  { L: 190, T: 210, W: 160, H: 160, LW: 5, BACKGROUND: PAINT.SKY };
+var TURTLePUShBUTTON =  { L: 190, T: 210, W: 160, H: 160, LW: 5, BACKGROUND: PAINT.SKY };
 var SPINDLePUShBUTTON = { L:  10, T: 410, W: 160, H: 160, LW: 5, BACKGROUND: PAINT.SKY };
-var SADDLePUShBUTTON =  { L: 190, T: 410, W: 160, H: 160, LW: 5, BACKGROUND: PAINT.SKY };
+var FIDDLePUShBUTTON =  { L: 190, T: 410, W: 160, H: 160, LW: 5, BACKGROUND: PAINT.SKY };
 
 //Buttons
 var HINtBUTTON = { L: -1, T: -1, W: 60, H: 25, LW: 3, LABEL: "Hint", COLOUR: GREY.ASH, BACKGROUND: GREY.ASH, STYLE: BUTTON.STYLE.ROUNDED };
@@ -57,6 +57,7 @@ var INSTRUCTIONsBUTTON = { L: -1, T: -1, W: 120, H: 25, LW: 3, LABEL: "Instructi
 var CROSSLeBUTTOnCORNErIMAGEs = { L: 305, T: 295, W: 18, H: 3, O: 2, R: 1, C: 4, PATCH: { W: 3, H: 3 } };
 
 //Icons
+var GREyICOnCORNErIMAGEs = { L: 325, T: 295, W: 38, H: 3, O: 2, R: 1, C: 8, PATCH: { W: 3, H: 3 } };
 var EXPANdICOnIMAGE = { L: 305, T: 235, W: 46, H: 18 };
 var EXPANdICON = { L: -1, T: -1, W: 52, H: 24, LW: 3, COLOUR: GREY.LIGHT };
 var CONTROLLErICOnIMAGE = { L: 305, T: 255, W: 63, H: 18 };
@@ -64,6 +65,15 @@ var CONTROLLErICON = { L: -1, T: -1, W: 69, H: 24, LW: 3, COLOUR: GREY.LIGHT };
 var FULlSCREEnICOnIMAGE = { L: 305, T: 275, W: 68, H: 18 };
 var FULlSCREEnICON = { L: -1, T: -1, W: 74, H: 24, LW: 3, COLOUR: GREY.LIGHT };
 
+var LEXiKEYBOARD = { ROWS: [ 0,10,19 ], OFFSETS: [ 0,18,54 ],
+							KEY: { COUNT: 26, W: 32, H: 32, O: { UnPRESSED: { X: 8, Y: 6 }, PRESSED: { X: 5, Y: 2 } }, LW: 3, GAP: 4,
+									 STATE: { UnPRESSED: 0, CLICKED: 1, SINGLeCLICKED: 2, DOUBLeCLICKED: 3, PRESSED: 4 } },
+							IMAGE: { KEY: { BUTTONS: { L: 490, T: 131, W: 66, H: 32, O: 2, C: 2, R: 1, PATCH: { W: 32, H: 32 } },
+												 LETTERS: { L: 368, T: 187, W: 231, H: 45, O: 3, C: 13, R: 2, PATCH: { W: 15, H: 21 } },
+												 PRESSED: { L: 362, T: 234, W: 154, H: 30, O: 2, C: 13, R: 2, PATCH: { W: 10, H: 14 } }
+											  }
+									 }
+};
 var LEXiCONTROLLER = { L: 368, T: 480, W: 272, H: 272, KEY: { O: 4 } };
 
 //--------------------------------------
