@@ -96,7 +96,7 @@ LexiCrossleView.prototype.SetDaily = function() {
 
 	this.GameType = this.Specs.TYPE.DAILY;
 	ms = this.DailyDate.getTime();
-	this.Selector.SolutionIndex = Math.floor((ms-this.Specs.MILLISECONDS)/(24*60*60*1000));
+	this.Selector.SolutionIndex = Math.floor((ms-this.Specs.MILLISECONDS)/(24*60*60*1000)) % Solutions.length;
 };
 LexiCrossleView.prototype.SetNumber = function(num) {
 
