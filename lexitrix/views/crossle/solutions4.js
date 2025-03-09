@@ -238,8 +238,29 @@ var Solutions300 = [ [ "necklines", "glassware", "blackmail", "deepening",
 							  "guilt", "messy", "genre", "noses", "nosed", "arena", "salon", "eagle"  ],
 							[ "canonical", "organizes", "adoringly", "necessary",
 							  "along", "oasis", "inept", "amber", "tread", "dryer", "futon", "nasal",
-							  "ebons", "edges", "ember", "terra", "sated", "reedy", "fungi", "taste"  ]		//480
+							  "ebons", "edges", "ember", "terra", "sated", "reedy", "fungi", "taste"  ],		//480
 							[ "discovery", "undresses", "sophomore", "unwelcome",
 							  "icing", "cheat", "video", "roach", "rodeo", "ditch", "modem", "trier",
-							  "noise", "eight", "drawn", "other", "cared", "midst", "mites", "drive"  ]
-];  //481
+							  "noise", "eight", "drawn", "other", "cared", "midst", "mites", "drive"  ],
+							[ "dehydrate", "behemoths", "passports", "jointless",
+							  "event", "years", "recap", "taboo", "sigma", "reeds", "video", "roust",
+							  "opera", "notes", "cable", "prone", "laser", "segue", "virgo", "dough"  ],
+							[ "campaigns", "nanometer", "chrysalis", "utterance",
+							  "anger", "patch", "itchy", "north", "hutch", "nappy", "aroma", "swami",
+							  "tight", "earth", "circa", "yahoo", "ashen", "cutup", "aisle", "orate"  ],
+							[ "botanical", "prosecute", "miscreant", "withstood",
+							  "offer", "apron", "imply", "aspen", "chili", "tonic", "plate", "nylon",
+							  "infer", "heron", "paper", "yanks", "tacit", "onion", "panic", "allot"  ],
+							[ "scantiest", "faintness", "cementing", "decorated",
+							  "crime", "nests", "input", "slack", "chafe", "delve", "leapt", "doyen",
+							  "exits", "ovens", "plaza", "token", "arced", "email", "laden", "abyss"  ],
+							[ "ecosphere", "handsewed", "milliwatt", "panellist",
+							  "crowd", "sired", "hauls", "robot", "chili", "legal", "sinew", "erect",
+							  "amour", "ended", "umbra", "sated", "local", "sling", "scene", "niece"  ],
+							[ "sentience", "terminate", "initiated", "emigrants",
+							  "enter", "tired", "eject", "clout", "drawn", "posit", "comma", "awake",
+							  "meter", "gored", "elope", "totem", "addup", "toads", "chain", "meant"  ],
+							[ "heinously", "retreated", "ostriches", "outdazzle",
+							  "enter", "niece", "uncut", "lucre", "nicks", "solar", "panic", "noise",
+							  "untie", "dirge", "cache", "their", "zings", "local", "panda", "naive"  ]
+];  //488
