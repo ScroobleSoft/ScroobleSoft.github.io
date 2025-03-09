@@ -1,0 +1,6 @@
+ * no amber colours - (only red and green); actually, not true, as only 'bumpers' will change colour, green if all 9 surrounding tiles are correct, amber if even 1 is correct
+ ** will be re-named Poodle with 4 5x5 grids
+ ** all tiles around a 'cleared' grid become green, opening a path for the poodle to traverse
+ ** one bulldog per grid, moving between the 4 empty tiles
+ ** will try to shuffle all the tiles such that they're all red at the start, although that may not be possible
+ ** will try a pseudo 'tap-and-drop,' which will be done by tapping the first tile, then the second to effect switch
