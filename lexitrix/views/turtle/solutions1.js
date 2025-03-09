@@ -1,0 +1,40 @@
+
+var TurtleSolutions100 = [ [ "agreement", "astern", "paste", "donut", "pared", "eject" ],
+									[ "financial", "magnet", "trace", "eatit", "tinge", "edict" ],
+									[ "unbeknown", "pocked", "spoke", "ridge", "sober", "erode" ],
+									[ "jumpsuits", "classy", "filed", "dryad", "famed", "dried" ],
+									[ "deceivers", "riding", "drink", "rigid", "decor", "knead" ],
+									[ "clockwise", "tucked", "found", "radon", "floor", "deign" ],
+									[ "weekender", "divest", "cling", "ditty", "creed", "giddy" ],
+									[ "penurious", "geared", "smelt", "dodge", "synod", "trope" ],
+									[ "quarterly", "pitted", "blind", "lodge", "brawl", "dirge" ],
+									[ "blundered", "sender", "fiend", "purse", "frump", "dirge" ],		//10
+									[ "pressgang", "lessen", "overt", "nanny", "ocean", "toady" ],
+									[ "austerity", "heresy", "break", "thyme", "beset", "knife" ],
+									[ "memorized", "stared", "deter", "rider", "demur", "razor" ],
+									[ "announcer", "resume", "bleed", "seedy", "bonus", "decay" ],
+									[ "birthrate", "rushed", "prude", "hedge", "parch", "evade" ],
+									[ "hourglass", "fought", "cross", "deter", "could", "stair" ],
+									[ "historian", "shroud", "ethic", "elder", "ensue", "crier" ],
+									[ "catalysts", "wallow", "graph", "dowse", "gated", "haste" ],
+									[ "sharpened", "propel", "scram", "filth", "staff", "munch" ],
+									[ "alertness", "pelted", "wheel", "dodge", "wield", "liege" ],		//20
+									[ "logarithm", "outrun", "squib", "tinge", "sight", "bathe" ],
+									[ "shameless", "surety", "crust", "style", "crass", "theme" ],
+									[ "garrulous", "immune", "mimic", "elect", "merge", "croft" ],
+									[ "maligning", "groggy", "surge", "tryst", "split", "evict" ],
+									[ "abrogated", "judged", "crust", "elder", "curve", "tutor" ],
+									[ "anonymity", "buoyed", "count", "yodel", "crony", "twirl" ],
+									[ "seatbelts", "ribbed", "quilt", "madly", "qualm", "tally" ],
+									[ "biorhythm", "pathos", "shawl", "loser", "shoal", "later" ],
+									[ "mailrooms", "search", "spend", "ethos", "spite", "dross" ],
+									[ "flickered", "packer", "drawl", "north", "deign", "lurch" ],		//30
+									[ "ablutions", "wanted", "slant", "nudge", "salon", "trope" ],
+									[ "trackball", "awoken", "cowed", "linen", "crawl", "drawn" ],
+									[ "reopening", "cement", "steep", "rotor", "scour", "prior" ],
+									[ "grainiest", "kidney", "reign", "maybe", "realm", "niece" ],
+									[ "continual", "defile", "spend", "event", "singe", "doubt" ],
+									[ "darkening", "potent", "floss", "total", "first", "swill" ],
+									[ "agreement", "astern", "paste", "donut", "pared", "eject" ]
+];  //37
+//									[ "", "", "", "", "", "" ]
