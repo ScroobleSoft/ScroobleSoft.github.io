@@ -1,0 +1,41 @@
+
+ //NOTE: In decreasing order of wealth
+var ForeignLeagues = [ Spain, Italy, Germany, France, Russia, Turkey, Portugal, Holland, Switzerland, Belgium, Ukraine, Sweden, Denmark, Norway, Scotland, Greece, CzechRepublic, Hungary, Poland, Serbia, Croatia, Brazil, Mexico, Argentina, USA, UAE, Japan, Colombia, Uruguay, CostaRica, Ecuador, Romania, Ireland, Australia, Slovenia, Egypt, Cyprus ];
+
+var Argentina = [ "Independiente", "Racing", "River Plate" ];
+var Australia = [ "Brisbane Athletic", "Brisbane Roar", "Newcastle Jets" ];
+var Belgium = [ "Anderlecht", "Club Brugge", "Genk", "Standard Liege" ];
+var Brazil = [ "Atletico Paranaense", "Fluminense", "Internacional", "Palmeiras", "Sao Paolo" ];
+var CzechRepublic = [ "Mlada Boleslav" ];
+var Colombia = [ "Atletico Nacional" ];
+var CostaRica = [ "Saprissa" ];
+var Croatia = [ "Dinamo Zagreb" ];
+var Cyprus = [ "Apollon" ];
+var Denmark = [ "Brondby", "Copenhagen", "Esbjerg", "Midtjylland" ];
+var Ecuador = [ "LDU Quito" ];
+var Egypt = [ "Al Ahly" ];
+var France = [ "Bordeaux", "Laval", "Le Havre", "Lens", "Lille", "Lorient", "Lyon", "Marseille", "Metz", "Monaco", "Montpellier", "Nancy", "Nice", "Paris Saint-Germain", "Rennes", "Saint-Etienne" ];
+var Germany = [ "1860 Munich", "Augsburg", "Bayer Leverkusen", "Bayern Munich", "Borussia Monchengladbach", "Borussia Dortmund", "Cologne", "Dynamo Dresden", "Hamburg", "Hanover", "Hoffenheim", "Ingolstadt", "Kaiserlautern", "Karlsruher", "Mainz", "Paderborn", "Schalke", "Union Berlin", "Werder Bremen", "Wolfsburg" ];
+var Greece = [ "Olympiakos" ];
+var Holland = [ "Ajax", "AZ Alkmaar", "Den Haag", "Feyenoord", "Heerenveen", "PSV", "Twente", "Vitesse", "VVV Venlo" ];
+var Hungary = [ "Ferencvaros" ];
+var Ireland = [ "Cork City", "Dundalk", "Sligo Rovers" ];
+var Italy = [ "Atalanta", "Fiorentina", "Internazionale", "Juventus", "Lazio", "Palermo", "Roma", "Sampdoria", "Torino", "Udinese" ];
+var Japan = [ "Grampus Eight" ];
+var Mexico = [ "Morelia", "Pachuca" ];
+var Norway = [ "Aalesund" ];
+var Poland = [ "Cracovia", "Lech Poznan", "Legia Warsaw" ];
+var Portugal = [ "Benfica", "Gremio", "Porto", "Sporting Lisbon" ];
+var Romania = [ "Steaua Bucharest" ];
+var Russia = [ "CSKA Moscow", "Lokomotiv Moscow", "Spartak Moscow", "Ufa", "Zenit St Petersburg" ];
+var Scotland = [ "Aberdeen", "Celtic", "Falkirk" ];
+var Serbia = [ "Red Star Belgrade" ];
+var Slovenia = [ "Domzale" ];
+var Spain = [ "Alaves", "Almeria", "Athletic Bilbao", "Atletico Madrid", "Barcelona", "Celta Vigo", "Deportivo La Coruna", "Eibar", "Espanyol", "Granada", "Las Palmas", "Malaga", "Napoli", "Ponferradina", "Real Madrid", "Sevilla", "Tenerife", "Terrassa", "Valencia", "Villareal" ];
+var Sweden = [ "Ostersund" ];
+var Switzerland = [ "Basle", "Grasshoppers", "Neuchatel Xamax", "Sion" ];
+var Turkey = [ "Besiktas" ];
+var UAE = [ "Al Jazira" ];
+var Ukraine = [ "Shakhtar Donetsk" ];
+var Uruguay = [ "Penarol" ];
+var USA = [ "Houston Dynamo" ];
