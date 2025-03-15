@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+
+    <a href="https://www.hitc.com/topic/hitc-sevens/?hl=en">
+	<img src="banner.png" alt="HITC Sevens" width="400" height="64" >
+    </a>
+
+    <head>
+	<div id="PrimeDiv" style="position:absolute; top:40px; left:8px; z-index:1">
+	    <canvas id="PitchCanvas" width="400" height="400"></canvas>
+	</div>
+	<div id="InfoDiv" style="position:absolute; top:444px; left:8px; z-index:2">
+	    <canvas id="ZoomCanvas" width="240" height="240"></canvas>
+	</div>
+	<div id="ConsoleDiv" style="position:absolute; top:444px; left:252px; z-index:3">
+	    <canvas id="ConsoleCanvas" width="156" height="240"></canvas>
+	</div>
+    </head>
+
+   <body onload="RunMobileFootie()">
+
+	<!-- Data -->
+	<script src="..\library\GenieData.js"></script>
+	<script src="..\library\data\Consts.js"></script>
+	<script src="..\library\data\Characters.js"></script>
+	<script src="..\library\data\Colours.js"></script>
+	<script src="..\library\data\Geo.js"></script>
+	<script src="..\library\data\IO.js"></script>
+	<script src="..\library\data\Controls.js"></script>
+	<script src="..\library\data\Images.js"></script>
+	<script src="..\library\data\Sprites.js"></script>
+	<script src="..\library\data\Agents.js"></script>
+	<script src="..\library\data\Weapons.js"></script>
+
+	<!-- Types -->
+	<script src="..\library\GenieTypes.js"></script>
+	<script src="..\library\GenieArray.js"></script>
+	<script src="..\library\GenieList.js"></script>
+	<script src="..\library\AgentArray.js"></script>
+
+	<!-- Utilities -->
+	<script src="..\library\GenieUtils.js"></script>
+	<script src="..\library\utils\BitUtils.js"></script>
+	<script src="..\library\utils\GeoUtils.js"></script>
+	<script src="..\library\utils\SpaceUtils.js"></script>
+	<script src="..\library\utils\ArrayUtils.js"></script>
+	<script src="..\library\utils\IntersectUtils.js"></script>
+	<script src="..\library\utils\PerspectiveUtils.js"></script>
+	<script src="..\library\utils\StringUtils.js"></script>
+
+	<!-- Tools -->
+	<script src="..\library\GenieRandom.js"></script>
+	<script src="..\library\GenieBuffer.js"></script>
+	<script src="..\library\GenieText.js"></script>
+	<script src="..\library\GenieCalcPad.js"></script>
+
+	<!-- Graphics -->
+	<script src="..\library\GenieImage.js"></script>
+	<script src="..\library\ImageMap.js"></script>
+	<script src="..\library\GenieGraphics.js"></script>
+	<script src="..\library\GenieShape.js"></script>
+	<script src="..\library\shapes\GenieCircle.js"></script>
+	<script src="..\library\shapes\GenieRectangle.js"></script>
+
+	<!-- Sprites -->
+	<script src="..\library\GenieSprite.js"></script>
+	<script src="..\library\sprites\AnimatedSprite.js"></script>
+	<script src="..\library\sprites\GeometricSprite.js"></script>
+	<script src="..\library\sprites\CompositeSprite.js"></script>
+	<script src="..\library\sprites\AnimatedCompositeSprite.js"></script>
+
+	<!-- Agents -->
+	<script src="..\library\MobileObject.js"></script>
+	<script src="..\library\GenieAgent.js"></script>
+	<script src="..\library\agent\Draw.js"></script>
+	<script src="..\library\agent\Update.js"></script>
+	<script src="..\library\agent\Animation.js"></script>
+	<script src="..\library\agent\Space.js"></script>
+	<script src="..\library\FX\GenieProjectile.js"></script>
+
+	<!-- Controls -->
+	<script src="..\library\GenieControl.js"></script>
+	<script src="..\library\controls\GenieButton.js"></script>
+	<script src="..\library\controls\TextButton.js"></script>
+	<script src="..\library\controls\ImageButton.js"></script>
+	<script src="..\library\controls\AnimatedButton.js"></script>
+	<script src="..\library\controls\GenieRadio.js"></script>
+	<script src="..\library\controls\GenieTabs.js"></script>
+	<script src="..\library\controls\ColouredTabs.js"></script>
+	<script src="..\library\controls\ButtonPanel.js"></script>
+	<script src="..\library\controls\IconPanel.js"></script>
+	<script src="..\library\controls\GenieCheckBox.js"></script>
+	<script src="..\library\controls\SpinControl.js"></script>
+	<script src="..\library\controls\GenieTouchBar.js"></script>
+	<script src="..\library\controls\GeniePagination.js"></script>
+	<script src="..\library\controls\GenieTextArea.js"></script>
+
+	<!-- Interface -->
+	<script src="..\library\GenieMouse.js"></script>
+	<script src="..\library\TouchScreen.js"></script>
+	<script src="..\library\GenieKeyboard.js"></script>
+	<script src="..\library\GenieGamepad.js"></script>
+
+	<!-- Framework -->
+	<script src="..\library\ImageManager.js"></script>
+	<script src="..\library\GenieCanvas.js"></script>
+	<script src="..\library\GenieScape.js"></script>
+	<script src="..\library\GenieView.js"></script>
+	<script src="..\library\views\SubView.js"></script>
+	<script src="..\library\views\NestedView.js"></script>
+	<script src="..\library\GenieGame.js"></script>
+
+	<!-- teams -->
+	<script src="teams\arsenal.js"></script>
+	<script src="teams\bournemouth.js"></script>
+	<script src="teams\brighton.js"></script>
+	<script src="teams\burnley.js"></script>
+	<script src="teams\chelsea.js"></script>
+	<script src="teams\crystalpalace.js"></script>
+	<script src="teams\everton.js"></script>
+	<script src="teams\huddersfield.js"></script>
+	<script src="teams\leicester.js"></script>
+	<script src="teams\liverpool.js"></script>
+	<script src="teams\mancity.js"></script>
+	<script src="teams\manutd.js"></script>
+	<script src="teams\newcastle.js"></script>
+	<script src="teams\southampton.js"></script>
+	<script src="teams\stoke.js"></script>
+	<script src="teams\swansea.js"></script>
+	<script src="teams\tottenham.js"></script>
+	<script src="teams\watford.js"></script>
+	<script src="teams\wba.js"></script>
+	<script src="teams\westham.js"></script>
+
+	<!-- data -->
+	<script src="data.js"></script>
+	<script src="data\names.js"></script>
+	<script src="data\colours.js"></script>
+	<script src="data\squad.js"></script>
+	<script src="data\formations.js"></script>
+	<script src="data\transfer.js"></script>
+	<script src="data\controls.js"></script>
+	<script src="data\seeds.js"></script>
+	<script src="data\sprites.js"></script>
+	<script src="data\views.js"></script>
+
+	<script src="types.js"></script>
+
+	<!-- players -->
+	<script src="match\football.js"></script>
+	<script src="player.js"></script>
+	<script src="players\youth.js"></script>
+	<script src="players\senior.js"></script>
+	<script src="players\matchplayer.js"></script>
+	<script src="players\match.js"></script>
+	<script src="players\keeper.js"></script>
+	<script src="players\foreignplayer.js"></script>
+	<script src="players\sideview.js"></script>
+	<script src="players\topdown.js"></script>
+	<script src="players\quality.js"></script>
+	<script src="transferpool.js"></script>
+
+	<script src="manager.js"></script>
+
+	<script src="utils.js"></script>
+
+	<!-- controls -->
+	<script src="controls\buttonpanel.js"></script>
+	<script src="controls\imagebutton.js"></script>
+	<script src="controls\rotatingbutton.js"></script>
+
+	<!-- league -->
+	<script src="league.js"></script>
+	<script src="league\generate.js"></script>
+	<script src="league\dump.js"></script>
+	<script src="league\load.js"></script>
+
+	<!-- components -->
+	<script src="components.js"></script>
+	<script src="components\data.js"></script>
+	<script src="components\controls.js"></script>
+	<script src="components\images.js"></script>
+	<script src="components\sprites.js"></script>
+	<script src="components\agents.js"></script>
+	<script src="components\views.js"></script>
+
+	<!-- AI -->
+	<script src="instruct.js"></script>
+	<script src="news.js"></script>
+	<script src="assistant.js"></script>
+
+	<script src="stats.js"></script>
+	<script src="youthteam.js"></script>
+	<script src="squad.js"></script>
+	<script src="selector.js"></script>
+	<script src="season.js"></script>
+	<script src="schedule.js"></script>
+	<script src="formation.js"></script>
+	<script src="team.js"></script>
+	<script src="table.js"></script>
+
+	<!-- match -->
+	<script src="match.js"></script>
+	<script src="match\sim.js"></script>
+	<script src="match\matchup.js"></script>
+	<script src="match\scoreboard.js"></script>
+	<script src="mapper.js"></script>
+	<script src="pitchgrid.js"></script>
+	<script src="pitch\sideview.js"></script>
+	<script src="pitchiso.js"></script>
+	<script src="quicksim.js"></script>
+
+	<!-- views -->
+	<script src="views\league.js"></script>
+	<script src="views\league\info.js"></script>
+	<script src="views\league\console.js"></script>
+	<script src="views\team.js"></script>
+	<script src="views\team\info.js"></script>
+	<script src="views\team\console.js"></script>
+	<script src="views\squad.js"></script>
+	<script src="views\youthteam.js"></script>
+
+	<script src="views\formation.js"></script>
+	<script src="views\formation\info.js"></script>
+	<script src="views\formation\console.js"></script>
+	<script src="views\formation\bench.js"></script>
+	<script src="views\formation\subs.js"></script>
+
+	<script src="views\training.js"></script>
+
+	<script src="views\tactics.js"></script>
+	<script src="views\tactics\console.js"></script>
+
+	<script src="views\transfer.js"></script>
+	<script src="views\transfer\set.js"></script>
+	<script src="views\transfer\console.js"></script>
+
+	<script src="views\opponent.js"></script>
+	<script src="views\opponent\info.js"></script>
+
+	<script src="views\fixtures.js"></script>
+	<script src="views\fixtures\season.js"></script>
+	<script src="views\fixtures\next10.js"></script>
+	<script src="views\fixtures\league.js"></script>
+	<script src="views\fixtures\cups.js"></script>
+	<script src="views\fixtures\diamond.js"></script>
+	<script src="views\fixtures\emerald.js"></script>
+	<script src="views\fixtures\ruby.js"></script>
+	<script src="views\fixtures\sapphire.js"></script>
+	<script src="views\fixtures\info.js"></script>
+
+	<script src="views\injury.js"></script>
+	<script src="views\table.js"></script>
+	<script src="views\stats.js"></script>
+	<script src="views\matchsideview.js"></script>
+
+	<script src="views\highlights.js"></script>
+	<script src="views\highlights\info.js"></script>
+	<script src="views\highlights\console.js"></script>
+
+	<!-- tests -->
+	<script src="testing.js"></script>
+	<script src="testing\mgBasic.js"></script>
+	<script src="testing\mgStriker.js"></script>
+	<script src="testing\mgReset.js"></script>
+	<script src="testing\dribbling.js"></script>
+	<script src="testing\animated.js"></script>
+	<script src="testing\wing.js"></script>
+	<script src="testing\pitch.js"></script>
+	<script src="testing\geometric.js"></script>
+	<script src="testing\smudging.js"></script>
+	<script src="testing\parabolic.js"></script>
+	<script src="testing\formations.js"></script>
+	<script src="testing\fixtures.js"></script>
+	<script src="testing\matchups.js"></script>
+	<script src="testing\sprites.js"></script>
+	<script src="testing\kit.js"></script>
+	<script src="testing\possession.js"></script>
+	<script src="testing\conformance.js"></script>
+	<script src="testing\directional.js"></script>
+	<script src="testing\names.js"></script>
+	<script src="testing\random.js"></script>
+
+	<script src="intro.js"></script>
+
+	<script src="demo.js"></script>
+
+	<script src="tutorial.js"></script>
+
+	<script src="minigames.js"></script>
+
+	<script src="lContest.js"></script>
+
+	<script>
+
+	 //Main game object
+	 var Game;
+
+	 function RunMobileFootie() {
+
+	    //Create standard game objects
+	    FootieScape = new GenieScape();
+	    FootieGraphics = new GenieGraphics();
+	    FootieText = new GenieText();
+	    FootieCalcPad = new GenieCalcPad();
+	    FootieRandomizer = new GenieRandomizer();
+
+	    //Set main screen and game components
+	    ImageManager.Set(FootieImages);
+	    FootieScape.Set("PitchCanvas", "ZoomCanvas", "ConsoleCanvas");
+//	    FootieScape.PrimeScape.DisableRightClickMenu();
+	    FootieGraphics.Set(FootieScape.Screen, FootieScape.InfoBox, FootieScape.ControlPanel);
+	    FootieText.Set(FootieScape.Screen, null, FootieScape.InfoBox, FootieScape.ControlPanel);
+	    FootieScape.AddController(GAMePAD.ARROWS);
+	    FootieController = FootieScape.ControllerA;
+	    Controller = FootieScape.ControllerA;
+	    FootieRandomizer.Set()
+
+	    //Load and assign graphic images
+	    ImageManager.LoadImages();
+	    ImageManager.Check();				//Check if images have loaded
+
+	    //Begin as soon as images have loaded
+	    Game = new LeagueContest();
+	    Game.Set(FootieScape, FootieGraphics, FootieCalcPad, FootieText, FootieRandomizer);
+	    Game.SetMobile();
+	    Game.CheckImagesLoaded();
+
+	}
+
+	</script>
+    </body>
+</html>
