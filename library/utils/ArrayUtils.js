@@ -2,7 +2,7 @@
 //-----------------------------------------------
 //---------- ARRAY UTILITIES --------------------
 var ArrayUtilities = function() {
-	var i, val;
+	var i, val, indx;
 };
 ArrayUtilities.prototype = {
 	Set() {
@@ -145,7 +145,7 @@ ArrayUtilities.prototype = {
 
 		return (arry);
 	},
-	CreateDuplicate(arry) {  //UNLOGGED
+	CreateDuplicate(arry) {
 		var aElmnts;
 
 		aElmnts = new Array(arry.length);
@@ -153,6 +153,19 @@ ArrayUtilities.prototype = {
 			aElmnts[this.i] = arry[this.i];
 
 		return (aElmnts);
+	},
+	GetHighestIndex(arry) {
+		var indx;
+
+		this.indx = 0 ;
+		this.val = arry[this.indx];
+		for (this.i=1;this.i<arry.length;++this.i)
+			if (arry[this.i]>this.val) {
+				this.indx = this.i;
+				this.val = arry[this.i];
+			}
+
+		return (this.indx);
 	}
 };
 
