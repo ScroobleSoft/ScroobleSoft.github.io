@@ -84,5 +84,26 @@ var FiddleSolutions400 = [ [ "soppy", "scant", "prior", "yummy", "axiom", "tarry
 									[ "fibre", "float", "begot", "eaten", "ought", "titan" ],
 									[ "rural", "recur", "robin", "leafy", "cobra", "rangy" ],		//384
 									[ "repel", "raven", "penal", "lemon", "venom", "nylon" ],
-									[ "melee", "melts", "lodge", "event", "ladle", "spent" ]
+									[ "melee", "melts", "lodge", "event", "ladle", "spent" ],
+									[ "raged", "right", "glide", "dryer", "grimy", "their" ],
+									[ "raved", "roost", "vogue", "dotty", "ought", "teeny" ],		//388
+									[ "feint", "facet", "image", "theme", "cease", "these" ],
+									[ "alive", "alias", "irate", "eaten", "inapt", "stern" ],
+									[ "aerie", "atone", "razor", "ended", "oozed", "erred" ],
+									[ "ankle", "alter", "kaput", "error", "taper", "rotor" ],		//392
+									[ "crony", "cited", "ounce", "yodel", "tuned", "dwell" ],
+									[ "rouse", "repel", "uncut", "elder", "paced", "later" ],
+									[ "leave", "loser", "amiss", "entry", "swift", "raspy" ],
+									[ "merry", "metal", "rearm", "yearn", "tiara", "lemon" ],		//396
+									[ "drove", "ditto", "owned", "every", "tonne", "oddly" ],
+									[ "mania", "mynah", "naval", "apron", "never", "halon" ],
+									[ "untie", "unlit", "taste", "early", "laser", "teeny" ],
+									[ "drink", "depot", "inane", "knave", "plaza", "these" ]			//400
+];
+var FiddleSolutions500 = [ [ "given", "grand", "video", "nurse", "adder", "diode" ],
+									[ "guard", "gable", "amass", "dance", "brain", "ensue" ],
+									[ "homey", "halve", "meant", "yearn", "llama", "eaten" ],
+									[ "awful", "atoll", "flint", "leech", "oxide", "latch" ],		//404
+									[ "pants", "pivot", "naive", "sneak", "voice", "tweak" ],
+									[ "slope", "smash", "onion", "elide", "alibi", "hinge" ]
 ];
