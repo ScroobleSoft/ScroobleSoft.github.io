@@ -2,7 +2,7 @@
  *  deafult colouring is light grey for unselected pages, light blue for selected ones
  *  NOTE: 'ITEM.COUNT' denotes the number of entries displayed per page; # of pages won't be fixed, and will depend on # of items
  */
-//-----------------------------------------------  specs: { L: -1, T: -1, W: -1, H: -1, C: -1, R: -1, ITEMS: { PAGE: -1, COLOUR: "", MAX: -1 },
+//-----------------------------------------------  specs: { L: -1, T: -1, W: -1, H: -1, C: -1, R: -1, ITEM: { H: -1, COUNT: -1, MAX: -1 },
 //---------- GENIE PAGINATION -------------------		 		COLOUR: { FRAME: "", PAGE: "", STRIP: "", SELECTION: "" } }
 var GeniePagination = function() {
 	var SelectedPage, SelectedItemIndex, SelectedItem;		//NOTE: index is for entry on page, not overall entry in list of items
@@ -150,7 +150,7 @@ GeniePagination.prototype.DrawStrip = function() {
 	}
 
 	//Colour bakground
-	t = this.Specs.T + this.Specs.PAGE.H;
+	t = this.Specs.T + (this.Specs.ITEM.H*this.Specs.ITEM.COUNT);
 	this.Context.fillStyle = bColour;
 	this.Context.fillRect(this.Specs.L, t, this.Pic.Specs.W, this.Pic.Specs.H);
 
@@ -182,7 +182,7 @@ GeniePagination.prototype.DrawStrip = function() {
 			w = ((this.Pages % this.Specs.C)*(ptch.W+1)) + 1;
 			h = (Math.floor(this.Pages/this.Specs.C)*(ptch.H+1));
 			this.Pic.DrawPatch(this.Specs.L, t, 0, h, w, ptch.H+2);
-			this.Pic.SetCoords(this.Specs.L, this.Specs.T+(this.Specs.PAGE.H+1));
+			this.Pic.SetCoords(this.Specs.L, this.Specs.T+((this.Specs.ITEM.H*this.Specs.ITEM.COUNT)+1));
 		}
 
 	} else {
@@ -216,7 +216,7 @@ GeniePagination.prototype.GetPage = function() {
 	//Get index
 	if (this.Specs.R) {
 		c = Math.floor((Mouse.Down.X-this.Specs.L)/(w+1));
-		r = Math.floor((Mouse.Down.Y-(this.Specs.T+this.Specs.PAGE.H))/(h+1));
+		r = Math.floor((Mouse.Down.Y-(this.Specs.T+(this.Specs.ITEM.H*this.Specs.ITEM.COUNT)))/(h+1));
 		this.i = (this.Specs.C*r) + c;
 	} else
 		this.i = Math.floor((Mouse.Down.X-this.Specs.L)/(PAGINATION.PATCH.W+1));
