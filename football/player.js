@@ -395,6 +395,17 @@ FootballPlayer.prototype = {
 				return (0);
 		}
 	},
+	GetGroup() {
+
+		if (this.Position==POSITION.GK)
+			return (SQUAD.CATEGORY.G);
+		else if (this.Position<=POSITION.LWB)
+			return (SQUAD.CATEGORY.D);
+		else if (this.Position<=POSITION.LAM)
+			return (SQUAD.CATEGORY.M);
+		else
+			return (SQUAD.CATEGORY.A);
+	},
 	SetInjured() {
 
 		this.Status += BitUtils.AddBit(this.Status, FOOTBALLER.BIT.INJURY);

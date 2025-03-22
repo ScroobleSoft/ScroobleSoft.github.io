@@ -68,13 +68,27 @@ FootballSquad.prototype = {
 
 		this.Players.push(player);
 		if (player.Position==POSITION.GK)
-	 this.Goalkeepers.push(player);
+			this.Goalkeepers.push(player);
 		else if (player.Position<POSITION.RM)
-	 this.Defenders.push(player);
+			this.Defenders.push(player);
 		else if (player.Position<POSITION.RW)
-	 this.Midfielders.push(player);
+			this.Midfielders.push(player);
 		else
-	 this.Attackers.push(player);
+			this.Attackers.push(player);
+	},
+	SubtractPlayer(player) {
+		var i;
+		var grp;
+
+		//Remove from main list
+		for (i=0;i<this.Players.length;++i)
+			if (this.Players[i]===player)
+				break;
+		ArrayUtils.Remove(this.Players, i);
+
+		//Remove from position list
+		grp = player.GetGroup();
+		this.PositionGroups[grp].sort(function(a, b) {return a.Quality-b.Quality;});
 	},
 	AssignBalancedPositions() {
 
@@ -173,9 +187,11 @@ FootballSquad.prototype = {
 		for (i=0;i<SQUAD.GROUPS;++i)
 	 this.PositionGroups[i].sort(function(a, b) {return a.Quality-b.Quality;});
 	},
-	PositionSort() {
+	SortByPosition() {
+
+		this.Players.sort(function(a, b) {return a.Position-b.Position;});
 	},
-	QualitySort() {
+	SortByQuality() {
 		var i;
 
 		//UNLOGGED

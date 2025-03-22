@@ -220,7 +220,7 @@ FootballTransferPool.prototype = {
 		var i, j;
 		var iPlayer;
 
-		Teams.forEach(function(team) {team.Squad.QualitySort();});
+		Teams.forEach(function(team) {team.Squad.SortByQuality();});
 
 		iPlayer = 0;
 		for (i=0;i<LEAGUE.TEAMS;++i) {
@@ -314,6 +314,10 @@ FootballTransferPool.prototype = {
 		// maybe the former can be numbered 100+, the latter 200+)
 	},
 	Sort() {	//NOTE: by quality
+
+		this.Players.sort(function(a, b) {return (a.Quality-b.Quality);});
+	},
+	SortByQuality() {  //UNLOGGED . . . TODO: replace ::Sort
 
 		this.Players.sort(function(a, b) {return (a.Quality-b.Quality);});
 	},
