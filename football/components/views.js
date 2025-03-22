@@ -40,9 +40,9 @@ FootballComponents.prototype.SetFormationViews = function() {
 };
 FootballComponents.prototype.SetTransferViews = function() {
 
+	TransferSubView.SetLinks(this.GraphicsTool, this.TextWriter);
 	TransferSubView.Set(this.Interface.PrimeScape, VIEW.TRANSFERS, TeamView);
-	TransferSubView.SetLinks(null, this.TextWriter);
-	TransferConsoleView.Set(this.Interface.Console, VIEW.TRANSFERS.CONSOLE, TeamView);
+	TransferConsoleView.Set(this.Interface.Console, VIEW.TRANSFERS.CONSOLE, TransferSubView);
 	TransferSubView.SetSubViews(null, TransferConsoleView);
 };
 FootballComponents.prototype.SetHighlightsViews = function() {
