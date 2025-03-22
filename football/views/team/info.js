@@ -186,9 +186,9 @@ FootballTeamInfoView.prototype.DisplayFinancials = function() {
 	this.TextWriter.SetContext(this.Context);
 
 	this.TextWriter.Write("Price:", this.Specs.PRICE.LABEL.X, this.Specs.PRICE.LABEL.Y+this.Padding, { FONT: "12px Arial" } );
-	this.TextWriter.Write(Utils.FormatMoney(this.Footballer.GetPrice()*1000), this.Specs.PRICE.X, this.Specs.PRICE.Y+this.Padding, { FONT: "12px Arial" } );
+	this.TextWriter.Write(Utils.FormatMoney(this.Footballer.GetPrice()), this.Specs.PRICE.X, this.Specs.PRICE.Y+this.Padding, { FONT: "12px Arial" } );
 	this.TextWriter.Write("Wages:", this.Specs.WAGES.LABEL.X, this.Specs.WAGES.LABEL.Y+this.Padding, { FONT: "12px Arial" } );
-	this.TextWriter.Write(this.Footballer.GetWages()+"K", this.Specs.WAGES.X, this.Specs.WAGES.Y+this.Padding, { FONT: "12px Arial" } );
+	this.TextWriter.Write(Utils.FormatMoney(this.Footballer.GetWages())+"K", this.Specs.WAGES.X, this.Specs.WAGES.Y+this.Padding, { FONT: "12px Arial" } );
 
 	this.TextWriter.ResetContext();
 };
