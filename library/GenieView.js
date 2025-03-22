@@ -286,5 +286,14 @@ GenieView.prototype = {
 		this.Controls.push(iPnl);
 
 		return (iPnl);
+	},
+	SetTouchBar(specs, iSpecs) {
+		var tBar;
+
+		tBar = new GenieTouchBar();
+		tBar.Set(this.Canvas, specs, iSpecs);
+		this.Controls.push(tBar);
+
+		return (tBar);
 	}
 };

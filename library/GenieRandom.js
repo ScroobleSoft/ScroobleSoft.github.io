@@ -33,6 +33,7 @@ GenieRandomizer.prototype = {
 	},
 	SetSeeds(sd1, sd2) {
 
+		this.SaveSeeds();
 		this.Seed1 = sd1;
 		this.Seed2 = sd2;
 	},
@@ -42,6 +43,11 @@ GenieRandomizer.prototype = {
 		this.SavedSeed2 = this.Seed2;
 	},
 	RestoreSeeds() {
+
+		this.Seed1 = this.SavedSeed1;
+		this.Seed2 = this.SavedSeed2;
+	},
+	ResetSeeds() {  //TODO: will replace ::RestoreSeeds
 
 		this.Seed1 = this.SavedSeed1;
 		this.Seed2 = this.SavedSeed2;
