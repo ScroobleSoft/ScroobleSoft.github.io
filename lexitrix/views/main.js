@@ -13,22 +13,22 @@ GenieMainView.prototype.Set = function(cnvs, specs, tWriter) {
 };
 GenieMainView.prototype.SetControls = function() {
 
-	this.Controls.push(CracklePushButton);
-	this.Controls.push(ShufflePushButton);
 	this.Controls.push(CrosslePushButton);
+	this.Controls.push(CracklePushButton);
 	this.Controls.push(TurtlePushButton);
-	this.Controls.push(SpindlePushButton);
 	this.Controls.push(FiddlePushButton);
+	this.Controls.push(SpindlePushButton);
+	this.Controls.push(ShufflePushButton);
 };
 GenieMainView.prototype.Open = function() {
 	GenieView.prototype.Open.call(this);
 
-	this.TextWriter.Write("Crackle",  49, 190, { COLOUR: "blue", FONT: "24px Arial" } );
-	this.TextWriter.Write("Shuffle", 232, 190, { COLOUR: "blue", FONT: "24px Arial" } );
-	this.TextWriter.Write("Crossle",  51, 390, { COLOUR: "blue", FONT: "24px Arial" } );
-	this.TextWriter.Write("Turtle",  239, 390, { COLOUR: "blue", FONT: "24px Arial" } );
+	this.TextWriter.Write("Crossle",  51, 190, { COLOUR: "blue", FONT: "24px Arial" } );
+	this.TextWriter.Write("Crackle", 232, 190, { COLOUR: "blue", FONT: "24px Arial" } );
+	this.TextWriter.Write("Turtle",   42, 390, { COLOUR: "blue", FONT: "24px Arial" } );
+	this.TextWriter.Write("Fiddle",  232, 390, { COLOUR: "blue", FONT: "24px Arial" } );
 	this.TextWriter.Write("Spindle",  49, 590, { COLOUR: "blue", FONT: "24px Arial" } );
-	this.TextWriter.Write("Fiddle",  232, 590, { COLOUR: "blue", FONT: "24px Arial" } );
+	this.TextWriter.Write("Shuffle", 232, 590, { COLOUR: "blue", FONT: "24px Arial" } );
 
 	this.Canvas.SetFrameRateMeasurement();
 };
@@ -41,9 +41,6 @@ GenieMainView.prototype.Update = function() {
 	if (CracklePushButton.CheckPressed())
 		this.Close(this.LaunchCrackle.bind(this), 100);
 
-	if (ShufflePushButton.CheckPressed())
-		this.Close(this.LaunchShuffle.bind(this), 100);
-
 	if (CrosslePushButton.CheckPressed())
 		this.Close(this.LaunchCrossle.bind(this), 100);
 
@@ -55,6 +52,10 @@ GenieMainView.prototype.Update = function() {
 
 	if (FiddlePushButton.CheckPressed())
 		this.Close(this.LaunchFiddle.bind(this), 100);
+
+	if (ShufflePushButton.CheckPressed())
+		alert("Under construction - sorry!");
+//		this.Close(this.LaunchShuffle.bind(this), 100);
 };
 GenieMainView.prototype.LaunchCrackle = function() {
 
