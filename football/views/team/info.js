@@ -105,10 +105,17 @@ FootballTeamInfoView.prototype.DrawMugshot = function() {
 
 	//Shirt
 	this.GraphicsTool.SetContext(this.Context);
-	if (this.Footballer.CheckMale())
-		this.GraphicsTool.DrawPolygon(0, this.Padding, this.Specs.FOOTBALLER.SHIRT, TeamColours[this.Footballer.Team.Index][0], colour, 0);
-	else
-		this.GraphicsTool.DrawPolygon(0, this.Padding, this.Specs.FOOTBALLINA.SHIRT, TeamColours[this.Footballer.Team.Index][0], colour, 0);
+	if (this.Footballer.CheckMale()) {
+		if (Number.isInteger(this.Footballer.Team))
+			this.GraphicsTool.DrawPolygon(0, this.Padding, this.Specs.FOOTBALLER.SHIRT, "grey", colour, 0);
+		else
+			this.GraphicsTool.DrawPolygon(0, this.Padding, this.Specs.FOOTBALLER.SHIRT, TeamColours[this.Footballer.Team.Index][0], colour, 0);
+	} else {
+		if (Number.isInteger(this.Footballer.Team))
+			this.GraphicsTool.DrawPolygon(0, this.Padding, this.Specs.FOOTBALLINA.SHIRT, "grey", colour, 0);
+		else
+			this.GraphicsTool.DrawPolygon(0, this.Padding, this.Specs.FOOTBALLINA.SHIRT, TeamColours[this.Footballer.Team.Index][0], colour, 0);
+	}
 	this.GraphicsTool.RestoreContext();
 
 	//Face, hair and pupils
