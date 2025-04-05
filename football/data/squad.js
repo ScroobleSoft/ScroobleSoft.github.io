@@ -32,7 +32,7 @@ var SwitchPenalties = [ [],	//GK
 			[]
 ];
 */
-var SQUAD = { SIZE: 27, TYPES: 4, SUbPOSITIONS: 5, CATEGORY: { G: 0, D: 1, M: 2, A: 3 }, GROUPS: 4,		//TODO: make .TYPES REDUNDANT
+var SQUAD = { SIZE: 27, MIN: 18, TYPES: 4, SUbPOSITIONS: 5, CATEGORY: { G: 0, D: 1, M: 2, A: 3 }, GROUPS: 4,		//TODO: make .TYPES REDUNDANT
 				  SLOTS: { G: 3, D: 8, M: 10, A: 6,
 		        GK: 3, RB: 2, CB: 4, LB: 2, RM: 2, DM: 1, CM: 2, AM: 1, LM: 2, RW: 1, S: 4, LW: 1 } };		//NOTE: used in Formation View
 var SquadDistribution = [ 6, 2,2,2,2,2,2,2,2, 2,2,2,2,2,2,2,2,2,2, 1,3,2,4,3,1 ];

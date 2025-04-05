@@ -85,10 +85,10 @@ var VIEW = { LEAGUE: { COLOUR: PAINT.SKY,
 														 }
 											}
 							 },
-				 TRANSFERS: { COLOUR: "rgb(239,217,239)", TEXT: "rgb(159,031,159)",
+				 TRANSFERS: { COLOUR: "rgb(239,217,239)", TEXT: "rgb(159,031,159)", SELECTION: "rgb(207,175,223)", OFFSET: 12,
 								  FRAME: { L: 0, T: 0, W: 189, H: 380, LW: 2 },
-								  BUTTON: { SELL: { L: 82, T: 380, W: 41, H: 19, LW: 3, SX: 168, SY: 316, STYLE: BUTTON.STYLE.RAISED },
-												BUY: { L: 282, T: 380, W: 41, H: 19, LW: 3, SX: 168, SY: 301, STYLE: BUTTON.STYLE.RAISED }
+								  BUTTON: { SELL: { L: 147, T: 380, W: 41, H: 19, LW: 3, SX: 168, SY: 316, STYLE: BUTTON.STYLE.RAISED },
+												BUY: { L: 355, T: 380, W: 41, H: 19, LW: 3, SX: 168, SY: 301, STYLE: BUTTON.STYLE.RAISED }
 											 },
 								  SPInCONTROL: { L: 413, T: 55, W: 16, H: 25, O: 17, COUNT: 5,
 													  IMAGE: { BUTTON: { L: 222, T: 22, W: 54, H: 10, O: 2, C: 4, R: 1, PATCH: { W: 12, H: 10 },
@@ -107,9 +107,10 @@ var VIEW = { LEAGUE: { COLOUR: PAINT.SKY,
 													 D: { L: 605, T: 175, W: 155, H: 138, ITEM: { H: 15, COUNT: 8, MAX: 80 } },
 													 M: { L: 605, T: 320, W: 155, H: 153, ITEM: { H: 15, COUNT: 9, MAX: 90 } },
 													 A: { L: 605, T: 483, W: 155, H: 108, ITEM: { H: 15, COUNT: 6, MAX: 60 } },
-													 MOBILE: { L: 195, T: 1, W: 200, H: 368, ITEM: { H: 14, COUNT: 25, MAX: 250 },
-																  COLOUR: { PAGE: "rgb(239,217,239)", STRIP: "white", SELECTION: "rgb(207,175,223)" },
-																  IMAGE: { L: 176, T: 342, W: 151, H: 16, PATCH: { W: 14, H: 14 } } }
+													 MOBILE: { L: 195, T: 1, W: 200, H: 366, ITEM: { H: 14, COUNT: 25, MAX: 250 },
+																  COLOUR: { FRAME: "rgb(159,031,159)", PAGE: "rgb(239,217,239)", BACKGROUND: "rgb(239,217,239)",
+																				STRIP: "white", SELECTION: "rgb(207,175,223)" },
+																  IMAGE: { L: 176, T: 342, W: 151, H: 16, O: 1, PATCH: { W: 14, H: 14 } } }
 												  },
 								  TOUChBAR: { SPECS: { COLOUR: { KEY: "white", SELECTION: "rgb(207,175,223)" }
 															},
@@ -145,22 +146,22 @@ var VIEW = { LEAGUE: { COLOUR: PAINT.SKY,
 												},
 								  CONSOLE: { COLOUR: "rgb(239,217,239)",
 												 BUTTON: { BUY: { L: 0, T: 285, W: 100, H: 100, LW: 2, SX: 538, SY: 1, STYLE: BUTTON.STYLE.SHALLOW },
-															  SELL: { L: 100, T: 285, W: 100, H: 100, LW: 2, SX: 538, SY: 99, STYLE: BUTTON.STYLE.SHALLOW }
+															  SELL: { L: 100, T: 285, W: 100, H: 100, LW: 2, SX: 538, SY: 99, STYLE: BUTTON.STYLE.SHALLOW },
+															  EXIT: { L: 80, T: 194, W: 72, H: 44, LW: 3, SX: 398, SY: 262, STYLE: BUTTON.STYLE.RAISED }
 															},
-												 ICOnPANEL: { PRICE: { L: 40, T: 166, W: 75, H: 72, C: 1, R: 4, LW: 2, ICONS: 4, ICON: { W: 75, H: 18 }, PRESS: 3,
+												 ICOnPANEL: { PRICE: { L: 2, T: 166, W: 75, H: 72, C: 1, R: 4, LW: 2, ICONS: 4, ICON: { W: 75, H: 18 }, PRESS: 3,
 																			  IMAGE: { L: 94, T: 287, W: 71, H: 62, O: 2, R: 4, C: 1, PATCH: { W: 71, H: 14 } },
 																			  BEVEL: { L: 2, T: 351, W: 152, H: 18, O: 2, C: 2, R: 1, PATCH: { W: 75, H: 18 } }
 																			}
 																},
-												 TOUChBAR: { STATE: { POSITION: 0, UNIT: 1, GRADE: 2 },
-																 POSITION: { L: 0, T: 0, W: 156, H: 111, KEYS: 25, KEY: { W: 30, H: 21 }, ORIENT: ORIENTATION.BOTH, 
-																				 IMAGE: { L: 734, T: 1, W: 156, H: 111 }, MULTI: false
+												 TOUChBAR: { POSITION: { L: 0, T: 0, W: 156, H: 111, KEYS: 25, O: 1, C: 5, R: 5, ORIENT: ORIENTATION.MIXED, 
+																				 KEY: { W: 30, H: 21 }, IMAGE: { L: 459, T: 1, W: 156, H: 111 }, MULTI: false
 																			  },
 																 UNIT: { L: 0, T: 115, W: 156, H: 23, KEYS: 5, KEY: { W: 30, H: 21 }, ORIENT: ORIENTATION.HORIZONTAL,
-																			IMAGE: { L: 734, T: 114, W: 156, H: 23 }, MULTI: false, SELECT: 3
+																			IMAGE: { L: 459, T: 114, W: 156, H: 23 }, MULTI: false, SELECT: 0
 																		 },
-																 GRADE: { L: 0, T: 141, W: 156, H: 23, KEYS: 5, KEY: { W: 30, H: 21 }, ORIENT: ORIENTATION.HORIZONTAL,
-																			IMAGE: { L: 734, T: 139, W: 156, H: 23 }, MULTI: false, SELECT: 3
+																 GRADE: { L: 0, T: 141, W: 157, H: 23, KEYS: 6, KEY: { W: 25, H: 21 }, ORIENT: ORIENTATION.HORIZONTAL,
+																			 IMAGE: { L: 459, T: 139, W: 157, H: 23 }, MULTI: false, SELECT: 0
 																		  }
 															  }
 											  }
