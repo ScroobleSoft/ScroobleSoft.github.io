@@ -133,5 +133,20 @@ GenieGame.prototype = {
 	CheckTiled() {
 
 		return (this.Settings & GAME.TILED);
+	},
+	SetMobile() {
+
+		this.Settings = GAME.PLATFORM.PHONE;
+
+		SCREEN.WIDTH = SCREEN.MOBILE.W;
+		SCREEN.HEIGHT = SCREEN.MOBILE.H;
+		INFoBOX.WIDTH = INFoBOX.MOBILE.W;
+		INFoBOX.HEIGHT = INFoBOX.MOBILE.H;
+		CONTROlPANEL.WIDTH = CONTROlPANEL.MOBILE.W;
+		CONTROlPANEL.HEIGHT = CONTROlPANEL.MOBILE.H;
+	},
+	CheckMobile() {
+
+		return (this.Settings & GAME.PLATFORM.PHONE);
 	}
 };
