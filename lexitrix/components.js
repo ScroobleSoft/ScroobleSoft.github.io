@@ -90,7 +90,7 @@ LexiComponents.prototype = {
 
 		//UNLOGGED
 
-		Solutions = Solutions0.concat(Solutions100, Solutions200, Solutions300);
+		Solutions = Solutions0.concat(Solutions100, Solutions200, Solutions300, Solutions400);
 
 		//Word arrays
 		FiveLetterWords = [ Words5a, Words5b, Words5c, Words5d, Words5e, Words5f, Words5g, Words5h, Words5i, Words5j, Words5k, Words5l, Words5m,
