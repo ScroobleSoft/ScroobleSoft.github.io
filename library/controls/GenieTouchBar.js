@@ -9,11 +9,14 @@ var GenieTouchBar = function() {
 	var c, r, l;
 };
 GenieTouchBar.prototype = new GenieControl();
-GenieTouchBar.prototype.Set = function(cnvs, specs, pSpecs) {  //p- pic
+GenieTouchBar.prototype.Set = function(cnvs, specs, pSpecs, img) {  //p- pic
 	GenieControl.prototype.Set.call(this, cnvs, specs);
 
 	this.Pic = new GenieImage();
-	this.Pic.Set(this.Context, ImageManager.Pics[IMAGeINDEX.CONTROLS], pSpecs);
+	if (img)
+		this.Pic.Set(this.Context, img, pSpecs);
+	else
+		this.Pic.Set(this.Context, ImageManager.Pics[IMAGeINDEX.CONTROLS], pSpecs);
 	this.SetSelection();
 	this.KeyChangeFlag = false;
 	this.rct = new GenieRect();
@@ -27,10 +30,10 @@ GenieTouchBar.prototype.SetSelection = function() {
 			for (this.i=0;this.i<this.Specs.SELECT.length;++this.i)
 				this.SelectedKeys[this.Specs.SELECT[this.i]] = true;
 	} else
-		if (this.Specs.NULL)
-			this.SelectedKey = (this.Specs.SELECT==undefined) ? this.Specs.SELECT : -1;
+		if (this.Specs.SELECT===undefined)
+			this.SelectedKey = -1;
 		else
-			this.SelectedKey = (this.Specs.SELECT==undefined) ? this.Specs.SELECT : 0;
+			this.SelectedKey = this.Specs.SELECT;
 };
 GenieTouchBar.prototype.Draw = function() {
 

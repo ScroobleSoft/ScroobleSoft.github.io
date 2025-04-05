@@ -7,7 +7,7 @@
 var GeniePagination = function() {
 	var SelectedPage, SelectedItemIndex, SelectedItem;		//NOTE: index is for entry on page, not overall entry in list of items
 	var PageChangeFlag, SelectionChangeFlag;					//refers to selected item
-	var Items, Pages;
+	var Items, Pages;													//ASSUMPTION: .Items is a GenieList 
 };
 GeniePagination.prototype = new GenieControl();
 GeniePagination.prototype.Set = function(cnvs, specs, pSpecs) {  //p- pic
@@ -18,6 +18,13 @@ GeniePagination.prototype.Set = function(cnvs, specs, pSpecs) {  //p- pic
 	this.SelectedItemIndex = 0;
 	this.SelectionChangeFlag = false;
 	this.PageChangeFlag = false;
+};
+GeniePagination.prototype.Reset = function() {
+
+	this.SelectedPage = 0;
+	this.SelectedItemIndex = 0;
+	if (this.Items.Length)
+		this.SelectedItem = this.Items[this.SelectedItemIndex];
 };
 GeniePagination.prototype.SetPic = function(pSpecs) {
 
@@ -30,11 +37,9 @@ GeniePagination.prototype.SetPic = function(pSpecs) {
 GeniePagination.prototype.SetItems = function(itms) {  //NOTE: this method is partly to allow writing items here if so chosen; mostly, the app does the writing
 
 	this.Items = itms;
-	this.SelectedItem = this.Items[0];
-	if (this.Items.Length)
-		this.Pages = Math.ceil(this.Items.Length/this.Specs.ITEM.COUNT);
-	else
-		this.Pages = Math.ceil(this.Items.length/this.Specs.ITEM.COUNT);
+	this.SelectedItemIndex = 0;
+	this.SelectedItem = this.Items[this.SelectedItemIndex];
+	this.Pages = Math.ceil(this.Items.Length/this.Specs.ITEM.COUNT);
 };
 GeniePagination.prototype.Draw = function() {
 
@@ -49,7 +54,7 @@ GeniePagination.prototype.Draw = function() {
 
 	//Numbers strip image and background
 	if (this.Items)
-		if (this.Items.length)
+		if (this.Items.Length)
 			this.DrawStrip();
 };
 GeniePagination.prototype.DrawPage = function() {
@@ -66,7 +71,7 @@ GeniePagination.prototype.DrawPage = function() {
 		this.Context.fillStyle = this.Specs.COLOUR.SELECTION || PAGINATION.COLOUR.SELECTION;
 	else
 		this.Context.fillStyle = PAGINATION.COLOUR.SELECTION;
-	this.Context.fillRect(this.Specs.L+1, this.Specs.T+1+(15*this.SelectedItemIndex), this.Specs.W-2, 13);  //TODO: entry height needs to be customized
+	this.Context.fillRect(this.Specs.L+1, this.Specs.T+1+(this.Specs.ITEM.H*this.SelectedItemIndex), this.Specs.W-2, 13);
 };
 GeniePagination.prototype.MouseDown = function() {  //check if mouse is down over the strip - otherwise, ignore
 
@@ -84,9 +89,11 @@ GeniePagination.prototype.MouseDown = function() {  //check if mouse is down ove
 	} else {  //items
 		if (Mouse.Down.Y<(this.Specs.T+this.Specs.H-(this.Pic.Specs.H))) {
 			this.i = Math.floor((Mouse.Down.Y-this.Specs.T)/this.Specs.ITEM.H);
+			if ((this.SelectedPage*this.Specs.ITEM.COUNT)+this.i>=this.Items.Length)		//make sure a blank row isn't selected
+				return;
 			if (this.i!=this.SelectedItemIndex) {
-				if (Math.floor(this.Items.length/this.Specs.ITEM.COUNT)==this.SelectedPage)
-					if (this.i>=(this.Items.length % this.Specs.ITEM.COUNT))
+				if (Math.floor(this.Items.Length/this.Specs.ITEM.COUNT)==this.SelectedPage)
+					if (this.i>=(this.Items.Length % this.Specs.ITEM.COUNT))
 						return;
 				this.SelectedItemIndex = this.i;
 				this.SelectedItem = this.Items[(this.SelectedPage*this.Specs.ITEM.COUNT)+this.SelectedItemIndex];
@@ -149,8 +156,8 @@ GeniePagination.prototype.DrawStrip = function() {
 		bColour = this.Specs.COLOUR.BACKGROUND || PAGINATION.COLOUR.BACKGROUND;
 	}
 
-	//Colour bakground
-	t = this.Specs.T + (this.Specs.ITEM.H*this.Specs.ITEM.COUNT);
+	//Colour background
+	t = this.Specs.T + (this.Specs.ITEM.H*this.Specs.ITEM.COUNT) + 1;
 	this.Context.fillStyle = bColour;
 	this.Context.fillRect(this.Specs.L, t, this.Pic.Specs.W, this.Pic.Specs.H);
 
@@ -219,7 +226,7 @@ GeniePagination.prototype.GetPage = function() {
 		r = Math.floor((Mouse.Down.Y-(this.Specs.T+(this.Specs.ITEM.H*this.Specs.ITEM.COUNT)))/(h+1));
 		this.i = (this.Specs.C*r) + c;
 	} else
-		this.i = Math.floor((Mouse.Down.X-this.Specs.L)/(PAGINATION.PATCH.W+1));
+		this.i = Math.floor((Mouse.Down.X-this.Specs.L)/(w+1));
 
 	//Return after safety check
 	if (this.i<this.Pages)
