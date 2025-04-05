@@ -283,7 +283,7 @@ FootballSquadView.prototype.DrawSections = function() {	//NOTE: this also sets s
 			y += 25;
 		this.DrawBasReliefSection(y, this.Squad.PositionGroups[i].length, i);
 		if (Game.CheckMobile())
-			y += 2;
+			y += 3;
 		else
 			y += 10;
 		for (j=0;j<this.Squad.PositionGroups[i].length;++j) {

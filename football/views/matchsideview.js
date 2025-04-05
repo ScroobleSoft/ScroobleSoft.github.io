@@ -4,7 +4,7 @@
  *  the RM-LCM-RM variety
  */
 var POSSESSION = { NEITHER: 0, HOME: 1, AWAY: 2 };
-var TempPlayers = [ ArsenalPlayers, BournemouthPlayers, BrightonPlayers, BurnleyPlayers, EvertonPlayers ];
+//var TempPlayers = [ ArsenalPlayers, BournemouthPlayers, BrightonPlayers, BurnleyPlayers, EvertonPlayers ];
 
 //--------------------------------------------------------
 //---------- FOOTBALL MATCH SIDE VIEW --------------------
@@ -78,10 +78,11 @@ FootballMatchSideView.prototype = {
       this.Match = match;
    },
    GetLastName() {  //TEMP
-      var i;
+      var i, j;
 
-      i = this.Randomizer.GetIndex(TempPlayers.length);
-      return (TempPlayers[i][this.Randomizer.GetIndex(TempPlayers[i].length)][0][1]);
+      i = this.Randomizer.GetIndex(LastNames.length);
+		j = this.Randomizer.GetIndex(LastNames[i].length)
+      return (LastNames[i][j]);
 //      i = Utilities.GetRandomNumber(TempPlayers.length, STARtAtZERO);
 //      return (TempPlayers[i][Utilities.GetRandomNumber(TempPlayers[i].length, STARtAtZERO)][0][1]);
    },

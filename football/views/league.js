@@ -178,7 +178,7 @@ FootballLeagueView.prototype.Update = function() {  //TODO: will have to be modi
 			League.Generate(GAMeTYPE.PRECISE, BUDGET.ZERO);	 //TODO: there will be several options to be implemented
 			League.GenerateSeasonFixtures();
 			TeamSelected = Teams[this.i];
-			TransferPool.AddLeaguePlayers();			//NOTE: call is here to avoid adding selected team's players on the list
+//			TransferPool.AddLeaguePlayers();			//NOTE: call is here to avoid adding selected team's players on the list
 
 			//Squads have already been generated for display, so swap for right one
 			this.SwapSquad = TeamSelected.Squad;
@@ -204,14 +204,17 @@ FootballLeagueView.prototype.SelectGame = function() {
 		case FOOTBALL.TYPE.FEATURED:
 			Game.Type = FOOTBALL.TYPE.FEATURED;
 			this.Randomizer.SetSeeds(Featured[0][0], Featured[0][1]);
+//			this.Randomizer.SetSeeds(Featured[0][0], Featured[0][0]+1);
 			break;
 		case FOOTBALL.TYPE.DAILY:
 			Game.Type = FOOTBALL.TYPE.DAILY;
 			this.Randomizer.SetSeeds(Daily[0][0], Daily[0][1]);
+//			this.Randomizer.SetSeeds(Daily[0][0], Daily[0][0]+1);
 			break;
 		case FOOTBALL.TYPE.WEEKLY:
 			Game.Type = FOOTBALL.TYPE.WEEKLY;
 			this.Randomizer.SetSeeds(Weekly[0][0], Weekly[0][1]);
+//			this.Randomizer.SetSeeds(Weekly[0][0], Weekly[0][0]+1);
 			break;
 	}
 };
