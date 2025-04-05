@@ -43,7 +43,7 @@ FootballComponents.prototype.SetTransferViews = function() {
 	TransferSubView.SetLinks(this.GraphicsTool, this.TextWriter);
 	TransferSubView.Set(this.Interface.PrimeScape, VIEW.TRANSFERS, TeamView);
 	TransferConsoleView.Set(this.Interface.Console, VIEW.TRANSFERS.CONSOLE, TransferSubView);
-	TransferSubView.SetSubViews(null, TransferConsoleView);
+	TransferSubView.SetSubViews(TeamInfoView, TransferConsoleView);
 };
 FootballComponents.prototype.SetHighlightsViews = function() {
 
