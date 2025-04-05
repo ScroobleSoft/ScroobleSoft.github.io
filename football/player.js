@@ -187,7 +187,7 @@ FootballPlayer.prototype = {
 	},
 	SetPrice() {  //UNLOGGED
 
-		this.Price = this.GetPrice();
+		this.Price = Math.round(this.GetPrice());
 	},
 	GetPrice() {
 

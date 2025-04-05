@@ -5,19 +5,17 @@ var FootballTransferPool = function() {
 	var Randomizer;
 
 	var Players;
-	var LeaguePlayers;
-	var OverseasPlayers, DomesticPlayers, PeripheralPlayers, YouthPlayers, SemiProPlayers, ProdigyPlayers;
-	var AllList, GList, DList, MList, AList;
+	var LeaguePlayers;  //could be made REDUNDANT
+	var OverseasPlayers, DomesticPlayers, PeripheralPlayers, YouthPlayers, SemiProPlayers, ProdigyPlayers;  //could be made REDUNDANT
+	var AllList, GList, DList, MList, AList;  //should be REDUNDANT
 	var AllFilter, DFilter, MFilter, AFilter, DesignationFilter;
 	var PlayerIndex;
 	var PlayerTypes, PlayerDesignations;
-	var DummyPlayer;				//used to fill up lists for sorting
+	var DummyPlayer;				//used to fill up lists for sorting - probably REDUNDANT?
 };
 FootballTransferPool.prototype = {
 	Set(rGenerator) {
 		this.Randomizer = rGenerator;
-
-		this.PlayerIndex = 0;
 		this.SetLists();
 		this.SetFilters();
 		this.PlayerTypes = new Array(FOOTBALLER.TYPE.COUNT);
@@ -26,7 +24,9 @@ FootballTransferPool.prototype = {
 	},
 	SetLists() {
 
-		this.Players = new Array(TRANSFERS.POOL.TOTAL);
+		this.Players = new GenieArray();
+//		this.Players.Set(TRANSFERS.POOL.TOTAL);
+		this.Players.Set(TRANSFERS.POOL.TOTAL-TRANSFERS.POOL.LEAGUE);		//TEMP number since am leaving out league players
 		this.LeaguePlayers = new Array(TRANSFERS.POOL.LEAGUE);
 
 		//Designation arrays
@@ -43,7 +43,7 @@ FootballTransferPool.prototype = {
 		this.SemiProPlayers.Set(TRANSFERS.POOL.SEMiPRO, FootballPlayer);
 		this.ProdigyPlayers.Set(TRANSFERS.POOL.PRODIGY, FootballPlayer);
 
-		//Position arrays
+		//Position arrays . . . should be REDUNDANT
 		this.AllList = new GenieList();
 		this.GList = new GenieList();
 		this.DList = new GenieList();
@@ -55,7 +55,7 @@ FootballTransferPool.prototype = {
 		this.MList.Set(TRANSFERS.TARGETS.M);
 		this.AList.Set(TRANSFERS.TARGETS.A);
 	},
-	FillLists() {
+	FillLists() {  //should be REDUNDANT
 		var i;
 		var player;
 
@@ -95,13 +95,14 @@ FootballTransferPool.prototype = {
 	},
 	Generate() {
 
+		this.PlayerIndex = 0;
 		this.GenerateOverseas();
 		this.GenerateDomestics();
 		this.GeneratePeripherals();
 		this.GenerateYouths();
 		this.GenerateSemiPros();
 		this.GenerateProdigies();
-		this.AddLeaguePlayers();
+//		this.AddLeaguePlayers();			TODO: temporary removal
 	},
 	GenerateOverseas() {
 		var i;
@@ -116,9 +117,10 @@ FootballTransferPool.prototype = {
 			this.OverseasPlayers[i].SetIdentity();
 			this.OverseasPlayers[i].Age = this.Randomizer.GetInRange(FOOTBALLER.AGE.YOUTH+1,FOOTBALLER.AGE.VETERAN);
 			this.OverseasPlayers[i].GeneratePosition();
-			this.OverseasPlayers[i].Quality = this.Randomizer.GetInRange(GRADE.Aplus,GRADE.Dminus);
+			this.OverseasPlayers[i].Quality = this.Randomizer.GetInRange(GRADE.Aplus,GRADE.Cminus);
 			this.OverseasPlayers[i].Team = -1;
 			this.Players[this.PlayerIndex] = this.OverseasPlayers[i];
+//			this.Players.Add(this.OverseasPlayers[i]);
 			++this.PlayerIndex;
 		}
 	},
@@ -136,11 +138,12 @@ FootballTransferPool.prototype = {
 			this.DomesticPlayers[i].Age = this.Randomizer.GetInRange(FOOTBALLER.AGE.MIN,FOOTBALLER.AGE.EXPERIENCED);
 			this.DomesticPlayers[i].GeneratePosition();
 			if (this.DomesticPlayers[i].Age>FOOTBALLER.AGE.YOUTH)
-				this.DomesticPlayers[i].Quality = this.Randomizer.GetInRange(GRADE.Dplus, GRADE.Fminus);
+				this.DomesticPlayers[i].Quality = this.Randomizer.GetInRange(GRADE.Cplus, GRADE.Eminus);
 			else
 				this.DomesticPlayers[i].GenerateYouthRating();
 			this.DomesticPlayers[i].Team = this.Randomizer.GetInRange(LEAGUE.TEAMS, LEAGUES.TEAMS-1);
 			this.Players[this.PlayerIndex] = this.DomesticPlayers[i];
+//			this.Players.Add(this.DomesticPlayers[i]);
 			++this.PlayerIndex;
 		}
 	},
@@ -157,14 +160,17 @@ FootballTransferPool.prototype = {
 			this.PeripheralPlayers[i].SetIdentity();
 			this.PeripheralPlayers[i].Age = this.Randomizer.GetInRange(FOOTBALLER.AGE.YOUTH+1,FOOTBALLER.AGE.EXPERIENCED);
 			this.PeripheralPlayers[i].GeneratePosition();
-			this.PeripheralPlayers[i].Quality = this.Randomizer.GetInRange(GRADE.Dplus,GRADE.Fminus);
+			this.PeripheralPlayers[i].Quality = this.Randomizer.GetInRange(GRADE.Cplus,GRADE.Eminus);
 			this.PeripheralPlayers[i].Team = -1;
 			this.Players[this.PlayerIndex] = this.PeripheralPlayers[i];
+//			this.Players.Add(this.PeripheralPlayers[i]);
 			++this.PlayerIndex;
 		}
 	},
 	GenerateYouths() {
 		var i;
+
+		//TODO: add youths from League teams
 
 		for (i=0;i<TRANSFERS.POOL.YOUTH;++i) {
 			this.YouthPlayers[i].Set(this.Randomizer, i);
@@ -179,6 +185,7 @@ FootballTransferPool.prototype = {
 			this.YouthPlayers[i].Quality = GRADE.Jminus;
 			this.YouthPlayers[i].Team = this.Randomizer.GetInRange(LEAGUE.TEAMS, LEAGUES.TEAMS-1);
 			this.Players[this.PlayerIndex] = this.YouthPlayers[i];
+//			this.Players.Add(this.YouthPlayers[i]);
 			++this.PlayerIndex;
 		}
 	},
@@ -198,6 +205,7 @@ FootballTransferPool.prototype = {
 			this.SemiProPlayers[i].Quality = this.Randomizer.GetInRange(GRADE.Hplus,GRADE.Jminus);
 			this.SemiProPlayers[i].Team = -1;
 			this.Players[this.PlayerIndex] = this.SemiProPlayers[i];
+//			this.Players.Add(this.SemiProPlayers[i]);
 			++this.PlayerIndex;
 		}
 	},
@@ -213,7 +221,8 @@ FootballTransferPool.prototype = {
 			this.ProdigyPlayers[i].Quality = GRADE.Jminus;
 			this.ProdigyPlayers[i].Team = -1;
 			this.Players[this.PlayerIndex] = this.ProdigyPlayers[i];
-			++this.PlayerIndex;
+//			this.Players.Add(this.ProdigyPlayers[i]);
+			++this.PlayerIndex;			//TODO: now REDUNDANT
 		}
 	},
 	AddLeaguePlayers() {
@@ -224,6 +233,8 @@ FootballTransferPool.prototype = {
 
 		iPlayer = 0;
 		for (i=0;i<LEAGUE.TEAMS;++i) {
+			if (i==TeamSelected)
+				continue;
 			for (j=MATCH.PLAYERS;j<Teams[i].Squad.Players.length;++j) {
 				this.Players[this.PlayerIndex] = Teams[i].Squad.Players[j];
 				this.LeaguePlayers[iPlayer] = Teams[i].Squad.Players[j];
@@ -234,7 +245,7 @@ FootballTransferPool.prototype = {
 
 		this.LeaguePlayers.forEach(function(plyr) {plyr.SetPrice();});
 		this.LeaguePlayers.sort(function(plyr1,plyr2) {return (plyr2.Price-plyr1.Price);});
-		this.Players.Length = this.PlayerIndex;
+//		this.Players.Length = this.PlayerIndex;  TODO: probably delete since .Players no longer a GenieList
 	},
 	Update() {
 
@@ -326,5 +337,14 @@ FootballTransferPool.prototype = {
 		//UNLOGGED
 
 		this.Players.sort(function(a, b) {return (a.Designation-b.Designation);});
+	},
+	SortByCost() {
+
+		this.Players.forEach(function(plyr) {plyr.SetPrice();});
+		this.Players.sort(function(a, b) {return (b.Price-a.Price);});
+	},
+	AddPlayer(plyr) {
+
+		this.Players.push(plyr);
 	}
 };
