@@ -29,7 +29,7 @@ FiddleWordsSelector.prototype = {
 		for (i=0;i<this.FiddleWords.length;++i)
 			this.FiddleWords[i] = FiveLetterWords[i].concat(SupplementaryWords5a[i]);
 
-		this.Solutions = FiddleSolutions100.concat(FiddleSolutions200);
+		this.Solutions = FiddleSolutions100.concat(FiddleSolutions200, FiddleSolutions300, FiddleSolutions400, FiddleSolutions500, FiddleSolutions600);
 		this.SetStashIndices();
 
 		//Lists

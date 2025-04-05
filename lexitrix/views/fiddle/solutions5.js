@@ -50,5 +50,53 @@ var FiddleSolutions500 = [ [ "given", "grand", "video", "nurse", "adder", "diode
 									[ "canal", "covet", "nappy", "ledge", "vapid", "thyme" ],
 									[ "vicar", "visit", "coupe", "ruddy", "squad", "teeny" ],
 									[ "skirt", "strap", "inlet", "tacky", "relic", "patty" ],
-									[ "cloud", "chomp", "overt", "drawn", "omega", "piton" ]		//452
-];
+									[ "cloud", "chomp", "overt", "drawn", "omega", "piton" ],		//452
+									[ "amber", "argue", "beast", "roomy", "guano", "entry" ],
+									[ "finch", "femur", "novel", "hardy", "mover", "rally" ],
+									[ "might", "madam", "given", "terra", "diver", "manna" ],
+									[ "riven", "refer", "viola", "needy", "froze", "ready" ],		//456
+									[ "crave", "choke", "arise", "enemy", "oxide", "elegy" ],
+									[ "oasis", "omega", "stone", "stead", "erode", "amend" ],
+									[ "teary", "toast", "aspen", "yeast", "alpha", "tenet" ],
+									[ "stunk", "scant", "urban", "kneel", "amble", "tonal" ],		//460
+									[ "recur", "raids", "creel", "ratio", "inept", "salvo" ],
+									[ "stiff", "sweat", "irony", "frame", "ebola", "thyme" ],
+									[ "exile", "extra", "inure", "ethos", "tough", "abets" ],
+									[ "snarl", "sweet", "acrid", "loyal", "early", "tidal" ],		//464
+									[ "saggy", "scale", "guilt", "yummy", "axiom", "entry" ],
+									[ "bunch", "blood", "nadir", "hunky", "olden", "derby" ],
+									[ "graph", "grass", "abase", "hiker", "aback", "shear" ],
+									[ "laden", "lower", "dally", "nasal", "wiles", "royal" ],		//468
+									[ "yeast", "yacht", "arena", "those", "credo", "trace" ],
+									[ "gypsy", "gusto", "prune", "yearn", "sauna", "ocean" ],
+									[ "frank", "fetid", "allay", "kinky", "talon", "dryly" ],
+									[ "voter", "visit", "trier", "rapid", "skimp", "tired" ],		//472
+									[ "vigil", "valet", "grant", "lusty", "loads", "tatty" ],
+									[ "fudge", "flake", "debug", "eyrie", "amber", "eagle" ],
+									[ "mason", "motto", "surge", "noose", "torso", "obese" ],
+									[ "mourn", "meter", "untie", "niece", "title", "reeve" ],		//476
+									[ "hoary", "havoc", "aroma", "yearn", "viola", "chain" ],
+									[ "twist", "thorn", "ionic", "theme", "ounce", "niche" ],
+									[ "solve", "snoop", "lithe", "eerie", "outer", "piece" ],
+									[ "samba", "sweet", "mushy", "adept", "ensue", "tryst" ],		//480
+									[ "niece", "never", "equal", "ether", "vouch", "ruler" ],
+									[ "copse", "copra", "paled", "elfin", "pilaf", "addon" ],
+									[ "sherd", "swain", "eyrie", "dolly", "aural", "needy" ],
+									[ "qualm", "queen", "aught", "merge", "eager", "nitre" ],		//484
+									[ "defer", "death", "faint", "risky", "amiss", "hotly" ],
+									[ "dough", "drone", "utter", "handy", "often", "early" ],
+									[ "dally", "dacha", "lilac", "yacht", "colic", "ascot" ],
+									[ "adult", "abbot", "upset", "tuner", "bison", "tutor" ],		//488
+									[ "pithy", "photo", "tenet", "yodel", "owned", "octal" ],
+									[ "beefy", "bring", "exude", "yield", "inure", "greed" ],
+									[ "pitch", "plant", "trite", "heist", "alibi", "treat" ],
+									[ "lapse", "limbo", "piton", "error", "motor", "owner" ],		//492
+									[ "pound", "polio", "unmet", "donut", "lemon", "octet" ],
+									[ "shall", "swirl", "angle", "lathe", "ingot", "liege" ],
+									[ "liken", "leach", "known", "notch", "afoot", "hunch" ],
+									[ "crowd", "circa", "offal", "dress", "rifle", "atlas" ],		//496
+									[ "leaky", "light", "annoy", "yield", "genre", "toyed" ],
+									[ "mulch", "metro", "laden", "haste", "tides", "ounce" ],
+									[ "glean", "grand", "ebony", "nadir", "avoid", "dryer" ],
+									[ "sugar", "strap", "genus", "repay", "runup", "pushy" ]
+];  //500
