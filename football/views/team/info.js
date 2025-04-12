@@ -31,8 +31,6 @@ FootballTeamInfoView.prototype.SetFootballer = function(ftbllr) {
 FootballTeamInfoView.prototype.Open = function() {
 	GenieSubView.prototype.Open.call(this);
 
-	if (Game.CheckMobile())
-		this.DisplayLegends();
 };
 FootballTeamInfoView.prototype.Update = function() {
 
@@ -50,6 +48,12 @@ FootballTeamInfoView.prototype.ColourBackground = function() {
 		this.ColourScape();
 };
 FootballTeamInfoView.prototype.Draw = function() {
+
+	if (Game.CheckMobile())
+		this.DisplayLegends();
+	this.DisplayPlayerInfo();
+};
+FootballTeamInfoView.prototype.DisplayPlayerInfo = function() {
 
 	this.DrawSections();
 	this.DrawMugshot();
@@ -97,6 +101,7 @@ FootballTeamInfoView.prototype.DrawSections = function() {
 
 	this.GraphicsTool.SetContext(this.Context);
 	this.GraphicsTool.DrawBasReliefSection(this.Specs.SECTION.L, this.Specs.SECTION.T+this.Padding, this.Specs.SECTION.W, this.Specs.SECTION.H);
+	this.GraphicsTool.DrawRectangle(this.Specs.FRAME.L, this.Specs.FRAME.T+this.Padding, this.Specs.FRAME.W, this.Specs.FRAME.H, "white", 0);
 	this.GraphicsTool.DrawRectangle(this.Specs.FRAME.L, this.Specs.FRAME.T+this.Padding, this.Specs.FRAME.W, this.Specs.FRAME.H, "black", 5);
 	this.GraphicsTool.RestoreContext();
 };
@@ -195,7 +200,7 @@ FootballTeamInfoView.prototype.DisplayFinancials = function() {
 	this.TextWriter.Write("Price:", this.Specs.PRICE.LABEL.X, this.Specs.PRICE.LABEL.Y+this.Padding, { FONT: "12px Arial" } );
 	this.TextWriter.Write(Utils.FormatMoney(this.Footballer.GetPrice()), this.Specs.PRICE.X, this.Specs.PRICE.Y+this.Padding, { FONT: "12px Arial" } );
 	this.TextWriter.Write("Wages:", this.Specs.WAGES.LABEL.X, this.Specs.WAGES.LABEL.Y+this.Padding, { FONT: "12px Arial" } );
-	this.TextWriter.Write(Utils.FormatMoney(this.Footballer.GetWages())+"K", this.Specs.WAGES.X, this.Specs.WAGES.Y+this.Padding, { FONT: "12px Arial" } );
+	this.TextWriter.Write(Utils.FormatMoney(this.Footballer.GetWages()), this.Specs.WAGES.X, this.Specs.WAGES.Y+this.Padding, { FONT: "12px Arial" } );
 
 	this.TextWriter.ResetContext();
 };

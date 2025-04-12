@@ -41,8 +41,9 @@ FootballTeamConsoleView.prototype.Update = function() {  //UNLOGGED
 
 	if (this.TabButtonPanel.CheckButtonPressed())
 		if (this.TabButtonPanel.ButtonPressed!=this.MainView.PanelID) {
-			this.MainView.PanelID = this.TabButtonPanel.ButtonPressed;
-			this.MainView.Close(this.OpenPanelView.bind(this), 100);
+			this.MainView.PanelID = this.TabButtonPanel.ButtonPressed;			//REDUNDANT
+//			this.MainView.Close(this.OpenPanelView.bind(this), 100);
+			this.MainView.CloseAll();
 		}
 
 	if (this.MatchButton.CheckClicked()) {
@@ -50,41 +51,17 @@ FootballTeamConsoleView.prototype.Update = function() {  //UNLOGGED
 		this.MainView.Close(this.OpenHighlightsView.bind(this), 100);
 	}
 };
-FootballTeamConsoleView.prototype.OpenPanelView = function() {
+FootballTeamConsoleView.prototype.OpenTeamView = function() {  //UNLOGGED
 
-	switch (this.TabButtonPanel.ButtonPressed) {
-		case this.Specs.BUTTOnPANEL.TAB.SQUAD:
-			this.Open();
-			break;
-		case this.Specs.BUTTOnPANEL.TAB.YOUTH:
-			break;
-		case this.Specs.BUTTOnPANEL.TAB.FORMATION:
-			FormationSubView.Open();
-			break;
-		case this.Specs.BUTTOnPANEL.TAB.TACTICS:
-			TacticsSubView.Open();
-			break;
-		case this.Specs.BUTTOnPANEL.TAB.TRAINING:
-			TrainingSubView.Open();
-			break;
-		case this.Specs.BUTTOnPANEL.TAB.TRANSFERS:
-			TransferSubView.Open();
-			break;
-		case this.Specs.BUTTOnPANEL.TAB.OPPONENT:
-			OpponentSubView.Open();
-			break;
-		case this.Specs.BUTTOnPANEL.TAB.FIXTURES:
-			FixturesSubView.Open();
-			break;
-		case this.Specs.BUTTOnPANEL.TAB.TABLES:
-			TableSubView.Open();
-			break;
-		case this.Specs.BUTTOnPANEL.TAB.STATS:
-			StatsSubView.Open();
-			break;
-	}
+	TeamView.Open();
+};
+FootballTeamConsoleView.prototype.OpenFormationView = function() {  //UNLOGGED
 
-	Game.Interface.ResumeInput();
+	FormationSubView.Open();
+};
+FootballTeamConsoleView.prototype.OpenTransferView = function() {  //UNLOGGED
+
+	TransferSubView.Open();
 };
 FootballTeamConsoleView.prototype.OpenHighlightsView = function() {
 
