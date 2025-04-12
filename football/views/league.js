@@ -190,7 +190,10 @@ FootballLeagueView.prototype.Update = function() {  //TODO: will have to be modi
 			if (!Game.CheckMobile())
 				League.Dump();
 			this.Randomizer.ResetSeeds();
-			this.Close(this.OpenTeamView.bind(this), 100);
+			if (Game.CheckMobile())
+				this.Close(this.OpenSquadView.bind(this), 100);
+			else
+				this.Close(this.OpenTeamView.bind(this), 100);
 			return;
 		}
 
@@ -255,7 +258,7 @@ FootballLeagueView.prototype.SimulateSeason = function() {  //TODO: a more sophi
 	var aTeams;
 
 	//Play half the season
-	for (i=0;i<LEAGUE.WEEKS/2;++i)
+	for (i=0;i<LEAGUE.WEEKS/2;++i) {
 		for (j=0;j<LEAGUE.FIXTURES;++j) {
 			QuickSim.SetTeams(Teams[League.Fixtures[i][j].Home], Teams[League.Fixtures[i][j].Away]);
 			QuickSim.SimMatch();
@@ -269,6 +272,9 @@ FootballLeagueView.prototype.SimulateSeason = function() {  //TODO: a more sophi
 			}
 			QuickSim.Reset();
 		}
+		Teams.forEach(function(team) {team.Squad.UpdateInjuries();});
+	}
+	Teams.forEach(function(team) {team.Squad.ClearInjuries();});
 
 	//Determine each teams' table position
 	aTeams = new Array(LEAGUE.TEAMS);
@@ -277,6 +283,13 @@ FootballLeagueView.prototype.SimulateSeason = function() {  //TODO: a more sophi
 	aTeams.sort(function(team1, team2) {return (team2.Points-team1.Points);});
 	for (i=0;i<LEAGUE.TEAMS;++i)
 		Teams[aTeams[i].Index].Position = i;
+	LeagueTable.FirstSort();
+};
+FootballLeagueView.prototype.OpenSquadView = function() {
+
+	TeamView.SetTeam(TeamSelected);
+	SquadView.SetTeam(TeamSelected);
+	SquadView.Open();
 };
 FootballLeagueView.prototype.OpenTeamView = function() {
 

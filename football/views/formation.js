@@ -74,44 +74,39 @@ FootballFormationSubView.prototype.Open = function() {
 	if (Game.CheckMobile()) {
 		this.InfoView.Open();
 		this.ConsoleView.Open();
+		this.UpdateMobile();
 	}
-
-	this.Update();
 };
 FootballFormationSubView.prototype.Update = function() {  //UNLOGGED
-
-	this.AnimationFrameHandle = requestAnimationFrame(this.Update.bind(this));
 
 	if (Mouse.CheckLeftClicked(CANVAS.PRIME))
 		this.UpdateClick();
 
 	//Check if formation has changed
-	if (!Game.CheckMobile())
-		if (this.FormationIconPanel.CheckMouseDown()) {
-			 this.SetFormation(this.FormationIconPanel.DepressedIcon);
-			 this.Draw();
-		}
+	if (this.FormationIconPanel.CheckMouseDown()) {
+		this.SetFormation(this.FormationIconPanel.DepressedIcon);
+		this.Draw();
+	}
 
 	//Checkboxes
 
 	//Update buttons
-	if (!Game.CheckMobile()) {
-		if (AutoSelectButton.CheckClicked())
-			this.AutoSelect();
-		if (ClearSelectionsButton.CheckClicked()) {
-		}
+	if (AutoSelectButton.CheckClicked())
+		this.AutoSelect();
+	if (ClearSelectionsButton.CheckClicked()) {
 	}
+};
+FootballFormationSubView.prototype.UpdateMobile = function() {  //UNLOGGED
+
+	this.AnimationFrameHandle = requestAnimationFrame(this.UpdateMobile.bind(this));
+
+	if (Mouse.CheckLeftClicked(CANVAS.PRIME))
+		this.UpdateClick();
+	else
+		Mouse.ClearAll();
 
 	this.InfoView.Update();  //REDUNDANT? if so, clear zoom canvas clicks
 	this.ConsoleView.Update();
-};
-FootballFormationSubView.prototype.Close = function() {
-	GenieNestedView.prototype.Close.call(this);
-
-	if (Game.CheckMobile()) {
-		this.InfoView.Close();
-		this.ConsoleView.Close();
-	}
 };
 FootballFormationSubView.prototype.Draw = function() {
 
@@ -120,6 +115,7 @@ FootballFormationSubView.prototype.Draw = function() {
 	this.DisplayDecals();
 	this.DisplayNames();
 	this.DisplayGrades();
+	this.DisplayFormationRating();
 };
 FootballFormationSubView.prototype.SetTeam = function(team) {
 
@@ -331,4 +327,27 @@ FootballFormationSubView.prototype.CheckPlayerSelected = function(plyr) {
 };
 FootballFormationSubView.prototype.DisplayOpponent = function() {
 
+};
+FootballFormationSubView.prototype.DisplayFormationRating = function() {
+	var i;
+	var rtng;
+
+	this.GraphicsTool.DrawRectangle(315, 5, 72, 22, "rgb(000,207,000)", 0);		//erase previous rating
+
+	//Write new rating
+	rtng = 0;
+	for (i=0;i<MATCH.PLAYERS;++i)
+		rtng += this.Team.FormationStarters[this.Team.Formation][i].Rating;
+	rtng = Utils.NumberToGrade(Math.round(rtng/MATCH.PLAYERS));
+	this.TextWriter.Write("Rating: "+rtng, 318, 20, { COLOUR: "white" } );
+
+	this.GraphicsTool.DrawRectangle(315, 5, 72, 22, "white", 1);		//frame it
+};
+FootballFormationSubView.prototype.CloseAll = function() {  //Mobile only
+
+	GenieView.prototype.Close.call(this, this.OpenSquadView.bind(this), 100);
+};
+FootballFormationSubView.prototype.OpenSquadView = function() {  //Mobile only
+
+	SquadView.Open();
 };

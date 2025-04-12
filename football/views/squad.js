@@ -67,22 +67,44 @@ FootballSquadView.prototype.ShowControls = function() {  //UNLOGGED - eventually
 	if (Game.CheckMobile())
 		this.PositionButtons.forEach(function(btn) {btn.Show();});
 };
-FootballSquadView.prototype.SetSquad = function(sqd) {
+FootballSquadView.prototype.SetTeam = function(team) {  //NOTE: for mobile game
+
+	this.Team = team;
+	this.SetSquad(this.Team.Squad);
+	this.InfoView.SetFootballer(this.Team.Squad.Goalkeepers[0]);
+};
+FootballSquadView.prototype.SetSquad = function(sqd) {  //NOTE: for computer game
 
 	this.Squad = sqd;
 	this.Slots = ArrayUtils.Create(this.Squad.Players.length, function() { var X, Y, Player; } );
 };
-FootballSquadView.prototype.Open = function() {  //at the moment, REDUNDANT
+FootballSquadView.prototype.Open = function() {
 	GenieNestedView.prototype.Open.call(this);
+
+	if (Game.CheckMobile()) {
+		this.InfoView.Open();
+		this.ConsoleView.Open();
+		Game.Interface.ResumeInput();
+		this.UpdateMobile();
+	}
 
 		//TEST
 //		this.GraphicsTool.DrawSection(410, 410, 350, 150, "Transfer List", "black", null, this.TextWriter);
 //		this.DumpSquad();
 };
-FootballSquadView.prototype.Update = function() {  //LOGGED, unused as of now, but may be needed later
+FootballSquadView.prototype.Update = function() {  //UNLOGGED, unused as of now, but may be needed later
 
 //		if (Mouse.CheckLeftClicked()) {  //TODO: will change - method only called on Mouse click, so don't have to check for click
 //		}
+};
+FootballSquadView.prototype.UpdateMobile = function() {
+
+	this.AnimationFrameHandle = requestAnimationFrame(this.UpdateMobile.bind(this));
+
+	this.ConsoleView.Update();
+
+	if (Mouse.CheckLeftClicked(CANVAS.PRIME))
+		this.Clicked();
 };
 FootballSquadView.prototype.Draw = function() {  //UNLOGGED
 
@@ -90,6 +112,10 @@ FootballSquadView.prototype.Draw = function() {  //UNLOGGED
 	this.DisplayPlayers();
 	if (!Game.CheckMobile())
 		this.DisplayLegends();
+};
+FootballSquadView.prototype.CloseAll = function() {  //UNLOGGED
+
+	GenieView.prototype.Close.call(this, this.OpenPanelView.bind(this), 100);
 };
 FootballSquadView.prototype.SelectSlot = function(table, sNumber) {  //s- slot; table can be SQUAD, YOUTH, TRANSFErLISTED etc . . . UNLOGGED
 };
@@ -325,17 +351,20 @@ FootballSquadView.prototype.DisplayPlayers = function() {
 	for (this.i=0;this.i<this.Squad.Players.length;++this.i) {
 		this.Player = this.Slots[this.i].Player;
 		this.DisplayPlayerInfo(this.Slots[this.i].X+5, this.Slots[this.i].Y+10, this.i==this.SelectedSlot);
-		if (this.i==this.SelectedSlot)
-			this.ParentView.InfoView.Draw();
+		if (this.i==this.SelectedSlot) {
+			if (Game.CheckMobile())
+				this.InfoView.Draw();
+			else
+				this.ParentView.InfoView.Draw();
+		}
 	}
 };
 FootballSquadView.prototype.DisplayPlayerInfo = function(x, y, bSlctd) {
 
 		//Determine colour
-		if (this.Player.Quality<15)
-			this.colour = SquadColours[Math.floor(this.Player.Quality/3)];
-		else
-			this.colour = "black";
+		this.num = Math.floor(this.Player.Quality/3);
+		this.num = (this.num>5) ? 5 : this.num;
+		this.colour = SquadColours[this.num];
 		if (bSlctd) {
 			if (Game.CheckMobile())
 				this.GraphicsTool.DrawRectangle(10+this.Indent, y-11, 380-this.Indent, 15, this.colour, 0);
@@ -348,10 +377,6 @@ FootballSquadView.prototype.DisplayPlayerInfo = function(x, y, bSlctd) {
 			x += this.Indent;
 
 		//Name, age and position
-		if (this.Player.CheckStricken())
-			this.TextWriter.Write("††", x, y, { FONT: "12px Arial", COLOUR: this.colour } );
-		if (this.Player.CheckInjured())
-			this.TextWriter.Write(" †", x, y, { FONT: "12px Arial", COLOUR: this.colour } );
 		this.TextWriter.Write(this.Player.Name.GetFullName(), x+10, y, { FONT: "12px Arial", COLOUR: this.colour, STYLE: FONT.STYLE.BOLD } );
 		this.TextWriter.Write(this.Player.Age, x+130, y, { FONT: "12px Arial", COLOUR: this.colour } );
 		if (!this.Player.Position)
@@ -362,22 +387,14 @@ FootballSquadView.prototype.DisplayPlayerInfo = function(x, y, bSlctd) {
 		//Ratings
 		this.TextWriter.Write(Utils.NumberToGrade(this.Player.Quality), x+191, y, { FONT: "12px Arial", COLOUR: this.colour } );
 		if (this.Player.Age<=FOOTBALLER.AGE.EXPERIENCED)
-			ArrowImages.DrawPatchNumber(0, x+216, y-10);
+			ArrowImages.DrawPatchNumber(this.num, x+216, y-10);
 		else if (this.Player.Age>FOOTBALLER.AGE.SEASONED)
-			ArrowImages.DrawPatchNumber(1, x+216, y-10);
+			ArrowImages.DrawPatchNumber(this.num+6, x+216, y-10);
 		this.TextWriter.Write(this.Player.Potential, x+223, y, { FONT: "12px Arial", COLOUR: this.colour } );
 		this.TextWriter.Write("+"+this.Player.Variation, x+247, y, { FONT: "12px Arial", COLOUR: this.colour } );
 
 		//Price and wages
 		this.num = this.Player.GetPrice();
-		/* REDUNDANT
-		if (this.num>=1000)
-			this.num = (Math.round(this.num/100)/10)+"M";
-		else if (this.num>=100)
-			this.num = (Math.round(this.num/10)*10)+"K";
-		else
-			this.num = Math.round(this.num)+"K";
-		*/
 		this.num = Utils.FormatMoney(this.num);
 		this.TextWriter.Write(this.num, x+269, y, { FONT: "12px Arial", COLOUR: this.colour } );
 		this.num = this.Player.GetWages();
@@ -392,6 +409,14 @@ FootballSquadView.prototype.DisplayPlayerInfo = function(x, y, bSlctd) {
 			TypeSymbolImages.DrawPatchNumber(this.Player.Type-1, x-5, y-10);
 		if (this.Player.Designation)
 			DesignationSymbolImages.DrawPatchNumber(this.Player.Designation-1, x+360-this.Indent, y-10);
+
+		//Draw a line through the player if injured, 2 if stricken
+		if (this.Player.CheckInjured())
+			this.GraphicsTool.DrawHorizontalLine( { X: x, Y: y-5 }, 365, this.colour, 1);
+		if (this.Player.CheckStricken()) {
+			this.GraphicsTool.DrawHorizontalLine( { X: x, Y: y-3 }, 365, this.colour, 1);
+			this.GraphicsTool.DrawHorizontalLine( { X: x, Y: y-6 }, 365, this.colour, 1);
+		}
 
 		if (this.PlayerSelected===this.Player)
 			this.GraphicsTool.DrawRectangle(5, (y-20)+6, x+330, 20, "black", 3);
@@ -432,9 +457,53 @@ FootballSquadView.prototype.Clicked = function() {
 			this.Context.fillRect(20, 0, SCREEN.WIDTH-20, SCREEN.HEIGHT);
 			this.DrawSections();
 			this.DisplayPlayers();
-			this.ParentView.InfoView.SetFootballer(this.Slots[this.SelectedSlot].Player);
-			this.ParentView.InfoView.ColourBackground();
-			this.ParentView.InfoView.Draw();
+			if (Game.CheckMobile()) {
+				this.InfoView.SetFootballer(this.Slots[this.SelectedSlot].Player);
+				this.InfoView.ColourBackground();
+				this.InfoView.Draw();
+			} else {
+				this.ParentView.InfoView.SetFootballer(this.Slots[this.SelectedSlot].Player);
+				this.ParentView.InfoView.ColourBackground();
+				this.ParentView.InfoView.Draw();
+			}
 		}
 	}
+};
+FootballSquadView.prototype.OpenPanelView = function() {
+
+	switch (this.ConsoleView.TabButtonPanel.ButtonPressed) {
+		case this.Specs.CONSOLE.BUTTOnPANEL.TAB.TEAM:
+//			this.MainView.Close(this.OpenTeamView.bind(this), 100);
+			break;
+		case this.Specs.CONSOLE.BUTTOnPANEL.TAB.YOUTH:
+//			this.MainView.Close(this.OpenYouthView.bind(this), 100);
+			break;
+		case this.Specs.CONSOLE.BUTTOnPANEL.TAB.FORMATION:
+//			this.OpenFormationView();
+			FormationSubView.Open();
+			break;
+		case this.Specs.CONSOLE.BUTTOnPANEL.TAB.TACTICS:
+			TacticsSubView.Open();
+			break;
+		case this.Specs.CONSOLE.BUTTOnPANEL.TAB.TRAINING:
+			TrainingSubView.Open();
+			break;
+		case this.Specs.CONSOLE.BUTTOnPANEL.TAB.TRANSFERS:
+			this.MainView.Close(this.OpenTransferView.bind(this), 100);			
+			break;
+		case this.Specs.CONSOLE.BUTTOnPANEL.TAB.OPPONENT:
+			OpponentSubView.Open();
+			break;
+		case this.Specs.CONSOLE.BUTTOnPANEL.TAB.FIXTURES:
+			FixturesSubView.Open();
+			break;
+		case this.Specs.CONSOLE.BUTTOnPANEL.TAB.TABLES:
+			TableSubView.Open();
+			break;
+		case this.Specs.CONSOLE.BUTTOnPANEL.TAB.STATS:
+			StatsSubView.Open();
+			break;
+	}
+
+	Game.Interface.ResumeInput();
 };

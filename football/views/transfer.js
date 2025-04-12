@@ -17,8 +17,8 @@ var FootballTransferSubView = function() {
 	var i, y, num, info;
 };
 FootballTransferSubView.prototype = new GenieNestedView();
-FootballTransferSubView.prototype.Set = function(cnvs, specs, tView) {
-	GenieNestedView.prototype.Set.call(this, cnvs, specs, tView);
+FootballTransferSubView.prototype.Set = function(cnvs, specs, pView) {
+	GenieNestedView.prototype.Set.call(this, cnvs, specs, pView);
 
 	this.SetLists();
 	this.Fee = 0;
@@ -83,7 +83,7 @@ FootballTransferSubView.prototype.Open = function() {
 		this.UpdateTransferList();
 		this.MobilePagination.SetItems(this.FootballerList);
 		this.DisplayTargets();
-		this.Update();
+		this.UpdateMobile();
 		return;
 	} else {
 	//TEMP
@@ -121,18 +121,19 @@ FootballTransferSubView.prototype.Open = function() {
 
 	this.Update();
 };
+FootballTransferSubView.prototype.UpdateMobile = function() {
+
+	this.AnimationFrameHandle = requestAnimationFrame(this.UpdateMobile.bind(this));
+
+	this.UpdateMouseClick();
+	this.UpdateButtons();
+	this.UpdatePagination();
+	this.InfoView.Update();
+	this.ConsoleView.Update();
+};
 FootballTransferSubView.prototype.Update = function() {	//UNLOGGED
 
-	this.AnimationFrameHandle = requestAnimationFrame(this.Update.bind(this));
-
-	if (Game.CheckMobile()) {
-		this.UpdateMouseClick();
-		this.UpdateButtons();
-		this.UpdatePagination();
-		this.InfoView.Update();
-		this.ConsoleView.Update();
-	} else
-		this.UpdateSpinControls();
+	this.UpdateSpinControls();
 };
 FootballTransferSubView.prototype.Draw = function() {  //NOTE: expected to call only once, unless Info Dialogs are added
 
@@ -150,8 +151,9 @@ FootballTransferSubView.prototype.UpdateMouseClick = function() {
 				this.GraphicsTool.DrawRectangle(this.Specs.FRAME.L, this.Specs.FRAME.T, this.Specs.FRAME.W, this.Specs.FRAME.H, this.Specs.COLOUR,
 																																											this.Specs.FRAME.LW);
 				this.DisplaySquad();
-				this.InfoView.SetFootballer(this.ParentView.Team.Squad.Players[this.FootballerIndex]);					
-				this.InfoView.Draw();
+				this.InfoView.SetFootballer(this.ParentView.Team.Squad.Players[this.FootballerIndex]);
+				this.InfoView.ColourBackground();
+				this.InfoView.DisplayPlayerInfo();
 			}
 	}
 };
@@ -415,9 +417,13 @@ FootballTransferSubView.prototype.AddByGrade = function(plyr) {  //REDUNDANT
 		   break;
 	}
 };
-FootballTransferSubView.prototype.CloseAll = function() {
+FootballTransferSubView.prototype.CloseAll = function() {  //Mobile only
 
-	this.Close(this.OpenTeamView.bind(this), 100);
+	GenieView.prototype.Close.call(this, this.OpenSquadView.bind(this), 100);
+};
+FootballTransferSubView.prototype.OpenSquadView = function() {  //Mobile only
+
+	SquadView.Open();
 };
 FootballTransferSubView.prototype.OpenTeamView = function() {
 
