@@ -11,7 +11,9 @@ var VIEW = { LEAGUE: { COLOUR: PAINT.SKY,
 												  }
 									  },
 							  CONSOLE: { COLOUR: PAINT.SKY,
-											 BUTTON: { MATCH: { L: 2, T: 202, W: 152, H: 36, LW: 3, SX: 311, SY: 181, STYLE: BUTTON.STYLE.RAISED }  //REDUNDANT?
+											 BUTTON: { MATCH: { L: 2, T: 202, W: 152, H: 36, LW: 3, SX: 311, SY: 181, STYLE: BUTTON.STYLE.RAISED },  //REDUNDANT?
+														  HELP: { L: 4, T: 194, W: 72, H: 44, LW: 3, SX: 529, SY: 292, STYLE: BUTTON.STYLE.RAISED },
+														  PAST: { L: 80, T: 194, W: 72, H: 44, LW: 3, SX: 529, SY: 252, STYLE: BUTTON.STYLE.RAISED }
 														}
 										  }
 							},
@@ -48,7 +50,7 @@ var VIEW = { LEAGUE: { COLOUR: PAINT.SKY,
 							CONSOLE: { COLOUR: BLUE.AZURE,
 										  BUTTOnPANEL: { TAB: { L: 0, T: 0, W: 156, H: 200, C: 2, R: 5, LW: 3, BUTTON: { W: 78, H: 40 },
 																		IMAGE: { L: 311, T: 1, W: 146, H: 78, C: 2, R: 5, O: 2, PATCH: { W: 72, H: 34 } },
-																		SQUAD: 0, YOUTH: 1, FORMATION: 2, TACTICS: 3, TRAINING: 4, TRANSFERS: 5, 
+																		TEAM: 0, YOUTH: 1, FORMATION: 2, TACTICS: 3, TRAINING: 4, TRANSFERS: 5, 
 																		OPPONENT: 6, FIXTURES: 7, TABLES: 8, STATS: 9 }
 															},
 										  BUTTON: { MATCH: { L: 2, T: 202, W: 152, H: 36, LW: 3, SX: 311, SY: 181, STYLE: BUTTON.STYLE.RAISED }
@@ -59,6 +61,17 @@ var VIEW = { LEAGUE: { COLOUR: PAINT.SKY,
 						 },
 				 SQUAD: { COLOUR: BLUE.POWDER, L: 0, T: 0, W: 400, H: 547,
 							 BUTTON: { POSITION: { L: -1, T: -1, W: 21, H: 19, O: 2, LW: 3, SX: 1, SY: 249, COUNT: 4, STYLE: BUTTON.STYLE.RAISED }
+										},
+							 CONSOLE: { COLOUR: BLUE.POWDER,
+										   BUTTOnPANEL: { TAB: { L: 0, T: 0, W: 156, H: 200, C: 2, R: 5, LW: 3, BUTTON: { W: 78, H: 40 },
+																		 IMAGE: { L: 311, T: 1, W: 146, H: 78, C: 2, R: 5, O: 2, PATCH: { W: 72, H: 34 } },
+																		 TEAM: 0, YOUTH: 1, FORMATION: 2, TACTICS: 3, TRAINING: 4, TRANSFERS: 5, 
+																		 OPPONENT: 6, FIXTURES: 7, TABLES: 8, STATS: 9 }
+															},
+										   BUTTON: { MATCH: { L: 2, T: 202, W: 152, H: 36, LW: 3, SX: 311, SY: 181, STYLE: BUTTON.STYLE.RAISED }
+													  },
+											IMAGE: { BEVEL: { L: 311, T: 213, W: 162, H: 40, O: 2, C: 2, R: 1, PATCH: { W: 78, H: 40 } }
+													 }
 										}
 						  },
 				 FORMATION: { ICOnPANEL: { FORMATION: { L: 446, T: 458, W: 304, H: 78, C: 4, R: 3, LW: 3, ICONS: 12, ICON: { W: 76, H: 26 },
@@ -72,8 +85,9 @@ var VIEW = { LEAGUE: { COLOUR: PAINT.SKY,
 																					IMAGE: { L: 109, T: 61, W: 286, H: 64, O: 2, R: 3, C: 4, PATCH: { W: 70, H: 20 } }
 																				 }
 																},
-												 BUTTON: { AUToSELECT: {  L: 5, T: 210, W: 100, H: 25, LW: 3, LABEL: "Auto Select", STYLE: BUTTON.STYLE.RAISED },
-															  SUBS: {  L: 110, T: 210, W: 40, H: 25, LW: 3, LABEL: "Subs", STYLE: BUTTON.STYLE.RAISED }
+												 BUTTON: { AUToSELECT: {  L: 5, T: 165, W: 80, H: 25, LW: 3, LABEL: "Auto Select", STYLE: BUTTON.STYLE.RAISED },
+															  SUBS: {  L: 110, T: 165, W: 40, H: 25, LW: 3, LABEL: "Subs", STYLE: BUTTON.STYLE.RAISED },
+															  EXIT: { L: 80, T: 194, W: 72, H: 44, LW: 3, SX: 470, SY: 212, STYLE: BUTTON.STYLE.RAISED }
 															}
 								  }
 								},
@@ -81,6 +95,19 @@ var VIEW = { LEAGUE: { COLOUR: PAINT.SKY,
 														  }
 											 }
 							  },
+				 TABLES: { COLOUR: "rgb(000,159,111)", COLOURS: { BUTTON: "rgb(223,239,047)" },
+							  IMAGE: { HEADING: { L: 1, T: 34, W: 150, H: 20 }
+										},
+							  INFO: { },
+							  CONSOLE: { COLOUR: "rgb(223,239,047)",
+											 ICOnPANEL: { COMPETITION: { L: 15, T: 15, W: 126, H: 150, C: 1, R: 5, LW: 3, ICONS: 5, ICON: { W: 126, H: 32 }, PRESS: 0,
+																				  IMAGE: { L: 734, T: 1, W: 120, H: 138, O: 2, R: 5, C: 1, PATCH: { W: 120, H: 26 } }
+																				}
+															},
+											 BUTTON: { EXIT: { L: 80, T: 194, W: 72, H: 44, LW: 3, SX: 538, SY: 212, STYLE: BUTTON.STYLE.RAISED }
+														}
+										  }
+							},
 				 TACTICS: {	CONSOLE: { BUTTON: { KICkOFF: { L: 100, T: 275, W: 100, H: 100, LW: 2, SX: 636, SY: 1, STYLE: BUTTON.STYLE.SHALLOW }
 														 }
 											}
@@ -194,11 +221,6 @@ var VIEW = { LEAGUE: { COLOUR: PAINT.SKY,
 																  }
 												  }
 							  },
-				 TABLES: { IMAGE: { HEADING: { L: 1, T: 34, W: 150, H: 20 }
-										},
-							  INFO: { },
-							  CONSOLE: { }
-							},
 				 STATS: {
 						  },
 				 HIGHLIGHTS: { COLOUR: GREY.FAINT,
