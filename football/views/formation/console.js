@@ -5,7 +5,7 @@
 //---------- FOOTBALL FORMATION CONSOLE VIEW --------------------
 var FootballFormationConsoleView = function() {
 	var FormationIconPanel;
-	var AutoSelectButton, SubsButton;
+	var AutoSelectButton, SubsButton, ExitButton;
 	var IconContext;
 };
 FootballFormationConsoleView.prototype = new GenieSubView();
@@ -20,6 +20,7 @@ FootballFormationConsoleView.prototype.SetControls = function() {
 																			IconCornerImages, this.GraphicsTool);
 		this.AutoSelectButton = this.SetTextButton(this.Specs.BUTTON.AUToSELECT, RaisedCornerImages, this.TextWriter);
 		this.SubsButton = this.SetTextButton(this.Specs.BUTTON.SUBS, RaisedCornerImages, this.TextWriter);
+		this.ExitButton = this.SetImageButton(this.Specs.BUTTON.EXIT, ImageManager.Pics[IMAGeINDEX.MOBILE], RaisedCornerImages);
 	}
 };
 FootballFormationConsoleView.prototype.ShowControls = function() {
@@ -31,20 +32,23 @@ FootballFormationConsoleView.prototype.ShowControls = function() {
 		IconCornerImages.Context = this.IconContext;
 		this.AutoSelectButton.Show();
 		this.SubsButton.Show();
+		this.ExitButton.Show();
 	}
 };
-FootballFormationConsoleView.prototype.Update = function() {
-	//UNLOGGED
+FootballFormationConsoleView.prototype.Update = function() {  //UNLOGGED
+
 	if (Game.CheckMobile()) {
 
 		//Check if formation has changed
 		if (this.FormationIconPanel.CheckMouseDown()) {
 			this.MainView.SetFormation(this.FormationIconPanel.DepressedIcon);
 			this.MainView.Draw();
-			this.DisplayFormationRating();
 		}
 
 		//-subs and auto-select buttons?
+
+		if (this.ExitButton.CheckClicked())
+			this.MainView.CloseAll();
 	}
 };
 FootballFormationConsoleView.prototype.Draw = function() {
@@ -52,9 +56,8 @@ FootballFormationConsoleView.prototype.Draw = function() {
 	if (!Game.CheckMobile())
 		this.DisplayPlayersInfo();
 	this.TextWriter.SetContext(this.Context);
-	this.TextWriter.Write("Rating:", 5, 185);
+	this.TextWriter.Write("Rating:", 5, 175);
 	this.TextWriter.ResetContext();
-	this.DisplayFormationRating();
 };
 FootballFormationConsoleView.prototype.DisplayPlayersInfo = function() {
 	var i;
@@ -70,22 +73,4 @@ FootballFormationConsoleView.prototype.DisplayPlayersInfo = function() {
 		this.TextWriter.Write(Utils.NumberToGrade(this.MainView.Team.YouthTeam.Players[i].Quality), 175, 15*(i+1), font);
 	}
 	this.TextWriter.RestoreContext();
-};
-FootballFormationConsoleView.prototype.DisplayFormationRating = function() {
-	var i;
-	var rtng;
-
-	//Erase previous rating
-	this.GraphicsTool.SetContext(this.Context);
-	this.GraphicsTool.DrawRectangle(60, 170, 35, 20, this.Specs.COLOUR, 0);
-	this.GraphicsTool.ResetContext();
-
-	//Write new rating
-	rtng = 0;
-	for (i=0;i<MATCH.PLAYERS;++i)
-		rtng += this.MainView.Team.FormationStarters[this.MainView.Team.Formation][i].Rating;
-	rtng = Utils.NumberToGrade(Math.round(rtng/MATCH.PLAYERS));
-	this.TextWriter.SetContext(this.Context);
-	this.TextWriter.Write(rtng, 65, 185);
-	this.TextWriter.ResetContext();
 };
