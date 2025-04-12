@@ -89,6 +89,30 @@ StringUtilities.prototype = {
 			context.font = this.fnt;
 
 		return (aBrks);
+	},
+	GetLetterIndex(lttr) {
+		var a;
+
+		a = "a";
+		return (lttr.charCodeAt(0)-a.charCodeAt(0));
+	},
+	InitializeFirstName(fName, lName, width, context) {  //contract first name to initial if full name doesn't fit
+
+		if (this.GetTextWidth(fName + " " + lName, null, context)<width)
+			return (fName + " " + lName);
+		else
+			return (fName[0] + " " + lName);
+	},
+	TruncateLastName(fName, lName, width, mantissa, context) {
+
+		if (this.GetTextWidth(fName + " " + lName, null, context)<width)
+			return (fName + " " + lName);
+		else {
+			this.str = lName.slice(lName.length-mantissa);
+			return (fName + " " + this.str);
+		}
+	},
+	TruncateFullName(fName, lName, width, context) {  //UNLOGGED
 	}
 };
 
