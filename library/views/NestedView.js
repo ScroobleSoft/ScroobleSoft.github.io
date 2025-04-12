@@ -27,6 +27,6 @@ GenieNestedView.prototype.Update = function() {  //NOTE: often over-ridden, but 
 };
 GenieNestedView.prototype.Close = function() {
 
-	if (this.Controls.length)  //hide controls
-		this.Controls.forEach( function(cntrl) {cntrl.Hide();} );
+	if (this.Controls.length)
+		this.Controls.forEach( function(cntrl) {cntrl.DeActivate();} );
 };
