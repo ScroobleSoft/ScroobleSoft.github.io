@@ -21,6 +21,10 @@ FootballSquad.prototype = {
 		this.Attackers = new Array();
 		this.PositionGroups = [ this.Goalkeepers, this.Defenders, this.Midfielders, this.Attackers ];
 	},
+	Reset() {  //UNLOGGED
+
+		this.ClearInjuries();  //TODO: necessary? only needed at end of season, not when starting a new game
+	},
 	Generate() {
 
 		this.Players = ArrayUtils.Create(SQUAD.SIZE, FootballPlayer);
@@ -233,5 +237,13 @@ FootballSquad.prototype = {
 			qlty += this.Players[i].Quality;
 
 		return (qlty/this.Players.length);
+	},
+	UpdateInjuries() {
+
+		this.Players.forEach(function(plyr) {plyr.UpdateInjured();});
+	},
+	ClearInjuries() {
+
+		this.Players.forEach(function(plyr) {plyr.ClearInjury();});
 	}
 };

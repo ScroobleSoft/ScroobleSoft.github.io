@@ -63,11 +63,20 @@ FootballTeam.prototype = {
 	},
 	GenerateFormations() {
 		var i;
+		var nPlyrs;
 
 		//Sort list from best player downwards, the best 10 to be selected first, others subbing in if they upgrade a position
+		nPlyrs = 0;
 		for (i=0;i<SQUAD.SIZE;++i)
 			if (this.Squad.Players[i].Position!=POSITION.GK)
-				this.SortedSquadList[i] = this.Squad.Players[i];
+				if (!this.Squad.Players[i].CheckInjured()) {
+					if (nPlyrs<this.SortedSquadList.length)
+						this.SortedSquadList[nPlyrs] = this.Squad.Players[i];
+					else
+						this.SortedSquadList.push(this.Squad.Players[i]);
+					++nPlyrs;
+				}
+		this.SortedSquadList.length = nPlyrs;
 		this.SortedSquadList.sort(function(ftblr1, ftblr2) {return (ftblr1.Quality-ftblr2.Quality);});
 
 		for (i=0;i<FORMATION.TYPES;++i)
@@ -149,9 +158,9 @@ FootballTeam.prototype = {
 		var i;
 		var rtng;
 
-		for (i=0;i<SQUAD.SIZE;++i) {
-			if (!this.SortedSquadList[i])
-				continue;
+		for (i=0;i<this.SortedSquadList.length;++i) {
+//			if (!this.SortedSquadList[i])			//looks REDUNDANT
+//				continue;
 			if ( this.SortedSquadList[i].Selected || this.SortedSquadList[i].Position==POSITION.GK )
 				continue;
 			rtng = this.SortedSquadList[i].GetDisplacement(Formations[iFrmtn][iPlyr]) + this.SortedSquadList[i].Quality;

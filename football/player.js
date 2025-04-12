@@ -426,6 +426,11 @@ FootballPlayer.prototype = {
 
 		return (BitUtils.CheckBit(this.Status, FOOTBALLER.BIT.STRICKEN));
 	},
+	ClearInjury() {
+
+		if (this.CheckInjured())
+			this.Status -= BitUtils.AddBit(this.Status, FOOTBALLER.BIT.INJURY);
+	},
 	Update() {  //TODO: may set a bit indicating if played in League and/or Cup match that week, or could pass in that info plus minutes played
 
 		//UNLOGGED
@@ -459,6 +464,12 @@ FootballPlayer.prototype = {
 				this.UpdateChronic();
 				break;
 		}
+	},
+	UpdateInjured() {
+
+		this.ClearInjury();
+		if (this.Randomizer.CheckUnderOdds(3,SQUAD.SIZE))
+			this.SetInjured();
 	},
 	UpdateAge() {
 	},

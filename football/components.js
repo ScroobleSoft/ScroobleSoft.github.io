@@ -105,10 +105,12 @@ var HomeIsometricPlayers, AwayIsometricPlayers;
 
 var LeagueView, LeagueInfoView, LeagueConsoleView;
 var TeamView, TeamInfoView, TeamConsoleView;
-var SquadView, YouthView;
+var SquadView, SquadConsoleView;
+var YouthView;
 var FormationSubView, FormationInfoView, FormationConsoleView;
 var FixturesSubView, FixturesInfoView;
-var OpponentSubView, OpponentInfoView, TableSubView, TransferSubView;
+var OpponentSubView, OpponentInfoView, TransferSubView;
+var TableSubView, TableConsoleView;
 var TacticsSubView, TrainingSubView, StatsSubView;
 var MatchSideView, HighlightsView, HighlightsInfoView, HighlightsConsoleView;
 
@@ -537,7 +539,11 @@ FootballComponents.prototype = {
 		TeamInfoView = new FootballTeamInfoView();
 		if (Game.CheckMobile())
 			TeamConsoleView = new FootballTeamConsoleView();
+
 		SquadView = new FootballSquadView();
+		if (Game.CheckMobile())
+			SquadConsoleView = new FootballSquadConsoleView();
+
 		YouthView = new YouthTeamView();
 
 		FormationSubView = new FootballFormationSubView();
@@ -552,7 +558,10 @@ FootballComponents.prototype = {
 			OpponentInfoView = new FootballOpponentInfoView();
 	
 		MatchSideView = new FootballMatchSideView();
+
 		TableSubView = new FootballTableSubView();
+		TableConsoleView = new FootballTableConsoleView();
+
 		TransferSubView = new FootballTransferSubView();
 		TransferConsoleView = new FootballTransferConsoleView();
 
@@ -566,19 +575,16 @@ FootballComponents.prototype = {
 
 		this.SetLeagueViews();
 		this.SetTeamViews();
+		this.SetSquadViews();
 		this.SetFormationViews();
 		this.SetTransferViews();
 		this.SetOpponentViews();
 		this.SetFixturesViews();
 		this.SetHighlightsViews();
+		this.SetTableViews();
 
-		SquadView.SetLinks(this.GraphicsTool, this.TextWriter, this.Randomizer);
-		SquadView.Set(this.Interface.PrimeScape, VIEW.SQUAD, TeamView);
 		YouthView.Set(this.Screen, this.GraphicsTool, this.TextWriter);
-
 		MatchSideView.Set(this.Screen, this.GraphicsTool, this.Randomizer);
-		TableSubView.Set(this.Interface.PrimeScape, VIEW.TABLES, TeamView);
-		TableSubView.SetLinks(null, this.TextWriter);
 
 		TacticsSubView.Set(this.Interface.PrimeScape, VIEW.TACTICS, TeamView);
 		TrainingSubView.Set(this.Interface.PrimeScape, VIEW.TRAINING, TeamView);

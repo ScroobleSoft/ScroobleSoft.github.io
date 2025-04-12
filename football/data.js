@@ -155,16 +155,17 @@ var FOOTBALLER = { SERVICE: { YOUTH: 0, EXPERIENCED: 1, SEASONED: 2, VETERAN: 3,
 var PLAYERS = { OUTFIELD: 10, TOTAL: 11 };  //TODO: maybe TEMP
 var PlayerTypes = [ "Normal", "Brittle", "Inspirational", "Sparker", "Specalist", "Temperamental", "Undisciplined", "Versatile", "Volatile" ];
 var Designations = [ "League", "Laggard", "Overseas", "Domestic", "Peripheral", "Youth", "Semi-Pro", "Prodigy", "Chronic" ];
-var TRANSFERS = { POOL: { TOTAL: 904, LEAGUE: 320, FRINGE: 600, OVERSEAS: 100, DOMESTIC: 100, PERIPHERAL: 100, YOUTH: 100, SEMiPRO: 100, PRODIGY: 100 },
+var TRANSFERS = { POOL: { TOTAL: 1024, LEAGUE: 304, FRINGE: 720, OVERSEAS: 300, DOMESTIC: 200, PERIPHERAL: 100, YOUTH: 60, SEMiPRO: 30, PRODIGY: 30 },
 		  ALL: 0, G: 1, D: 2, M: 3, A: 4, TARGETS: { ALL: 900, G: 40, D: 80, M: 90, A: 60 } };
 var TypeSymbols = [ "", "…", "‡", "º", "*", "†", "^", "±" ];  //REDUNDANT
 var SLOT = { GK: 3, D: 8, M: 8, A: 6, RB: 4, RWB: 5, CB: 9, LB: 10, LWB: 11, RM: 13, DM: 14, CM: 16, AM: 17, LM: 19, RW: 20, SF: 21, S: 23, BF: 24, LW: 25 };
 var FORM = { TERRIBLE: 0, POOR: 1, NORMAL: 2, GOOD: 3, EXCELLENT: 4 };  //TODO: might use SOLID rather than NORMAL
+/*
 var LeaguePlayers = [ ArsenalPlayers, BournemouthPlayers, BrightonPlayers, BurnleyPlayers, ChelseaPlayers, CrystalPalacePlayers,
 				EvertonPlayers, HuddersfieldPlayers, LeicesterPlayers, LiverpoolPlayers, ManchesterCityPlayers,
 				ManchesterUtdPlayers, NewcastlePlayers, SouthamptonPlayers, StokePlayers, SwanseaPlayers,
 				TottenhamPlayers, WatfordPlayers, WBAPlayers, WestHamPlayers ];
-
+*/
 //-- MATCH --
 
 var MATCH = { PLAYERS: 11, SUBS: 7, MINUTES: 90, SIM: { CYCLE: { UNIT: 0, ZONAL: 1, MATChUP: 2 }, RESULT: { TURNOVER: 0, MISS: 1, SAVE: 2, GOAL: 3 } } };
@@ -228,7 +229,7 @@ var ROTATINgBALlIMAGE = { L: 2, T: 264, W: 80, H: 80 };
 var ACRONYmIMAGEs = { L: 1, T: 1, W: 232, H: 31, O: 2, R: 3, C: 9, PATCH: { W: 24, H: 9 } };
 var TYPeSYMBOlIMAGEs = { L: 1, T: 156, W: 110, H: 13, O: 2, C: 8, R: 1, PATCH: { W: 12, H: 13 } };
 var DESIGNATIOnSYMBOlIMAGEs = { L: 113, T: 156, W: 110, H: 13, O: 2, C: 8, R: 1, PATCH: { W: 12, H: 13 } };
-var ARROwIMAGEs = { L: 265, T: 87, W: 12, H: 10, O: 2, C: 2, R: 1, PATCH: { W: 5, H: 10 } };
+var ARROwIMAGEs = { L: 265, T: 87, W: 82, H: 10, O: 2, C: 10, R: 1, PATCH: { W: 5, H: 10 } };
 
 var HAIrIMAGEs = { L: 1, T: 56, W: 294, H: 21, O: 2, R: 1, C: 8, PATCH: { W: 35, H: 21 } };
 var FOOTBALLErFACeIMAGEs = { L: 1, T: 79, W: 262, H: 29, O: 2, R: 1, C: 8, PATCH: { W: 31, H: 29 } };
