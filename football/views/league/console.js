@@ -3,11 +3,17 @@
 //---------- FOOTBALL LEAGUE CONSOLE VIEW --------------------
 var FootballLeagueConsoleView = function() {
 	var ImageContext;
+	var HelpButton, PastGamesButton;
 };
 FootballLeagueConsoleView.prototype = new GenieSubView();
 FootballLeagueConsoleView.prototype.Set = function(cnvs, specs, mView) {
 	GenieSubView.prototype.Set.call(this, cnvs, specs, mView);
 
+};
+FootballLeagueConsoleView.prototype.SetControls = function() {
+
+	this.HelpButton = this.SetImageButton(this.Specs.BUTTON.HELP, ImageManager.Pics[IMAGeINDEX.MOBILE], RaisedCornerImages);
+	this.PastGamesButton = this.SetImageButton(this.Specs.BUTTON.PAST, ImageManager.Pics[IMAGeINDEX.MOBILE], RaisedCornerImages);
 };
 FootballLeagueConsoleView.prototype.Draw = function() {
 
@@ -53,13 +59,13 @@ FootballLeagueConsoleView.prototype.DisplayBestPlayers = function() {
 	//Pick appropriate players
 	switch (this.MainView.InfoView.OptionSelected) {
 		case FOOTBALL.TYPE.FEATURED:
-			aPlyrs = Featured[0][5];
+			aPlyrs = Featured[0][6];
 			break;
 		case FOOTBALL.TYPE.DAILY:
-			aPlyrs = Daily[0][5];
+			aPlyrs = Daily[0][6];
 			break;
 		case FOOTBALL.TYPE.WEEKLY:
-			aPlyrs = Weekly[0][5];
+			aPlyrs = Weekly[0][6];
 			break;
 		case FOOTBALL.TYPE.RANDOM:
 			return;

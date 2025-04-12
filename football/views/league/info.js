@@ -32,14 +32,16 @@ FootballLeagueInfoView.prototype.Update = function() {
 					this.SelectionImages.DrawPatchNumber(1, this.OptionBoxes[this.OptionSelected].L-3, this.OptionBoxes[this.OptionSelected].T-3);
 					this.OptionSelected = this.i;
 					this.SelectionImages.DrawPatchNumber(0, this.OptionBoxes[this.OptionSelected].L-3, this.OptionBoxes[this.OptionSelected].T-3);
-					this.MainView.ConsoleView.ColourScape();
-					this.MainView.ConsoleView.Draw();
+					this.MainView.ConsoleView.Context.fillStyle = this.Specs.COLOUR;
+					this.MainView.ConsoleView.Context.fillRect(0, 0, CONTROlPANEL.WIDTH, 190);;
+					this.MainView.ConsoleView.DisplayBestPlayers();
 				}
 			}
 };
 FootballLeagueInfoView.prototype.Draw = function() {
 	var i;
 	var y;
+	var name;
 
 	//-basic stats in Info Box (such as ranking, G/D/M/A rating and maybe ranking)
 //	SquadView.DisplayTeamInfo();			//TEMP
@@ -53,19 +55,22 @@ FootballLeagueInfoView.prototype.Draw = function() {
 			this.OptionBoxes[i].Set(4, y, this.Specs.IMAGE.OPTIONS.PATCH.W, this.Specs.IMAGE.OPTIONS.PATCH.H);
 			switch (i) {
 				case FOOTBALL.TYPE.FEATURED:
-					this.TextWriter.Write("Title: "+Featured[0][2], 95, 20+((this.Specs.IMAGE.OPTIONS.PATCH.H+4)*i));
-					this.TextWriter.Write("League Position: "+Featured[0][3], 95, 37+((this.Specs.IMAGE.OPTIONS.PATCH.H+4)*i));
-					this.TextWriter.Write("Date: "+Featured[0][4], 95, 54+((this.Specs.IMAGE.OPTIONS.PATCH.H+4)*i));
+					name = StringUtils.InitializeFirstName(Featured[0][2], Featured[0][3], 105, this.Context);
+					this.TextWriter.Write("Title: "+name, 95, 20+((this.Specs.IMAGE.OPTIONS.PATCH.H+4)*i));
+					this.TextWriter.Write("League Position: "+Featured[0][4], 95, 37+((this.Specs.IMAGE.OPTIONS.PATCH.H+4)*i));
+					this.TextWriter.Write("Date: "+Featured[0][5], 95, 54+((this.Specs.IMAGE.OPTIONS.PATCH.H+4)*i));
 					break;
 				case FOOTBALL.TYPE.DAILY:
-					this.TextWriter.Write("Title: "+Daily[0][2], 95, 20+((this.Specs.IMAGE.OPTIONS.PATCH.H+4)*i));
-					this.TextWriter.Write("League Position: "+Daily[0][3], 95, 37+((this.Specs.IMAGE.OPTIONS.PATCH.H+4)*i));
-					this.TextWriter.Write("Date: "+Daily[0][4], 95, 54+((this.Specs.IMAGE.OPTIONS.PATCH.H+4)*i));
+					name = StringUtils.InitializeFirstName(Daily[0][2], Daily[0][3], 105, this.Context);
+					this.TextWriter.Write("Title: "+name, 95, 20+((this.Specs.IMAGE.OPTIONS.PATCH.H+4)*i));
+					this.TextWriter.Write("League Position: "+Daily[0][4], 95, 37+((this.Specs.IMAGE.OPTIONS.PATCH.H+4)*i));
+					this.TextWriter.Write("Date: "+Daily[0][5], 95, 54+((this.Specs.IMAGE.OPTIONS.PATCH.H+4)*i));
 					break;
 				case FOOTBALL.TYPE.WEEKLY:
-					this.TextWriter.Write("Title: "+Weekly[0][2], 95, 20+((this.Specs.IMAGE.OPTIONS.PATCH.H+4)*i));
-					this.TextWriter.Write("League Position: "+Weekly[0][3], 95, 37+((this.Specs.IMAGE.OPTIONS.PATCH.H+4)*i));
-					this.TextWriter.Write("Date: "+Weekly[0][4], 95, 54+((this.Specs.IMAGE.OPTIONS.PATCH.H+4)*i));
+					name = StringUtils.InitializeFirstName(Weekly[0][2], Weekly[0][3], 105, this.Context);
+					this.TextWriter.Write("Title: "+name, 95, 20+((this.Specs.IMAGE.OPTIONS.PATCH.H+4)*i));
+					this.TextWriter.Write("League Position: "+Weekly[0][4], 95, 37+((this.Specs.IMAGE.OPTIONS.PATCH.H+4)*i));
+					this.TextWriter.Write("Date: "+Weekly[0][5], 95, 54+((this.Specs.IMAGE.OPTIONS.PATCH.H+4)*i));
 					break;
 			}
 		}
