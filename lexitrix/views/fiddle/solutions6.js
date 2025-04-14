@@ -52,5 +52,47 @@ var FiddleSolutions600 = [ [ "twist", "tweed", "issue", "tweak", "ensue", "dreck
 									[ "blunt", "beset", "usury", "tweet", "saute", "tryst" ],
 									[ "slash", "scout", "argue", "hunch", "organ", "teeth" ],		//552
 									[ "paved", "posit", "verve", "dotty", "strut", "teeny" ],
-									[ "store", "since", "ozone", "enemy", "noose", "every" ]
+									[ "store", "since", "ozone", "enemy", "noose", "every" ],
+									[ "waive", "wowed", "image", "easel", "wears", "dwell" ],
+									[ "shunt", "sniff", "union", "tutor", "idiot", "finer" ],		//556
+									[ "phase", "plead", "apron", "essay", "earns", "dingy" ],
+									[ "bough", "betel", "usage", "hasty", "traps", "leery" ],
+									[ "enter", "ethos", "there", "roast", "hyena", "slept" ],
+									[ "sushi", "sugar", "snail", "inter", "grant", "ruler" ],		//560
+									[ "carve", "cedar", "rummy", "eyrie", "demur", "rhyme" ],
+									[ "arson", "apace", "swear", "notch", "agent", "earth" ],
+									[ "cycle", "crest", "chide", "elect", "exile", "treat" ],
+									[ "drawn", "downs", "arena", "nutty", "wheat", "soapy" ],		//564
+									[ "shape", "shrew", "argot", "enemy", "rogue", "witty" ],
+									[ "vowel", "vigil", "wrong", "lunar", "grown", "lager" ],
+									[ "plush", "plain", "usage", "hotly", "adapt", "needy" ],
+									[ "frill", "frail", "irked", "ladle", "asked", "ledge" ],		//568
+									[ "swarm", "sloop", "above", "mossy", "oboes", "piety" ],
+									[ "gross", "goose", "otter", "scour", "outdo", "error" ],
+									[ "route", "rumba", "unwed", "eyrie", "mower", "addle" ],
+									[ "pinch", "paled", "nests", "husky", "loses", "dusty" ],		//572
+									[ "dross", "delta", "opera", "spell", "liege", "avail" ],
+									[ "curio", "class", "raged", "obese", "algae", "sidle" ],
+									[ "metro", "mitre", "tonne", "onset", "tongs", "erect" ],
+									[ "singe", "sweat", "nutty", "evade", "extra", "thyme" ],		//576
+									[ "asked", "alert", "knell", "dryly", "enemy", "tally" ],
+									[ "least", "leapt", "adieu", "trice", "alibi", "taupe" ],
+									[ "jeans", "joker", "arrow", "staid", "karma", "rowed" ],
+									[ "thyme", "tarot", "yeast", "eaten", "roast", "titan" ],		//580
+									[ "wince", "whole", "noble", "elect", "ombre", "eject" ],
+									[ "fluff", "finch", "uncut", "fared", "nicer", "hated" ],
+									[ "virus", "visor", "rhyme", "siege", "style", "reeve" ],
+									[ "lunch", "legal", "naive", "hasty", "grits", "leery" ],		//584
+									[ "sowed", "stout", "wharf", "dusky", "opals", "taffy" ],
+									[ "sawed", "skirt", "wiser", "ditty", "inset", "tarry" ],
+									[ "whale", "wired", "anger", "early", "rigor", "derby" ],
+									[ "youth", "yacht", "under", "harry", "cedar", "tardy" ],		//588
+									[ "cairn", "chose", "inter", "noted", "octet", "erred" ],
+									[ "trace", "tried", "axiom", "eaten", "idiot", "demon" ],
+									[ "small", "stare", "alder", "leery", "addle", "early" ],
+									[ "latex", "larva", "tempo", "yeast", "rumba", "aloft" ],		//592
+									[ "slash", "shred", "amity", "honey", "reign", "dryly" ],
+									[ "groom", "grits", "orate", "muted", "inapt", "speed" ],
+									[ "sloth", "swamp", "order", "hunch", "addon", "parch" ],
+									[ "cinch", "covet", "noone", "heave", "viola", "theme" ]		//596
 ];  //600
