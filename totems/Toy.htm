@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <canvas id="PrimeCanvas" width="600" height="600"></canvas>
+      <div id="CanvasDiv" style="position:absolute; top:8px; left:612px; z-index:2">
+         <canvas id="ZoomCanvas" width="240" height="240"></canvas>
+      </div>
+      <div id="ConsoleDiv" style="position:absolute; top:252px; left:612px; z-index:2">
+         <canvas id="ConsoleCanvas" width="240" height="120"></canvas>
+      </div>
+   </head>
+
+   <button type="button" id="StartButton" onclick="EventHandler(0)">Start</button>
+   <button type="button" id="ResetButton" onclick="EventHandler(1)">Reset</button>
+   <button type="button" id="TestButton" onclick="EventHandler(2)">Test</button>
+
+   <body onload="RunTollsGame()">
+
+      <script src="..\modules\GenieData.js"></script>
+      <script src="..\modules\GenieTypes.js"></script>
+      <script src="..\library\GenieTypes.js"></script>
+      <script src="..\library\GenieArray.js"></script>
+      <script src="..\library\AgentArray.js"></script>
+      <script src="..\library\GenieList.js"></script>
+
+      <script src="..\modules\GenieUtils.js"></script>
+      <script src="..\library\utils\GeoUtils.js"></script>
+      <script src="..\library\utils\SpaceUtils.js"></script>
+      <script src="..\library\utils\ArrayUtils.js"></script>
+
+      <script src="..\library\GenieCalcPad.js"></script>
+      <script src="..\modules\GenieText.js"></script>
+      <script src="..\library\GenieRandom.js"></script>
+      <script src="..\library\ScreenManager.js"></script>
+      <script src="..\library\GenieBuffer.js"></script>
+      <script src="..\library\GenieColourizer.js"></script>
+
+      <script src="..\library\GenieGraphics.js"></script>
+      <script src="..\library\GenieImage.js"></script>
+      <script src="..\library\ImageMap.js"></script>
+      <script src="..\modules\GenieMedia.js"></script>
+      <script src="..\modules\GenieSprite.js"></script>
+      <script src="..\modules\GenieSprites.js"></script>
+
+      <script src="..\library\MobileObject.js"></script>
+      <script src="..\library\GenieAgent.js"></script>
+      <script src="..\library\agent\Draw.js"></script>
+      <script src="..\library\agent\Update.js"></script>
+      <script src="..\library\agent\Space.js"></script>
+      <script src="..\library\agent\Animation.js"></script>
+
+      <script src="..\modules\GenieControls.js"></script>
+      <script src="..\modules\controls\GenieButtons.js"></script>
+
+      <script src="..\modules\GenieIO.js"></script>
+      <script src="..\modules\GenieScape.js"></script>
+
+      <script src="data.js"></script>
+      <script src="types.js"></script>
+
+      <script src="stack.js"></script>
+      <script src="armystack.js"></script>
+      <script src="navystack.js"></script>
+      <script src="airstack.js"></script>
+      <script src="battlefield.js"></script>
+      <script src="battle.js"></script>
+
+      <script src="presidio.js"></script>
+      <script src="pillar.js"></script>
+      <script src="vault.js"></script>
+
+      <script src="tile.js"></script>
+      <script src="path.js"></script>
+      <script src="canal.js"></script>
+      <script src="map.js"></script>
+      <script src="clan.js"></script>
+
+      <script src="unit.js"></script>
+
+      <script src="units\gunner.js"></script>
+      <script src="units\agent.js"></script>
+      <script src="units\commandant.js"></script>
+      <script src="units\bayonetter.js"></script>
+
+      <script src="units\lighttank.js"></script>
+      <script src="units\mediumtank.js"></script>
+      <script src="units\heavytank.js"></script>
+
+      <script src="components.js"></script>
+
+      <script src="battle\clan.js"></script>
+
+      <script src="testing.js"></script>
+      <script src="testing\battle.js"></script>
+      <script src="testing\infantry.js"></script>
+      <script src="testing\waterways.js"></script>
+      <script src="testing\scouting.js"></script>
+      <script src="testing\presidio.js"></script>
+      <script src="testing\vault.js"></script>
+      <script src="testing\questing.js"></script>
+      <script src="testing\shield.js"></script>
+
+      <script src="intro.js"></script>
+
+      <script src="cInvaders.js"></script>
+
+      <script>
+
+	 //Main game object
+	 var Game;
+
+         function RunTollsGame() {
+
+	    //Create library components
+	    TollScape = new GenieScape();
+	    TollCalcPad = new GenieCalcPad();
+	    TollGraphics = new GenieGraphics();
+	    TollText = new GenieText();
+	    TollRandomizer = new GenieRandomizer();
+
+	    //Set library components
+	    TollScape.Set("PrimeCanvas", "ZoomCanvas", TollControls, "ConsoleCanvas");
+	    TollCalcPad.Set();
+	    TollGraphics.Set(TollScape.PrimeScape.Context, TollScape.ZoomScape.Context);
+//	    TollGraphics.SetCalcPad(TollCalcPad);
+//	    TollGraphics.Enable2D();
+	    TollText.Set(TollScape.PrimeScape.Context, null, TollScape.ZoomScape.Context, TollScape.Console);
+	    TollScape.PrimeScape.Context.font = DEFAULT.FONT;
+	    TollScape.AddController(GAMePAD.ARROWS);
+	    Controller = TollScape.ControllerA;
+	    TollRandomizer.Set();
+
+	    //Load and assign graphic images
+	    ImageManager.Set(TollImages);
+	    ImageManager.LoadImages();
+	    ImageManager.Check();				//Check if images have loaded
+
+	    //Begin as soon as images have loaded
+	    Game = new CorridorInvaders();
+	    Game.Set(TollScape, TollGraphics, TollCalcPad, TollText, TollRandomizer);
+	    Game.CheckImagesLoaded();
+	 }
+
+	 function EventHandler(EventNumber) {
+	    switch (EventNumber) {
+	       case EVENT.STARTBTN_CLCKD :
+		  Game.Play();
+		  break;
+	       case EVENT.RESETBTN_CLCKD :
+		  Game.Reset = true;
+	          break;
+	       case EVENT.TEStBUTTOnCLICKED:
+		  Testing.Start();
+		  break;
+	       }
+	 };
+
+      </script>
+   </body>
+</html>
