@@ -12,12 +12,15 @@ var GenieIconPanel = function() {
 	var PicContext;
 };
 GenieIconPanel.prototype = new GenieControl();
-GenieIconPanel.prototype.Set = function(canvas, specs, pSpecs) {
+GenieIconPanel.prototype.Set = function(canvas, specs, pSpecs, img) {
 	GenieControl.prototype.Set.call(this, canvas, specs);
 
 	if (pSpecs) {
 		this.Pic = new GenieImage();
-		this.Pic.Set(this.Context, ImageManager.Pics[IMAGeINDEX.CONTROLS], pSpecs);
+		if (img)
+			this.Pic.Set(this.Context, img, pSpecs);
+		else
+			this.Pic.Set(this.Context, ImageManager.Pics[IMAGeINDEX.CONTROLS], pSpecs);
 	}
 	if (this.Specs.PRESS!=null) {
 		this.DepressedIcon = this.Specs.PRESS;
