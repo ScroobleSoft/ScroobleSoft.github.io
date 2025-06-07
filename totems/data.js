@@ -7,7 +7,7 @@ var TollImages = [
    "../modules/GenieSprites.png",
    "TollImages.png",
    "Testing.png",
-   "Design.png"		//TEMP
+   "design.png"		//TEMP
 ];
 var IMAGeINDEX = {
    SPRITES:	 0,
