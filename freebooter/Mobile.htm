@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+
+    <a href="https://www.c64.com/">
+	<img src="banner.png" alt="C64.COM" width="400" height="64" >
+    </a>
+
+    <head>
+	<div id="PrimeDiv" style="position:absolute; top:40px; left:8px; z-index:1">
+	    <canvas id="CockpitCanvas" width="400" height="400"></canvas>
+	</div>
+	<div id="InfoDiv" style="position:absolute; top:444px; left:8px; z-index:2">
+	    <canvas id="SolarCanvas" width="240" height="240"></canvas>
+	</div>
+	<div id="ConsoleDiv" style="position:absolute; top:444px; left:252px; z-index:3">
+	    <canvas id="ConsoleCanvas" width="156" height="240"></canvas>
+	</div>
+    </head>
+
+    <body onload="RunSolarGame()">
+
+	<!-- Data -->
+	<script src="..\library\GenieData.js"></script>
+	<script src="..\library\data\Consts.js"></script>
+	<script src="..\library\data\Colours.js"></script>
+	<script src="..\library\data\Geo.js"></script>
+	<script src="..\library\data\IO.js"></script>
+	<script src="..\library\data\Controls.js"></script>
+	<script src="..\library\data\Images.js"></script>
+	<script src="..\library\data\Sprites.js"></script>
+	<script src="..\library\data\Agents.js"></script>
+	<script src="..\library\data\Weapons.js"></script>
+
+	<!-- Types -->
+	<script src="..\library\GenieTypes.js"></script>
+	<script src="..\library\GenieColour.js"></script>
+	<script src="..\library\GenieArray.js"></script>
+	<script src="..\library\GenieList.js"></script>
+	<script src="..\library\AgentArray.js"></script>
+
+	<!-- Utilities -->
+	<script src="..\library\GenieUtils.js"></script>
+	<script src="..\library\utils\ArrayUtils.js"></script>
+	<script src="..\library\utils\GeoUtils.js"></script>
+	<script src="..\library\utils\SpaceUtils.js"></script>
+
+	<!-- Controls -->
+	<script src="..\library\GenieControl.js"></script>
+	<script src="..\library\controls\GenieButton.js"></script>
+	<script src="..\library\controls\TextButton.js"></script>
+	<script src="..\library\controls\ImageButton.js"></script>
+	<script src="..\library\controls\ButtonPanel.js"></script>
+
+	<!-- Objects -->
+	<script src="..\library\GenieBuffer.js"></script>
+	<script src="..\library\GenieStructure.js"></script>
+	<script src="..\library\MobileObject.js"></script>
+
+	<!-- Tools -->
+	<script src="..\library\GenieRandom.js"></script>
+	<script src="..\library\ScreenManager.js"></script>
+	<script src="..\library\GenieCalcPad.js"></script>
+	<script src="..\library\GenieText.js"></script>
+
+	<!-- Graphics -->
+	<script src="..\library\GenieImage.js"></script>
+	<script src="..\library\ImageMap.js"></script>
+	<script src="..\library\GenieGraphics.js"></script>
+	<script src="..\library\GenieShape.js"></script>
+	<script src="..\library\shapes\GenieLine.js"></script>
+	<script src="..\library\shapes\GeniePolygon.js"></script>
+
+	<!-- Sprites -->
+	<script src="..\library\GenieSprite.js"></script>
+	<script src="..\library\sprites\AnimatedSprite.js"></script>
+
+	<!-- Agents -->
+	<script src="..\library\GenieAgent.js"></script>
+	<script src="..\library\agent\Draw.js"></script>
+	<script src="..\library\agent\Update.js"></script>
+	<script src="..\library\agent\Space.js"></script>
+	<script src="..\library\agent\Collision.js"></script>
+
+	<!-- FX -->
+	<script src="..\library\GenieSound.js"></script>
+
+	<!-- Interface -->
+	<script src="..\library\GenieMouse.js"></script>
+	<script src="..\library\GenieKeyboard.js"></script>
+	<script src="..\library\GenieGamepad.js"></script>
+	<script src="..\library\TouchScreen.js"></script>
+	<script src="..\library\TrackPad.js"></script>
+
+	<!-- Framework -->
+	<script src="..\library\ImageManager.js"></script>
+	<script src="..\library\GenieCanvas.js"></script>
+	<script src="..\library\GenieScape.js"></script>
+	<script src="..\library\GenieView.js"></script>
+	<script src="..\library\views\SubView.js"></script>
+	<script src="..\library\views\NestedView.js"></script>
+	<script src="..\library\GenieGame.js"></script>
+
+	<script src="data.js"></script>
+	<script src="data\celestial.js"></script>
+	<script src="data\colours.js"></script>
+	<script src="data\names.js"></script>
+	<script src="data\images.js"></script>
+	<script src="data\sprites.js"></script>
+	<script src="data\views.js"></script>
+
+	<script src="types.js"></script>
+
+	<script src="units.js"></script>
+	<script src="pilot.js"></script>
+	<script src="ship.js"></script>
+	<script src="pirate.js"></script>
+	<script src="starstile.js"></script>
+	<script src="docking.js"></script>
+	<script src="planet.js"></script>
+	<script src="station.js"></script>
+	<script src="starfield.js"></script>
+	<script src="sun.js"></script>
+	<script src="solarsystem.js"></script>
+	<script src="cockpit.js"></script>
+	<script src="voyage\crate.js"></script>
+	<script src="voyage\cargo.js"></script>
+	<script src="voyage\route.js"></script>
+
+	<!-- views -->
+	<script src="views\intro.js"></script>
+	<script src="views\intro\info.js"></script>
+	<script src="views\intro\console.js"></script>
+	<script src="views\cockpit\info.js"></script>
+	<script src="views\cockpit\console.js"></script>
+	<script src="views\courier.js"></script>
+	<script src="views\courier\info.js"></script>
+	<script src="views\courier\console.js"></script>
+	<script src="views\docked.js"></script>
+	<script src="views\docked\info.js"></script>
+	<script src="views\docked\console.js"></script>
+	<script src="views\docking.js"></script>
+	<script src="views\jump.js"></script>
+	<script src="views\jump\info.js"></script>
+	<script src="views\jump\console.js"></script>
+	<script src="views\trade.js"></script>
+	<script src="views\trade\info.js"></script>
+	<script src="views\trade\console.js"></script>
+	<script src="views\voyage.js"></script>
+	<script src="views\voyage\info.js"></script>
+	<script src="views\voyage\console.js"></script>
+	<script src="views\word\info.js"></script>
+	<script src="views\word\console.js"></script>
+	<script src="views\word\cell.js"></script>
+
+	<script src="components.js"></script>
+	<script src="components\images.js"></script>
+	<script src="components\views.js"></script>
+
+	<script src="intro.js"></script>
+	<script src="minigames.js"></script>
+
+	<script src="rTrader.js"></script>
+
+	<script>
+
+	    //Main game object
+	    var Game;
+
+	    function RunSolarGame() {
+
+		//Create library components
+		SolarScape = new GenieScape();
+		SolarCalcPad = new GenieCalcPad();
+		SolarGraphics = new GenieGraphics();
+		SolarText = new GenieText();
+		SolarRandomizer = new GenieRandomizer();
+
+		//Set library components
+		SolarScape.Set("CockpitCanvas", "SolarCanvas", "ConsoleCanvas");
+		SolarCalcPad.Set();
+		SolarGraphics.Set(SolarScape.Screen, SolarScape.InfoBox, SolarScape.ControlPanel);
+		SolarText.Set(SolarScape.Screen, null, SolarScape.InfoBox, SolarScape.ControlPanel);
+		SolarScape.AddController(GAMePAD.ARROWS);
+		Controller = SolarScape.ControllerA;
+		SolarRandomizer.Set();
+
+		//Load and assign graphic images
+		ImageManager.Set(SolarImages);
+		ImageManager.LoadImages();
+		ImageManager.Check();				//Check if images have loaded
+
+		//Begin as soon as images have loaded
+		Game = new RogueTrader();
+		Game.Set(SolarScape, SolarGraphics, SolarCalcPad, SolarText, SolarRandomizer, Controller);
+		Game.SetMobile();
+		Game.CheckImagesLoaded();
+	    }
+
+	</script>
+    </body>
+</html>
