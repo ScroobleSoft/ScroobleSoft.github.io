@@ -148,5 +148,9 @@ GenieGame.prototype = {
 	CheckMobile() {
 
 		return (this.Settings & GAME.PLATFORM.PHONE);
+	},
+	CheckPC() {  //UNLOGGED - this could change when approach to tablets is decided
+
+		return (!this.CheckMobile());
 	}
 };

@@ -229,6 +229,14 @@ GenieView.prototype = {
 		//-will there be multiple sub-windows and sub-views . . . no plans as such, but might need to expand this feature
 		//-eventually might even have subsubviews of subviews
 	},
+	SetImage(img, specs) {
+		var pic;
+
+		pic = new GenieImage();
+		pic.Set(this.Context, img, specs);
+
+		return (pic);
+	},
 	SetTextButton(specs, iCrnrs, tWriter) {
 		var btn;
 
@@ -262,11 +270,11 @@ GenieView.prototype = {
 
 		return (icon);
 	},
-	SetCornersIconPanel(specs, iSpecs, cImg, gTool) {
+	SetCornersIconPanel(specs, iSpecs, cImg, gTool, img) {
 		var iPnl;
 
 		iPnl = new GenieIconPanel();
-		iPnl.Set(this.Canvas, specs, iSpecs);
+		iPnl.Set(this.Canvas, specs, iSpecs, img);
 		iPnl.SetCornersPic(cImg);
 		iPnl.SetLinks(gTool);
 		this.Controls.push(iPnl);
@@ -287,11 +295,11 @@ GenieView.prototype = {
 
 		return (iPnl);
 	},
-	SetTouchBar(specs, iSpecs) {
+	SetTouchBar(specs, iSpecs, img) {
 		var tBar;
 
 		tBar = new GenieTouchBar();
-		tBar.Set(this.Canvas, specs, iSpecs);
+		tBar.Set(this.Canvas, specs, iSpecs, img);
 		this.Controls.push(tBar);
 
 		return (tBar);

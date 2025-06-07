@@ -4,6 +4,21 @@
 var Coordinate2D = function() {var X, Y;};
 Coordinate2D.prototype.Set = function(x, y) { this.X = x; this.Y = y; };
 
+//---------------------------------------------
+//---------- COORDINATE 3D --------------------
+var Coordinate3D = function() {var X, Y, Z;};
+Coordinate3D.prototype.Set = function(x, y, z) { this.X = x; this.Y = y; this.Z = z; };
+Coordinate3D.prototype.Rotate = function(angl) {
+   var x, y, z;
+
+   x = this.X*Math.cos(angl.Y)*Math.cos(angl.Z) + this.Z*Math.sin(angl.Y) - this.Y*Math.sin(angl.Z);
+   y = this.Y*Math.cos(angl.Z)*Math.cos(angl.X) + this.X*Math.sin(angl.Z) - this.Z*Math.sin(angl.X);
+   z = this.Z*Math.cos(angl.X)*Math.cos(angl.Y) + this.Y*Math.sin(angl.X) - this.X*Math.sin(angl.Y);
+   this.X = x;
+   this.Y = y;
+   this.Z = z;
+};
+
 //------------------------------------------
 //---------- GENIE TILE --------------------
 var GenieTile = function() {var C, R;};
