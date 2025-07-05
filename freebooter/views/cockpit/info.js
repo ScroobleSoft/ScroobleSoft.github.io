@@ -6,9 +6,11 @@ var SolarCockpitInfoView = function() {
 	var FrontSelectionImage, RightSelectionImage, BackSelectionImage, LeftSelectionImage;
 	var TopLabelImages, BottomLabelImages;
 	var FrontLabelImage, RightLabelImage, BackLabelImage, LeftLabelImage, CargoLabelImage;
+	var SpeedImage;
 	var ViewSelected;
 	var FrontBox, RightBox, BackBox, LeftBox, TopBox, BottomBox, ViewBoxes, CargoBox;
-	var PilotsButton, HelpButton, OptionsButton, ExitButton;  //UNLOGGED
+	var PlusButton, MinusButton, SpeedStep;
+	var HelpButton, OptionsButton, ExitButton;
 
 	var i;
 };
@@ -17,6 +19,7 @@ SolarCockpitInfoView.prototype.Set = function(cnvs, specs, mView) {
 	GenieSubView.prototype.Set.call(this, cnvs, specs, mView);
 
 	this.ViewSelected = VIEW.COCKPIT.VIEW.FRONT;
+	this.SpeedStep = 1;
 	this.SetBoxes();
 };
 SolarCockpitInfoView.prototype.SetImages = function() {
@@ -39,6 +42,8 @@ SolarCockpitInfoView.prototype.SetImages = function() {
 	this.BackLabelImage = this.SetImage(ImageManager.Pics[IMAGeINDEX.IMAGES], this.Specs.IMAGE.LABEL.BACK);
 	this.LeftLabelImage = this.SetImage(ImageManager.Pics[IMAGeINDEX.IMAGES], this.Specs.IMAGE.LABEL.LEFT);
 	this.CargoLabelImage = this.SetImage(ImageManager.Pics[IMAGeINDEX.IMAGES], this.Specs.IMAGE.LABEL.CARGO);
+
+	this.SpeedImage = this.SetImage(ImageManager.Pics[IMAGeINDEX.IMAGES], this.Specs.IMAGE.SPEED);
 };
 SolarCockpitInfoView.prototype.SetControls = function() {  //UNLOGGED
 
@@ -48,6 +53,8 @@ SolarCockpitInfoView.prototype.SetControls = function() {  //UNLOGGED
 		this.OptionsButton = this.SetImageButton(this.Specs.BUTTON.OPTIONS, ImageManager.Pics[IMAGeINDEX.CONTROLS], RaisedCornerImages);
 		this.ExitButton = this.SetImageButton(this.Specs.BUTTON.EXIT, ImageManager.Pics[IMAGeINDEX.CONTROLS], RaisedCornerImages);
 	}
+	this.PlusButton = this.SetImageButton(this.Specs.BUTTON.PLUS, ImageManager.Pics[IMAGeINDEX.CONTROLS], RaisedCornerImages);
+	this.MinusButton = this.SetImageButton(this.Specs.BUTTON.MINUS, ImageManager.Pics[IMAGeINDEX.CONTROLS], RaisedCornerImages);
 };
 SolarCockpitInfoView.prototype.SetBoxes = function() {
 
@@ -61,6 +68,36 @@ SolarCockpitInfoView.prototype.SetBoxes = function() {
 	this.ViewBoxes = [ this.FrontBox, this.RightBox, this.BackBox, this.LeftBox, this.TopBox, this.BottomBox, this.CargoBox ];
 };
 SolarCockpitInfoView.prototype.Update = function() {  //UNLOGGED
+
+	//Update speed buttons
+	if (this.PlusButton.CheckClicked()) {
+		++this.SpeedStep;
+		if (this.SpeedStep>8)				//TODO: actually, should disable the Plus button, making this check REDUNDANT
+			this.SpeedStep = 8;
+		else {
+			Starfield.Speed = 0.25 * this.SpeedStep;
+			this.DisplaySpeed();
+		}
+	}
+	if (this.MinusButton.CheckClicked()) {
+		--this.SpeedStep;
+		if (this.SpeedStep<0)				//TODO: actually, should disable the Plus button, making this check REDUNDANT
+			this.SpeedStep = 0;
+		else {
+			Starfield.Speed = 0.25 * this.SpeedStep;
+			this.DisplaySpeed();
+		}
+	}
+
+	//Update speed if necessary
+	if (Math.ceil(this.MainView.Speed/0.25)>this.SpeedStep) {
+		++this.SpeedStep;
+		if (this.SpeedStep>VOYAGE.SPEED.MAXIMUM)
+			this.SpeedStep = VOYAGE.SPEED.MAXIMUM;
+		this.DisplaySpeed();
+	}
+
+	//-update buttons
 
 	this.UpdateClick();
 };
@@ -118,8 +155,21 @@ SolarCockpitInfoView.prototype.Draw = function() {
 			CargoBay.Draw();
 			break;
 	}
+
+	//Labels
+	this.SpeedImage.Draw();
+	this.TextWriter.Write(Speeds[1], 165, 35, { COLOUR: "white" } );
 };
-SolarCockpitInfoView.prototype.UpdateClick = function() {  //UNLOGGED
+SolarCockpitInfoView.prototype.DisplaySpeed = function() {
+
+	this.GraphicsTool.SetContext(this.Context);
+	this.GraphicsTool.DrawRectangle(160, 22, 75, 25, this.Specs.COLOUR, 0);
+	this.GraphicsTool.ResetContext();
+	this.TextWriter.SetContext(this.Context);
+	this.TextWriter.Write(Speeds[this.SpeedStep], 165, 39, { COLOUR: "white" } );
+	this.TextWriter.ResetContext();
+};
+SolarCockpitInfoView.prototype.UpdateClick = function() {
 
 	for (this.i=0;this.i<VIEW.COCKPIT.VIEW.COUNT;++this.i)
 		if (SpaceUtils.CheckPointInBox(Mouse.Click, this.ViewBoxes[this.i])) {
