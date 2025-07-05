@@ -17,7 +17,9 @@ var CONTROL = { ID: 0, LEFT: 1, TOP: 2 };
 var CapitalLetters = [ "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" ];
 var CapitalConsonants = "BCDFGHJKLMNPQRSTVWXYZ";
 var Vowels = [ "a", "e", "i", "o", "u" ];
-var Consonants = [ "b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "w", "x", "y", "z"];
+var VowelString = "aeiou";
+var Consonants = [ "b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "w", "x", "y", "z" ];
+var ConsonantString = "bcdfghjklmnpqrstvwxyz";
 var Alphabet = "abcdefghijklmnopqrstuvwxyz";
 var DescendingLetters = "gjpqy";
 
