@@ -94,5 +94,9 @@ var FiddleSolutions600 = [ [ "twist", "tweed", "issue", "tweak", "ensue", "dreck
 									[ "slash", "shred", "amity", "honey", "reign", "dryly" ],
 									[ "groom", "grits", "orate", "muted", "inapt", "speed" ],
 									[ "sloth", "swamp", "order", "hunch", "addon", "parch" ],
-									[ "cinch", "covet", "noone", "heave", "viola", "theme" ]		//596
+									[ "cinch", "covet", "noone", "heave", "viola", "theme" ],		//596
+									[ "greed", "gable", "elude", "dregs", "brute", "evens" ],
+									[ "baker", "begot", "kaput", "rayon", "gypsy", "titan" ],
+									[ "thing", "trope", "infer", "gulch", "offal", "earth" ],
+									[ "chase", "cacti", "atoll", "erect", "clove", "inlet" ]
 ];  //600
