@@ -4,8 +4,8 @@
 
 var SolarScape, SolarGraphics, SolarCalcPad, SolarText, SolarRandomizer, Controller;		//library
 var Planets, SelectedPlanet;
-var Pilots, PlayerPilot, Starfield, SolarSystem, ColonyStation, StarStile, HabitationStation;			//core
-var Cockpit, CargoBay;
+var Pilots, PlayerPilot, Ships, Starfield, SolarSystem, ColonyStation, StarStile, HabitationStation;			//core
+var Cockpit, CargoBay, Journey;
 var Intro, MiniGames;
 
 //----------------------------------------
@@ -42,7 +42,7 @@ var TestingImage, MiniGamesImage;
 //---------- IMAGES -------------------
 
 var TitleImage, PicatrixImage, ByImage, ScrooblesoftImage, TrixsterImage, SoundImage;
-var CrateImage;
+var CrateImage, ShipImage, StationImage;
 var StationChuteImage;
 
 //----------------------------------------
@@ -167,13 +167,16 @@ SolarComponents.prototype = {
 		//UNLOGGED
 
 		Pilots = new GenieArray();
+		Ships = new GenieArray();
 		Planets = new GenieArray();
 		Starfield = new SolarStarfield();
 		SolarSystem = new RogueSolarSystem();
 		ColonyStation = new SolarDockingStation();
 		StarStile = new SolarStarStile();
+
 		Cockpit = new SolarCockpit();
 		CargoBay = new SolarCargoBay();
+		Journey = new SolarJourney();
 	},
 	SetCoreObjects() {
 		var i;
@@ -182,6 +185,7 @@ SolarComponents.prototype = {
 		//UNLOGGED
 
 		Pilots.Set(PILOT.COUNT, SolarPilot, INDEXED);
+		Ships.Set(PILOT.COUNT, FreebooterShip, INDEXED);
 		PlayerPilot = Pilots[0];
 		Planets.Set(PLANET.COUNT, SolarPlanet, INDEXED, this.Screen, this.GraphicsTool, this.Randomizer, PLANET, PlanetBuffer);
 //		Utilities.GetUniqueRandomNumbers(order, PLANET.COUNT, PLANET.COUNT, STARtAtZERO);
@@ -203,8 +207,10 @@ SolarComponents.prototype = {
 		Starfield.Set(this.Screen, this.GraphicsTool, this.Randomizer, STARFIELD);
 		ColonyStation.Set(this.Screen, this.GraphicsTool, this.CalcPad);
 		StarStile.Set(this.Screen, this.CalcPad);
+
 		Cockpit.Set(this.InfoBox, this.GraphicsTool, COCKPIT);
 		CargoBay.Set(this.Screen, this.GraphicsTool);
+		Journey.Set();
 
 		StarStileBuffer.Set(SCREEN);
 	},
@@ -306,6 +312,8 @@ SolarComponents.prototype = {
 		//UNLOGGED
 
 		CrateImage = new GenieImage();
+		ShipImage = new GenieImage();
+		StationImage = new GenieImage();
 		StationChuteImage = new GenieImage();
 
 		this.CreateCreditImages();
@@ -315,6 +323,8 @@ SolarComponents.prototype = {
 		//UNLOGGED
 
 		CrateImage.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.IMAGES], CRATeIMAGE);
+		ShipImage.Set(this.ControlPanel, ImageManager.Pics[IMAGeINDEX.IMAGES], SHIpIMAGE);
+		StationImage.Set(this.ControlPanel, ImageManager.Pics[IMAGeINDEX.IMAGES], STATIOnIMAGE);
 		StationChuteImage.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.IMAGES], STATIOnCHUTeIMAGE);
 
 		this.SetCreditImages();

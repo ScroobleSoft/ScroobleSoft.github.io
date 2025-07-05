@@ -71,7 +71,8 @@ var SOLArDOCKINgSTATION = { MInSIDES: 8, MAxSIDES: 16, SIZE: 250, ENTRANCE: { SI
 var ELITeSHIP = { MAxALTITUDE: 5, WEAPON: { NONE: 0, TACkCANNON: 1, PInCANNON: 2, PIKeCANNON: 3, MINiMISSILE: 5, MEDIAlMISSILE: 5, HYPErMISSILE: 6 } };  //NOTE: altitude in miles
 var COCKPIT = { L: 0, T: 0, W: 600, H: 600, PANEL: { COUNT: 12 }, DASHBOARD: {} };
 var ChannelLengths = [ 540, 523, 511, 503, 499 ];
-var VOYAGE = { OFFERS: 8 };
+var VOYAGE = { OFFERS: 8, SPEED: { STOPPED: 0, CRAWL: 1, STROLL: 2, JOG: 3, TROT: 4, GALLOP: 5, SPRINT: 6, TEAR: 7, MAX: 8 } };
+var Speeds = [ "stopped", "crawl", "stroll", "jog", "trot", "gallop", "sprint", "tear", "maximum" ];
 var CARGO = { TYPES: 8 };
 var Cargo = [ "food", "fuel", "electronics", "ceramics", "collectibles", "antiques", "toys", "comics" ];
 
