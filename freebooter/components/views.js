@@ -20,7 +20,7 @@ SolarComponents.prototype.CreateCockpitViews = function() {
 };
 SolarComponents.prototype.SetCockpitViews = function() {
 
-	CockpitInfoView.SetLinks(this.GraphicsTool);
+	CockpitInfoView.SetLinks(this.GraphicsTool, this.TextWriter);
 	CockpitInfoView.Set(this.Interface.ZoomScape, VIEW.COCKPIT.INFO, VoyageView);
 	CockpitConsoleView.SetLinks(this.GraphicsTool);
 	CockpitConsoleView.Set(this.Interface.Console, VIEW.COCKPIT.CONSOLE, VoyageView);
@@ -89,15 +89,15 @@ SolarComponents.prototype.SetVoyageViews = function() {
 	VoyageView.Set(this.Interface.PrimeScape, VIEW.VOYAGE);
 	VoyageView.SetSubViews(CockpitInfoView, CockpitConsoleView);
 };
-SolarComponents.prototype.CreateWordViews = function() {  //UNLOGGED
+SolarComponents.prototype.CreateWordViews = function() {
 	
 	WordsInfoView = new SolarWordsInfoView();
 	WordsConsoleView = new SolarWordsConsoleView();
 };
-SolarComponents.prototype.SetWordViews = function() {  //UNLOGGED
+SolarComponents.prototype.SetWordViews = function() {
 
-	WordsInfoView.SetLinks(this.GraphicsTool);
+	WordsInfoView.SetLinks(this.GraphicsTool, this.TextWriter, this.Randomizer);
 	WordsInfoView.Set(this.Interface.ZoomScape, VIEW.WORDS.INFO, VoyageView);
-	WordsConsoleView.SetLinks(this.GraphicsTool);
+	WordsConsoleView.SetLinks(this.GraphicsTool, this.TextWriter);
 	WordsConsoleView.Set(this.Interface.Console, VIEW.WORDS.CONSOLE, VoyageView);
 };
