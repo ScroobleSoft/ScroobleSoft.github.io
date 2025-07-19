@@ -30,7 +30,7 @@ LexiCrossleView.prototype.Set = function(cnvs, specs, gTool, tWriter, rGenerator
 	this.Timer = 0;
 	this.Frames = 60;
 	this.FirstOpenFlag = true;
-	this.DeveloperFlag = false;
+	this.DeveloperFlag = true;
 };
 LexiCrossleView.prototype.SetComponents = function() {
 
@@ -49,21 +49,21 @@ LexiCrossleView.prototype.SetImages = function() {
 };
 LexiCrossleView.prototype.SetControls = function() {
 
-	//Icons
-	this.VowelsIconImage = new GenieImage();
-	this.VowelsIconImage.Set(this.Context, ImageManager.Pics[IMAGeINDEX.CONTROLS], this.Specs.ICON.VOWELS.IMAGE);
-	this.VowelsIcon = new GenieIcon();
-	this.VowelsIcon.Set(this.Canvas, this.Specs.ICON.VOWELS, this.VowelsIconImage);
-	this.VowelsIcon.SetCornersPic(IconCornerImages);
-	this.Controls.push(this.VowelsIcon);
-	this.BorderIconImage = new GenieImage();
-	this.BorderIconImage.Set(this.Context, ImageManager.Pics[IMAGeINDEX.CONTROLS], this.Specs.ICON.BORDER.IMAGE);
-	this.BorderIcon = new GenieIcon();
-	this.BorderIcon.Set(this.Canvas, this.Specs.ICON.BORDER, this.BorderIconImage);
-	this.BorderIcon.SetCornersPic(IconCornerImages);
-	this.Controls.push(this.BorderIcon);
+	this.SetButtons();
+	this.SetIcons();
 
-	//Buttons
+	if (this.DeveloperFlag) {
+	this.GenerateButton = new TextButton();
+	this.GenerateButton.Set(this.Canvas, { L: 5, T: 475, W: 40, H: 25, LABEL: "Gen" }, this.TextWriter);
+	this.Controls.push(this.GenerateButton);
+
+	this.MineButton = new TextButton();
+	this.MineButton.Set(this.Canvas, { L: 315, T: 475, W: 40, H: 25, LABEL: "Mine" }, this.TextWriter);
+	this.Controls.push(this.MineButton);
+	}
+};
+LexiCrossleView.prototype.SetButtons = function() {
+
 	this.InstructionsButton = new TextButton();
 	this.InstructionsButton.Set(this.Canvas, this.Specs.BUTTON.INSTRUCTIONS, this.TextWriter);
 	this.InstructionsButton.SetCornersPic(RoundedCornerImages);
@@ -80,16 +80,22 @@ LexiCrossleView.prototype.SetControls = function() {
 	this.QuitButton.Set(this.Canvas, this.Specs.BUTTON.QUIT, this.TextWriter);
 	this.QuitButton.SetCornersPic(RoundedCornerImages);
 	this.Controls.push(this.QuitButton);
+};
+LexiCrossleView.prototype.SetIcons = function() {
 
-	if (this.DeveloperFlag) {
-	this.GenerateButton = new TextButton();
-	this.GenerateButton.Set(this.Canvas, { L: 5, T: 475, W: 40, H: 25, LABEL: "Gen" }, this.TextWriter);
-	this.Controls.push(this.GenerateButton);
+	this.VowelsIconImage = new GenieImage();
+	this.VowelsIconImage.Set(this.Context, ImageManager.Pics[IMAGeINDEX.CONTROLS], this.Specs.ICON.VOWELS.IMAGE);
+	this.VowelsIcon = new GenieIcon();
+	this.VowelsIcon.Set(this.Canvas, this.Specs.ICON.VOWELS, this.VowelsIconImage);
+	this.VowelsIcon.SetCornersPic(IconCornerImages);
+	this.Controls.push(this.VowelsIcon);
 
-	this.MineButton = new TextButton();
-	this.MineButton.Set(this.Canvas, { L: 315, T: 475, W: 40, H: 25, LABEL: "Mine" }, this.TextWriter);
-	this.Controls.push(this.MineButton);
-	}
+	this.BorderIconImage = new GenieImage();
+	this.BorderIconImage.Set(this.Context, ImageManager.Pics[IMAGeINDEX.CONTROLS], this.Specs.ICON.BORDER.IMAGE);
+	this.BorderIcon = new GenieIcon();
+	this.BorderIcon.Set(this.Canvas, this.Specs.ICON.BORDER, this.BorderIconImage);
+	this.BorderIcon.SetCornersPic(IconCornerImages);
+	this.Controls.push(this.BorderIcon);
 };
 LexiCrossleView.prototype.SetDaily = function() {
 	var ms;
@@ -221,9 +227,9 @@ LexiCrossleView.prototype.Update = function() {
 		this.Keyboard.UpdateKeys();
 		--this.Frames;
 		if (!this.Frames)
-			if (this.Timer<300) {
+			if (this.Timer<300) {					//TODO: have to replace this w/ 5*this.FPS
 				++this.Timer;
-				this.Frames = 60;
+				this.Frames = 60;						//TODO: needs amending, too
 				if (!this.Board.SolvedFlag)
 					this.DrawSeconds();
 			}
@@ -234,7 +240,7 @@ LexiCrossleView.prototype.Update = function() {
 };
 LexiCrossleView.prototype.UpdateClick = function() {
 
-	if (Mouse.CheckDowned(CANVAS.PRIME)) {
+	if (Mouse.CheckClicked(CANVAS.PRIME)) {
 		if (!this.Board.UpdateClick())
 			this.Keyboard.UpdateClick();
 	}
@@ -242,11 +248,8 @@ LexiCrossleView.prototype.UpdateClick = function() {
 LexiCrossleView.prototype.UpdateButtons = function() {
 
 	//Instructions
-	if (this.InstructionsButton.CheckClicked()) {
-		cancelAnimationFrame(this.AnimationFrameHandle);
+	if (this.InstructionsButton.CheckClicked())
 		CrossleInstructionsView.Open();
-		CrossleInstructionsView.Update();
-	}
 
 	//Solve
 	if (this.SolveButton.CheckClicked()) {
