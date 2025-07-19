@@ -1,7 +1,7 @@
 
 LexiSpindleView.prototype.UpdateClick = function() {
 
-	if (Mouse.CheckDowned(CANVAS.PRIME)) {
+	if (Mouse.CheckClicked(CANVAS.PRIME)) {
 		if (!this.Ledger.UpdateClick())
 			this.Keyboard.UpdateClick();
 	}
