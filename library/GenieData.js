@@ -11,7 +11,7 @@ var GRADE = { Aplus: 0, A: 1, Aminus: 2, Bplus: 3, B: 4, Bminus: 5, Cplus: 6, C:
 				  Iplus: 24, I: 25, Iminus: 26, Jplus: 27, J: 28, Jminus: 29, Kplus: 30, BAND: { A: 0, B: 1, C: 2, D: 3, E: 4 } };
 var FONT = { STYLE: { NONE: 0, BOLD: 1, ITALICS: 2, UNDERLINED: 4, OVERLINED: 8, LINeTHROUGH: 16 },
 				 DEFAULT: "14px Arial" };
-var TEXT = { FONT: "14px Arial", COLOUR: "black" };
+var TEXT = { FONT: "14px Arial", COLOUR: "black", GAP: 17 };
 var CONTROL = { ID: 0, LEFT: 1, TOP: 2 };
 
 var CapitalLetters = [ "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" ];

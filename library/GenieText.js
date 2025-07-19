@@ -9,7 +9,7 @@ var GenieText = function() {
 	var Specs;
 	var Font, Colour;
 
-	var cntxt;		//scratch variables
+	var gap, cntxt;		//scratch variables
 };
 GenieText.prototype = {
 	Set(cntxt, specs, iBox, cPanel, tTape, tRoll) {
@@ -149,7 +149,35 @@ GenieText.prototype = {
 			this.cntxt = null;
 		}
 	},
-	WriteArray(aStrng, x, y, specs, cnvs) {
-		//TODO: spacing is the only issue, delineated in specs with a default behaviour
+	WriteMulti(aStrng, x, y, specs, cnvs) {
+		var i;
+		var gap;
+
+		//Set gap
+		if (specs)
+			gap = specs.GAP || TEXT.GAP;
+		else
+			gap = TEXT.GAP;
+
+		//Write strings
+		for (i=0;i<aStrng.length;++i)
+			this.Write(aStrng[i], x, y+(gap*i), specs, cnvs);
+	},
+	WriteParagraphs(aStrngs, x, y, specs, cnvs, space) {
+		var i, j;
+		var gap;
+
+		//Set gap
+		if (specs)
+			gap = specs.GAP || TEXT.GAP;
+		else
+			gap = TEXT.GAP;
+
+		//Write strings
+		for (i=0;i<aStrngs.length;++i) {
+//			for (j=0;j<aStrngs[i].length;++j) {
+				this.WriteMulti(aStrngs[i], x, y+(space*i), specs, cnvs);
+				y += gap * aStrngs[i].length;
+			}
 	}
 };

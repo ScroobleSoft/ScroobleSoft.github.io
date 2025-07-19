@@ -257,6 +257,16 @@ GenieView.prototype = {
 
 		return (btn);
 	},
+	SetCheckBox(specs, img, tWriter) {  //UNLOGGED - UNTESTED
+		var chkbx;
+
+		chkbx = new GenieCheckBox();
+		chkbx.Set(this.Canvas, specs, img);
+		chkbx.SetLinks(null, this.TextWriter);
+		this.Controls.push(chkbx);
+
+		return (chkbx);
+	},
 	SetCornersIcon(specs, img, iSpecs, cImg) {
 		var iIcon;
 		var icon;
