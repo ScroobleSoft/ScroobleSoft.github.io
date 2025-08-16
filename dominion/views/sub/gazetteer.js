@@ -3,10 +3,11 @@
 //---------- DOMINION GAZETTEER INFO VIEW --------------------
 var DominionGazetteerInfoView = function() {
 	var Nation;
+	var SpeedSettingImage, SpeedSettingPanel, SpeedSelectionImage;		//??
+	var SpeedLabelImage;																//??
 	var SurplusChart;
-	var SpeedSettingImage, SpeedSettingPanel, SpeedSelectionImage;
-	var SpeedLabelImage;
-	var SurplusChart;
+	var PlusImage, MinusImage;
+	var Offsets, PlusBoxes, MinusBoxes;
 
 	var i, info, colour;
 };
@@ -15,6 +16,23 @@ DominionGazetteerInfoView.prototype.Set = function(cnvs, specs, mView) {
 	GenieSubView.prototype.Set.call(this, cnvs, specs, mView);
 
 	this.Id = VIEW.GLOBAL.INFO.GAZETTEER;
+	this.SetData();
+};
+DominionGazetteerInfoView.prototype.SetData = function() {  //UNLOGGED
+	var i;
+
+	this.Offsets = [ 20, 28, 26, 29, 28, 30, 27, 20 ];
+	this.PlusBoxes = ArrayUtils.Create(MINISTRY.PORTFOLIOS, GenieRect);
+	this.MinusBoxes = ArrayUtils.Create(MINISTRY.PORTFOLIOS, GenieRect);
+	for (i=0;i<MINISTRY.PORTFOLIOS;++i) {
+		this.PlusBoxes[i].Set(140, 115+(15*i), this.Specs.IMAGE.PLUS.W, this.Specs.IMAGE.PLUS.H);
+		this.MinusBoxes[i].Set(216, 115+(15*i), this.Specs.IMAGE.PLUS.W, this.Specs.IMAGE.PLUS.H);
+	}
+};
+DominionGazetteerInfoView.prototype.SetImages = function() {
+
+	this.PlusImage = this.SetImage(ImageManager.Pics[IMAGeINDEX.IMAGES], this.Specs.IMAGE.PLUS);
+	this.MinusImage = this.SetImage(ImageManager.Pics[IMAGeINDEX.IMAGES], this.Specs.IMAGE.MINUS);
 };
 DominionGazetteerInfoView.prototype.SetControls = function() {
 
@@ -55,13 +73,23 @@ DominionGazetteerInfoView.prototype.Open = function() {
 //	this.Context.fillStyle = GREY.SILVER;
 //	this.Context.fillRect(0, 285, CONTROlPANEL.WIDTH, 75);
 };
-DominionGazetteerInfoView.prototype.Update = function() {
+DominionGazetteerInfoView.prototype.UpdateClick = function() {  //UNLOGGED
 
-	//UNLOGGED
+	for (this.i=0;this.i<MINISTRY.PORTFOLIOS;++this.i) {
+		if (SpaceUtils.CheckPointInBox(Mouse.Click, this.PlusBoxes[this.i])) {
+			this.Cabinet.IncreaseBudget(this.i);
+			return;
+		}
+		if (SpaceUtils.CheckPointInBox(Mouse.Click, this.MinusBoxes[this.i])) {
+			this.Cabinet.DecreaseBudget(this.i);
+			return;
+		}
+	}
 /*
 	if (this.OfficeButton.CheckClicked()) {
 		//-launch Office View . . . this.MainView.OpenOfficeView()
 		GlobalView.Close();		//TEMP
+		OfficeView.SetNation(PlayerPower);		//TEMP
 		OfficeView.Open();		//TEMP
 	}
 */
@@ -107,7 +135,7 @@ DominionGazetteerInfoView.prototype.DisplayPowerProfile = function() {
 	this.TextWriter.SetColour(PowerColours[this.Nation.Index][1]);
 
 	//Name
-	this.TextWriter.Write("Name", 4, 15);
+	this.TextWriter.Write("Power:", 4, 15);
 	this.TextWriter.Write(PowerNames[this.Nation.Index], 120, 15);
 
 	//Population
@@ -116,7 +144,7 @@ DominionGazetteerInfoView.prototype.DisplayPowerProfile = function() {
 	this.info += Utils.GetPaddedAmount(Math.floor(this.pop/1000) % 1000);
 	this.info += ",";
 	this.info += Utils.GetPaddedAmount(this.pop % 1000);
-	this.TextWriter.Write("Population", 4, 30);
+	this.TextWriter.Write("Population:", 4, 30);
 	this.TextWriter.Write(this.info, 120, 30);
 
 	//Other info
@@ -124,18 +152,19 @@ DominionGazetteerInfoView.prototype.DisplayPowerProfile = function() {
 	this.TextWriter.Write(DominionUtils.GetFormattedAmount(this.Nation.GDP), 120, 45);
 	this.TextWriter.Write("Government:", 4, 60);
 	this.TextWriter.Write(Government[this.Nation.Government.Type], 120, 60);
-	if (this.Nation.HeadOfState[this.Nation.HeadOfState.indexOf(" ")-1]=="a")			//account for gender
-		this.TextWriter.Write(HeadOfState[1][this.Nation.Government.Type], 4, 75);
+	if (this.Nation.HeadOfState.Name[this.Nation.HeadOfState.Name.indexOf(" ")-1]=="a")			//account for gender
+		this.TextWriter.Write(HeadOfState[1][this.Nation.Government.Type]+":", 4, 75);
 	else
-		this.TextWriter.Write(HeadOfState[0][this.Nation.Government.Type], 4, 75);
-	this.TextWriter.Write(this.Nation.HeadOfState, 120, 75);
+		this.TextWriter.Write(HeadOfState[0][this.Nation.Government.Type]+":", 4, 75);
+	this.TextWriter.Write(this.Nation.HeadOfState.Name, 120, 75);
 	this.TextWriter.Write("Posture:", 4, 90);
 	this.TextWriter.Write(Belligerence[PowerProfiles[this.Nation.Index][2]], 120, 90);
 	this.TextWriter.Write("Alliances:", 4, 105);
 	this.TextWriter.Write(this.Nation.Alliances.length, 120, 105);
 //	this.TextWriter.Write("Treasury: " + DominionUtils.GetFormattedAmount(this.Nation.Treasury), 4, 120, this.FontSpecs);
+	this.TextWriter.Write("Tech: "+PowerProfiles[this.Nation.Index][3], 170, 105);
 
-	this.SurplusChart.SetSlices(this.Nation.SurplusPercentages);
+	this.SurplusChart.SetSlices(this.Nation.Cabinet.SurplusPercentages);
 	this.SurplusChart.Show();
 
 	this.TextWriter.ResetColour();
@@ -145,15 +174,15 @@ DominionGazetteerInfoView.prototype.DisplayPowerProfile = function() {
 	this.GraphicsTool.SetContext(this.Context);
 	for (this.i=0;this.i<MINISTRY.PORTFOLIOS;++this.i) {
 		this.GraphicsTool.DrawRectangle(140, 115+(15*this.i), 90, 15, MinistryColours[this.i], 0);
-		this.TextWriter.Write(Ministries[this.i], 150, 125+(15*this.i), { COLOUR: "white", FONT: "10px Arial" } );
+		this.TextWriter.Write(Ministries[this.i], 140+this.Offsets[this.i], 125+(15*this.i), { COLOUR: "white", FONT: "10px Arial" } );
+		this.PlusImage.Draw(140, 115+(15*this.i));
+		this.MinusImage.Draw(216, 115+(15*this.i));
 	}
 
 	this.GraphicsTool.RestoreContext();
 	this.TextWriter.ResetContext();
 };
-DominionGazetteerInfoView.prototype.DisplayAlliedProfile = function() {
-
-	//UNLOGGED
+DominionGazetteerInfoView.prototype.DisplayAlliedProfile = function() {  //UNLOGGED
 
 	this.Context.fillStyle = this.Nation.PrimaryColour;
 	this.Context.fillRect(0, 0, INFoBOX.WIDTH, INFoBOX.HEIGHT);
@@ -164,7 +193,7 @@ DominionGazetteerInfoView.prototype.DisplayAlliedProfile = function() {
 	this.TextWriter.SetColour("white");
 
 	//Name
-	this.TextWriter.Write("Name:", 4, 15);
+	this.TextWriter.Write("Allied State:", 4, 15);
 	this.TextWriter.Write(AlliedNames[this.Nation.Index], 120, 15);
 
 	//Population
@@ -179,19 +208,24 @@ DominionGazetteerInfoView.prototype.DisplayAlliedProfile = function() {
 	//Other info
 	this.TextWriter.Write("GDP:", 4, 45);
 	this.TextWriter.Write(DominionUtils.GetFormattedAmount(this.Nation.GDP), 120, 45);
-	this.TextWriter.Write("Government:", 4, 60);
-	this.TextWriter.Write(Government[this.Nation.Government.Type], 120, 60);
-	if (this.Nation.HeadOfState[this.Nation.HeadOfState.indexOf(" ")-1]=="a")
-		this.TextWriter.Write(HeadOfState[1][this.Nation.Government.Type] + ":", 4, 75);
+	this.TextWriter.Write("Preference:", 4, 60);
+	this.TextWriter.Write(Commodity[PowerProfiles[3][this.Nation.AssociatedIndex]], 120, 60);
+	this.TextWriter.Write("Government:", 4, 75);
+	this.TextWriter.Write(Government[this.Nation.Government.Type], 120, 75);
+	this.TextWriter.Write("Affiliaion:", 4, 90);
+	this.TextWriter.Write(PowerNames[this.Nation.AssociatedIndex], 120, 90);
+	if (this.Nation.HeadOfState.Name[this.Nation.HeadOfState.Name.indexOf(" ")-1]=="a")
+		this.TextWriter.Write(HeadOfState[1][this.Nation.Government.Type] + ":", 4, 105);
 	else
-		this.TextWriter.Write(HeadOfState[0][this.Nation.Government.Type] + ":", 4, 75);
-	this.TextWriter.Write(this.Nation.HeadOfState, 120, 75);
-	this.TextWriter.Write("Alliance:", 4, 90);
+		this.TextWriter.Write(HeadOfState[0][this.Nation.Government.Type] + ":", 4, 105);
+	this.TextWriter.Write(this.Nation.HeadOfState.Name, 120, 105);
+	this.TextWriter.Write("Alliance:", 4, 120);
 	if (this.Nation.Alliance)
-		this.TextWriter.Write(PowerNames[this.Nation.Alliance.Power.Index], 120, 90);
+		this.TextWriter.Write(PowerNames[this.Nation.Alliance.Power.Index], 120, 120);
 	else
-		this.TextWriter.Write("None", 120, 90);
-//	this.TextWriter.Write("Treasury: " + DominionUtils.GetFormattedAmount(this.Nation.Treasury), 4, 105, this.FontSpecs);
+		this.TextWriter.Write("None", 120, 120);
+	this.TextWriter.Write("Tech Level:", 4, 135);
+	this.TextWriter.Write(PowerProfiles[this.Nation.AssociatedIndex][3], 120, 135);
 
 	this.TextWriter.ResetColour();
 	this.TextWriter.ResetFont();
@@ -214,7 +248,7 @@ DominionGazetteerInfoView.prototype.DisplayCityStateProfile = function() {
 	this.TextWriter.SetColour(this.colour);
 
 	//Name
-	this.TextWriter.Write("Name:", 4, 15);
+	this.TextWriter.Write("City-State:", 4, 15);
 	this.TextWriter.Write(CityStateNames[this.Nation.Index], 120, 15);
 
 	//Population
@@ -227,7 +261,7 @@ DominionGazetteerInfoView.prototype.DisplayCityStateProfile = function() {
 	this.TextWriter.Write("GDP:", 4, 45);
 	this.TextWriter.Write(Math.round(this.Nation.GDP/1000) + "M", 120, 45);
 	this.TextWriter.Write("C.E.O.:", 4, 60);
-	this.TextWriter.Write(this.Nation.HeadOfState, 120, 60);
+	this.TextWriter.Write(this.Nation.HeadOfState.Name, 120, 60);
 	this.TextWriter.Write("Stock price:", 4, 75);
 	this.TextWriter.Write(this.Nation.StockPrice, 120, 75);
 //	this.TextWriter.Write("Treasury: " + DominionUtils.GetFormattedAmount(this.Nation.Treasury), 4, 90, this.FontSpecs);

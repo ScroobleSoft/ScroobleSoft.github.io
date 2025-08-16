@@ -32,7 +32,7 @@ DominionReservesInfoView.prototype.SetCharts = function() {
 	this.InventoryBarChart.SetLinks(this.GraphicsTool, this.TextWriter);
 	this.InventoryBarChart.Specs.COLOURS = new Array(COMMODITY.TYPES);
 	for (i=0;i<COMMODITY.TYPES;++i)
-		this.InventoryBarChart.Specs.COLOURS[i] = MinistryColours[CommodityMap[i]];
+		this.InventoryBarChart.Specs.COLOURS[i] = MinistryColours[i];
 	this.Controls.push(this.InventoryBarChart);
 
 	this.CommoditiesBarChart = new GenieBarChart();
@@ -144,7 +144,7 @@ DominionReservesInfoView.prototype.DrawInventoryLabels = function() {
 	this.TextWriter.SetContext(this.Context);
 	for (i=0;i<COMMODITY.TYPES;++i) {
 		y = this.Specs.BArCHART.INVENTORY.T + ((i+1)*this.Specs.BArCHART.INVENTORY.GAP) + (i*this.Specs.BArCHART.INVENTORY.BAR.H) + 12;
-		this.GraphicsTool.DrawRectangle(5, y, 60, 16, MinistryColours[CommodityMap[i]], 0);
+		this.GraphicsTool.DrawRectangle(5, y, 60, 16, MinistryColours[i], 0);
 		this.TextWriter.Write(Commodity[i], 7, y+11, { COLOUR: "white", FONT: "10px Arial" } );
 		this.TextWriter.Write(this.MainView.Nation.Reserves[i], 212, y+13);
 	}

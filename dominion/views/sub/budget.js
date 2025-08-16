@@ -53,22 +53,28 @@ DominionBudgetInfoView.prototype.SetControls = function() {
 DominionBudgetInfoView.prototype.Update = function() {
 
 	for (this.i=0;this.i<MINISTRY.PORTFOLIOS;++this.i) {
+
+		//Plus buttons
 		if (this.PlusPushButtons[this.i].CheckPressed()) {
-			if (this.Surplus) {
-				++this.MainView.Nation.SurplusAllocations[this.i];
+			if (this.Surplus==0)
+				alert("Reduce another allocation first.");
+			else {
+				++this.MainView.Nation.Cabinet.SurplusPercentages[this.i];
 				--this.Surplus;
 				this.DrawDigitPair(this.i);
 				this.DrawSurplusDigits();
 			}
 			return;
 		}
+
+		//Minus buttons
 		if (this.MinusPushButtons[this.i].CheckPressed()) {
-			if (this.MainView.Nation.SurplusAllocations[this.i]) {
-				--this.MainView.Nation.SurplusAllocations[this.i];
-				++this.Surplus;
-				this.DrawDigitPair(this.i);
-				this.DrawSurplusDigits();
-			}
+			if (this.MainView.Nation.Cabinet.SurplusPercentages[this.i]==0)
+				return;
+			--this.MainView.Nation.SurplusPercentages[this.i];
+			++this.Surplus;
+			this.DrawDigitPair(this.i);
+			this.DrawSurplusDigits();
 			return;
 		}
 	}
@@ -115,10 +121,16 @@ DominionBudgetInfoView.prototype.DrawDigitPair = function(iPnl) {
 	this.GraphicsTool.SetContext(this.Context);
 	this.GraphicsTool.DrawRectangle(114, 10+(26*iPnl), 32, 17, "white", 0);
 	this.GraphicsTool.ResetContext();
-	nPtch = Math.floor(this.MainView.Nation.SurplusAllocations[iPnl]/10) % 10;
+	nPtch = Math.floor(this.MainView.Nation.Cabinet.SurplusPercentages[iPnl]/10) % 10;
 	this.DigitImages.DrawPatchNumber(nPtch, 121, 12+(26*iPnl));
-	nPtch = this.MainView.Nation.SurplusAllocations[iPnl] % 10;
+	nPtch = Math.round(this.MainView.Nation.Cabinet.SurplusPercentages[iPnl]) % 10;
 	this.DigitImages.DrawPatchNumber(nPtch, 131, 12+(26*iPnl));
+};
+DominionBudgetInfoView.prototype.DrawDigitPairs = function() {  //UNLOGGED - REDUNDANT
+	var i;
+
+	for (i=0;i<MINISTRY.PORTFOLIOS;++i)
+		this.DrawDigitPair(i);
 };
 DominionBudgetInfoView.prototype.DisplaySurplus = function() {
 
