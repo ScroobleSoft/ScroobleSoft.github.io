@@ -4,10 +4,7 @@
 var DominionWorldMap = function() {
 	var Mode;
 	var BelligerenceSpectrum;
-//	var PowerOctagon, AlliedOctagon, CityStateOctagon, AtollOctagon;
-//	var AlliedSash;
-	var FontSpecs;
-	var Frames;
+	var SelectionFlag, SelectedNation;
 
 	var i, x, y, info, pop;		//scratch variables
 };
@@ -15,9 +12,18 @@ DominionWorldMap.prototype = new DominionMap();
 DominionWorldMap.prototype.Set = function(cntxt, iBox, cPanel, gTool, cPad, tWriter) {
 	DominionMap.prototype.Set.call(this, cntxt, iBox, cPanel, gTool, cPad, tWriter);
 
+	this.SelectionFlag = true;
 	this.Mode = MAP.MODE.NORMAL;
 	this.AlliedSash = ArrayUtils.Create(4, Coordinate2D);
 	this.Generate();
+};
+DominionWorldMap.prototype.SelectNation = function(nation) {
+
+	this.SelectedNation = nation;
+};
+DominionWorldMap.prototype.ActivateSelection = function() {
+
+	this.SelectionFlag = true;
 };
 DominionWorldMap.prototype.Generate = function() {
 
@@ -87,6 +93,10 @@ DominionWorldMap.prototype.DrawPowers = function() {
 	for (this.i=0;this.i<POWER.COUNT;++this.i) {
 		this.PowerOctagon.Colour = PowerColours[this.i][0];
 		this.PowerOctagon.Draw(Powers[this.i].Location.X, Powers[this.i].Location.Y);
+		if (this.SelectionFlag)
+			if (this.SelectedNation)
+				if (Powers[this.i]===this.SelectedNation)
+					this.GraphicsTool.DrawPolygon(Powers[this.i].Location.X, Powers[this.i].Location.Y, this.PowerOctagon.Vertices, "white", 3);
 		this.x = Powers[this.i].Location.X - Math.round(StringUtils.GetWidth(PowerNames[this.i], "bold 12px Arial", this.Screen)/2);
 		this.TextWriter.Write(PowerNames[this.i], this.x, Powers[this.i].Location.Y+5, { COLOUR: PowerColours[this.i][1], FONT: "bold 12px Arial" } );
 	}
@@ -97,6 +107,10 @@ DominionWorldMap.prototype.DrawAlliedStates = function() {
 		this.AlliedOctagon.Colour = AlliedStates[this.i].PrimaryColour;
 		this.AlliedOctagon.Draw(AlliedStates[this.i].Location.X, AlliedStates[this.i].Location.Y);
 		this.GraphicsTool.DrawPolygon(AlliedStates[this.i].Location.X, AlliedStates[this.i].Location.Y, this.AlliedSash, AlliedStates[this.i].SecondaryColour, 0);
+		if (this.SelectionFlag)
+			if (this.SelectedNation)
+				if (AlliedStates[this.i]===this.SelectedNation)
+					this.GraphicsTool.DrawPolygon(AlliedStates[this.i].Location.X, AlliedStates[this.i].Location.Y, this.AlliedOctagon.Vertices, "white", 2);
 		if (AlliedStates[this.i].Alliance) {
 			this.x = Math.round(AlliedStates[this.i].Location.X);
 			this.y = Math.round(AlliedStates[this.i].Location.Y);
@@ -109,6 +123,10 @@ DominionWorldMap.prototype.DrawCityStates = function() {
 	for (this.i=0;this.i<CITySTATE.COUNT;++this.i) {
 		this.CityStateOctagon.Colour = CityStateColours[this.i];
 		this.CityStateOctagon.Draw(CityStates[this.i].Location.X, CityStates[this.i].Location.Y);
+		if (this.SelectionFlag)
+			if (this.SelectedNation)
+				if (CityStates[this.i]===this.SelectedNation)
+					this.GraphicsTool.DrawPolygon(CityStates[this.i].Location.X, CityStates[this.i].Location.Y, this.CityStateOctagon.Vertices, "white", 1);
 	}
 };
 DominionWorldMap.prototype.DrawAtolls = function() {
