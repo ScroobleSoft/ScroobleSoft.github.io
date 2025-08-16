@@ -1,30 +1,27 @@
-/*
- *  TODO: may need to use scratchpad to clip images (make them into rounded rectangles) for monitor display - actually, will draw over corners, and might
- *	  even use images to draw monitors (definitely should do that)
- */
+
 //----------------------------------------------
 //---------- OFFICE MONITOR --------------------
 var OfficeMonitor = function() {
-   var Screen;
-   var GraphicsTool;
-   var Specs;
-
-   var Left, Top;
-   var FrameThickness;
+	var Specs;
+	var GraphicsTool;
+	var Location;
 };
 OfficeMonitor.prototype = {
-   Set(cntxt, gTool, specs, x, y) {
-      this.Screen = cntxt;
-      this.GraphicsTool = gTool;
-      this.Specs = specs;
+	Set(specs, gTool) {
+		this.Specs = specs;
+		this.GraphicsTool = gTool;
+		this.Location = new Coordinate2D();
+	},
+	SetLocation(x, y) {
 
-      this.Left = x;
-      this.Top = y;
-   },
-   Draw() {
-      //Draw image first, then the rounded rectangle
+		this.Location.Set(x, y);
+	},
+	EraseScreen() {
 
-      //Draw frame
-      this.GraphicsTool.DrawRoundedRectangle(this.Left, this.Top, this.Specs.W, this.Specs.H, this.Specs.RADIUS, this.Specs.COLOUR, this.Specs.FRAME);
-   }
+		this.GraphicsTool.DrawRectangle(this.Location.X+2, this.Location.Y+2, this.Specs.W-4, this.Specs.H-4, "white", 0);
+	},
+	DrawFrame() {  //-draw image first, then the rounded rectangle
+
+		this.GraphicsTool.DrawRoundedRectangle(this.Location.X, this.Location.Y, this.Specs.W, this.Specs.H, this.Specs.RDS, "black", null, this.Specs.LW);
+	}
 };
