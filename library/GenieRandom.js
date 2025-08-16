@@ -17,7 +17,7 @@
 //------------------------------------------------
 //---------- GENIE RANDOMIZER --------------------
 var GenieRandomizer = function() {
-	var Seed1, Seed2;
+	var Seed1, Seed2, DailySeed;
 	var SavedSeed1, SavedSeed2;
 	var Mode;						//Javascript/Middle Square/Xorshift/Mersenne Twister
 	var Value;
@@ -30,6 +30,12 @@ GenieRandomizer.prototype = {
 		this.Seed2 = seed2;
 		if (!this.Seed1 && !this.Seed2)
 			this.GenerateSeeds();
+	},
+	SetSeed(seed) {
+
+		this.SaveSeeds();
+		this.Seed1 = seed;
+		this.Seed2 = seed + 1;
 	},
 	SetSeeds(sd1, sd2) {
 
@@ -56,6 +62,32 @@ GenieRandomizer.prototype = {
 
 		this.Seed1 = Math.round(Math.pow(2, 31)*Math.random());		//NOTE: picking 2^32 as max number to be on the safe side and avoid overflows
 		this.Seed2 = this.Seed1 + 1;
+	},
+	SetDailySeed(date) {
+		var dt;
+
+		this.DailySeed = MILLISECONDS;
+		dt = new Date(date);
+		this.DailySeed += dt.getDay();
+		this.DailySeed += 10 * dt.getDate();
+		this.DailySeed += 1000 * dt.getMonth();
+	},
+	GetDailySeed(date) {
+		var dt, day;
+		var ms;
+		var seed;
+
+		dt = new Date(date);
+		ms = dt.getTime();
+		dt = new Date();
+		day = Math.floor((dt.getTime()-ms)/MILLISECONDS);
+		seed = day * this.DailySeed;
+
+		return (seed);
+	},
+	GetNumberedSeed(num) {
+
+		return (num*this.DailyDate);
 	},
 	GetValue() {  //returns between 0 and 2^32 . . . this is the main algorithm implementation
 

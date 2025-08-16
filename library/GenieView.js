@@ -42,6 +42,16 @@ GenieView.prototype = {
 		this.InfoView = iView;
 		this.ConsoleView = cView;
 	},
+	SetInfoView(iView) {  //NOTE: applicable only to main view
+
+		this.InfoView = iView;
+		this.InfoView.MainView = this;
+	},
+	SetConsoleView(cView) {  //NOTE: applicable only to main view
+
+		this.ConsoleView = cView;
+		this.ConsoleView.MainView = this;
+	},
 	SetPerspective(prspctv) {
 
 		this.Perspective = prspctv;
@@ -257,7 +267,7 @@ GenieView.prototype = {
 
 		return (btn);
 	},
-	SetCheckBox(specs, img, tWriter) {  //UNLOGGED - UNTESTED
+	SetCheckBox(specs, img, tWriter) {
 		var chkbx;
 
 		chkbx = new GenieCheckBox();
@@ -304,6 +314,22 @@ GenieView.prototype = {
 		this.Controls.push(iPnl);
 
 		return (iPnl);
+	},
+	SetPushButton(specs, iSpecs, eSpecs) {
+		var pBtn, iBtn, iEdges;
+
+		iBtn = new GenieImage();
+		iBtn.Set(this.Context, ImageManager.Pics[IMAGeINDEX.CONTROLS], iSpecs);
+
+		iEdges = new GenieImage();
+		iEdges.Set(this.Context, ImageManager.Pics[IMAGeINDEX.CONTROLS], eSpecs);
+
+		pBtn = new GeniePushButton();
+		pBtn.SetEdgePics(iEdges)
+		pBtn.Set(this.Canvas, specs, iBtn);
+		this.Controls.push(pBtn);
+
+		return (pBtn);
 	},
 	SetTouchBar(specs, iSpecs, img) {
 		var tBar;

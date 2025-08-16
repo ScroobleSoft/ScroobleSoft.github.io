@@ -45,6 +45,16 @@ GenieGame.prototype = {
 
 		this.View = view;
 	},
+	SetDaily() {
+		var seed;
+
+		seed = this.Randomizer.GetDailySeed(this.DailyDate);
+		this.Randomizer.SetSeed(seed);
+	},
+	ResetDaily() {
+
+		this.Randomizer.ResetSeeds();
+	},
 	ShowButtons() {  //REDUNDANT
 
 		this.InfoBox.fillStyle = "rgb(47,159,255)";

@@ -173,9 +173,9 @@ GenieGraphics.prototype = {
 		//TODO: scaling option should be added
 
 		for (this.i=rds;this.i>rds-(sqr.W/2);--this.i) {
-	 this.height = Math.sqrt(Math.pow(rds, 2) - Math.pow(rds-this.i, 2));  //NOTE: height is actually half
-	 this.Context.drawImage(img, sqr.L+this.i-1, sqr.T, 1, 2*rds, x-(rds-this.i), y-this.height, 1, 2*this.height);
-	 this.Context.drawImage(img, sqr.L+(2*rds)-this.i, sqr.T, 1, 2*rds, x+(rds-this.i), y-this.height, 1, 2*this.height);
+			this.height = Math.sqrt(Math.pow(rds, 2) - Math.pow(rds-this.i, 2));  //NOTE: height is actually half
+			this.Context.drawImage(img, sqr.L+this.i-1, sqr.T, 1, 2*rds, x-(rds-this.i), y-this.height, 1, 2*this.height);
+			this.Context.drawImage(img, sqr.L+(2*rds)-this.i, sqr.T, 1, 2*rds, x+(rds-this.i), y-this.height, 1, 2*this.height);
 		}
 	},
 	DrawEllipse(x, y, width, height, colour, lWidth, opcty) {
@@ -272,37 +272,61 @@ GenieGraphics.prototype = {
 
 		//Draw background if colour specified
 		if (bColour) {
-	 this.Context.fillStyle = bColour || "white";
-	 this.Context.beginPath();
-	 this.Context.arc(x+r, y+r, r, Math.PI, 1.5*Math.PI);
-	 this.Context.lineTo(x+w-r, y);
-	 this.Context.arc(x+w-r, y+r, r, 1.5*Math.PI, 0);
-	 this.Context.lineTo(x+w, y+h-r);
-	 this.Context.arc(x+w-r, y+h-r, r, 0, 0.5*Math.PI);
-	 this.Context.lineTo(x+r, y+h);
-	 this.Context.arc(x+r, y+h-r, r, 0.5*Math.PI, Math.PI);
-	 this.Context.lineTo(x, y+r);
-	 this.Context.fill();
-	 this.Context.closePath();
-	 r -= (lWidth-1);
+			this.Context.fillStyle = bColour;
+			this.Context.beginPath();
+			this.Context.arc(x+r, y+r, r, Math.PI, 1.5*Math.PI);
+			this.Context.lineTo(x+w-r, y);
+			this.Context.arc(x+w-r, y+r, r, 1.5*Math.PI, 0);
+			this.Context.lineTo(x+w, y+h-r);
+			this.Context.arc(x+w-r, y+h-r, r, 0, 0.5*Math.PI);
+			this.Context.lineTo(x+r, y+h);
+			this.Context.arc(x+r, y+h-r, r, 0.5*Math.PI, Math.PI);
+			this.Context.lineTo(x, y+r);
+			this.Context.fill();
+			this.Context.closePath();
+			r -= (lWidth-1);
 		}
 
-		//Draw frame if required, starting from top left corner
+		//Draw frame if colour specified
 		if (fColour) {
-	 this.Context.strokeStyle = fColour || "black";
-	 this.Context.lineWidth = lWidth || 1;
-	 this.Context.beginPath();
-	 this.Context.arc(x+r, y+r, r, Math.PI, 1.5*Math.PI);
-	 this.Context.lineTo(x+w-r, y);
-	 this.Context.arc(x+w-r, y+r, r, 1.5*Math.PI, 0);
-	 this.Context.lineTo(x+w, y+h-r);
-	 this.Context.arc(x+w-r, y+h-r, r, 0, 0.5*Math.PI);
-	 this.Context.lineTo(x+r, y+h);
-	 this.Context.arc(x+r, y+h-r, r, 0.5*Math.PI, Math.PI);
-	 this.Context.lineTo(x, y+r);
-	 this.Context.stroke();
-	 this.Context.closePath();
+			this.Context.strokeStyle = fColour;
+			this.Context.lineWidth = lWidth || 1;
+			this.Context.beginPath();
+			this.Context.arc(x+r, y+r, r, Math.PI, 1.5*Math.PI);
+			this.Context.lineTo(x+w-r, y);
+			this.Context.arc(x+w-r, y+r, r, 1.5*Math.PI, 0);
+			this.Context.lineTo(x+w, y+h-r);
+			this.Context.arc(x+w-r, y+h-r, r, 0, 0.5*Math.PI);
+			this.Context.lineTo(x+r, y+h);
+			this.Context.arc(x+r, y+h-r, r, 0.5*Math.PI, Math.PI);
+			this.Context.lineTo(x, y+r);
+			this.Context.stroke();
+			this.Context.closePath();
 		}
+	},
+	DrawTrapezoid(x, y, tw, bw, h, colour, lw, opcty) {  //t- top, b- bottom
+
+		this.SetOpacity(opcty);
+
+		//Start drawing starting from bottom left corner
+		if (lw) {
+			this.Context.lineWidth = lw;
+			this.Context.strokeStyle = colour;
+		} else
+      this.Context.fillStyle = colour;
+		this.Context.beginPath();
+		this.Context.moveTo(x, y);
+		this.Context.lineTo(x+((bw-tw)/2), y-h);
+		this.Context.lineTo(x+((bw-tw)/2)+tw, y-h);
+		this.Context.lineTo(x+bw, y);
+		this.Context.lineTo(x, y);
+		if (lw)
+			this.Context.stroke();
+		else
+			this.Context.fill();
+		this.Context.closePath();
+
+		this.ResetOpacity(opcty);
 	},
 	DrawOctagon(x, y, size, colour, lWidth, opcty) {
 
