@@ -12,21 +12,19 @@ DominionComponents.prototype.SetSpriteData = function() {
 };
 DominionComponents.prototype.CreateShipSprites = function() {
 
-	//UNLOGGED
-
 	GunBoatSprite = new CompositeSprite();
 	MissileBoatSprite = new CompositeSprite();
 	FrigateSprite = new CompositeSprite();
 	DestroyerSprite = new CompositeSprite();
 	CruiserSprite = new CompositeSprite();
 	BattleshipSprite = new CompositeSprite();
-	SmallCarrierSprite = new CompositeSprite();
-	CarrierSprite = new CompositeSprite();
+	EscortCarrierSprite = new CompositeSprite();
+	LightCarrierSprite = new CompositeSprite();
+	FleetCarrierSprite = new CompositeSprite();
 	SuperCarrierSprite = new CompositeSprite();
+	CarrierTowerSprite = new AnimatedSprite();
 };
 DominionComponents.prototype.SetShipSprites = function() {
-
-	//UNLOGGED
 
 	GunBoatSprite.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.SPRITES], GUnBOAtSPRITE, this.GraphicsTool);
 	MissileBoatSprite.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.SPRITES], MISSILeBOAtSPRITE, this.GraphicsTool);
@@ -34,9 +32,11 @@ DominionComponents.prototype.SetShipSprites = function() {
 	DestroyerSprite.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.SPRITES], DESTROYErSPRITE, this.GraphicsTool);
 	CruiserSprite.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.SPRITES], CRUISErSPRITE, this.GraphicsTool);
 	BattleshipSprite.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.SPRITES], BATTLESHIpSPRITE, this.GraphicsTool);
-	SmallCarrierSprite.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.SPRITES], SMALlCRUISErSPRITE, this.GraphicsTool);
-	CarrierSprite.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.SPRITES], CRUISErSPRITE, this.GraphicsTool);
-	SuperCarrierSprite.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.SPRITES], SUPErCRUISErSPRITE, this.GraphicsTool);
+	EscortCarrierSprite.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.SPRITES], ESCORtCARRIErSPRITE, this.GraphicsTool);
+	LightCarrierSprite.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.SPRITES], LIGHtCARRIErSPRITE, this.GraphicsTool);
+	FleetCarrierSprite.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.SPRITES], FLEEtCARRIErSPRITE, this.GraphicsTool);
+	SuperCarrierSprite.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.SPRITES], SUPErCARRIErSPRITE, this.GraphicsTool);
+	CarrierTowerSprite.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.SPRITES], CARRIErTOWErSPRITE);
 };
 DominionComponents.prototype.CreateJetSprites = function() {
 

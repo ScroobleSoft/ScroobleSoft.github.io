@@ -59,3 +59,45 @@ DominionComponents.prototype.SetWardImages = function() {
    FlareSymbolImage.Set(this.ControlPanel, ImageManager.Pics[IMAGeINDEX.IMAGES], FLAReSYMBOlIMAGE);
    ChaffSymbolImage.Set(this.ControlPanel, ImageManager.Pics[IMAGeINDEX.IMAGES], CHAFfSYMBOlIMAGE);
 };
+DominionComponents.prototype.CreateCharacterImages = function() {  //TODO: more face images, maybe hair and mouth also
+
+	//Hair
+	HairStyleImages = new GenieImage();
+	HairDoImages = new GenieImage();
+	LongHairImages = new GenieImage();
+
+	//Eyes
+	EyeBrowImages = new GenieImage();
+	EyeImages = new GenieImage();
+	HalfEyeImages = new GenieImage();
+	ClosedEyeImages = new GenieImage();
+
+	//Face
+	FaceImages = new GenieImage();
+	UrnFaceImages = new GenieImage();
+	NoseImages = new GenieImage();
+	MouthImages = new GenieImage();
+
+	TieImages = new GenieImage();
+};
+DominionComponents.prototype.SetCharacterImages = function() {
+
+	//Hair
+	HairStyleImages.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.CHARACTERS], HAIrSTYLeIMAGEs);
+	HairDoImages.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.CHARACTERS], HAIrDoIMAGEs);
+	LongHairImages.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.CHARACTERS], LONgHAIrIMAGEs);
+
+	//Face
+	FaceImages.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.CHARACTERS], FACeIMAGEs);
+	UrnFaceImages.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.CHARACTERS], URnFACeIMAGEs);
+	NoseImages.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.CHARACTERS], NOSeIMAGEs);
+	MouthImages.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.CHARACTERS], MOUThIMAGEs);
+
+	//Eyes
+	EyeBrowImages.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.CHARACTERS], EYEBROwIMAGEs);
+	EyeImages.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.CHARACTERS], EYeIMAGEs);
+	HalfEyeImages.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.CHARACTERS], HALfEYeIMAGEs);
+	ClosedEyeImages.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.CHARACTERS], CLOSEdEYeIMAGEs);
+
+	TieImages.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.CHARACTERS], TIeIMAGEs);
+};
