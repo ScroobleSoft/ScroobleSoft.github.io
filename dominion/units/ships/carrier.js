@@ -12,7 +12,7 @@ DominionCarrier.prototype.ReColour = function() {
 DominionGunBoat.prototype.Set = function(specs, sprite, type) {
    DominionShip.prototype.Set.call(this, specs, sprite, type);
 
-   this.Type = type ? type : SHIP.SMALlCARRIER;
+   this.Type = type ? type : SHIP.ESCORtCARRIER;
 };
 DominionCarrier.prototype.Draw = function() {
    DominionShip.prototype.Draw.call(this);
@@ -22,7 +22,7 @@ DominionCarrier.prototype.Draw = function() {
 };
 DominionCarrier.prototype.DrawBows = function() {
 
-   if (this.Type!=SHIP.SMALlCARRIER) {
+   if (this.Type!=SHIP.ESCORtCARRIER) {
 
       //NW
       this.x = this.ScreenCoords.X + CARRIErBOwOFFSETs[this.Type-SHIP.CARRIER][0].X;
