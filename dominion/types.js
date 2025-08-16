@@ -10,7 +10,7 @@ var BattleArray = function() {
 	var GunBoats, MissileBoats;
 	var Frigates, Cruisers;
 	var Destroyers, Battleships;
-	var EscortCarriers, FleetCarriers, SuperCarriers;
+	var EscortCarriers, LightCarriers, FleetCarriers, SuperCarriers;
 	var F1s, F2s, F3s, F4s, F5s, F6s, F7s, F8s, F9s;
 	var Bombers, Interceptors, Interdictors, Strafers;
 //	var PatrolBoats, Submarines, Recons, Refuellers, Transports;	not likely to participate in battle

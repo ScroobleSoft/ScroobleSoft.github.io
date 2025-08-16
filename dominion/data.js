@@ -6,6 +6,8 @@ var DominionImages = [
 	"DominionSprites.png",
 	"DominionImages.png",
 	"DominionControls.png",
+	"bitmaps/OfficeImages.png",
+	"bitmaps/Characters.png",
 	"DominionTesting.png",
 	"DominionDemo.png",
 	"DominionTutorial.png",
@@ -18,13 +20,15 @@ var IMAGeINDEX = {
 	SPRITES:			0,
 	IMAGES:			1,
 	CONTROLS:		2,
-	TESTING:			3,
-	DEMO:				4,
-	TUTORIAL:		5,
-	MINiGAMES:		6,
-	GENIeIMAGES:	7,
-	GENIeCONTROLS: 8,
-	SCRATCH:			9
+	OFFICE:			3,
+	CHARACTERS:		4,
+	TESTING:			5,
+	DEMO:				6,
+	TUTORIAL:		7,
+	MINiGAMES:		8,
+	GENIeIMAGES:	9,
+	GENIeCONTROLS: 10,
+	SCRATCH:			11
 };
 
 //-------------------------------------
@@ -42,18 +46,32 @@ var SCREEnRECT = { COLOUR: "red", LW: 1 };
 var MOBILE = { SCALE: SCREEN.MOBILE.W/SCREEN.WIDTH };
 //var MAP = { W: 1800, H: 1800 };						//TODO: this will be editable, not constant
 
-//--------------------------------------
-//---------- COLOURS -------------------
-
 //----------------------------------------
 //---------- GAME DATA -------------------
 
 const ATTACK = true;
-var EXPANSION = { PURCHASE: 0, BENEFICENCE: 1, INVESTING: 2, PACT: 3, SUBVERSION: 4, TREATY: 5, MISSION: 6, CONQUEST: 7, METHODS: 8 };
-var MISSION = { SABOTAGE: 0, AIrMISSION: 1, BLOCKADE: 2, CHAMPIONS: 3, INTERDICTION: 4, ICBM: 5, DOGFIGHT: 6, HUNTING: 7, TYPES: 8 };
+
+var DOMINION = { GAME: { DAILY: 0, FREeFORM: 1, MULTiCHOICE: 2 }, DATE: "2025-08-05",
+					  COLOUR: { CITySTATE: "rgb(175,175,255)",
+									FOOD: "rgb(223,239,143)", ENTERTAINMENT: "rgb(209,255,095)", ARMS: "rgb(255,175,175)", LAVENOIL: "rgb(175,143,207)",
+									BONDS: "rgb(255,239,239)", MEDICINE: "rgb(159,255,255)", GOODS: "rgb(191,223,239)", SURVEILLANCE: "rgb(255,223,111)",
+									OFFICE: { WOOD: "rgb(063,015,000)", EDGE: "rgb(031,000,000)", DOOR: { PANEL: GREY.SILVER } }
+								 },
+					  CHARACTER: { STATE: { QUIET: 0, TALKING: 1 },
+										FACE: { M: { X: 19, Y: 8 }, F: { X: 19, Y: 3 } }, HAIR: { M: -6, F: 0, LONG: { X: 13, Y: 34 } },
+										EYEBROW: { L: { X: 14, Y: 19 }, R: { X: 35, Y: 19 } }, NOSE: { X: 27, Y: 32 },
+										MOUTH: { X: 24, Y: 47, STATE: { CLOSED: 0, OPEN: 1 } },
+										EYE: { L: { X: 13, Y: 23 }, R: { X: 34, Y: 23 }, STATE: { OPEN: 0, CLOSING: 1, CLOSED: 2, OPENING: 3 } },
+										TIE: { X: 43, Y: 70 },
+										BITS: { GENDER: 0, HAIR: { S: 3, E: 1 }, FACE: { S: 6, E: 4 }, EYES: { S: 12, E: 7 }, NOSE: { S: 15, E: 13 } }
+												//TODO: more bits needed for different face and hair types
+									 },
+					  TURNS: { SHORT: 17, MEDIUM: 34, LONG: 51 }
+};
 var NewspaperTitles = [ "Chronicle", "Courant", "Bugle", "Dispatch", "Echo", "Examiner", "Gazette", "Guardian", "Herald", "Independent",
 								"Journal", "Mercury", "Metro", "Phoenix", "Post", "Record", "Standard", "Times", "Tribune", "Voice"
 ];
+var BONDS = { TYPES: 10 };
 
 //---------------------------------------
 //---------- CONTROLS -------------------

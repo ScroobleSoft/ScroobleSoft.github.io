@@ -3,7 +3,7 @@
 //---------- OBJECTS -------------------
 
 var DominionScape, DominionGraphics, DominionCalcPad, DominionText, DominionRandomizer, Controller;		//library
-var Nations, Powers, AlliedStates, CityStates, PlayerPower, Tomcat, DiplomacyTable;								//nations
+var Nations, Powers, PlayerPower, AlliedStates, CityStates, Tomcat, DiplomacyTable;								//nations
 var Continents, Archipelagos, Atolls, Map, WorldMap;																		//maps
 var Intro, Demo, Tutorial, MiniGames;																							//sim
 
@@ -14,6 +14,7 @@ var Testing;
 var Colourizer;
 var ScreenManager;
 var DominionUtils;
+var CharacterGenerator;
 
 //-----------------------------------
 //---------- DATA -------------------
@@ -29,7 +30,7 @@ var ArmsDistribution;		//MOBILE
 
 //Buttons
 var NewGameButton, TutorialButton, DemoButton, MiniGamesButton;		//standard
-var IconCornerImages, RaisedCornerImages;										//images
+var IconCornerImages, RaisedCornerImages, CheckBoxImages;				//images
 
 var AllianceCancelButton, AllianceButton, TurnButton;						//REDUNDANT?
 
@@ -50,6 +51,12 @@ var ArverniDigitImages;
 var PowerLabelImages;
 var AllianceImage;										//UNLOGGED - REDUNDANT
 
+//Characters
+var HairStyleImages, HairDoImages, LongHairImages;
+var EyeBrowImages, EyeImages, HalfEyeImages, ClosedEyeImages;
+var FaceImages, UrnFaceImages, NoseImages, MouthImages;
+var TieImages;
+
 //Weapons
 var ShortCannonImages, LongCannonImages, ShortCannonConsoleImages, LongCannonConsoleImages;
 var AAMHorizontalShaftImages, AAMVerticalShaftImages;
@@ -66,7 +73,7 @@ var FortnightDigitImages, JetLetterImages, TinyDigitImages;
 
 //Navy
 var GunBoatSprite, MissileBoatSprite, FrigateSprite, DestroyerSprite, CruiserSprite, BattleshipSprite,
-	 SmallCarrierSprite, CarrierSprite, SuperCarrierSprite;
+	 EscortCarrierSprite, LightCarrierSprite, FleetCarrierSprite, SuperCarrierSprite;
 var ShipBowSprite, ShipOutlineSprite, ShipHullSprite;
 
 //Air Force
@@ -112,15 +119,17 @@ var FlareList, ChaffList;
 //------------------------------------
 //---------- VIEWS -------------------
 
-var GlobalView, 
+var GlobalView, IntroView,
 	 GazetteerInfoView, VotesInfoView, BudgetInfoView, ReservesInfoView, DiplomacyInfoView, CashInfoView, ArmsInfoView, EventsInfoView,
 	 ActionConsoleView;
 //var BoardView;
 var AllianceView, MissionView;
 var ConquestView, ConquestInfoView, ConquestConsoleView;
-var PurchaseView, GrantView, InvestmentView, PactView, TreatyView, IntrigueView;
+var PurchaseView, GrantView, PactView, TreatyView, IntrigueView;
+var AssetsView, ForcesView, InvestmentView, BondsView;
 var AirMissionView, ChampionsView;									//missions
 var SeaTheatre, BeachheadTheatre;									//theatres
+var SolicitationView, SolicitationInfoView, TurnConsoleView;
 
 //--------------------------------------------------
 //---------- DOMINION COMPONENTS -------------------
@@ -278,6 +287,7 @@ DominionComponents.prototype = {
 		Colourizer = new GenieColourizer();
 		ScreenManager = new GenieScreenManager();
 		DominionUtils = new DominionUtilities();
+		CharacterGenerator = new DominionCharacterGenerator();
 	},
 	SetTools() {
 
@@ -288,6 +298,7 @@ DominionComponents.prototype = {
 		Colourizer.Set();
 		ScreenManager.Set(this.InfoBox, this.ScreenRect, this.GraphicsTool, 200, true);
 		DominionUtils.Set(this.Randomizer);
+		CharacterGenerator.Set(this.GraphicsTool, this.Randomizer);
 	},
 	CreateControls() {
 
@@ -299,7 +310,9 @@ DominionComponents.prototype = {
 		DemoButton = new ImageButton();
 		MiniGamesButton = new ImageButton();
 
+		//Images
 		IconCornerImages = new GenieImage();
+		CheckBoxImages = new GenieImage();
 
 		//Buttons
 		RaisedCornerImages = new GenieImage();
@@ -326,7 +339,9 @@ DominionComponents.prototype = {
 		DemoButton.Set(this.Interface.ZoomScape, DEMoBUTTOnIMAGE, ImageManager.Pics[IMAGeINDEX.GENIeIMAGES]);
 		MiniGamesButton.Set(this.Interface.ZoomScape, MINiGAMEsBUTTOnIMAGE, ImageManager.Pics[IMAGeINDEX.GENIeIMAGES]);
 
+		//Images
 		IconCornerImages.Set(this.ControlPanel, ImageManager.Pics[IMAGeINDEX.GENIeCONTROLS], ICOnCORNErIMAGEs);
+		CheckBoxImages.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.GENIeCONTROLS], CHECkBOxIMAGE);
 
 		//Buttons
 		RaisedCornerImages.Set(this.ControlPanel, ImageManager.Pics[IMAGeINDEX.GENIeCONTROLS], RAISEdBUTTOnCORNErIMAGEs);
@@ -366,6 +381,7 @@ DominionComponents.prototype = {
 		MinistryPanelImage = new GenieImage();
 		MinistryImagePanel = new GenieImagePanel();
 
+		this.CreateCharacterImages();
 		this.CreateCannonImages();
 		this.CreateMissileImages();
 		this.CreateWardImages();
@@ -395,6 +411,7 @@ DominionComponents.prototype = {
 		MinistryPanelImage.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.IMAGES], MINISTRyPANElIMAGE);
 		MinistryImagePanel.Set(this.Interface.PrimeScape, MINISTRyIMAGePANEL, MinistryPanelImage);
 
+		this.SetCharacterImages();
 		this.SetCannonImages();
 		this.SetMissileImages();
 		this.SetWardImages();
@@ -498,17 +515,9 @@ DominionComponents.prototype = {
 
 		//UNLOGGED
 
-		//Global and info sub-views
-		GlobalView = new DominionGlobalView();
-		GazetteerInfoView = new DominionGazetteerInfoView();
-		VotesInfoView = new DominionVotesInfoView();
-		BudgetInfoView = new DominionBudgetInfoView();
-		ReservesInfoView = new DominionReservesInfoView();
-		DiplomacyInfoView = new DominionRelationsInfoView();
-		CashInfoView = new DominionCashInfoView();
-		ArmsInfoView = new DominionArmsInfoView();
-		EventsInfoView = new DominionEventsInfoView();
-		ActionConsoleView = new DominionActionConsoleView();
+		this.CreateGlobalViews();
+
+		IntroView = new DominionIntroView();
 
 		OfficeView = new DominionOfficeView();
 
@@ -524,43 +533,34 @@ DominionComponents.prototype = {
 
 		PurchaseView = new DominionPurchaseView();
 		GrantView = new DominionGrantView();
-		InvestmentView = new DominionInvestmentView();
 		PactView = new DominionPactView();
 		TreatyView = new DominionTreatyView();
 		IntrigueView = new DominionIntrigueView();
-	},
-	SetViews() {
- 
-		//UNLOGGED
 
-		//Global and info sub-views
-		GazetteerInfoView.SetLinks(this.GraphicsTool, this.TextWriter);
-		GazetteerInfoView.Set(this.Interface.ZoomScape, VIEW.GAZETTEER, GlobalView);
-		VotesInfoView.SetLinks(this.GraphicsTool, this.TextWriter);
-		VotesInfoView.Set(this.Interface.ZoomScape, VIEW.VOTES, GlobalView);
-		BudgetInfoView.SetLinks(this.GraphicsTool, this.TextWriter);
-		BudgetInfoView.Set(this.Interface.ZoomScape, VIEW.BUDGET, GlobalView);
-		ReservesInfoView.SetLinks(this.GraphicsTool, this.TextWriter);
-		ReservesInfoView.Set(this.Interface.ZoomScape, VIEW.RESERVES, GlobalView);
-		DiplomacyInfoView.SetLinks(this.GraphicsTool, this.TextWriter);
-		DiplomacyInfoView.Set(this.Interface.ZoomScape, VIEW.DIPLOMACY, GlobalView);
-		CashInfoView.SetLinks(this.GraphicsTool, this.TextWriter);
-		CashInfoView.Set(this.Interface.ZoomScape, VIEW.CASH, GlobalView);
-		ArmsInfoView.SetLinks(this.GraphicsTool, this.TextWriter);
-		ArmsInfoView.Set(this.Interface.ZoomScape, VIEW.ARMS, GlobalView);
-		EventsInfoView.SetLinks(this.GraphicsTool, this.TextWriter);
-		EventsInfoView.Set(this.Interface.ZoomScape, VIEW.EVENTS, GlobalView);
-		ActionConsoleView.SetLinks(this.GraphicsTool);
-		ActionConsoleView.Set(this.Interface.Console, VIEW.ACTION, GlobalView);
-		GlobalView.SetLinks(this.GraphicsTool, this.TextWriter);
-		GlobalView.Set(this.Interface.PrimeScape, VIEW.GLOBAL, this.GraphicsTool, this.TextWriter);
-		GlobalView.SetSubViews(GazetteerInfoView, ActionConsoleView);
+		//Inventory
+		AssetsView = new DominionAssetsView();
+		ForcesView = new DominionForcesView();
+		InvestmentView = new DominionInvestmentView();
+		BondsView = new DominionBondsView();
+
+		//Turns
+		SolicitationView = new DominionSolicitationView();
+		SolicitationInfoView = new DominionSolicitationInfoView();
+		TurnConsoleView = new DominionTurnConsoleView();
+	},
+	SetViews() {  //UNLOGGED
+
+		this.SetGlobalViews();
+		this.SetIntroViews();
+		this.SetFinancialViews();
+		this.SetTurnViews();
 
 //		BoardView.Set(this.Interface.PrimeScape, this.GraphicsTool, this.CalcPad, this.TextWriter, this.ScreenRect);	//TODO: all these arguments needed?
 
-		OfficeView.Set(this.Interface.PrimeScape, OFFICE, this.GraphicsTool, this.TextWriter);
+		OfficeView.SetLinks(this.GraphicsTool, this.TextWriter);
+		OfficeView.Set(this.Interface.PrimeScape, VIEW.OFFICE);
 
-		AllianceView.Set(this.Interface.PrimeScape, ALLIANCE, this.GraphicsTool);
+		AllianceView.Set(this.Interface.PrimeScape, VIEW.ALLIANCE, this.GraphicsTool);
 
 		MissionView.SetLinks(this.GraphicsTool);
 		MissionView.Set(this.Interface.PrimeScape, VIEW.MISSION);
@@ -576,7 +576,6 @@ DominionComponents.prototype = {
 
 		PurchaseView.Set(this.Interface.PrimeScape, VIEW.PURCHASE);
 		GrantView.Set(this.Interface.PrimeScape, VIEW.GRANT);
-		InvestmentView.Set(this.Interface.PrimeScape, VIEW.INVESTMENT);
 		PactView.Set(this.Interface.PrimeScape, VIEW.PACT);
 		TreatyView.Set(this.Interface.PrimeScape, VIEW.TREATY);
 		IntrigueView.Set(this.Interface.PrimeScape, VIEW.INTRIGUE);

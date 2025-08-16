@@ -87,31 +87,6 @@ DominionUtilities.prototype = {
 		 return (9);
 		}
 	},
-	GenerateName() {
-		var iName;
-		var name;
-
-		iName = this.Randomizer.GetIndex(CapitalConsonants.length);
-		name = CapitalConsonants[iName];
-		if (name=="Q")
-			name += "u";
-		else {
-			iName = this.Randomizer.GetIndex(Vowels.length);
-			name += Vowels[iName];
-		}
-		iName = this.Randomizer.GetIndex(Consonants.length);
-		name += Consonants[iName];
-		if (name=="q")
-			name += "u";
-		else {
-			iName = this.Randomizer.GetIndex(Vowels.length);
-			name += Vowels[iName];
-		}
-		iName = this.Randomizer.GetIndex(Consonants.length);
-		name += Consonants[iName];
-
-		return (name);
-	},
 	GetFormattedAmount(num) {  //NOTE: does not go above billion (trillion, quadrillion etc. ignored)
 
 		this.info = num.toString();

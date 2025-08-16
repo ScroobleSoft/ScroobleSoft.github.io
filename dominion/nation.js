@@ -3,18 +3,16 @@
 //---------- DOMINION NATION --------------------
 var DominionNation = function() {
 	var Randomizer;
-
 	var Type;
 	var Location, Continent;								//.Location- world screen map coordinates
-	var Population;
-	var GDP, Revenue;
-	var SurplusPercentages, SurplusAllocations;		//.SurplusPercentages REDUNDANT?
-	var Treasury, Reserves, Cash, Investments;		//coffers - .Reserves, .Cash and .Investments are for MOBILE game for now
-	var Popularity, Government, Opposition;
-	var HeadOfState, Advisor;
+	var Population, GDP, Revenue;
+	var SurplusPercentages, SurplusAllocations;		//both REDUNDANT? - moving this to cabinet
+	var Treasury, Reserves;									//coffers - .Reserves REDUNDANT?
+	var Popularity, Government, Opposition;			//internal
+	var HeadOfState, Adviser;
 	var Cabinet;
 	var Army, AirForce, Navy, Missilery, Fleets;
-	var MicroUnits, MidUnits, MegaUnits;				//for MOBILE game
+	var MicroUnits, MidUnits, MegaUnits, Units;		//for MOBILE game (maybe TEMP)
 
 	var Cities, Provinces, Bases;	//TODO: one or more of these may be REDUNDANT
 	var TerritorialWaters;		//ISSUE: very much a maybe
@@ -30,15 +28,13 @@ DominionNation.prototype = {
 	},
 	SetSlots() {
 
-		//UNLOGGED
+		//UNLOGGED - REDUDANT?
 
 		this.SurplusPercentages = new Array(MINISTRY.PORTFOLIOS);
 		this.SurplusPercentages.fill(0);
 		this.SurplusAllocations = new Array(MINISTRY.PORTFOLIOS);
 		this.SurplusAllocations.fill(0);
 		this.Reserves = new Array(COMMODITY.TYPES);
-		this.Investments = new Array(CITySTATE.COUNT);
-		this.Investments.fill(0);
 	},
 	Generate() {
 
@@ -47,9 +43,10 @@ DominionNation.prototype = {
 		this.SetPopulation();
 		this.SetGovernment();
 		this.SetPersonnel();
-		this.SetCabinet();
 		this.SetEconomy();
+		this.SetCabinet();
 		this.SetMilitary();
+		this.SetInvestments();
 
 		//-also have to set buoys, satellites, in ministry objects
 	},
@@ -68,35 +65,21 @@ DominionNation.prototype = {
 	},
 	SetPersonnel() {
 
-		//UNLOGGED
-
-		this.HeadOfState = DominionUtils.GenerateName();
-		if (this.Randomizer.FlipCoin())
-			this.HeadOfState += "a";
-		this.HeadOfState += " " + DominionUtils.GenerateName();
-		
-		//-advisor
+		this.HeadOfState = new DominionCharacter();
+		this.HeadOfState.Set();
+		this.Adviser = new DominionCharacter();			//TODO: cabinet will be generated, adviser will be selected among ministers
+		this.Adviser.Set();
 	},
 	SetCabinet() {
-		var nation;
 
-		this.Cabinet = new Array(MINISTRY.PORTFOLIOS);
-		this.Cabinet[MINISTRY.AGRICULTURE] = new AgricultureMinistry();
-		this.Cabinet[MINISTRY.DEFENCE]	  = new DefenceMinistry();
-		this.Cabinet[MINISTRY.ENERGY]		  = new EnergyMinistry();
-		this.Cabinet[MINISTRY.FINANCE]	  = new FinanceMinistry();
-		this.Cabinet[MINISTRY.FOREIGN]	  = new ForeignMinistry();
-		this.Cabinet[MINISTRY.HEALTH]		  = new HealthMinistry();
-		this.Cabinet[MINISTRY.INDUSTRY]	  = new IndustryMinistry();
-		this.Cabinet[MINISTRY.INFORMATION] = new InformationMinistry();
-
-		nation = this;
-		this.Cabinet.forEach(function(mnstry){mnstry.Set(nation);});
+		this.Cabinet = new DominionCabinet();
+		this.Cabinet.Set(this);
+		if (this.Type==NATION.POWER) {
+			this.Cabinet.SetSurplusPercentages();
+			this.Cabinet.SetInventory();
+		}
 	},
-	SetEconomy() {
-		var i;
-
-		//UNLOGGED
+	SetEconomy() {  //UNLOGGED
 
 		this.GDP = this.Population * GDP.PErCAPITA;
 		this.Revenue = 0.4 * this.GDP;													//TODO: tax rate could be adjustable
@@ -104,26 +87,31 @@ DominionNation.prototype = {
 	},
 	SetMilitary() {
 
-		this.Army = new DominionArmy();
-		this.Army.Set();
-		this.Navy = new DominionNavy();
-		this.Navy.Set();
-		this.AirForce = new DominionAirForce();
-		this.AirForce.Set();
+		if (this.Type!=NATION.CITySTATE) {
+			this.Army = new DominionArmy();
+			this.Army.Set(this);
+			this.Navy = new DominionNavy();
+			this.Navy.Set(this);
+			this.AirForce = new DominionAirForce();
+			this.AirForce.Set(this);
+			if (this.Type==NATION.POWER)
+				this.SetFleet();
+		}
 		this.Missilery = new DominionMissilery();
-		this.Missilery.Set();
-
-		this.SetArmy();
-		this.SetNavy();
-		this.SetAirForce();
-		this.SetMissilery();
+		this.Missilery.Set(this);
 	},
-	SetNavy() {
-
-		this.Navy.EscortCarriers = 0;
-		this.Navy.FleetCarriers = 0;
-		this.Navy.SuperCarriers = 0;
+	SetInvestments() {  //NOTE: dummy function
 	},
+/*
+	SetArmy() {  //NOTE: dummy function
+	},
+	SetNavy() {  //NOTE: dummy function
+	},
+	SetAirForce() {  //NOTE: dummy function
+	},
+	SetFleets() {  //NOTE: dummy function
+	},
+*/
 	SetBudget(blgrnc) {  //REDUNDANT - UNLOG with impunity
 		var i;
 		var portion;
