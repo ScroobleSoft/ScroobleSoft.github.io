@@ -5,22 +5,30 @@ var DominionAlliedState = function() {
 	var Randomizer;
 	var AssociatedIndex, SecondaryIndex;		//.Associated - most closely associated Power, .Secondary - more peripheral association
 	var PrimaryColour, SecondaryColour;
-	var Alliance, AllianceHistory;		//'.AllianceHistory' stores both past pacts and failed approaches (from either end)
+	var Alliance, Grants, Aid, Treaties, Pacts;
 	var Orientation, Belligerence;
-	var Donations;
+	var ConsulGenerals;
 };
 DominionAlliedState.prototype = new DominionNation();
 DominionAlliedState.prototype.Set = function(rGenerator) {
 	DominionNation.prototype.Set.call(this, rGenerator);
 
 	this.Type = NATION.ALLIED;
-	this.AllianceHistory = new Array();
-	this.Donations = new Array(POWER.COUNT);
-	this.Donations.fill(0);
-};
-DominionAlliedState.prototype.SetAlliance = function(allnc) {
+	this.SetData();
 
-	this.Alliance = allnc;
+	//TODO: this is TEMP for Mobile/Multiple-Choice game
+	this.Units = 59 * 5;		//NOTE: missiles not included
+};
+DominionAlliedState.prototype.SetData = function() {
+
+	this.Grants = new Array(POWER.COUNT);
+	this.Grants.fill(0);
+	this.Aid = new Array(POWER.COUNT);
+	this.Aid.fill(0);
+	this.Treaties = new Array(POWER.COUNT);
+	this.Treaties.fill(0);
+	this.Pacts = new Array(POWER.COUNT);
+	this.Pacts.fill(0);
 };
 /*
 DominionAlliedState.prototype.Generate = function(blgrnc) {
@@ -85,6 +93,13 @@ DominionAlliedState.prototype.SetBudget = function(blgrnc) {
 
 	DominionNation.prototype.SetBudget.call(this, BELLIGERENCE.NONE);
 };
+DominionAlliedState.prototype.SetPersonnel = function() {
+	DominionNation.prototype.SetPersonnel.call(this);
+
+	this.ConsulGenerals = ArrayUtils.Create(POWER.COUNT, DominionCharacter);
+	this.ConsulGenerals.forEach(function(cnsl) {cnsl.Set();});
+};
+/*
 DominionAlliedState.prototype.SetArmy = function() {
 
 	this.Army.LARTs		 = 4 * ALLIED.CITIES;
@@ -141,6 +156,7 @@ DominionAlliedState.prototype.SetAirForce = function() {
 	this.AirForce.F8s = 1 * ALLIED.CITIES;
 	this.AirForce.F9s = 1 * ALLIED.CITIES;
 };
+*/
 DominionAlliedState.prototype.SetMissilery = function() {
 
 	//UNLOGGED

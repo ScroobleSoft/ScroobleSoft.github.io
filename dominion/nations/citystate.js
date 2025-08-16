@@ -3,8 +3,8 @@
 //---------- DOMINION CITY STATE --------------------
 var DominionCityState = function() {
 	var City;
-	var StockPrice, PriceChange;
-	var Investments, Credit;							//Ringit value of current investments made by Powers, and cumulative credit they have accumulated
+	var StockPrice, PriceChange;			//REDUNDANT?
+	var Investments;							//contains Ringit value of current investments made by Powers, and cumulative credit they have accumulated
 	var FighterNomenclatures;
 	var Factories;
 };
@@ -19,10 +19,10 @@ DominionCityState.prototype.Set = function(rGenerator) {
 	this.StockPrice = new Array();
 	this.StockPrice = 20;
 	this.PriceChange = 0;
-	this.Investments = new Array(POWER.COUNT);
-	this.Investments.fill(0);
-	this.Credit = new Array(POWER.COUNT);
-	this.Credit.fill(0);
+	this.Investments = new Array();
+
+	//TODO: this is TEMP for Mobile/Multiple-Choice game
+	this.Units = 0;		//NOTE: missiles not included
 };
 DominionCityState.prototype.SetLinks = function(cfNmns) {  //cf- champion fighter
 
@@ -71,57 +71,6 @@ DominionCityState.prototype.GenerateChampionFighter = function() {  //NOTE: othe
 	//2 possibilities here - randomly select number of attributes OR go bit-by-bit and randomly flip each on or off;
 	//  latter would yield units of about the same quaility and cost (more significantly); better to randomly select overall
 	//  quality first, then distribute bits accordingly?
-};
-DominionCityState.prototype.SetArmy = function() {
-
-	this.Army.LARTs = 0;
-	this.Army.MARTs = 0;
-	this.Army.HARTs = 0;
-	this.Army.Jeeps = 0;
-	this.Army.Howitzers = 0;
-	this.Army.AVs = 0;
-	this.Army.MobileGuns = 0;
-	this.Army.Artillery = 0;
-	this.Army.Tanks = 0;
-	this.Army.AAGuns = 0;
-	this.Army.Helicopters = 0;
-};
-DominionCityState.prototype.SetNavy = function() {
-	DominionNation.prototype.SetNavy.call(this);
-
-	this.Navy.PatrolBoats = 0;
-	this.Navy.GunBoats = 0;
-	this.Navy.MissileBoats = 0;
-	this.Navy.Frigates = 0;
-	this.Navy.Cruisers = 0;
-	this.Navy.Destroyers = 0;
-	this.Navy.Battleships = 0;
-	this.Navy.Submarines = 0;
-};
-DominionCityState.prototype.SetAirForce = function() {
-
-	this.SetFighters();
-	this.AirForce.Bombers = 0;
-	this.AirForce.Interceptors = 0;
-	this.AirForce.Interdictors = 0;
-	this.AirForce.Recons = 0;
-	this.AirForce.Refuellers = 0;
-	this.AirForce.Strafers = 0;
-	this.AirForce.Transporters = 0;
-};
-DominionCityState.prototype.SetFighters = function() {
-
-	//UNLOGGED
-
-	this.AirForce.F1s = 0;
-	this.AirForce.F2s = 0;
-	this.AirForce.F3s = 0;
-	this.AirForce.F4s = 0;
-	this.AirForce.F5s = 0;
-	this.AirForce.F6s = 0;
-	this.AirForce.F7s = 0;
-	this.AirForce.F8s = 0;
-	this.AirForce.F9s = 0;
 };
 DominionCityState.prototype.SetMissilery = function() {
 

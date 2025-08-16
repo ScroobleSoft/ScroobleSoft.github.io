@@ -1,12 +1,17 @@
-
+/*
+ *		TODO: time to break up this file, maybe into Set.js and Alliance.js
+ */
 //----------------------------------------------
 //---------- DOMINION POWER --------------------
 var DominionPower = function() {
 	var Alliances;
 	var GovernmentsList;		//sorted by affinity, used in forming alliances
 	var ContinentIndices;	//random, used in alliances
+	var Investments, Bonds;
+	var Ambassadors, ConsulGenerals, HighCommissioners;
+	var Allieds;
 
-	var j;
+	var i, j;
 };
 DominionPower.prototype = new DominionNation();
 DominionPower.prototype.Set = function(rGenerator) {
@@ -18,6 +23,13 @@ DominionPower.prototype.Set = function(rGenerator) {
 	this.GovernmentsList = new Array(GOVERNMENT.TYPES);
 	this.ContinentIndices = new Array(MAP.CONTINENT.COUNT);
 	ArrayUtils.Index(this.ContinentIndices);
+	this.Bonds = new Array();
+
+	//TODO: this is TEMP for Mobile/Multiple-Choice game
+	this.Units = 88 * 17;		//NOTE: missiles not included
+
+   this.Allieds = ArrayUtils.Create(ALLIED.COUNT, function() {var Index, Proximity;} );
+	this.DetermineAlliedProximities();
 };
 DominionPower.prototype.SetPopulation = function() {
 	DominionNation.prototype.SetPopulation.call(this);
@@ -61,13 +73,17 @@ DominionPower.prototype.SetGovernment = function() {
 	}
 	this.Government.Set(this);
 };
+/*
 DominionPower.prototype.SetEconomy = function() {
 	var i;
 	var sum;
 
 	DominionNation.prototype.SetEconomy.call(this);
 
-	//Distribute allocation evenly if Tomcat
+	this.Cabinet.SetSurplusPercentages();
+	return;
+
+	//Distribute allocation evenly if Tomcat - TODO: the code below will be REDUNDANT
 	if (this.Index==POWER.TOMCAT) {
 		for (i=0;i<MINISTRY.PORTFOLIOS;++i)
 			this.SurplusAllocations[i] = 7;
@@ -88,106 +104,64 @@ DominionPower.prototype.SetEconomy = function() {
 
 	//NOTE: this is for MOBILE game, but could become permanent
 	for (i=0;i<COMMODITY.TYPES;++i)
-		this.Reserves[i] = 2 * this.SurplusAllocations[CommodityMap[i]];		//only 2 rather than 4, since the rest is split into .Cash
+		this.Reserves[i] = 2 * this.SurplusAllocations[i];		//only 2 rather than 4, since the rest is split into .Cash
 	this.Cash = (this.Index==POWER.TOMCAT) ? 4*BUDGET.UNITS : 2*BUDGET.UNITS;
+};
+*/
+DominionPower.prototype.SetPersonnel = function() {
+	DominionNation.prototype.SetPersonnel.call(this);
+
+	this.Ambassadors = ArrayUtils.Create(POWER.COUNT-1, DominionCharacter);
+	this.Ambassadors.forEach(function(ambsdr) {ambsdr.Set();});
+
+	this.ConsulGenerals = ArrayUtils.Create(ALLIED.COUNT, DominionCharacter);
+	this.ConsulGenerals.forEach(function(cnsl) {cnsl.Set();});
+
+	this.HighCommissioners = ArrayUtils.Create(CITySTATE.COUNT, DominionCharacter);
+	this.HighCommissioners.forEach(function(cmshnr) {cmshnr.Set();});
+};
+DominionPower.prototype.SetInvestments = function() {
+	var i;
+
+	this.Investments = ArrayUtils.Create(CITySTATE.COUNT, DominionInvestment);
+	for (i=0;i<CITySTATE.COUNT;++i) {
+		this.Investments[i].Set(this, CityStates[i]);
+		CityStates[i].Investments.push(this.Investments[i]);
+	}
+};
+DominionPower.prototype.GetInvestedAmount = function() {
+	var i;
+	var funds;
+
+	funds = 0;
+	for (i=0;i<CITySTATE.COUNT;++i)
+		funds += this.Investments[i].Amount;
+
+	return (funds);
+};
+DominionPower.prototype.GetBondsAmount = function() {  //UNLOGGED
+
+	return (this.Bonds.length*100000);		//TODO: actual amount yet to be decided
 };
 DominionPower.prototype.UpdateReserves = function() {  //UNLOGGED - for MOBILE game
 	var i;
 
 	for (i=0;i<COMMODITY.TYPES;++i)
-		this.Reserves[i] += this.SurplusAllocations[CommodityMap[i]];
+		this.Reserves[i] += this.SurplusAllocations[i];
 };
-DominionPower.prototype.SetArmy = function() {  //TODO: should be in Military object (or field)
-	var scale;
+DominionPower.prototype.SetFleet = function() {  //TODO: might implement this differently
+	var i;
+	var n;
+	var carrier;
 
-	scale = 1.0;
-	if (this.Index==POWER.TOMCAT)
-		scale *= 2;
-
-	if (Game.CheckMobile()) {
-		this.Army.LARTs =			8 * POWER.CITIES * (ArmsDistribution[this.Index][0]+scale);
-		this.Army.MARTs =			6 * POWER.CITIES * (ArmsDistribution[this.Index][1]+scale);
-		this.Army.HARTs =			4 * POWER.CITIES * (ArmsDistribution[this.Index][2]+scale);
-		this.Army.Jeeps =			8 * POWER.CITIES * ArmsDistribution[this.Index][0];
-		this.Army.Howitzers =	8 * POWER.CITIES * ArmsDistribution[this.Index][0];
-		this.Army.APCs =			8 * POWER.CITIES * ArmsDistribution[this.Index][0];
-		this.Army.AVs =			6 * POWER.CITIES * ArmsDistribution[this.Index][1];
-		this.Army.Artilleries =	6 * POWER.CITIES * ArmsDistribution[this.Index][1];
-		this.Army.IFVs =			6 * POWER.CITIES * ArmsDistribution[this.Index][1];
-		this.Army.MobileGuns =	4 * POWER.CITIES * ArmsDistribution[this.Index][2];
-		this.Army.Trucks =		4 * POWER.CITIES * ArmsDistribution[this.Index][2];
-		this.Army.Tanks =			4 * POWER.CITIES * ArmsDistribution[this.Index][2];
-		this.Army.AAGuns =		2 * POWER.CITIES * scale;
-		this.Army.ATWs =			2 * POWER.CITIES * scale;
-		this.Army.LCGs =			2 * POWER.CITIES * scale;
-		this.Army.Helicopters =	2 * POWER.CITIES * scale;
-	} else {  //likely REDUNDANT
-		this.Army.LARTs =			(this.Index==POWER.TOMCAT) ? 16*POWER.CITIES : 8*POWER.CITIES;
-		this.Army.MARTs =			(this.Index==POWER.TOMCAT) ? 16*POWER.CITIES : 8*POWER.CITIES;
-		this.Army.HARTs =			(this.Index==POWER.TOMCAT) ? 16*POWER.CITIES : 8*POWER.CITIES;
-		this.Army.Jeeps =			(this.Index==POWER.TOMCAT) ?  8*POWER.CITIES : 4*POWER.CITIES;
-		this.Army.Howitzers =	(this.Index==POWER.TOMCAT) ?  8*POWER.CITIES : 4*POWER.CITIES;
-		this.Army.AVs =			(this.Index==POWER.TOMCAT) ?  8*POWER.CITIES : 4*POWER.CITIES;
-		this.Army.MobileGuns =	(this.Index==POWER.TOMCAT) ?  8*POWER.CITIES : 4*POWER.CITIES;
-		this.Army.Artillery =	(this.Index==POWER.TOMCAT) ?  8*POWER.CITIES : 4*POWER.CITIES;
-		this.Army.Tanks =			(this.Index==POWER.TOMCAT) ?  8*POWER.CITIES : 4*POWER.CITIES;
-		this.Army.AAGuns =		(this.Index==POWER.TOMCAT) ?  8*POWER.CITIES : 4*POWER.CITIES;
-		this.Army.ATWs =			(this.Index==POWER.TOMCAT) ?  8*POWER.CITIES : 4*POWER.CITIES;
-		this.Army.LCGs =			(this.Index==POWER.TOMCAT) ?  8*POWER.CITIES : 4*POWER.CITIES;
-		this.Army.Helicopters =	(this.Index==POWER.TOMCAT) ?  8*POWER.CITIES : 4*POWER.CITIES;
-	}
-};
-DominionPower.prototype.SetNavy = function() {
-	DominionNation.prototype.SetNavy.call(this);
-
-	if (Game.CheckMobile()) {
-		this.Navy.PatrolBoats  = (this.Index==POWER.TOMCAT) ? 2*POWER.CITIES : POWER.CITIES;
-
-		this.Navy.GunBoats		 = 3 * POWER.CITIES * ArmsDistribution[this.Index][0];
-		this.Navy.MissileBoats	 = 3 * POWER.CITIES * ArmsDistribution[this.Index][0];
-		this.Navy.Frigates		 = 2 * POWER.CITIES * ArmsDistribution[this.Index][1];
-		this.Navy.Cruisers		 = 2 * POWER.CITIES * ArmsDistribution[this.Index][1];
-		this.Navy.Destroyers		 = 1 * POWER.CITIES * ArmsDistribution[this.Index][2];
-		this.Navy.Battleships	 = 1 * POWER.CITIES * ArmsDistribution[this.Index][2];
-		this.Navy.EscortCarriers = 1 * POWER.CITIES * ArmsDistribution[this.Index][0];
-		this.Navy.FleetCarriers	 = 1 * POWER.CITIES * ArmsDistribution[this.Index][1];
-		this.Navy.SuperCarriers	 = 1 * POWER.CITIES * ArmsDistribution[this.Index][2];
-
-		this.Navy.Submarines	  = (this.Index==POWER.TOMCAT) ? 2*POWER.CITIES : POWER.CITIES;
-	} else {
-		this.Navy.PatrolBoats  = (this.Index==POWER.TOMCAT) ? 2*POWER.CITIES : POWER.CITIES;
-		this.Navy.GunBoats	  = (this.Index==POWER.TOMCAT) ? 2*POWER.CITIES : POWER.CITIES;
-		this.Navy.MissileBoats = (this.Index==POWER.TOMCAT) ? 2*POWER.CITIES : POWER.CITIES;
-		this.Navy.Frigates	  = (this.Index==POWER.TOMCAT) ? 2*POWER.CITIES : POWER.CITIES;
-		this.Navy.Cruisers	  = (this.Index==POWER.TOMCAT) ? 2*POWER.CITIES : POWER.CITIES;
-		this.Navy.Destroyers	  = (this.Index==POWER.TOMCAT) ? 2*POWER.CITIES : POWER.CITIES;
-		this.Navy.Battleships  = (this.Index==POWER.TOMCAT) ? 2*POWER.CITIES : POWER.CITIES;
-		this.Navy.Submarines	  = (this.Index==POWER.TOMCAT) ? 2*POWER.CITIES : POWER.CITIES;
-	}
-};
-DominionPower.prototype.SetAirForce = function() {
-
-	this.SetFighters();
-
-	this.AirForce.Bombers		= (this.Index==POWER.TOMCAT) ? 2*POWER.CITIES : POWER.CITIES;
-	this.AirForce.Interceptors	= (this.Index==POWER.TOMCAT) ? 2*POWER.CITIES : POWER.CITIES;
-	this.AirForce.Interdictors	= (this.Index==POWER.TOMCAT) ? 2*POWER.CITIES : POWER.CITIES;
-	this.AirForce.Recons			= (this.Index==POWER.TOMCAT) ? 2*POWER.CITIES : POWER.CITIES;
-	this.AirForce.Refuellers	= (this.Index==POWER.TOMCAT) ? 2*POWER.CITIES : POWER.CITIES;
-	this.AirForce.Strafers		= (this.Index==POWER.TOMCAT) ? 2*POWER.CITIES : POWER.CITIES;
-	this.AirForce.Transports	= (this.Index==POWER.TOMCAT) ? 2*POWER.CITIES : POWER.CITIES;
-};
-DominionPower.prototype.SetFighters = function() {
-
-	this.AirForce.F1s = 3 * POWER.CITIES * ArmsDistribution[this.Index][0];
-	this.AirForce.F2s = 3 * POWER.CITIES * ArmsDistribution[this.Index][0];
-	this.AirForce.F3s = 3 * POWER.CITIES * ArmsDistribution[this.Index][0];
-	this.AirForce.F4s = 2 * POWER.CITIES * ArmsDistribution[this.Index][1];
-	this.AirForce.F5s = 2 * POWER.CITIES * ArmsDistribution[this.Index][1];
-	this.AirForce.F6s = 2 * POWER.CITIES * ArmsDistribution[this.Index][1];
-	this.AirForce.F7s = 1 * POWER.CITIES * ArmsDistribution[this.Index][2];
-	this.AirForce.F8s = 1 * POWER.CITIES * ArmsDistribution[this.Index][2];
-	this.AirForce.F9s = 1 * POWER.CITIES * ArmsDistribution[this.Index][2];
+	this.Fleets = new GenieArray();
+	n = (this.Index==POWER.TOMCAT) ? 2 : 1;
+	for (i=0;i<n;++i)
+		for (type=0;type<SHIP.CARRIERS;++type) {
+			carrier = new DominionCarrierFleet();
+			carrier.Set(this, type);
+			this.Fleets.push(carrier);
+		}
 };
 DominionPower.prototype.SetMissilery = function() {
 
@@ -200,15 +174,16 @@ DominionPower.prototype.Update = function() {
 
 	this.num = 10 - PowerProfiles[this.Index][0];
 	if (this.Randomizer.CheckUnderOdds(1,this.num))
-		this.ForgeAlliance();
+		this.MakeAlliance();
 };
 DominionPower.prototype.Generate = function() {  //UNLOGGED
 	DominionNation.prototype.Generate.call(this);
 
+	this.Cabinet.SetInventory();
 	this.Cities = new GenieArray();
 	this.Cities.Set(POWER.CITIES, DominionCity, null, this);
 };
-DominionPower.prototype.AddAlliance = function(alld) {
+DominionPower.prototype.AddAlliance = function(alld) {  //REDUNDANT?
 	var allnc;
 
 	allnc = new DominionAlliance();
@@ -219,7 +194,7 @@ DominionPower.prototype.AddAlliance = function(alld) {
 
 	//TODO: more data and detail is needed depending on type of alliance
 };
-DominionPower.prototype.ForgeAlliance = function() {
+DominionPower.prototype.MakeAlliance = function() {
 	var iGvrnmnt;
 
 	//UNLOGGED
@@ -256,6 +231,54 @@ DominionPower.prototype.ForgeAlliance = function() {
 		}
 
 	//TODO: since all Allied States are taken, consider one that isn't free
+};
+DominionPower.prototype.DetermineAlliedProximities = function() {  //UNLOGGED
+	var i;
+
+	for (i=0;i<ALLIED.COUNT;++i) {
+		this.Allieds[i].Index = i;
+		this.Allieds[i].Proximity = Math.abs(power.Government.Type-AlliedStates[i].Government.Type);
+	}
+};
+DominionPower.prototype.CourtAlliance = function() {
+	var nOffrs;
+	var iAlld;
+	var allnc, type;
+
+	//Try 8 times to make an alliance with an unallied state
+	nOffrs = 0;
+	while (nOffrs!=8) {		//TODO: remove HARD-CODING
+		iAlld = this.Randomizer.GetIndex(ALLIED.COUNT);
+		if (!AlliedStates[iAlld].Alliance)
+			if (this.CheckApproached(iAlld)) {
+				//-one step here should determine whether offer will be accepted or not
+				allnc = new DominionAlliance();
+				type = this.DetermineAllianceType();
+				allnc.Set(this, AlliedStates[iAlld], type);
+				return (allnc);
+			}
+		++nOffrs;
+	}
+
+	//Pick any Allied to force alliance
+};
+DominionPower.prototype.CheckApproached = function(iAllied) {  //UNLOGGED
+	var odds;
+
+	odds = 10 * (9-this.Allieds[iAllied].Proximity);
+	if (this.Randomizer.CheckUnderOdds(odds))
+		return (true);
+};
+DominionPower.prototype.DetermineAllianceType = function() {
+
+	//-at the moment, it is just aid
+	this.AllianceType = ALLIANCE.AID;
+};
+DominionPower.prototype.ForgeAlliance = function(alliance) {  //UNLOGGED
+
+	//-in case this is an upgraded alliance, scan the list and delete the previous one
+	this.Alliances.push(allnc);
+	allied.Alliance = allnc;
 };
 DominionPower.prototype.SetGovernmentsList = function() {
 	var nGvrnmnts;
