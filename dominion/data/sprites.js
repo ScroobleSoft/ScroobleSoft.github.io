@@ -28,13 +28,31 @@ var BATTLESHIpSPRITE = { L: 1, T: 139, W: 92, H: 16, GS: [ { SHAPE: SHAPE.RECTAN
 								{ SHAPE: SHAPE.RECTANGLE, COLOUR: "cyan", LW: 0, X: 45, Y: -12, W:  8, H:  8 },
 								{ SHAPE: SHAPE.RECTANGLE, COLOUR: "cyan", LW: 0, X: 58, Y: -12, W:  8, H:  8 },
 								{ SHAPE: SHAPE.RECTANGLE, COLOUR: "cyan", LW: 0, X: 71, Y: -12, W:  8, H:  8 }  ] };
-var SMALlCRUISErSPRITE = { L: 47, T: 67, W: 109, H: 16, GS: [ { SHAPE: SHAPE.RECTANGLE, COLOUR: "grey", LW: 0, X: 5, Y: -15, W: 99, H: 14 } ] };
-var CRUISErSPRITE = { L: 71, T: 85, W: 109, H: 32, GS: [ { SHAPE: SHAPE.RECTANGLE, COLOUR: "grey", LW: 0, X:	1, Y: -21, W:  4, H: 10 },		//left strip
-							 { SHAPE: SHAPE.RECTANGLE, COLOUR: "grey", LW: 0, X:	5, Y: -31, W: 99, H: 30 },		//centre
-							 { SHAPE: SHAPE.RECTANGLE, COLOUR: "grey", LW: 0, X: 104, Y: -21, W:  4, H: 10 }  ] };		//right strip
-var SUPErCRUISErSPRITE = { L: 95, T: 119, W: 109, H: 48, GS: [ { SHAPE: SHAPE.RECTANGLE, COLOUR: "grey", LW: 0, X:	1, Y: -37, W:  4, H: 26 },		//left strip
-									 { SHAPE: SHAPE.RECTANGLE, COLOUR: "grey", LW: 0, X:	5, Y: -47, W: 99, H: 46 },		//centre
-									 { SHAPE: SHAPE.RECTANGLE, COLOUR: "grey", LW: 0, X: 104, Y: -37, W:  4, H: 26 }  ] };	//right strip
+var ESCORtCARRIErSPRITE = { L: 95, T: 108, W: 113, H: 39,
+									 GS: [ { SHAPE: SHAPE.RECTANGLE, COLOUR: "grey", LW: 0, X:   1, Y: -35, W:   2, H: 31 },			//left trapezoid
+											 { SHAPE: SHAPE.RECTANGLE, COLOUR: "grey", LW: 0, X:   3, Y: -37, W:   2, H: 33 },
+											 { SHAPE: SHAPE.RECTANGLE, COLOUR: "grey", LW: 0, X:   5, Y: -39, W: 103, H: 37 },			//centre
+											 { SHAPE: SHAPE.RECTANGLE, COLOUR: "grey", LW: 0, X: 108, Y: -37, W:   2, H: 33 },			//right trapezoid
+											 { SHAPE: SHAPE.RECTANGLE, COLOUR: "grey", LW: 0, X: 110, Y: -35, W:   2, H: 31 }  ] };
+var LIGHtCARRIErSPRITE = { L: 71, T: 67, W: 135, H: 39,
+									GS: [ { SHAPE: SHAPE.RECTANGLE, COLOUR: "grey", LW: 0, X:   1, Y: -35, W:   2, H: 31 },
+											{ SHAPE: SHAPE.RECTANGLE, COLOUR: "grey", LW: 0, X:   3, Y: -37, W:   2, H: 33 },
+											{ SHAPE: SHAPE.RECTANGLE, COLOUR: "grey", LW: 0, X:   5, Y: -39, W: 125, H: 37 },
+											{ SHAPE: SHAPE.RECTANGLE, COLOUR: "grey", LW: 0, X: 130, Y: -37, W:   2, H: 33 },
+											{ SHAPE: SHAPE.RECTANGLE, COLOUR: "grey", LW: 0, X: 132, Y: -35, W:   2, H: 31 }  ] };
+var FLEEtCARRIErSPRITE = { L: 1, T: 257, W: 157, H: 39,
+									GS: [ { SHAPE: SHAPE.RECTANGLE, COLOUR: "grey", LW: 0, X:   1, Y: -35, W:   2, H: 31 },			//left trapezoid
+											{ SHAPE: SHAPE.RECTANGLE, COLOUR: "grey", LW: 0, X:	3, Y: -37, W:   2, H: 33 },
+											{ SHAPE: SHAPE.RECTANGLE, COLOUR: "grey", LW: 0, X:	5, Y: -39, W: 147, H: 37 },			//centre
+											{ SHAPE: SHAPE.RECTANGLE, COLOUR: "grey", LW: 0, X: 152, Y: -37, W:   2, H: 33 },			//right trapezoid
+											{ SHAPE: SHAPE.RECTANGLE, COLOUR: "grey", LW: 0, X: 154, Y: -35, W:   2, H: 31 }  ] };
+var SUPErCARRIErSPRITE = { L: 1, T: 288, W: 179, H: 39,
+									GS: [ { SHAPE: SHAPE.RECTANGLE, COLOUR: "grey", LW: 0, X:	1, Y: -35, W:   2, H: 31 },			//left trapezoid
+											{ SHAPE: SHAPE.RECTANGLE, COLOUR: "grey", LW: 0, X:	3, Y: -37, W:   2, H: 33 },
+											{ SHAPE: SHAPE.RECTANGLE, COLOUR: "grey", LW: 0, X:	5, Y: -39, W: 169, H: 37 },			//centre
+											{ SHAPE: SHAPE.RECTANGLE, COLOUR: "grey", LW: 0, X: 174, Y: -37, W:   2, H: 33 },			//right trapezoid
+											{ SHAPE: SHAPE.RECTANGLE, COLOUR: "grey", LW: 0, X: 176, Y: -35, W:   2, H: 31 }  ] };
+var CARRIErTOWErSPRITE = { L: 160, T: 247, W: 20, H: 10, O: 2, C: 3, R: 3 };
 
 //-- JETs --
 
