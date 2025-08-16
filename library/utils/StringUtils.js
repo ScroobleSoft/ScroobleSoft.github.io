@@ -113,6 +113,18 @@ StringUtilities.prototype = {
 		}
 	},
 	TruncateFullName(fName, lName, width, context) {  //UNLOGGED
+	},
+	Duplicate(str) {
+
+		return (str.repeat(1));
+	},
+	Reverse(str) {
+
+		this.str = str.split('');
+		this.str.reverse();
+		str = this.str.join('');
+
+		return (str);
 	}
 };
 
