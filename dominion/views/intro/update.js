@@ -20,6 +20,11 @@ DominionIntroView.prototype.UpdatePlayButtons = function() {
 		this.SetProfilesScreen();
 	}
 
+	if (this.SurvivalButton.CheckClicked()) {
+		Game.Type = DOMINION.GAME.SURVIVAL;
+		this.Close(this.OpenOfficeView.bind(this), 100);
+	}
+
 	if (this.PlayButton.CheckClicked()) {
 		this.PlayButton.DeActivate();
 		this.InfoButton.DeActivate();
@@ -38,6 +43,7 @@ DominionIntroView.prototype.SetProfilesScreen = function() {
 	this.DailyButton.DeActivate();
 	this.FreeFormButton.DeActivate();
 	this.MultiChoiceButton.DeActivate();
+	this.SurvivalButton.DeActivate();
 	this.State = this.Specs.STATE.START;
 	this.SetProfiles();
 	this.DisplayProfiles();
@@ -50,6 +56,7 @@ DominionIntroView.prototype.UpdateInfoButton = function() {
 			this.DailyButton.DeActivate();
 			this.FreeFormButton.DeActivate();
 			this.MultiChoiceButton.DeActivate();
+			this.SurvivalButton.DeActivate();
 			this.MoveInfoButton();
 		}
 		this.DisplayInfo();
@@ -119,17 +126,17 @@ DominionIntroView.prototype.UpdateTurnButtons = function() {  //UNLOGGED
 
 	if (this.ShortButton.CheckClicked()) {
 		Game.TurnLimit = DOMINION.TURNS.SHORT;
-		this.Close(this.OpenAssetsView.bind(this), 100);
+		this.StartGame();
 	}
 
 	if (this.MediumButton.CheckClicked()) {
 		Game.TurnLimit = DOMINION.TURNS.MEDIUM;
-		this.Close(this.OpenAssetsView.bind(this), 100);
+		this.StartGame();
 	}
 
 	if (this.LongButton.CheckClicked()) {
 		Game.TurnLimit = DOMINION.TURNS.LONG;
-		this.Close(this.OpenAssetsView.bind(this), 100);
+		this.StartGame();
 	}
 };
 DominionIntroView.prototype.MoveInfoButton = function() {
@@ -155,4 +162,13 @@ DominionIntroView.prototype.AdjustProfileButtons = function() {
 	this.ShortButton.Enable();
 	this.MediumButton.Enable();
 	this.LongButton.Enable();
+};
+DominionIntroView.prototype.StartGame = function() {
+
+	if (Game.Type==DOMINION.GAME.DAILY)
+		this.Close(this.OpenAssetsView.bind(this), 100);
+	else if (Game.Type==DOMINION.GAME.MULTiCHOICE) {
+		GlobalView.SetConsoleView(TurnConsoleView);
+		this.Close(this.OpenSolicitationView.bind(this), 100);
+	}
 };
