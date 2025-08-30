@@ -229,9 +229,9 @@ GenieButton.prototype.WriteLabel = function(offset) {
 	this.y = parseInt(this.Context.font.split(' ')[0].replace('px', ''));		//get height of font
 	this.y += Math.round((this.Specs.H-this.y)/2);					//add padding
 	this.y += this.Specs.T;
-	this.y -= 1;										//this appears to be necessary because of how JS writes text
+	this.y -= 2;										//this appears to be necessary because of how JS writes text
 	if (StringUtils.CheckDescending(this.Specs.LABEL))
-		this.y -= 2;
+		this.y -= 1;
 
 	//Write
 	this.TextWriter.cntxt = this.TextWriter.Context;
