@@ -10,6 +10,8 @@ var DominionCharacterGenerator = function() {
 	var Frames, EyeFrames, MouthFrames;
 	var X, Y;
 	var HairX, HairY, EyeLX, EyeLY, EyeRX, EyeRY, MouthX, MouthY;		//used in ::Update
+
+	var i, strng;
 };
 DominionCharacterGenerator.prototype = {
 	Set(gTool, rGenerator) {
@@ -64,6 +66,24 @@ DominionCharacterGenerator.prototype = {
 		name += Consonants[iName];
 
 		return (name);
+	},
+	CheckNameProfane(name) {
+
+		for (this.i=0;this.i<Profanities.length;++this.i) {
+			this.strng = StringUtils.Reverse(Profanities[this.i]);
+			if (Profanities[this.i].length==3) {
+				if (StringUtils.Compare(StringUtils.GetSubString(name, 2, 3), this.strng)==true)
+					return (true);
+				this.strng = StringUtils.CapitalizeFirstLetter(this.strng);
+				if (StringUtils.Compare(StringUtils.GetSubString(name, 0, 3), this.strng)==true)
+					return (true);
+			} else {
+				if (StringUtils.Compare(StringUtils.GetSubString(name, 0, 5), this.strng)==true)
+					return (true);
+			}
+		}
+
+		return (false);
 	},
 	GenerateProfile(bGender) {
 
