@@ -118,6 +118,9 @@ DominionActionConsoleView.prototype.Update = function() {  //UNLOGGED
 	this.UpdateButtonPanel();
 	if (this.ExpansionButtonPanel.ButtonPressed!=-1)
 		return;
+
+	if (this.OfficeIcon.CheckPressed())
+		this.MainView.Close(this.MainView.OpenOfficeView.bind(this), 100);
 };
 DominionActionConsoleView.prototype.Draw = function() {
 	GenieSubView.prototype.Draw.call(this);
@@ -149,28 +152,27 @@ DominionActionConsoleView.prototype.UpdateButtonPanel = function() {  //UNLOGGED
 			alert("Cannot annex that nation.");
 			return;
 		}
-
 		switch (this.ExpansionButtonPanel.ButtonPressed) {
-			case EXPANSION.PURCHASE:
-				ConquestView.SetNations(PlayerPower, this.MainView.SelectedNation);
+			case EXPANSION.FUNDING:
+				InvestmentView.SetNations(PlayerPower, this.MainView.SelectedNation);	//TODO: will change to AidView, if one is needed (could list recipients)
 				break;
 			case EXPANSION.BENEFICENCE:
 				GrantView.SetNations(PlayerPower, this.MainView.SelectedNation);
 				break;
-			case EXPANSION.INVESTING:
-				InvestmentView.SetNations(PlayerPower, this.MainView.SelectedNation);
+			case EXPANSION.NEGOTIATION:
+				TreatyView.SetNations(PlayerPower, this.MainView.SelectedNation);
 				break;
-			case EXPANSION.PACT:
+			case EXPANSION.AGREEMENT:
 				PactView.SetNations(PlayerPower, this.MainView.SelectedNation);
+				break;
+			case EXPANSION.UNDERTAKING:
+				MissionView.SetNations(PlayerPower, this.MainView.SelectedNation);
 				break;
 			case EXPANSION.SUBVERSION:
 				IntrigueView.SetNations(PlayerPower, this.MainView.SelectedNation);
 				break;
-			case EXPANSION.TREATY:
-				TreatyView.SetNations(PlayerPower, this.MainView.SelectedNation);
-				break;
-			case EXPANSION.MISSION:
-				MissionView.SetNations(PlayerPower, this.MainView.SelectedNation);
+			case EXPANSION.BUYING:
+				PurchaseView.SetNations(PlayerPower, this.MainView.SelectedNation);
 				break;
 			case EXPANSION.CONQUEST:
 				ConquestView.SetCombatants(PlayerPower, this.MainView.SelectedNation);

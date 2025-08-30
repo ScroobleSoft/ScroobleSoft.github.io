@@ -11,7 +11,7 @@ DominionSolicitationInfoView.prototype.Set = function(cnvs, specs, mView) {
 
 	this.State = this.Specs.INFO;
 };
-DominionSolicitationInfoView.prototype.SetControls = function() {  //UNLOGGED
+DominionSolicitationInfoView.prototype.SetControls = function() {
 
 	this.VotesButton = this.SetTextButton(this.Specs.BUTTON.VOTES, RaisedCornerImages, this.TextWriter);
 	this.DiplomacyButton = this.SetTextButton(this.Specs.BUTTON.DIPLOMACY, RaisedCornerImages, this.TextWriter);
@@ -42,9 +42,13 @@ DominionSolicitationInfoView.prototype.ShowControls = function() {  //UNLOGGED
 			break;
 	}
 };
-DominionSolicitationInfoView.prototype.SetAllied = function(allied) {  //UNLOGGED
+DominionSolicitationInfoView.prototype.SetAllied = function(allied) {
 
 	this.Allied = allied;
+};
+DominionSolicitationInfoView.prototype.Update = function() {  //UNLOGGED
+
+	this.UpdateButtons();
 };
 DominionSolicitationInfoView.prototype.UpdateButtons = function() {  //UNLOGGED
 
@@ -59,6 +63,7 @@ DominionSolicitationInfoView.prototype.UpdateButtons = function() {  //UNLOGGED
 
 	if (this.AcceptButton.CheckClicked()) {
 		PlayerPower.ForgeAlliance(this.MainView.Alliance);
+		this.MainView.Alliance.AlliedState.ForgeAlliance(this.MainView.Alliance);
 		this.State = this.Specs.STATE.ACKNOWLEDGEMENT;
 		this.DisplayNewAlliance();
 	}
@@ -68,33 +73,47 @@ DominionSolicitationInfoView.prototype.UpdateButtons = function() {  //UNLOGGED
 
 	if (this.ContinueButton.CheckClicked()) {
 		this.State = this.Specs.STATE.RIVALS;
+		this.ContinueButton.Hide();
 		this.DisplayRivalAlliances();
+		WorldMap.Draw();
 		this.ShowControls();
 	}
 
 	if (this.CloseButton.CheckClicked()) {
 		//-what is displayed depends on state
+		//-go to phase 3 and prompt to form an alliance
 	}
 };
-DominionSolicitationInfoView.prototype.Draw = function() {  //UNLOGGED
+DominionSolicitationInfoView.prototype.Draw = function() {
 
 	this.TextWriter.SetContext(this.Context);
 	this.TextWriter.SetFont("bold 14px Arial");
 	this.TextWriter.SetColour(this.Specs.TEXT);
 
-	//Basic data
-	this.TextWriter.Write("Allied State:", 4, 15);
-	this.TextWriter.Write(AlliedNames[this.Allied.Index], 120, 15);
-	this.TextWriter.Write("Affiliaion:", 4, 30);
-	this.TextWriter.Write(PowerNames[this.Allied.AssociatedIndex], 120, 30);
-	this.TextWriter.Write("Preference:", 4, 45);
-	this.TextWriter.Write(Commodity[PowerProfiles[3][this.Allied.AssociatedIndex]], 120, 45);
+	if (this.Allied) {
 
-	this.TextWriter.ResetFont();
+		//Basic data
+		this.TextWriter.Write("Allied State:", 4, 15);
+		this.TextWriter.Write(AlliedNames[this.Allied.NameIndex], 120, 15);
+		this.TextWriter.Write("Affiliaion:", 4, 30);
+		this.TextWriter.Write(PowerNames[this.Allied.AssociatedIndex], 120, 30);
+		this.TextWriter.Write("Preference:", 4, 45);
+		if (this.Allied.AssociatedIndex==POWER.TOMCAT)
+			this.TextWriter.Write("None", 120, 45);
+		else
+			this.TextWriter.Write(Commodity[PowerProfiles[this.Allied.AssociatedIndex][1]], 120, 45);
 
-	//-leader mugshot, name and title, proposal (only grant to begin with)
-	this.DisplayLeader();
-	this.DisplayProposal();
+		this.TextWriter.ResetFont();
+
+		//Leader mugshot, name and title, proposal . . . (TODO: only grant to begin with)
+		this.DisplayLeader();
+		this.DisplayProposal();
+	} else {
+		this.TextWriter.Write("No Allied States are interested", 4, 20);
+		this.TextWriter.Write("in forming an alliance this", 4, 37);
+		this.TextWriter.Write("fortnight.", 4, 54);
+		this.TextWriter.ResetFont();
+	}
 
 	this.TextWriter.ResetColour();
 	this.TextWriter.ResetContext();
@@ -127,13 +146,16 @@ DominionSolicitationInfoView.prototype.DisplayLeader = function() {
 		this.TextWriter.Write(this.Allied.HeadOfState.Name, 120, 82);
 	}
 };
-DominionSolicitationInfoView.prototype.DisplayProposal = function() {  //UNLOGGED
+DominionSolicitationInfoView.prototype.DisplayProposal = function() {  //UNLOGGED - only grant to begin with
 
 	this.TextWriter.Write("\"We would like to propose an alliance", 5, 171);
 	this.TextWriter.Write("in exchange for the following:", 5, 187);
-	this.TextWriter.Write(CommodityPreference[PowerProfiles[3][this.Allied.AssociatedIndex]]+"\"", 5, 203);
+	if (this.Allied.AssociatedIndex==POWER.TOMCAT)
+		this.TextWriter.Write(Commodity[this.MainView.Alliance.Commodity]+"\"", 5, 203);
+	else
+		this.TextWriter.Write(CommodityPreference[PowerProfiles[this.Allied.AssociatedIndex][3]]+"\"", 5, 203);
 };
-DominionSolicitationInfoView.prototype.DisplayNewAlliance = function() {  //UNLOGGED
+DominionSolicitationInfoView.prototype.DisplayNewAlliance = function() {  //UNLOGGED - only grant to begin with
 
 	//Remove previous buttons and text
 	this.AcceptButton.Hide();
@@ -142,11 +164,13 @@ DominionSolicitationInfoView.prototype.DisplayNewAlliance = function() {  //UNLO
 	this.Context.fillRect(0, 0, INFoBOX.WIDTH, 210);
 
 	this.TextWriter.SetContext(this.Context);
+	this.TextWriter("An alliance with "+AlliedNames[this.Allied.Index]+" has been formed.", 4, 20);
+	this.TextWriter(AlliedNames[this.Allied.Index]+" will receive aid every fortnight.", 4, 37);
 	this.TextWriter.ResetContext();
 
 	this.ShowControls();
 };
-DominionSolicitationInfoView.prototype.DisplayRivalAlliances = function() {  //UNLOGGED
+DominionSolicitationInfoView.prototype.DisplayRivalAlliances = function() {  //UNLOGGED - only aid to begin with
 	var i;
 	var allnc;
 	var nPwrs;
@@ -162,12 +186,35 @@ DominionSolicitationInfoView.prototype.DisplayRivalAlliances = function() {  //U
 	for (i=0;i<POWER.COUNT-1;++i) {
 		allnc = Powers[i].CourtAlliance();
 		if (allnc) {
-			info = PowerNames[allnc.Power.Index] + " and " + AlliedNames[allnc.AlliedState.Index];
-			info = " have formed an alliance";
+			info = PowerNames[allnc.Power.Index] + " and " + AlliedNames[allnc.AlliedState.NameIndex];
+			info += " have allied";
 			this.TextWriter.Write(info, 5, 20*(nPwrs+1));
 			++nPwrs;
 		}
 	}
 
 	this.TextWriter.ResetContext();
+};
+DominionSolicitationInfoView.prototype.DisplayBasicInfo = function() {  //UNLOGGED
+
+	this.TextWriter.SetContext(this.Context);
+	this.TextWriter.SetFont("bold 14px Arial");
+	this.TextWriter.SetColour(this.Specs.TEXT);
+
+	this.TextWriter.Write("Allied State:", 4, 15);
+	this.TextWriter.Write(AlliedNames[this.Allied.NameIndex], 120, 15);
+	this.TextWriter.Write("Affiliaion:", 4, 30);
+	this.TextWriter.Write(PowerNames[this.Allied.AssociatedIndex], 120, 30);
+	this.TextWriter.Write("Preference:", 4, 45);
+	if (this.Allied.AssociatedIndex==POWER.TOMCAT)
+		this.TextWriter.Write("None", 120, 45);
+	else
+		this.TextWriter.Write(Commodity[PowerProfiles[this.Allied.AssociatedIndex][1]], 120, 45);
+
+	this.TextWriter.ResetColour();
+	this.TextWriter.ResetContext();
+
+	this.DisplayLeader();
+};
+DominionSolicitationInfoView.prototype.DisplayNationInfo = function() {  //UNLOGGED - actually, will change to previous method
 };
