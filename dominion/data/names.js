@@ -2,15 +2,15 @@
 //-- Names --
 
 var PowerNames = [ "Hornet", "Jaguar", "Falcon", "Vulcan", "Eagle", "Buccaneer", "Phantom", "Mirage", "Tomcat" ];
-var AlliedNames = [ "Rome", "Ostia", "Ravenna", "Florentia", "Rhegium", "Catana", "Pompeii", "Mediolanum",
-						  "Ecbatana", "Susa", "Anshan", "Pasargadae", "Ctesiphon", "Behistun", "Elam", "Ahvaz",
-						  "Luxor", "Abydos", "Amarna", "Alexandria", "Memphis", "Avaris", "Tanis", "Sais",
-						  "Tintagel", "Viriconium", "Camelot", "Avalon", "Ys", "Brigadoon", "Tirnanog", "Lyonesse",
-						  "Athens", "Sparta", "Corinth", "Thebes", "Mycenae", "Argos", "Pylos", "Knossos",
-						  "Troy", "Lydia", "Smyrna", "Phrygia", "Sardis", "Carchemish", "Mitanni", "Ionia",
-						  "Sumer", "Babylon", "Palmyra", "Nippur", "Lagash", "Ur", "Akkad", "Nineveh",
-						  "Tyre", "Byblos", "Kadesh", "Megiddo", "Sidon", "Erum", "Petra", "Carthage",
-						  "Harappa", "Maggan", "Dilmun", "Mehrgarh", "Taxila", "Dholavira", "Kalibangan", "Lothal"
+var AlliedNames = [ "Rome", "Ostia", "Ravenna", "Florentia", "Rhegium", "Catana", "Pompeii", "Mediolanum",			//Hornet
+						  "Ecbatana", "Susa", "Anshan", "Pasargadae", "Ctesiphon", "Behistun", "Elam", "Ahvaz",			//Jaguar
+						  "Luxor", "Abydos", "Amarna", "Alexandria", "Memphis", "Avaris", "Tanis", "Sais",					//Falcon
+						  "Tintagel", "Viriconium", "Camelot", "Avalon", "Ys", "Brigadoon", "Tirnanog", "Lyonesse",		//Vulcan
+						  "Athens", "Sparta", "Corinth", "Thebes", "Mycenae", "Argos", "Pylos", "Knossos",					//Eagle
+						  "Troy", "Lydia", "Smyrna", "Phrygia", "Sardis", "Carchemish", "Mitanni", "Ionia",					//Buccaneer
+						  "Sumer", "Babylon", "Palmyra", "Nippur", "Lagash", "Ur", "Akkad", "Nineveh",						//Phantom
+						  "Tyre", "Byblos", "Kadesh", "Megiddo", "Sidon", "Erum", "Petra", "Carthage",						//Mirage
+						  "Harappa", "Maggan", "Dilmun", "Mehrgarh", "Taxila", "Dholavira", "Kalibangan", "Lothal"		//Tomcat
 ];
 var CityStateNames = [ "Harrier", "Panther", "Corsair", "Viper",			//central states
 							  "Raptor", "Mustang", "Tornado", "Typhoon",			//NE

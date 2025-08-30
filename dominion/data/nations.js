@@ -4,6 +4,8 @@
 var NATION = { POWER: 0, ALLIED: 1, CITySTATE: 2 };
 var MINISTRY = { NONE: -1, AGRICULTURE: 0, CULTURE: 1, DEFENCE: 2, ENERGY: 3, FOREIGN: 4, HEALTH: 5, INDUSTRY: 6, INFORMATION: 7, PORTFOLIOS: 8 };
 var Ministries = [ "Agriculture", "Culture", "Defence", "Energy", "Foreign", "Health", "Industry", "Information" ];
+var MinistriesFullNames = [ "Food and Agriculture", "Culture, Sports, Science and Education", "Defence", "Energy Production and Exploration",
+									 "Foreign Affairs", "Health and Social Services", "Industry and Finance", "Information and Interior" ];
 var GOVERNMENT = { DEMOCRACY: 0, THEOCRACY: 1, ANARCHY: 2, MARXIST: 3, REPUBLIC: 4, FEDERATION: 5, FEUDAL: 6, MONARCHY: 7, DICTATORSHIP: 8,
 						 COMMONWEALTH: 9, TYPES: 10  };
 var Government = [ "Democray", "Theocracy", "Anarchy", "Marxist", "Republic", "Federation", "Feudal", "Monarchy", "Dictatorship", "Commonwealth" ];
@@ -30,8 +32,8 @@ var DIPLOMACY = { SIDES: 9, LEVELS: 8 };
 var Relations = [ "Excellent", "Friendly", "Amicable", "Neutral", "Wary", "Tense", "Fraught", "War" ];
 var COMMODITY = { FOOD: 0, ENTERTAINMENT: 1, ARMS: 2, LAVENOIL: 3, BONDS: 4, MEDICINE: 2, GOODS: 3, SURVEILLANCE: 7, TYPES: 8 };
 var Commodity = [ "Food", "Entertainment", "Arms", "Lavenoil", "Bonds", "Medicine", "Goods", "Surveillance" ];
-var CommodityPreference = [ "Food and Beverages", "Entertainment and Educational Products", "Military Units and Supplies", "Lavenoil",
-									 "Dominion Bonds", "Medical Equipment and Pharmaceuticals", "TVs and Appliances", "Surveillance Equipment"  ];
+var CommodityPreference = [ "Food and Beverages", "Entertainment and Educational Fare", "Military Units and Supplies", "Lavenoil",
+									 "Dominion Bonds", "Medicines and Hospital Equipment", "TVs and Appliances", "Surveillance Equipment"  ];
 
 //-- EXPANSION --
 
