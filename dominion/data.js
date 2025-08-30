@@ -51,11 +51,12 @@ var MOBILE = { SCALE: SCREEN.MOBILE.W/SCREEN.WIDTH };
 
 const ATTACK = true;
 
-var DOMINION = { GAME: { DAILY: 0, FREeFORM: 1, MULTiCHOICE: 2 }, DATE: "2025-08-05",
+var DOMINION = { GAME: { DAILY: 0, FREeFORM: 1, MULTiCHOICE: 2, SURVIVAL: 3 }, DATE: "2025-08-05",
 					  COLOUR: { CITySTATE: "rgb(175,175,255)",
 									FOOD: "rgb(223,239,143)", ENTERTAINMENT: "rgb(209,255,095)", ARMS: "rgb(255,175,175)", LAVENOIL: "rgb(175,143,207)",
 									BONDS: "rgb(255,239,239)", MEDICINE: "rgb(159,255,255)", GOODS: "rgb(191,223,239)", SURVEILLANCE: "rgb(255,223,111)",
-									OFFICE: { WOOD: "rgb(063,015,000)", EDGE: "rgb(031,000,000)", DOOR: { PANEL: GREY.SILVER } }
+									OFFICE: { WOOD: "rgb(063,015,000)", EDGE: "rgb(031,000,000)", DOOR: { PANEL: GREY.SILVER } },
+									VIRIDIAN: "rgb(000,127,063)", YELLOW: "rgb(255,239,000)"
 								 },
 					  CHARACTER: { STATE: { QUIET: 0, TALKING: 1 },
 										FACE: { M: { X: 19, Y: 8 }, F: { X: 19, Y: 3 } }, HAIR: { M: -6, F: 0, LONG: { X: 13, Y: 34 } },
@@ -66,12 +67,17 @@ var DOMINION = { GAME: { DAILY: 0, FREeFORM: 1, MULTiCHOICE: 2 }, DATE: "2025-08
 										BITS: { GENDER: 0, HAIR: { S: 3, E: 1 }, FACE: { S: 6, E: 4 }, EYES: { S: 12, E: 7 }, NOSE: { S: 15, E: 13 } }
 												//TODO: more bits needed for different face and hair types
 									 },
-					  TURNS: { SHORT: 17, MEDIUM: 34, LONG: 51 }
+					  TURNS: { SHORT: 17, MEDIUM: 34, LONG: 51 }, FORTNIGHTS: 100
 };
+var SITUATION = { OFFER: 0, PROPOSAL: 1, INVESTMENT: 2, BOND: 3, INTRIGUE: 4, MISSION: 5, BLOCKADE: 6, INVASION: 7, TYPES: 8,					//Standard
+						OIL: 8, CULT: 9, SOVEREIGNITY: 10, INTERVENTION: 11, SPLINTERING: 12, SECESSION: 13, ACCESSION: 14, DISSIDENT: 15 };		//Rare
+var BONDS = { TYPES: 10 };
+var OIL = { INDIGOIL: 0, LAPISOIL: 1, COBALOIL: 2, CERULOIL: 3, AZUROIL: 4, MAGENOIL: 5, BOYSENOIL: 6, PAISLIOIL: 7, TYPES: 8 };
+var Oils = [ "Indigoil", "Lapisoil", "Cobaloil", "Ceruloil", "Azuroil", "Magenoil", "Boysenoil", "Paislioil" ];
 var NewspaperTitles = [ "Chronicle", "Courant", "Bugle", "Dispatch", "Echo", "Examiner", "Gazette", "Guardian", "Herald", "Independent",
 								"Journal", "Mercury", "Metro", "Phoenix", "Post", "Record", "Standard", "Times", "Tribune", "Voice"
 ];
-var BONDS = { TYPES: 10 };
+var Profanities = [ "sineP", "gin", "noroM", "renoB", "kuf", "cuf", "gaf", "par", "cid", "kid", "tit", "muc", "gav" ];
 
 //---------------------------------------
 //---------- CONTROLS -------------------
@@ -95,6 +101,7 @@ var MISSIONsIMAGE = { X: 180, Y: 130, L: 284, T: 49, W: 281, H: 359, SLOT: { C: 
 //---------- IMAGES --------------------
 
 var POWErLABElIMAGEs = { L: 944, T: 2, W: 63, H: 158, O: 4, C: 1, R: 9, PATCH: { W: 63, H: 14 } };
+var ALLIEdLABElIMAGEs = { L: 1, T: 367, W: 566, H: 142, O: 4, C: 8, R: 9, PATCH: { W: 69, H: 14 } };
 
 //Image Panels
 var MINISTRyPANElIMAGE = { L: 505, T: 79, W: 109, H: 187 };

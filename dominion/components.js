@@ -48,7 +48,7 @@ var StepButton;					//UNLOGGED
 var DemoImage, TutorialImage, MiniGamesImage, TestingImage;		//image maps
 var MinistryPanelImage, MinistryImagePanel;							//image panels
 var ArverniDigitImages;
-var PowerLabelImages;
+var PowerLabelImages, AlliedLabelImages;
 var AllianceImage;										//UNLOGGED - REDUNDANT
 
 //Characters
@@ -123,13 +123,14 @@ var GlobalView, IntroView,
 	 GazetteerInfoView, VotesInfoView, BudgetInfoView, ReservesInfoView, DiplomacyInfoView, CashInfoView, ArmsInfoView, EventsInfoView,
 	 ActionConsoleView;
 //var BoardView;
+var OfficeView, OfficeInfoView;
 var AllianceView, MissionView;
 var ConquestView, ConquestInfoView, ConquestConsoleView;
 var PurchaseView, GrantView, PactView, TreatyView, IntrigueView;
 var AssetsView, ForcesView, InvestmentView, BondsView;
 var AirMissionView, ChampionsView;									//missions
 var SeaTheatre, BeachheadTheatre;									//theatres
-var SolicitationView, SolicitationInfoView, TurnConsoleView;
+var SolicitationView, SolicitationInfoView, TurnConsoleView, MultipleChoiceView;
 
 //--------------------------------------------------
 //---------- DOMINION COMPONENTS -------------------
@@ -375,6 +376,7 @@ DominionComponents.prototype = {
 		ArverniDigitImages = new GenieImage();
 
 		PowerLabelImages = new GenieImage();
+		AlliedLabelImages = new GenieImage();
 
 		AllianceImage = new GenieImageMap();
 
@@ -405,6 +407,7 @@ DominionComponents.prototype = {
 		ArverniDigitImages.Set(this.InfoBox, ImageManager.Pics[IMAGeINDEX.GENIeIMAGES], ARVERNiDIGItIMAGEs);
 
 		PowerLabelImages.Set(this.InfoBox, ImageManager.Pics[IMAGeINDEX.IMAGES], POWErLABElIMAGEs);
+		AlliedLabelImages.Set(this.InfoBox, ImageManager.Pics[IMAGeINDEX.IMAGES], ALLIEdLABElIMAGEs);
 
 		AllianceImage.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.SCRATCH], ALLIANCeIMAGE);
 
@@ -520,6 +523,7 @@ DominionComponents.prototype = {
 		IntroView = new DominionIntroView();
 
 		OfficeView = new DominionOfficeView();
+		OfficeInfoView = new DominionOfficeInfoView();
 
 //		BoardView = new DominionBoardView();
 
@@ -547,6 +551,7 @@ DominionComponents.prototype = {
 		SolicitationView = new DominionSolicitationView();
 		SolicitationInfoView = new DominionSolicitationInfoView();
 		TurnConsoleView = new DominionTurnConsoleView();
+		MultipleChoiceView = new DominionChoiceInfoView();
 	},
 	SetViews() {  //UNLOGGED
 
@@ -554,11 +559,9 @@ DominionComponents.prototype = {
 		this.SetIntroViews();
 		this.SetFinancialViews();
 		this.SetTurnViews();
+		this.SetOfficeViews();
 
 //		BoardView.Set(this.Interface.PrimeScape, this.GraphicsTool, this.CalcPad, this.TextWriter, this.ScreenRect);	//TODO: all these arguments needed?
-
-		OfficeView.SetLinks(this.GraphicsTool, this.TextWriter);
-		OfficeView.Set(this.Interface.PrimeScape, VIEW.OFFICE);
 
 		AllianceView.Set(this.Interface.PrimeScape, VIEW.ALLIANCE, this.GraphicsTool);
 
