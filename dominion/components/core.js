@@ -13,11 +13,13 @@ DominionComponents.prototype.SetAlliedStates = function() {
 			AlliedStates[iAllied].AssociatedIndex = iColour;
 			AlliedStates[iAllied].PrimaryColour = PowerColours[iColour][0];
 			if (i==POWER.TOMCAT) {
+				AlliedStates[iAllied].NameIndex = POWER.COUNT * j;
 				sColour = iColour;
 				sColour = Utils.SafeIncrement(j, POWER.COUNT, j+1);
 				AlliedStates[iAllied].SecondaryIndex = sColour;
 				AlliedStates[iAllied].SecondaryColour = PowerColours[sColour][1];
 			} else {
+				AlliedStates[iAllied].NameIndex = i + (POWER.SATELLITES*iColour);
 				sColour = iColour;
 				sColour = Utils.SafeIncrement(sColour, POWER.COUNT, i+1);
 				AlliedStates[iAllied].SecondaryIndex = sColour;

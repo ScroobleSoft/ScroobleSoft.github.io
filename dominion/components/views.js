@@ -68,4 +68,14 @@ DominionComponents.prototype.SetTurnViews = function() {
 	TurnConsoleView.SetLinks(this.GraphicsTool, this.TextWriter);
 	TurnConsoleView.Set(this.Interface.Console, VIEW.TURN, SolicitationView);
 	SolicitationView.SetSubViews(GazetteerInfoView, TurnConsoleView);
+	MultipleChoiceView.SetLinks(null, this.TextWriter);
+	MultipleChoiceView.Set(this.Interface.ZoomScape, VIEW.CHOICE, GlobalView);
+};
+DominionComponents.prototype.SetOfficeViews = function() {
+
+	OfficeView.SetLinks(this.GraphicsTool, this.TextWriter);
+	OfficeView.Set(this.Interface.PrimeScape, VIEW.OFFICE);
+	OfficeInfoView.SetLinks(this.GraphicsTool, this.TextWriter);
+	OfficeInfoView.Set(this.Interface.ZoomScape, VIEW.OFFICE, OfficeView);
+	OfficeView.SetSubViews(OfficeInfoView, ActionConsoleView);
 };
