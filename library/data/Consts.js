@@ -23,3 +23,4 @@ const REVERSE = true;
 const INTERSECTION = true;
 const SELECTED = true;
 const DRAW = true;
+const MILLISECONDS = 24*60*60*1000;
