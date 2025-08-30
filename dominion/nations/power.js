@@ -10,6 +10,7 @@ var DominionPower = function() {
 	var Investments, Bonds;
 	var Ambassadors, ConsulGenerals, HighCommissioners;
 	var Allieds;
+	var Situation;
 
 	var i, j;
 };
@@ -29,7 +30,6 @@ DominionPower.prototype.Set = function(rGenerator) {
 	this.Units = 88 * 17;		//NOTE: missiles not included
 
    this.Allieds = ArrayUtils.Create(ALLIED.COUNT, function() {var Index, Proximity;} );
-	this.DetermineAlliedProximities();
 };
 DominionPower.prototype.SetPopulation = function() {
 	DominionNation.prototype.SetPopulation.call(this);
@@ -237,7 +237,7 @@ DominionPower.prototype.DetermineAlliedProximities = function() {  //UNLOGGED
 
 	for (i=0;i<ALLIED.COUNT;++i) {
 		this.Allieds[i].Index = i;
-		this.Allieds[i].Proximity = Math.abs(power.Government.Type-AlliedStates[i].Government.Type);
+		this.Allieds[i].Proximity = Math.abs(this.Government.Type-AlliedStates[i].Government.Type);
 	}
 };
 DominionPower.prototype.CourtAlliance = function() {
@@ -254,7 +254,7 @@ DominionPower.prototype.CourtAlliance = function() {
 				//-one step here should determine whether offer will be accepted or not
 				allnc = new DominionAlliance();
 				type = this.DetermineAllianceType();
-				allnc.Set(this, AlliedStates[iAlld], type);
+				allnc.Set(this, AlliedStates[iAlld], type, this.Randomizer);
 				return (allnc);
 			}
 		++nOffrs;
@@ -265,8 +265,8 @@ DominionPower.prototype.CourtAlliance = function() {
 DominionPower.prototype.CheckApproached = function(iAllied) {  //UNLOGGED
 	var odds;
 
-	odds = 10 * (9-this.Allieds[iAllied].Proximity);
-	if (this.Randomizer.CheckUnderOdds(odds))
+	odds = 2 + this.Allieds[iAllied].Proximity;
+	if (this.Randomizer.CheckUnderOdds(1,odds))
 		return (true);
 };
 DominionPower.prototype.DetermineAllianceType = function() {
@@ -277,8 +277,7 @@ DominionPower.prototype.DetermineAllianceType = function() {
 DominionPower.prototype.ForgeAlliance = function(alliance) {  //UNLOGGED
 
 	//-in case this is an upgraded alliance, scan the list and delete the previous one
-	this.Alliances.push(allnc);
-	allied.Alliance = allnc;
+	this.Alliances.push(alliance);
 };
 DominionPower.prototype.SetGovernmentsList = function() {
 	var nGvrnmnts;
@@ -313,4 +312,8 @@ DominionPower.prototype.CheckAnnexable = function(ntn) {
 			return (false);
 
 	return (true);
+};
+DominionPower.prototype.GenerateSituation = function() {
+
+	this.Situation = this.Randomizer.GetIndex(SITUATION.TYPES);
 };

@@ -3,7 +3,7 @@
 //---------- DOMINION ALLIED STATE --------------------
 var DominionAlliedState = function() {
 	var Randomizer;
-	var AssociatedIndex, SecondaryIndex;		//.Associated - most closely associated Power, .Secondary - more peripheral association
+	var AssociatedIndex, SecondaryIndex, NameIndex;		//.Associated - most closely associated Power, .Secondary - more peripheral association
 	var PrimaryColour, SecondaryColour;
 	var Alliance, Grants, Aid, Treaties, Pacts;
 	var Orientation, Belligerence;
@@ -157,9 +157,11 @@ DominionAlliedState.prototype.SetAirForce = function() {
 	this.AirForce.F9s = 1 * ALLIED.CITIES;
 };
 */
-DominionAlliedState.prototype.SetMissilery = function() {
+DominionAlliedState.prototype.ForgeAlliance = function(alliance) {
 
-	//UNLOGGED
+	this.Alliance = alliance;
+};
+DominionAlliedState.prototype.SetMissilery = function() {  //UNLOGGED
 
 };
 DominionAlliedState.prototype.CheckClicked = function() {
