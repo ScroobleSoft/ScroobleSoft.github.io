@@ -1,6 +1,6 @@
 /*
  *  TODO: this has replaced BoardView, but now AllianceButton and TurnButton are not being used
- *			 also, BoardView::PerformVoteAction could be cannabalized, particularly display of Air Theatre
+ *			 also, BoardView::PerformVoteAction could be cannibalized, particularly display of Air Theatre
  */
 //----------------------------------------------------
 //---------- DOMINION GLOBAL VIEW --------------------
@@ -9,19 +9,19 @@ var DominionGlobalView = function() {
 	var MapOptionImages, MapOptionControls;
 	var Nation;
 	var Alliance;
-	var InfoViews;				//REDUNDANT?
+	var InfoViews;
 	var SelectedNation;
 
 	var i, c, r;
 };
 DominionGlobalView.prototype = new GenieView();
-DominionGlobalView.prototype.Set = function(cnvs, specs, gTool, tWriter) {
+DominionGlobalView.prototype.Set = function(cnvs, specs) {
 	GenieView.prototype.Set.call(this, cnvs, specs);
 
-	this.SetInfoView();
-	this.SetLinks(gTool, tWriter);
+	this.SetInfoSubView();
    this.SetSpectrum();
 	this.SelectedNation = Tomcat;
+	WorldMap.SelectNation(PlayerPower);
 };
 DominionGlobalView.prototype.SetSpectrum = function() {
 	var i;
@@ -40,15 +40,16 @@ DominionGlobalView.prototype.SetSpectrum = function() {
 		this.DiplomacySpectrum[(BELLIGERENCE.TYPES/2)+i] = hSpctrm.Colours[i+1];
 	}
 };
-DominionGlobalView.prototype.SetControls = function() {  //REDUNDANT
+DominionGlobalView.prototype.SetControls = function() {
 
+	//REDUNDANT
 	this.MapOptionImages = new GenieImage();
 	this.MapOptionImages.Set(this.Context, ImageManager.Pics[IMAGeINDEX.CONTROLS], this.Specs.MApCONTROlIMAGEs);
 	this.MapOptionControls = new DominionMapControls();
 	this.MapOptionControls.Set(this.Canvas, this.Specs.MApOPTIOnCONTROLs, this.MapOptionImages);
 	this.Controls.push(this.MapOptionControls);
 };
-DominionGlobalView.prototype.SetInfoView = function() {
+DominionGlobalView.prototype.SetInfoSubView = function() {
 
 	this.InfoViews = new Array(this.Specs.INFO.TYPES);
 	this.InfoViews[0] = GazetteerInfoView;
@@ -115,25 +116,28 @@ DominionGlobalView.prototype.Draw = function() {  //UNLOGGED
 
 	WorldMap.Draw();
 };
-DominionGlobalView.prototype.UpdateMouseClick = function() {
-
-	//UNLOGGED
+DominionGlobalView.prototype.UpdateMouseClick = function() {  //UNLOGGED
 
 	if (Mouse.CheckLeftClicked(CANVAS.PRIME)) {
 
 		for (this.i=0;this.i<POWER.COUNT;++this.i)
 			if (SpaceUtils.CheckPointInCircle(Mouse, Powers[this.i].Location, MAP.SIZE.POWER/2)) {
-				if (this.InfoView.Id==this.Specs.INFO.GAZETTEER || this.InfoView.Id==this.Specs.INFO.RESERVES
-																				|| this.InfoView.Id==this.Specs.INFO.BUDGET || this.InfoView.Id==this.Specs.INFO.RATING)
-					this.InfoView.SetNation(Powers[this.i]);
-					this.SelectedNation = Powers[this.i];
+//				if (this.InfoView.Id==this.Specs.INFO.GAZETTEER || this.InfoView.Id==this.Specs.INFO.RESERVES		TODO: what's going on here?
+//																				|| this.InfoView.Id==this.Specs.INFO.BUDGET || this.InfoView.Id==this.Specs.INFO.RATING)
+			   this.SelectedNation = Powers[this.i];
+				WorldMap.SelectNation(this.SelectedNation);
+				WorldMap.Draw();
+				this.InfoView.SetNation(this.SelectedNation);
+				this.InfoView.DisplayNationInfo();
 				return;
 			}
 
 		for (this.i=0;this.i<ALLIED.COUNT;++this.i)
 			if (SpaceUtils.CheckPointInCircle(Mouse, AlliedStates[this.i].Location, MAP.SIZE.ALLIED/2)) {
-				this.InfoView.SetNation(AlliedStates[this.i]);
-				this.SelectedNation = AlliedStates[this.i];
+				this.SelectedNation = AlliedStates[this.i]
+				WorldMap.SelectNation(this.SelectedNation);
+				WorldMap.Draw();
+				this.InfoView.SetNation(this.SelectedNation);
 				this.InfoView.DisplayNationInfo();
 				return;
 			}
@@ -143,12 +147,17 @@ DominionGlobalView.prototype.UpdateMouseClick = function() {
 			this.r += 5;
 		for (this.i=0;this.i<CITySTATE.COUNT;++this.i) {
 			if (SpaceUtils.CheckPointInCircle(Mouse, CityStates[this.i].Location, this.r)) {
-				this.InfoView.SetNation(CityStates[this.i]);
 				this.SelectedNation = CityStates[this.i];
+				WorldMap.SelectNation(this.SelectedNation);
+				WorldMap.Draw();
+				this.InfoView.SetNation(this.SelectedNation);
 				this.InfoView.DisplayNationInfo();
 				return;
 			}
 		}
+	} else if (Mouse.CheckLeftClicked(CANVAS.ZOOM))
+		this.InfoView.Update();
+	else if (Mouse.CheckLeftClicked(CANVAS.CONSOLE)) {
 	}
 };
 /*
@@ -246,4 +255,10 @@ DominionGlobalView.prototype.OpenExpansionView = function() {  //UNLOGGED
 			ConquestView.Open();
 			break;
 	}
+};
+DominionGlobalView.prototype.OpenOfficeView = function() {
+
+	OfficeView.SetNation(PlayerPower);
+	OfficeView.Open();
+	OfficeView.Update();
 };
