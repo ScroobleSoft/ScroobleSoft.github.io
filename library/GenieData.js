@@ -23,6 +23,7 @@ var ConsonantString = "bcdfghjklmnpqrstvwxyz";
 var Alphabet = "abcdefghijklmnopqrstuvwxyz";
 var DescendingLetters = "gjpqy";
 
+var CALENDAR = { DAYS: { WEEK: 7, FORTNIGHT: 14 }, MONTHS: 12 };
 var YEAR = { WEEKS: 52, DAYS: { COMMON: 365, LEAP: 366 } };
 var Day = [ "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" ];
 var Month = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
