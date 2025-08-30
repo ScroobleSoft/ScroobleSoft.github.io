@@ -96,6 +96,20 @@ StringUtilities.prototype = {
 		a = "a";
 		return (lttr.charCodeAt(0)-a.charCodeAt(0));
 	},
+	GetSubString(str, start, lttrs) {
+
+		if (lttrs)
+			return (str.substring(start, start+lttrs));
+		else
+			return (str.substring(start));
+	},
+	CapitalizeFirstLetter(str) {
+
+		this.str = str[0].toUpperCase();
+		str[0] = this.str;
+
+		return (this.str);
+	},
 	InitializeFirstName(fName, lName, width, context) {  //contract first name to initial if full name doesn't fit
 
 		if (this.GetTextWidth(fName + " " + lName, null, context)<width)
@@ -117,6 +131,14 @@ StringUtilities.prototype = {
 	Duplicate(str) {
 
 		return (str.repeat(1));
+	},
+	Compare(str1, str2) {
+
+		for (this.i=0;this.i<str1.length;++this.i)
+			if (str1[this.i]!=str2[this.i])
+				return (false);
+
+		return (true);
 	},
 	Reverse(str) {
 
