@@ -1,20 +1,10 @@
 
 //---------------------------------------------
-//---------- OFFICE LAPTOP --------------------
+//---------- OFFICE LAPTOP --------------------  screen might pop up, or still display things if not - this is how monitor bank is cycled through
 var OfficeLaptop = function() {
-	var Specs;
-	var Pic;
 };
-OfficeLaptop.prototype = {
-	Set(specs, pic) {
-		this.Specs = specs;
-		this.Pic = pic;
-	},
-	Draw() {  //UNLOGGED - screen might pop up, or still display things if not
+OfficeLaptop.prototype = new OfficeItem();
+OfficeLaptop.prototype.Set = function(cnvs, specs) {
+	OfficeItem.prototype.Set.call(this, cnvs, specs);
 
-		if (Game.CheckMobile())
-			this.Pic.Draw(this.Specs.MOBILE.X, this.Specs.MOBILE.Y);
-		else
-			this.Pic.Draw(this.Specs.X, this.Specs.Y);
-	}
 };

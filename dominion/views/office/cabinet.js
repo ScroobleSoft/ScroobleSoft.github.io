@@ -36,5 +36,12 @@ FilingCabinet.prototype = {
 		h = this.DimensionSpecs.W / 4;
 		this.GraphicsTool.DrawTrapezoid(this.DimensionSpecs.L, this.DimensionSpecs.T, tw, this.DimensionSpecs.W, h, this.Specs.COLOUR.BODY, 0);
 		this.GraphicsTool.DrawHorizontalLine( { X: this.DimensionSpecs.L, Y: this.DimensionSpecs.T }, this.DimensionSpecs.W, this.Specs.COLOUR.HANDLE, 1);
+	},
+	CheckClicked() {  //UNLOGGED
+
+		if (SpaceUtils.CheckPointInBox(Mouse.Click, this.DimensionSpecs))  //rectangle
+			return (true);
+		if (SpaceUtils.CheckPointInBox(Mouse.Click, { L: this.Specs.L, T: this.Specs.T, W: this.Specs.W, H: -this.Specs.ROOF } ))  //trapezoid
+			return (true);
 	}
 };

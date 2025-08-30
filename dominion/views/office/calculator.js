@@ -1,20 +1,10 @@
 
 //-------------------------------------------------
-//---------- OFFICE CALCULATOR --------------------  UNLOGGED
+//---------- OFFICE CALCULATOR --------------------
 var OfficeCalculator = function() {
-	var Specs;
-	var Pic;
 };
-OfficeCalculator.prototype = {
-	Set(specs, pic) {
-		this.Specs = specs;
-		this.Pic = pic;
-	},
-	Draw() {
+OfficeCalculator.prototype = new OfficeItem();
+OfficeCalculator.prototype.Set = function(cnvs, specs) {
+	OfficeItem.prototype.Set.call(this, cnvs, specs);
 
-		if (Game.CheckMobile())
-			this.Pic.Draw(this.Specs.MOBILE.X, this.Specs.MOBILE.Y);
-		else
-			this.Pic.Draw(this.Specs.X, this.Specs.Y);
-	}
 };

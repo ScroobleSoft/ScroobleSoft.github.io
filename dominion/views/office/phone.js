@@ -1,20 +1,10 @@
 
 //--------------------------------------------
-//---------- OFFICE PHONE --------------------  UNLOGGED
+//---------- OFFICE PHONE --------------------
 var OfficePhone = function() {
-	var Specs;
-	var Pic;
 };
-OfficePhone.prototype = {
-	Set(specs, pic) {
-		this.Specs = specs;
-		this.Pic = pic;
-	},
-	Draw() {
+OfficePhone.prototype = new OfficeItem();
+OfficePhone.prototype.Set = function(cnvs, specs) {
+	OfficeItem.prototype.Set.call(this, cnvs, specs);
 
-		if (Game.CheckMobile())
-			this.Pic.Draw(this.Specs.MOBILE.X, this.Specs.MOBILE.Y);
-		else
-			this.Pic.Draw(this.Specs.X, this.Specs.Y);
-	}
 };
