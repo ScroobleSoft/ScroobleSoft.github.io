@@ -175,8 +175,10 @@ DominionGazetteerInfoView.prototype.DisplayPowerProfile = function() {
 	for (this.i=0;this.i<MINISTRY.PORTFOLIOS;++this.i) {
 		this.GraphicsTool.DrawRectangle(140, 115+(15*this.i), 90, 15, MinistryColours[this.i], 0);
 		this.TextWriter.Write(Ministries[this.i], 140+this.Offsets[this.i], 125+(15*this.i), { COLOUR: "white", FONT: "10px Arial" } );
-		this.PlusImage.Draw(140, 115+(15*this.i));
-		this.MinusImage.Draw(216, 115+(15*this.i));
+		if (this.Nation==PlayerPower) {
+			this.PlusImage.Draw(140, 115+(15*this.i));
+			this.MinusImage.Draw(216, 115+(15*this.i));
+		}
 	}
 
 	this.GraphicsTool.RestoreContext();
@@ -194,7 +196,7 @@ DominionGazetteerInfoView.prototype.DisplayAlliedProfile = function() {  //UNLOG
 
 	//Name
 	this.TextWriter.Write("Allied State:", 4, 15);
-	this.TextWriter.Write(AlliedNames[this.Nation.Index], 120, 15);
+	this.TextWriter.Write(AlliedNames[this.Nation.NameIndex], 120, 15);
 
 	//Population
 	if (this.Nation.Population>=10000000)
@@ -209,7 +211,7 @@ DominionGazetteerInfoView.prototype.DisplayAlliedProfile = function() {  //UNLOG
 	this.TextWriter.Write("GDP:", 4, 45);
 	this.TextWriter.Write(DominionUtils.GetFormattedAmount(this.Nation.GDP), 120, 45);
 	this.TextWriter.Write("Preference:", 4, 60);
-	this.TextWriter.Write(Commodity[PowerProfiles[3][this.Nation.AssociatedIndex]], 120, 60);
+	this.TextWriter.Write(Commodity[PowerProfiles[this.Nation.AssociatedIndex][3]], 120, 60);
 	this.TextWriter.Write("Government:", 4, 75);
 	this.TextWriter.Write(Government[this.Nation.Government.Type], 120, 75);
 	this.TextWriter.Write("Affiliaion:", 4, 90);
