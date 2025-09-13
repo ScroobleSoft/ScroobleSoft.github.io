@@ -77,5 +77,15 @@ DominionComponents.prototype.SetOfficeViews = function() {
 	OfficeView.Set(this.Interface.PrimeScape, VIEW.OFFICE);
 	OfficeInfoView.SetLinks(this.GraphicsTool, this.TextWriter);
 	OfficeInfoView.Set(this.Interface.ZoomScape, VIEW.OFFICE, OfficeView);
-	OfficeView.SetSubViews(OfficeInfoView, ActionConsoleView);
+	OfficeView.SetSubViews(OfficeInfoView, DocumentationConsoleView);
+};
+DominionComponents.prototype.SetGuideViews = function() {  //UNLOGGED
+
+	GuideView = new DominionGuideView();
+	GuideView.SetLinks(this.GraphicsTool, this.TextWriter);
+	GuideView.Set(this.Interface.PrimeScape, VIEW.GUIDE);
+	GuideInfoView = new DominionGuideInfoView();
+	GuideInfoView.SetLinks(this.GraphicsTool, this.TextWriter);
+	GuideInfoView.Set(this.Interface.ZoomScape, VIEW.GUIDE.INFO);
+	GuideView.SetSubViews(GuideInfoView, DocumentationConsoleView);
 };
