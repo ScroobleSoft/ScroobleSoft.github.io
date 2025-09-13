@@ -3,7 +3,7 @@
 //---------- DOMINION AIR FORCE --------------------
 var DominionAirForce = function() {
 	var Nation;
-	var Fighters;  //REDUNDANT?
+	var Fighters;  //updated in conjunction w/ F1-F9s, used in Forces View
 	var F1s, F2s, F3s, F4s, F5s, F6s, F7s, F8s, F9s;
 	var Bombers;
 	var Interceptors;
