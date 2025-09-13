@@ -8,5 +8,6 @@ AgricultureMinistry.prototype = new DominionMinistry();
 AgricultureMinistry.prototype.Set = function(nation) {
    DominionMinistry.prototype.Set.call(this, nation);
 
+	this.Id = MINISTRY.AGRICULTURE;
    this.Food = 0;
 };

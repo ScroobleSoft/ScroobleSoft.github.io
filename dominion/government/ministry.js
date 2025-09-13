@@ -3,9 +3,11 @@
 //---------- DOMINION MINISTRY --------------------
 var DominionMinistry = function() {
    var Cabinet;
+	var Id;
    var Minister;
    var Level;
-   var Inventory, LiquidateFlag;   //e.g. energy (untapped resources), food (granary equivalent)
+   var Inventory, Revenue;
+	var LiquidateFlag;   //e.g. energy (untapped resources), food (granary equivalent)
 };
 DominionMinistry.prototype = {
    Set(cabinet) {
@@ -20,8 +22,11 @@ DominionMinistry.prototype = {
 		this.Minister = new DominionCharacter();
 		this.Minister.Set();
 	},
-	GetIncome() {
+	GetFortnightlyRevenue() {
 
-		return (0);  //TEMP
+		this.Revenue = this.Cabinet.Nation.GetFortnightlyRevenue() * (this.Cabinet.SurplusPercentages[this.Id]/100);
+		this.Revenue /=  MINISTRY.PORTFOLIOS;
+
+		return (Math.round(this.Revenue));
 	}
 };

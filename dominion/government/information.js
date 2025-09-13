@@ -2,11 +2,12 @@
 //----------------------------------------------------
 //---------- INFORMATION MINISTRY --------------------
 var InformationMinistry = function() {
-   var Satellites;
+	var Satellites;
 };
 InformationMinistry.prototype = new DominionMinistry();
 InformationMinistry.prototype.Set = function(nation) {
-   DominionMinistry.prototype.Set.call(this, nation);
+	DominionMinistry.prototype.Set.call(this, nation);
 
-   this.Satellites = 0;	//TODO: eventually an array
+	this.Id = MINISTRY.INFORMATION;
+	this.Satellites = 0;	//TODO: eventually an array
 };
