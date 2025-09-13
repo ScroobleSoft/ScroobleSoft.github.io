@@ -1,16 +1,16 @@
 
-//----------------------------------------------------
-//---------- DOMINION CHOICE VIEW --------------------  NOTE: ramdomly determined whether male or female head of state is shown first
+//---------------------------------------------------
+//---------- DOMINION INTRO VIEW --------------------  NOTE: ramdomly determined whether male or female head of state is shown first
 var DominionIntroView = function() {
-	var DailyButton, FreeFormButton, MultiChoiceButton, SurvivalButton, PlayButton, InfoButton;
+	var DailyButton, FreeFormButton, MultiChoiceButton, SurvivalButton, PlayButton, GuideButton, InfoButton;
 	var PickMaleButton, ModifyMaleButton, PickFemaleButton, ModifyFemaleButton;
 	var ShortButton, MediumButton, LongButton;
-	var PastButton;
+	var GameRadioOptions, PastButton;
 	var OkButton, CancelButton;
 	var FemaleFirstFlag, PastGamesFlag, LeaderPickedFlag;
 	var MaleX, FemaleX;
 	var MaleName, FemaleName, MaleProfile, FemaleProfile;
-	var InfoCount;
+	var GameInfo, InfoCount;
 };
 DominionIntroView.prototype = new GenieView();
 DominionIntroView.prototype.Set = function(cnvs, specs) {
@@ -19,74 +19,17 @@ DominionIntroView.prototype.Set = function(cnvs, specs) {
 	this.State = this.Specs.STATE.OPEN;
 	this.InfoCount = 0;
 };
-DominionIntroView.prototype.SetControls = function() {
+DominionIntroView.prototype.Open = function() {
+	var date;
 
-	//Choice
-	this.DailyButton = this.SetTextButton(this.Specs.BUTTON.DAILY, RaisedCornerImages, this.TextWriter);
-	this.FreeFormButton = this.SetTextButton(this.Specs.BUTTON.FREeFORM, RaisedCornerImages, this.TextWriter);
-	this.MultiChoiceButton = this.SetTextButton(this.Specs.BUTTON.MULTiCHOICE, RaisedCornerImages, this.TextWriter);
-	this.SurvivalButton = this.SetTextButton(this.Specs.BUTTON.SURVIVAL, RaisedCornerImages, this.TextWriter);
-	this.PlayButton = this.SetTextButton(this.Specs.BUTTON.PLAY, RaisedCornerImages, this.TextWriter);
-	this.InfoButton = this.SetTextButton(this.Specs.BUTTON.INFO, RaisedCornerImages, this.TextWriter);
+	GenieView.prototype.Open.call(this);
 
-	//Head of state
-	this.PickMaleButton = this.SetTextButton(this.Specs.BUTTON.PICkMALE, RaisedCornerImages, this.TextWriter);
-	this.ModifyMaleButton = this.SetTextButton(this.Specs.BUTTON.MODIFyMALE, RaisedCornerImages, this.TextWriter);
-	this.PickFemaleButton = this.SetTextButton(this.Specs.BUTTON.PICkFEMALE, RaisedCornerImages, this.TextWriter);
-	this.ModifyFemaleButton = this.SetTextButton(this.Specs.BUTTON.MODIFyFEMALE, RaisedCornerImages, this.TextWriter);
-
-	//Game Options
-	this.ShortButton = this.SetTextButton(this.Specs.BUTTON.SHORT, RaisedCornerImages, this.TextWriter);
-	this.MediumButton = this.SetTextButton(this.Specs.BUTTON.MEDIUM, RaisedCornerImages, this.TextWriter);
-	this.LongButton = this.SetTextButton(this.Specs.BUTTON.LONG, RaisedCornerImages, this.TextWriter);
-	this.PastButton = this.SetTextButton(this.Specs.BUTTON.PAST, RaisedCornerImages, this.TextWriter);
-
-	//Profile
-	this.OkButton = this.SetTextButton(this.Specs.BUTTON.OK, RaisedCornerImages, this.TextWriter);
-	this.CancelButton = this.SetTextButton(this.Specs.BUTTON.CANCEL, RaisedCornerImages, this.TextWriter);
-};
-DominionIntroView.prototype.ShowControls = function() {
-
-	switch (this.State) {
-		case this.Specs.STATE.OPEN:
-			this.DailyButton.Show();
-			this.FreeFormButton.Show();
-			this.MultiChoiceButton.Show();
-			this.SurvivalButton.Show();
-			this.InfoButton.Show();
-			break;
-		case this.Specs.STATE.START:
-			this.PickMaleButton.Show();
-			this.ModifyMaleButton.Show();
-			this.PickFemaleButton.Show();
-			this.ModifyFemaleButton.Show();
-			this.MoveTurnButtons();
-			this.ShortButton.Show();
-			this.MediumButton.Show();
-			this.LongButton.Show();
-			if (!this.LeaderPickedFlag) {
-				this.ShortButton.Disable();
-				this.MediumButton.Disable();
-				this.LongButton.Disable();
-			}
-			this.PastButton.Show();
-			break;
-		case this.Specs.STATE.INFO:
-			this.PlayButton.Show();
-			this.InfoButton.Show();
-			break;
-		case this.Specs.STATE.CHARACTER:
-			this.OkButton.Show();
-			this.CancelButton.Show();
+	if (this.State==this.Specs.STATE.OPEN) {
+		date = new Date();
+		date.getTime();
+		this.GameInfo = date.toDateString();
 	}
 };
-/*
-DominionIntroView.prototype.Open = function() {  //UNLOGGED
-
-	this.Draw();
-	this.ShowControls();
-};
-*/
 DominionIntroView.prototype.Update = function() {
 
 	this.AnimationFrameHandle = requestAnimationFrame(this.Update.bind(this));
@@ -98,6 +41,7 @@ DominionIntroView.prototype.Update = function() {
 		this.UpdateProfileButtons();
 		this.UpdatePastButton();
 		this.UpdateTurnButtons();
+		this.UpdateRadioControl();
 	}
 	if (this.State==VIEW.INTRO.STATE.CHARACTER)
 		this.UpdateCharacterControls();
@@ -114,11 +58,11 @@ DominionIntroView.prototype.Draw = function() {
 	this.TextWriter.Write("to pick a leader themselves.", 96, 158);
 	this.TextWriter.ResetColour();
 
-	this.Update();
+//	this.Update();
 };
 DominionIntroView.prototype.DisplayInfo = function() {
 
-	this.GraphicsTool.DrawRectangle(80, 50, 240, 300, this.Specs.COLOUR, 0);
+	this.GraphicsTool.DrawRectangle(80, 50, 240, 260, this.Specs.COLOUR, 0);
 	this.GraphicsTool.DrawRectangle(80, 50, 240, 300, "white", 3);
 
 	this.TextWriter.SetColour("white");
@@ -177,9 +121,7 @@ DominionIntroView.prototype.DisplayProfiles = function() {
 			//-name of game chosen
 		} else {
 			this.TextWriter.Write("Daily", 70, 262, { COLOUR: "white", STYLE: FONT.STYLE.UNDERLINED } );
-			date = new Date();
-			date.getTime();
-			this.TextWriter.Write(date.toDateString(), 70, 286, { COLOUR: "white" } );
+			this.TextWriter.Write(this.GameInfo, 70, 286, { COLOUR: "white" } );
 		}
 	}
 
@@ -189,9 +131,9 @@ DominionIntroView.prototype.DisplayProfiles = function() {
 	else
 		x = 0;
 	this.TextWriter.Write("Votes", 210+x, 240, { COLOUR: "white", STYLE: FONT.STYLE.UNDERLINED } );
-	this.TextWriter.Write("17", 220+x, 267, { COLOUR: "white" } );
-	this.TextWriter.Write("34", 220+x, 297, { COLOUR: "white" } );
-	this.TextWriter.Write("51", 220+x, 327, { COLOUR: "white" } );
+	this.TextWriter.Write("20", 220+x, 267, { COLOUR: "white" } );
+	this.TextWriter.Write("35", 220+x, 297, { COLOUR: "white" } );
+	this.TextWriter.Write("50", 220+x, 327, { COLOUR: "white" } );
 };
 DominionIntroView.prototype.OpenGlobalView = function() {  //UNLOGGED - probably REDUNDANT
 
@@ -205,6 +147,7 @@ DominionIntroView.prototype.OpenAssetsView = function() {
 	AssetsView.SetNation(PlayerPower);
 	WorldMap.SelectNation(PlayerPower);
 	AssetsView.Open();
+	AssetsView.Update();
 };
 DominionIntroView.prototype.OpenSolicitationView = function() {
 
@@ -215,4 +158,9 @@ DominionIntroView.prototype.OpenOfficeView = function() {
 
 	OfficeView.SetNation(PlayerPower);
 	OfficeView.Open();
+};
+DominionIntroView.prototype.OpenGuideView = function() {
+
+	GuideView.Open();
+	GuideView.Update();
 };

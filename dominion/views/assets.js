@@ -50,6 +50,7 @@ DominionAssetsView.prototype.SetNation = function(nation) {  //UNLOGGED
 
 	this.Nation = nation;
 };
+/*
 DominionAssetsView.prototype.Open = function() {  //UNLOGGED
 	GenieView.prototype.Open.call(this);
 
@@ -57,6 +58,7 @@ DominionAssetsView.prototype.Open = function() {  //UNLOGGED
 
 	this.Update();
 };
+*/
 DominionAssetsView.prototype.Update = function() {  //UNLOGGED
 
 	this.AnimationFrameHandle = requestAnimationFrame(this.Update.bind(this));
@@ -75,7 +77,7 @@ DominionAssetsView.prototype.Update = function() {  //UNLOGGED
 
 	this.UpdateViewButtons();
 };
-DominionAssetsView.prototype.Draw = function() {  //UNLOGGED
+DominionAssetsView.prototype.Draw = function() {
 	var i;
 	var invstmnt;
 
@@ -94,8 +96,8 @@ DominionAssetsView.prototype.Draw = function() {  //UNLOGGED
 	//Commodities inventory and income
 	for (i=0;i<COMMODITY.TYPES;++i) {
 		this.TextWriter.Write(Commodity[i], 5, 65+(20*i));
-		this.TextWriter.Write(this.Nation.Cabinet.Ministries[i].Inventory, 100, 65+(20*i));
-		this.TextWriter.Write(this.Nation.Cabinet.Ministries[i].GetIncome(), 225, 65+(20*i));
+		this.TextWriter.Write(Utils.FormatMoney(this.Nation.Cabinet.Ministries[i].Inventory), 100, 65+(20*i));
+		this.TextWriter.Write(Utils.FormatMoney(this.Nation.Cabinet.Ministries[i].GetFortnightlyRevenue()), 225, 65+(20*i));
 	}
 
 	//Investments
@@ -144,6 +146,7 @@ DominionAssetsView.prototype.OpenForcesView = function() {  //UNLOGGED
 
 	ForcesView.SetNation(this.Nation);
 	ForcesView.Open();
+	ForcesView.Update();
 };
 DominionAssetsView.prototype.OpenInvestmentsView = function() {  //UNLOGGED
 
