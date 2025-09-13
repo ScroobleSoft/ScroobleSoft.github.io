@@ -29,8 +29,8 @@ var ArmsDistribution;		//MOBILE
 //---------- CONTROLS -------------------
 
 //Buttons
-var NewGameButton, TutorialButton, DemoButton, MiniGamesButton;		//standard
-var IconCornerImages, RaisedCornerImages, CheckBoxImages;				//images
+var NewGameButton, TutorialButton, DemoButton, MiniGamesButton;						//standard
+var IconCornerImages, RaisedCornerImages, CheckBoxImages, RadioOptionImage;		//images
 
 var AllianceCancelButton, AllianceButton, TurnButton;						//REDUNDANT?
 
@@ -71,9 +71,19 @@ var FortnightDigitImages, JetLetterImages, TinyDigitImages;
 //--------------------------------------
 //---------- SPRITES -------------------
 
+//Army
+var LeftTrooperSprite, RightTrooperSprite, GrenadeSprite, LeftBazookaSprite, RightBazookaSprite,
+	 LeftGunArmSprite, RightGunArmSprite, LeftGrenadierArmSprite, RightGrenadierArmSprite, LeftBazookerArmSprite, RightBazookerArmSprite;	//troopers
+var LeftHowitzerSprite, RightHowitzerSprite, JeepSprite, APCSprite, SmallBarrelSprite, LeftJeepGunSprite, RightJeepGunSprite;		//light units - UNLOGGED
+var AVSprite, ArtillerySprite, IFVSprite, LeftAVCannonSprite, RightAVCannonSprite, LeftBarrelSprite, RightBarrelSprite;				//medium units
+var MobileGunSprite, LeftTruckSprite, RightTruckSprite, TankSprite, TankHutchSprite, LargeBarrelSprite;	//heavy units - UNLOGGED
+var ATWSprite, LeftATMSprite, RightATMSprite, AAGunSprite, LeftLCGSprite, RightLCGSprite, LeftLCGBarrelSprite, RightLCGBarrelSprite; //defence units - U
+var MissilePadSprite, SAMSprite, LeftSSMSprite, RightSSMSprite;		//missile - UNLOGGED
+var LargeWheelSprite, MediumWheelSprite, SmallWheelSprite, TreadSprite;		//wheels - UNLOGGED
+
 //Navy
 var GunBoatSprite, MissileBoatSprite, FrigateSprite, DestroyerSprite, CruiserSprite, BattleshipSprite,
-	 EscortCarrierSprite, LightCarrierSprite, FleetCarrierSprite, SuperCarrierSprite;
+	 EscortCarrierSprite, LightCarrierSprite, FleetCarrierSprite, SuperCarrierSprite, CarrierTowerSprite;
 var ShipBowSprite, ShipOutlineSprite, ShipHullSprite;
 
 //Air Force
@@ -131,6 +141,7 @@ var AssetsView, ForcesView, InvestmentView, BondsView;
 var AirMissionView, ChampionsView;									//missions
 var SeaTheatre, BeachheadTheatre;									//theatres
 var SolicitationView, SolicitationInfoView, TurnConsoleView, MultipleChoiceView;
+var GuideView, GuideInfoView, DocumentationConsoleView;
 
 //--------------------------------------------------
 //---------- DOMINION COMPONENTS -------------------
@@ -314,6 +325,7 @@ DominionComponents.prototype = {
 		//Images
 		IconCornerImages = new GenieImage();
 		CheckBoxImages = new GenieImage();
+		RadioOptionImage = new GenieImage();
 
 		//Buttons
 		RaisedCornerImages = new GenieImage();
@@ -343,6 +355,7 @@ DominionComponents.prototype = {
 		//Images
 		IconCornerImages.Set(this.ControlPanel, ImageManager.Pics[IMAGeINDEX.GENIeCONTROLS], ICOnCORNErIMAGEs);
 		CheckBoxImages.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.GENIeCONTROLS], CHECkBOxIMAGE);
+		RadioOptionImage.Set(this.ControlPanel, ImageManager.Pics[IMAGeINDEX.GENIeCONTROLS], RADIoCONTROlIMAGE);
 
 		//Buttons
 		RaisedCornerImages.Set(this.ControlPanel, ImageManager.Pics[IMAGeINDEX.GENIeCONTROLS], RAISEdBUTTOnCORNErIMAGEs);
@@ -430,6 +443,13 @@ DominionComponents.prototype = {
 
 		//UNLOGGED
 
+		this.CreateTrooperSprites();
+		this.CreateLightCombatantSprites();
+		this.CreateMediumCombatantSprites();
+		this.CreateHeavyCombatantSprites();
+		this.CreateDefenceCombatantSprites();
+		this.CreateMissileSprites();
+		this.CreateWheelSprites();
 		this.CreateShipSprites();
 		this.CreateJetSprites();
 		this.CreateInfoJetSprites();
@@ -453,6 +473,13 @@ DominionComponents.prototype = {
 
 		//UNLOGGED
 
+		this.SetTrooperSprites();
+		this.SetLightCombatantSprites();
+		this.SetMediumCombatantSprites();
+		this.SetHeavyCombatantSprites();
+		this.SetDefenceCombatantSprites();
+		this.SetMissileSprites();
+		this.SetWheelSprites();
 		this.SetShipSprites();
 		this.SetJetSprites();
 		this.SetInfoJetSprites();
@@ -552,6 +579,8 @@ DominionComponents.prototype = {
 		SolicitationInfoView = new DominionSolicitationInfoView();
 		TurnConsoleView = new DominionTurnConsoleView();
 		MultipleChoiceView = new DominionChoiceInfoView();
+
+		DocumentationConsoleView = new DominionDocumentationConsoleView();
 	},
 	SetViews() {  //UNLOGGED
 
@@ -560,6 +589,9 @@ DominionComponents.prototype = {
 		this.SetFinancialViews();
 		this.SetTurnViews();
 		this.SetOfficeViews();
+		DocumentationConsoleView.SetLinks(null, this.TextWriter);
+		DocumentationConsoleView.Set(this.Interface.Console, VIEW.DOCUMENTATION);
+		this.SetGuideViews();
 
 //		BoardView.Set(this.Interface.PrimeScape, this.GraphicsTool, this.CalcPad, this.TextWriter, this.ScreenRect);	//TODO: all these arguments needed?
 

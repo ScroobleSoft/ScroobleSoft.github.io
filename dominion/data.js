@@ -14,6 +14,7 @@ var DominionImages = [
 	"MiniGames.png",
 	"../library/GenieImages.png",
 	"../library/GenieControls.png",
+	"bitmaps/Guide.png",
 	"Scratch.png"
 ];
 var IMAGeINDEX = {
@@ -28,7 +29,8 @@ var IMAGeINDEX = {
 	MINiGAMES:		8,
 	GENIeIMAGES:	9,
 	GENIeCONTROLS: 10,
-	SCRATCH:			11
+	GUIDE:			11,
+	SCRATCH:			12
 };
 
 //-------------------------------------
@@ -55,7 +57,7 @@ var DOMINION = { GAME: { DAILY: 0, FREeFORM: 1, MULTiCHOICE: 2, SURVIVAL: 3 }, D
 					  COLOUR: { CITySTATE: "rgb(175,175,255)",
 									FOOD: "rgb(223,239,143)", ENTERTAINMENT: "rgb(209,255,095)", ARMS: "rgb(255,175,175)", LAVENOIL: "rgb(175,143,207)",
 									BONDS: "rgb(255,239,239)", MEDICINE: "rgb(159,255,255)", GOODS: "rgb(191,223,239)", SURVEILLANCE: "rgb(255,223,111)",
-									OFFICE: { WOOD: "rgb(063,015,000)", EDGE: "rgb(031,000,000)", DOOR: { PANEL: GREY.SILVER } },
+									OFFICE: { WOOD: "rgb(063,015,000)", EDGE: "rgb(031,000,000)", DOOR: { PANEL: GREY.SILVER } }, LINK: "rgb(047,079,175)",
 									VIRIDIAN: "rgb(000,127,063)", YELLOW: "rgb(255,239,000)"
 								 },
 					  CHARACTER: { STATE: { QUIET: 0, TALKING: 1 },
@@ -67,7 +69,7 @@ var DOMINION = { GAME: { DAILY: 0, FREeFORM: 1, MULTiCHOICE: 2, SURVIVAL: 3 }, D
 										BITS: { GENDER: 0, HAIR: { S: 3, E: 1 }, FACE: { S: 6, E: 4 }, EYES: { S: 12, E: 7 }, NOSE: { S: 15, E: 13 } }
 												//TODO: more bits needed for different face and hair types
 									 },
-					  TURNS: { SHORT: 17, MEDIUM: 34, LONG: 51 }, FORTNIGHTS: 100
+					  TURNS: { SHORT: 17, MEDIUM: 34, LONG: 51 }, FORTNIGHTS: 100, YEARS: 4
 };
 var SITUATION = { OFFER: 0, PROPOSAL: 1, INVESTMENT: 2, BOND: 3, INTRIGUE: 4, MISSION: 5, BLOCKADE: 6, INVASION: 7, TYPES: 8,					//Standard
 						OIL: 8, CULT: 9, SOVEREIGNITY: 10, INTERVENTION: 11, SPLINTERING: 12, SECESSION: 13, ACCESSION: 14, DISSIDENT: 15 };		//Rare
@@ -77,7 +79,7 @@ var Oils = [ "Indigoil", "Lapisoil", "Cobaloil", "Ceruloil", "Azuroil", "Magenoi
 var NewspaperTitles = [ "Chronicle", "Courant", "Bugle", "Dispatch", "Echo", "Examiner", "Gazette", "Guardian", "Herald", "Independent",
 								"Journal", "Mercury", "Metro", "Phoenix", "Post", "Record", "Standard", "Times", "Tribune", "Voice"
 ];
-var Profanities = [ "sineP", "gin", "noroM", "renoB", "kuf", "cuf", "gaf", "par", "cid", "kid", "tit", "muc", "gav" ];
+var Profanities = [ "sineP", "gin", "noroM", "renoB", "cuf", "kuf", "quf", "gaf", "par", "cid", "kid", "tit", "muc", "gav" ];
 
 //---------------------------------------
 //---------- CONTROLS -------------------

@@ -42,6 +42,7 @@ OctagonalNations.prototype.Start = function() {
 	if (Game.CheckMobile()) {
 		GlobalView.Disable();
 		IntroView.Open();
+		IntroView.Update();
 		IntroView.ConsoleView.DeActivateControls();
 		this.Randomizer.SetDailySeed(DOMINION.DATE);
 	} else

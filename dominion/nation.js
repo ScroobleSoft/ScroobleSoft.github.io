@@ -11,7 +11,7 @@ var DominionNation = function() {
 	var Popularity, Government, Opposition;			//internal
 	var HeadOfState, Adviser;
 	var Cabinet;
-	var Army, AirForce, Navy, Missilery, Fleets;
+	var Army, AirForce, Navy, Missilery;
 	var MicroUnits, MidUnits, MegaUnits, Units;		//for MOBILE game (maybe TEMP)
 
 	var Cities, Provinces, Bases;	//TODO: one or more of these may be REDUNDANT
@@ -95,7 +95,7 @@ DominionNation.prototype = {
 			this.AirForce = new DominionAirForce();
 			this.AirForce.Set(this);
 			if (this.Type==NATION.POWER)
-				this.SetFleet();
+				this.SetFleets();
 		}
 		this.Missilery = new DominionMissilery();
 		this.Missilery.Set(this);
@@ -118,17 +118,24 @@ DominionNation.prototype = {
 
 		//Distribute allocation evenly if Tomcat or an Allied State
 		if (!blgrnc) {
-	 for (i=0;i<MINISTRY.PORTFOLIOS;++i)
+			for (i=0;i<MINISTRY.PORTFOLIOS;++i)
 		 this.Budget[i] = BUDGET.PORTIONS/MINISTRY.PORTFOLIOS;
-	 return;
+			return;
 		}
 
 		portion = 1;
 		iMinistries = new Array(MINISTRY.PORTFOLIOS);
 		for (i=0;i<MINISTRY.PORTFOLIOS;++i) {
-	 this.Budget[BudgetDistribution[blgrnc][i]] = portion;
-	 ++portion;
+			this.Budget[BudgetDistribution[blgrnc][i]] = portion;
+			++portion;
 		}
+	},
+	GetFortnightlyRevenue() {  //UNLOGGED . . . TODO: will become more complex, with variable tax rates and such
+
+		this.Revenue = 0.4 * this.Population * GDP.PErCAPITA;
+		this.Revenue /= (DOMINION.FORTNIGHTS/DOMINION.YEARS);
+
+		return (this.Revenue);
 	},
 	Update() {
 		//TODO: plan for this to be first call in game cycle
