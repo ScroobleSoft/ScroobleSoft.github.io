@@ -1,11 +1,130 @@
 
+//-- TROOPERS --
+
+var LEFtTROOPErSPRITE = { L: 219, T: 2, W: 8, H: 19,
+								  GS: [ { SHAPE: SHAPE.RECTANGLE, COLOUR: "grey", LW: 0, X: 1, Y: -18, W: 5, H: 5 },				//head
+										  { SHAPE: SHAPE.RECTANGLE, COLOUR: "cyan", LW: 0, X: 2, Y: -10, W: 3, H: 4 },				//torso
+										  { SHAPE: SHAPE.RECTANGLE, COLOUR: "grey", LW: 0, X: 2, Y:  -5, W: 2, H: 2 },				//legs
+										  { SHAPE: SHAPE.RECTANGLE, COLOUR: "grey", LW: 0, X: 2, Y:  -3, W: 5, H: 2 }  ] };			//boots
+var RIGHtTROOPErSPRITE = { L: 229, T: 2, W: 8, H: 19,
+								  GS: [ { SHAPE: SHAPE.RECTANGLE, COLOUR: "grey", LW: 0, X: 2, Y: -18, W: 5, H: 5 },				//head
+										  { SHAPE: SHAPE.RECTANGLE, COLOUR: "cyan", LW: 0, X: 3, Y: -10, W: 3, H: 4 },				//torso
+										  { SHAPE: SHAPE.RECTANGLE, COLOUR: "grey", LW: 0, X: 3, Y:  -5, W: 2, H: 2 },				//legs
+										  { SHAPE: SHAPE.RECTANGLE, COLOUR: "grey", LW: 0, X: 1, Y:  -3, W: 5, H: 2 }  ] };			//boots
+var GRENADeSPRITE = { L: 306, T: 11, W: 4, H: 4,
+							 GS: [ { SHAPE: SHAPE.RECTANGLE, COLOUR: "gold", LW: 0, X: 1, Y: -3, W: 2, H: 2 } ] };
+var LEFtBAZOOKaSPRITE = { L: 292, T: 9, W: 12, H: 3,
+								  GS: [ { SHAPE: SHAPE.RECTANGLE, COLOUR: "gold", LW: 0, X: 2, Y: -2, W: 9, H: 1 } ] };
+var RIGHtBAZOOKaSPRITE = { L: 292, T: 14, W: 12, H: 3,
+									GS: [ { SHAPE: SHAPE.RECTANGLE, COLOUR: "gold", LW: 0, X: 1, Y: -2, W: 9, H: 1 } ] };
+var LEFtGUnARmSPRITE = { L: 239, T: 2, W: 9, H: 5 };
+var RIGHtGUnARmSPRITE = { L: 239, T: 9, W: 9, H: 5 };
+var LEFtGRENADIErARmSPRITE = { L: 239, T: 16, W: 2, H: 2 };
+var RIGHtGRENADIErARmSPRITE = { L: 243, T: 16, W: 2, H: 2 };
+var LEFtBAZOOKErARmSPRITE = { L: 251, T: 2, W: 5, H: 3 };
+var RIGHtBAZOOKErARmSPRITE = { L: 258, T: 2, W: 5, H: 3 };
+
+//-- LIGHT ARMY UNITS --
+
+var LEFtHOWITZErSPRITE = { L: 219, T: 23, W: 11, H: 12, O: 2, C: 9, R: 1 };
+var RIGHtHOWITZErSPRITE = { L: 219, T: 37, W: 11, H: 12, O: 2, C: 9, R: 1 };
+var JEEpSPRITE = { L: 209, T: 51, W: 24, H: 9,
+						 GS: [ { SHAPE: SHAPE.RECTANGLE, COLOUR: "grey", LW: 0, X: 1, Y: -8, W: 22, H: 7 } ] };
+var APCsPRITE = { L: 235, T: 51, W: 20, H: 15,
+						GS: [ { SHAPE: SHAPE.RECTANGLE, COLOUR: "cyan", LW: 0, X:  6, Y: -14, W:  8, H: 4 },				//turret
+								{ SHAPE: SHAPE.RECTANGLE, COLOUR: "grey", LW: 0, X:  1, Y:  -7, W:  2, H: 6 },				//left armour
+								{ SHAPE: SHAPE.RECTANGLE, COLOUR: "grey", LW: 0, X:  2, Y:  -9, W: 14, H: 8 },				//body
+								{ SHAPE: SHAPE.RECTANGLE, COLOUR: "grey", LW: 0, X: 17, Y:  -7, W:  2, H: 6 }  ] };			//right armour
+var SMALLlBARRElSPRITE = { L: 265, T: 2, W: 4, H: 2 };
+var LEFtJEEpGUnSPRITE = { L: 251, T: 7, W: 21, H: 7 };
+var RIGHtJEEpGUnSPRITE = { L: 251, T: 13, W: 21, H: 7 };
+
+//-- MEDIUM ARMY UNITS --
+
+var AVsPRITE = { L: 277, T: 51, W: 24, H: 11,
+					  GS: [ { SHAPE: SHAPE.RECTANGLE, COLOUR: "grey", LW: 0, X: 1, Y: -10, W: 22, H: 9 } ] };
+var ARTILLERySPRITE = { L: 257, T: 51, W: 18, H: 9,
+								GS: [ { SHAPE: SHAPE.RECTANGLE, COLOUR: "grey", LW: 0, X: 1, Y: -8, W: 16, H: 7 } ] };
+var IFVsPRITE = { L: 303, T: 51, W: 24, H: 15,
+						GS: [ { SHAPE: SHAPE.RECTANGLE, COLOUR: "cyan", LW: 0, X: 7, Y: -14, W: 10, H: 4 },					//turret
+								{ SHAPE: SHAPE.RECTANGLE, COLOUR: "grey", LW: 0, X: 3, Y:  -9, W: 18, H: 2 },					//top armour
+								{ SHAPE: SHAPE.RECTANGLE, COLOUR: "grey", LW: 0, X: 1, Y:  -7, W: 22, H: 4 },					//middle armour
+								{ SHAPE: SHAPE.RECTANGLE, COLOUR: "grey", LW: 0, X: 3, Y:  -3, W: 18, H: 2 }  ] };			//bottom armour
+var LEFtAVcANNOnSPRITE = { L: 274, T: 2, W: 11, H: 5,
+									GS: [ { SHAPE: SHAPE.RECTANGLE, COLOUR: "grey", LW: 0, X: 1, Y: -4, W: 8, H: 2 },				//barrel
+											{ SHAPE: SHAPE.RECTANGLE, COLOUR: "cyan", LW: 0, X: 3, Y: -1, W: 2, H: 1 }  ] };			//stand
+var RIGHtAVcANNOnSPRITE = { L: 287, T: 2, W: 11, H: 5,
+									 GS: [ { SHAPE: SHAPE.RECTANGLE, COLOUR: "grey", LW: 0, X: 2, Y: -4, W: 8, H: 2 },				//barrel
+											 { SHAPE: SHAPE.RECTANGLE, COLOUR: "cyan", LW: 0, X: 6, Y: -1, W: 2, H: 1 }  ] };		//stand
+var LEFtBARRElSPRITE = { L: 208, T: 91, W: 8, H: 6, O: 2 };
+var RIGHtBARRElSPRITE = { L: 208, T: 99, W: 8, H: 6, O: 2 };
+
+//-- HEAVY ARMY UNITS --
+
+var MOBILeGUnSPRITE = { L: 295, T: 133, W: 24, H: 11,
+								GS: [ { SHAPE: SHAPE.RECTANGLE, COLOUR: "grey", LW: 0, X: 1, Y: -10, W: 22, H: 9 } ] };
+var LEFtTRUCkSPRITE = { L: 208, T: 68, W: 24, H: 13,
+								GS: [ { SHAPE: SHAPE.RECTANGLE, COLOUR: "grey", LW: 0, X: 16, Y: -12, W: 10, H: 4 },				//cabin
+										{ SHAPE: SHAPE.RECTANGLE, COLOUR: "cyan", LW: 0, X: 18, Y: -10, W:  3, H: 3 },				//window
+										{ SHAPE: SHAPE.RECTANGLE, COLOUR: "grey", LW: 0, X:  1, Y:  -6, W: 22, H: 5 }  ] };			//bed
+var RIGHtTRUCkSPRITE = { L: 234, T: 68, W: 24, H: 13,
+								 GS: [ { SHAPE: SHAPE.RECTANGLE, COLOUR: "grey", LW: 0, X: 1, Y: -12, W: 10, H: 4 },				//cabin
+										 { SHAPE: SHAPE.RECTANGLE, COLOUR: "cyan", LW: 0, X: 3, Y: -10, W:  3, H: 3 },				//window
+										 { SHAPE: SHAPE.RECTANGLE, COLOUR: "grey", LW: 0, X: 1, Y:  -6, W: 22, H: 5 }  ] };			//bed
+var TANkSPRITE = { L: 260, T: 70, W: 24, H: 10,
+					    GS: [ { SHAPE: SHAPE.RECTANGLE, COLOUR: "grey", LW: 0, X: 1, Y: -9, W: 22, H: 8 } ] };
+var TANkHUTChSPRITE = { L: 260, T: 62, W: 16, H: 6,
+								GS: [ { SHAPE: SHAPE.RECTANGLE, COLOUR: "cyan", LW: 0, X: 1, Y: -5, W: 14, H: 5 } ] };
+var LARGeBARRElSPRITE = { L: 300, T: 2, W: 6, H: 2 };
+
+//-- LAND DEFENCE UNITS --
+
+var ATWsPRITE = { L: 306, T: 68, W: 14, H: 7,
+						GS: [ { SHAPE: SHAPE.RECTANGLE, COLOUR: "grey", LW: 0, X: 1, Y: -5, W: 12, H: 4 } ] };
+var LEFtATMsPRITE = { L: 208, T: 83, W: 14, H: 4,
+							 GS: [ { SHAPE: SHAPE.RECTANGLE, COLOUR: "cyan", LW: 0, X: 2, Y: -3, W: 11, H: 2 } ] };
+var RIGHtATMsPRITE = { L: 224, T: 83, W: 14, H: 4,
+							  GS: [ { SHAPE: SHAPE.RECTANGLE, COLOUR: "cyan", LW: 0, X: 1, Y: -3, W: 11, H: 2 } ] };
+var AAGUnSPRITE = { L: 286, T: 64, W: 18, H: 21,
+						  GS: [ { SHAPE: SHAPE.RECTANGLE, COLOUR: "cyan", LW: 0, X: 8, Y: -20, W:  2, H: 6 },					//barrel
+								  { SHAPE: SHAPE.RECTANGLE, COLOUR: "grey", LW: 0, X: 4, Y: -12, W: 10, H: 6 },					//body
+								  { SHAPE: SHAPE.RECTANGLE, COLOUR: "cyan", LW: 0, X: 1, Y:  -5, W: 16, H: 4 }  ] };			//base
+var LEFtLCGsPRITE = { L: 217, T: 133, W: 24, H: 18, O: 2, C: 3, R: 3 };
+var RIGHtLCGsPRITE = { L: 226, T: 193, W: 24, H: 18, O: 2, C: 3, R: 3 };
+var LEFtLCGbARRElSPRITE = { L: 306, T: 93, W: 13, H: 5,
+									 GS: [ { SHAPE: SHAPE.RECTANGLE, COLOUR: "grey", LW: 0, X: 0, Y: -4, W: 12, H: 3 } ] };
+var RIGHtLCGbARRElSPRITE = { L: 306, T: 100, W: 13, H: 5,
+									  GS: [ { SHAPE: SHAPE.RECTANGLE, COLOUR: "grey", LW: 0, X: 1, Y: -4, W: 12, H: 3 } ] };
+
+//-- MISSILE --
+
+var MISSILePAdSPRITE = { L: 240, T: 83, W: 26, H: 6,
+								 GS: [ { SHAPE: SHAPE.RECTANGLE, COLOUR: "cyan", LW: 0, X: 1, Y: -5, W: 24, H: 4 } ] };
+var SAMsPRITE = { L: 298, T: 91, W: 6, H: 14,
+						GS: [ { SHAPE: SHAPE.RECTANGLE, COLOUR: "grey", LW: 0, X: 2, Y: -13, W: 2, H: 11 } ] };
+var LEFtSSMsPRITE = { L: 210, T: 107, W: 11, H: 11, O: 2 };
+var RIGHtSSMsPRITE = { L: 210, T: 120, W: 11, H: 11, O: 2 };
+
+//-- WHEELS --
+
+var LARGeWHEElSPRITE = { L: 308, T: 2, W: 7, H: 7, O: 2,
+								 GS: [ { SHAPE: SHAPE.RECTANGLE, COLOUR: "cyan", LW: 0, X: 1, Y: -6, W: 5, H: 5 } ] };
+var MEDIUmWHEElSPRITE = { L: 306, T: 77, W: 6, H: 6, O: 2, C: 2, R: 2,
+								 GS: [ { SHAPE: SHAPE.RECTANGLE, COLOUR: "cyan", LW: 0, X: 1, Y: -5, W: 4, H: 4 } ] };
+var SMALlWHEElSPRITE = { L: 312, T: 11, W: 5, H: 5, O: 2,
+								 GS: [ { SHAPE: SHAPE.RECTANGLE, COLOUR: "cyan", LW: 0, X: 1, Y: -4, W: 3, H: 3 } ] };
+var TREAdSPRITE = { L: 209, T: 62, W: 4, H: 4, O: 2,
+						  GS: [ { SHAPE: SHAPE.RECTANGLE, COLOUR: "cyan", LW: 0, X: 1, Y: -3, W: 2, H: 2 } ] };
+
 //-- SHIPS --
 
-var GUnBOAtSPRITE = { L: 1, T: 49, W: 32, H: 16, GS: [ { SHAPE: SHAPE.RECTANGLE, COLOUR: "grey", LW: 0, X: 5, Y: -15, W: 22, H: 14 },
-																		 { SHAPE: SHAPE.RECTANGLE, COLOUR: "cyan", LW: 0, X: 6, Y: -12, W:  8, H:  8 }  ] };
-var MISSILeBOAtSPRITE = { L: 1, T: 67, W: 44, H: 16, GS: [ { SHAPE: SHAPE.RECTANGLE, COLOUR: "grey", LW: 0, X:  5, Y: -15, W: 34, H: 14 },
-								{ SHAPE: SHAPE.RECTANGLE, COLOUR: "cyan", LW: 0, X:  6, Y: -12, W:  8, H:  8 },
-								{ SHAPE: SHAPE.RECTANGLE, COLOUR: "cyan", LW: 0, X: 19, Y: -12, W:  8, H:  8 }  ] };
+var GUnBOAtSPRITE = { L: 1, T: 49, W: 32, H: 16,
+							 GS: [ { SHAPE: SHAPE.RECTANGLE, COLOUR: "grey", LW: 0, X: 5, Y: -15, W: 22, H: 14 },
+									 { SHAPE: SHAPE.RECTANGLE, COLOUR: "cyan", LW: 0, X: 6, Y: -12, W:  8, H:  8 }  ] };
+var MISSILeBOAtSPRITE = { L: 1, T: 67, W: 44, H: 16, 
+								  GS: [ { SHAPE: SHAPE.RECTANGLE, COLOUR: "grey", LW: 0, X:  5, Y: -15, W: 34, H: 14 },
+										  { SHAPE: SHAPE.RECTANGLE, COLOUR: "cyan", LW: 0, X:  6, Y: -12, W:  8, H:  8 },
+										  { SHAPE: SHAPE.RECTANGLE, COLOUR: "cyan", LW: 0, X: 19, Y: -12, W:  8, H:  8 }  ] };
 var FRIGATeSPRITE = { L: 1, T: 85, W: 56, H: 16, GS: [ { SHAPE: SHAPE.RECTANGLE, COLOUR: "grey", LW: 0, X: 5, Y: -15, W: 46, H: 14 },
 								 { SHAPE: SHAPE.RECTANGLE, COLOUR: "cyan", LW: 0, X: 6, Y: -12, W: 8, H: 8 },
 								 { SHAPE: SHAPE.RECTANGLE, COLOUR: "cyan", LW: 0, X: 19, Y: -12, W: 8, H: 8 },
