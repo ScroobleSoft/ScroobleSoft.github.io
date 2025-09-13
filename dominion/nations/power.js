@@ -11,6 +11,7 @@ var DominionPower = function() {
 	var Ambassadors, ConsulGenerals, HighCommissioners;
 	var Allieds;
 	var Situation;
+	var Fleets;
 
 	var i, j;
 };
@@ -149,7 +150,7 @@ DominionPower.prototype.UpdateReserves = function() {  //UNLOGGED - for MOBILE g
 	for (i=0;i<COMMODITY.TYPES;++i)
 		this.Reserves[i] += this.SurplusAllocations[i];
 };
-DominionPower.prototype.SetFleet = function() {  //TODO: might implement this differently
+DominionPower.prototype.SetFleets = function() {  //TODO: might implement this differently
 	var i;
 	var n;
 	var carrier;
@@ -162,6 +163,17 @@ DominionPower.prototype.SetFleet = function() {  //TODO: might implement this di
 			carrier.Set(this, type);
 			this.Fleets.push(carrier);
 		}
+};
+DominionPower.prototype.GetCarriers = function(iCarrier) {
+	var i;
+	var nCarriers;
+
+	nCarriers = 0;
+	for (i=0;i<this.Fleets.length;++i)
+		if (this.Fleets.CarrierType==iCarrier)
+			++nCarriers;
+
+	return (nCarriers);
 };
 DominionPower.prototype.SetMissilery = function() {
 
@@ -179,7 +191,6 @@ DominionPower.prototype.Update = function() {
 DominionPower.prototype.Generate = function() {  //UNLOGGED
 	DominionNation.prototype.Generate.call(this);
 
-	this.Cabinet.SetInventory();
 	this.Cities = new GenieArray();
 	this.Cities.Set(POWER.CITIES, DominionCity, null, this);
 };
