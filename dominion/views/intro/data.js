@@ -1,4 +1,10 @@
 
+var GameDescriptions = [ [ "FREE FORM - this game is played", "   in 3 phases, ", " * make financial decisions for the",
+									"   coming fortnight.", " * receive an offer for an alliance", "   from an Allied State in Week 1",
+									" * initiate an alliance in Week 2 - ", "   this process is then repeated." ],
+								 [ "MULTIPLE CHOICE - each week,", "   you are presented with a situation,", "   and a range of responses." ],
+								 [ "MANAGEMENT - a daily decision-", "   making game, played in an office." ]
+];
 var IntroOpening = [ [ "The colony's emergent nations have", "given the strongest power a period", "of time to garner a certain number",
 									"of votes, and thus a mandate to", "rule. That power is the Tomcat", "Democratic Republic, situated at",
 									"the centre of the map." ],
@@ -17,4 +23,4 @@ var IntroPhases = [ [ "Each turn lasts a Fortnight, and", "consists of 3 phases 
 								 [ "An alliance can be formed via", "a treaty, defence pact, grant,", "investment, intrigue, a mission,",
 									"purchase or outright conquest.", "Let your adviser explain the", "various approaches - good luck!" ]
 ];
-var IntroInfo = [ IntroOpening, IntroTomcat, IntroPhases ];
+var IntroInfo = [ GameDescriptions, IntroOpening, IntroTomcat, IntroPhases ];
