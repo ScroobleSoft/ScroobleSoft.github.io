@@ -42,7 +42,7 @@ GenieRadioControls.prototype.SetBoxes = function() {
 			this.OptionRects[i].L = this.Specs.L;
 			this.OptionRects[i].T = this.Specs.T + ((this.Specs.GAP+this.Pic.Specs.PATCH.H)*i);
 		}
-		this.OptionRects[i].W = this.Pic.Specs.PATCH.W + 2 + this.Context.measureText(this.Specs.OPTIONS[i]).width;
+		this.OptionRects[i].W = this.Pic.Specs.PATCH.W + 2 + Math.round(this.Context.measureText(this.Specs.OPTIONS[i]).width);
 		this.OptionRects[i].H = this.Pic.Specs.PATCH.H;
 		w = Math.max(w, this.OptionRects[i].W);
 	}
@@ -111,10 +111,6 @@ GenieRadioControls.prototype.DrawControl = function(iCntrl, bSlctd) {
 GenieRadioControls.prototype.MouseDown = function() {
 	GenieControl.prototype.MouseDown.call(this);
 
-	this.ClickedOn();
-};
-GenieRadioControls.prototype.ClickedOn = function() {
-
 	//Get radio control clicked
 	for (this.i=0;this.i<this.Specs.OPTIONS.length;++this.i) {
 		if (SpaceUtils.CheckPointInBox(Mouse.Down, this.OptionRects[this.i]))
@@ -129,6 +125,7 @@ GenieRadioControls.prototype.ClickedOn = function() {
 			this.DrawControl(this.Selected, false);
 		this.DrawControl(this.i, true);
 		this.Selected = this.i;
+		this.ClickedOn();
 	}
 };
 GenieRadioControls.prototype.DisableOptions = function(aOptions, bDraw) {  //NOTE: copying rather than assigning entire array to avoid garbage collection
