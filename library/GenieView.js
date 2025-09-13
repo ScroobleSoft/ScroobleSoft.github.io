@@ -339,5 +339,15 @@ GenieView.prototype = {
 		this.Controls.push(tBar);
 
 		return (tBar);
+	},
+	SetRadioControls(specs, img, tWriter) {
+		var rdio;
+
+		rdio = new GenieRadioControls();
+		rdio.Set(this.Canvas, specs, img);
+		rdio.SetLinks(null, this.TextWriter);
+		this.Controls.push(rdio);
+
+		return (rdio);
 	}
 };
