@@ -13,7 +13,12 @@ var VIEW = { CURRENT: { GLOBAL: 0, OFFICE: 1, ASSETS: -1, BONDS: -1, FORCES: -1,
 							 INFO: { COLOUR: GREY.SILVER
 									 }
 						  },
-				 INTRO: { COLOUR: "slateblue", L: 80, T: 65, W: 240, H: 270, STATE: { OPEN: 0, START: 1, INFO: 2, CHARACTER: 3, PAST: 4 },
+				 INTRO: { COLOUR: "slateblue", L: 80, T: 65, W: 240, H: 270, STATE: { OPEN: 0, START: 1, INFO: 2, CHARACTER: 3, PAST: 4, GOAL: 5 },
+				 			 NUMBERS: { O: [ 0,4,7,11 ], OX: 12, OY: 3 },
+							 IMAGE: { CELL: { L: 501, T: 214, W: 32, H: 16 },
+										 SELECTION: { L: 501, T: 232, W: 30, H: 14 },
+										 DESELECTION: { L: 533, T: 232, W: 30, H: 14 }
+									  },
 							 BUTTON: { DAILY: { L: 120, T: 175, W: 160, H: 25, LW: 3, LABEL: "Daily Multiple-Choice", COLOUR: "rgb(079,191,239)",
 																																						STYLE: BUTTON.STYLE.RAISED },
 										  FREeFORM: { L: 95, T: 215, W: 100, H: 25, LW: 3, LABEL: "Free Form", COLOUR: "rgb(079,191,239)",
@@ -39,10 +44,17 @@ var VIEW = { CURRENT: { GLOBAL: 0, OFFICE: 1, ASSETS: -1, BONDS: -1, FORCES: -1,
 										  PAST: { L: 82, T: 300, W: 80, H: 25, LW: 3, LABEL: "Past . . .", COLOUR: "rgb(079,191,239)", BACKGROUND: "slateblue",
 																																										STYLE: BUTTON.STYLE.RAISED },
 										  OK: { L: 110, T: 310, W: 60, H: 25, LW: 3, LABEL: "OK", COLOUR: "rgb(079,191,239)", STYLE: BUTTON.STYLE.RAISED },
-										  CANCEL: { L: 230, T: 310, W: 60, H: 25, LW: 3, LABEL: "Cancel", COLOUR: "rgb(079,191,239)", STYLE: BUTTON.STYLE.RAISED }
+										  CANCEL: { L: 225, T: 310, W: 60, H: 25, LW: 3, LABEL: "Cancel", COLOUR: "rgb(079,191,239)", STYLE: BUTTON.STYLE.RAISED }
 										},
 							  RADIO: { GAME: { L: 70, T: 235, W: 11, H: 26, GAP: 4, ORIENT: ORIENTATION.VERTICAL, OPTIONS: [ "Random", "Daily" ],
-														SELECT: 0, BACKGROUND: "slateblue" } },
+													 SELECT: 0, BACKGROUND: "slateblue" },
+										  GENDER: { L: 91, T: 333, W: 98, H: 11, GAP: 39, ORIENT: ORIENTATION.HORIZONTAL, OPTIONS: [ "Male", "Female" ],
+														SELECT: 1, BACKGROUND: "slateblue" }
+										},
+							  TOUChBAR: { MONTHS: { L: 56, T: 56, W: 169, H: 31, O: 1, C: 6, R: 2, KEYS: 12, KEY: { W: 27, H: 14 }, SELECT: 0,
+															COLOUR: { KEY: "white", SELECTION: "rgb(079,191,239)" },
+															ORIENT: ORIENTATION.BOTH, IMAGE: { L: 2, T: 250, W: 169, H: 31 } }
+											}
 							},
 				 ALLIANCE: { COLOUR: GREY.LIGHT, MISSION: { L: 5, T: 407, W: 110, H: 110, O: 5, C: 4, R: 2, LW: 3, TITLE: 87 } },
 				 ASSETS: { COLOUR: DOMINION.COLOUR.CITySTATE, TEXT: { COLOUR: "rgb(079,079,175)" },
@@ -70,25 +82,43 @@ var VIEW = { CURRENT: { GLOBAL: 0, OFFICE: 1, ASSETS: -1, BONDS: -1, FORCES: -1,
 												 IMAGE: { L: 118, T: 198, W: 32, H: 52, O: 2, C: 1, R: 2, PATCH: { W: 32, H: 25 } }
 											  }
 							},
-				 CHOICE: { COLOUR: DOMINION.COLOUR.YELLOW,
-							  BUTTON: { ACCEPT: { L: 40, T: 160, W: 60, H: 25, LW: 3, LABEL: "Accept", COLOUR: DOMINION.COLOUR.VIRIDIAN,
+				 CHOICE: { 
+							  INFO: { COLOUR: DOMINION.COLOUR.YELLOW,
+										 BUTTON: { ACCEPT: { L: 40, T: 160, W: 60, H: 25, LW: 3, LABEL: "Accept", COLOUR: DOMINION.COLOUR.VIRIDIAN,
 																											TEXT: { COLOUR: "rgb(255,239,000)" }, STYLE: BUTTON.STYLE.RAISED },
-										   DECLINE: {  L: 140, T: 160, W: 60, H: 25, LW: 3, LABEL: "Decline", COLOUR: DOMINION.COLOUR.VIRIDIAN,
-																											TEXT: { COLOUR: "rgb(255,239,000)" }, STYLE: BUTTON.STYLE.RAISED },
-											OTHER: { L: 5, T: 370, W: 95, H: 25, LW: 3, LABEL: "Other", COLOUR: DOMINION.COLOUR.VIRIDIAN, STYLE: BUTTON.STYLE.RAISED },
-											YES: { L: 105, T: 370, W: 100, H: 25, LW: 3, LABEL: "Yes", COLOUR: DOMINION.COLOUR.VIRIDIAN, STYLE: BUTTON.STYLE.RAISED },
-											NO: { L: 210, T: 370, W: 90, H: 25, LW: 3, LABEL: "No", COLOUR: DOMINION.COLOUR.VIRIDIAN, STYLE: BUTTON.STYLE.RAISED },
-											PROPOSE: { L: 40, T: 160, W: 60, H: 25, LW: 3, LABEL: "Propose", COLOUR: DOMINION.COLOUR.VIRIDIAN,
-																											TEXT: { COLOUR: "rgb(255,239,000)" }, STYLE: BUTTON.STYLE.RAISED },
-											INVEST: { L: 40, T: 160, W: 60, H: 25, LW: 3, LABEL: "Invest", COLOUR: DOMINION.COLOUR.VIRIDIAN,
-																											TEXT: { COLOUR: "rgb(255,239,000)" }, STYLE: BUTTON.STYLE.RAISED },
-											PURCHASE: { L: 40, T: 160, W: 60, H: 25, LW: 3, LABEL: "Purchase", COLOUR: DOMINION.COLOUR.VIRIDIAN,
-																											TEXT: { COLOUR: "rgb(255,239,000)" }, STYLE: BUTTON.STYLE.RAISED },
-											PASS: { L: 140, T: 160, W: 60, H: 25, LW: 3, LABEL: "Pass", COLOUR: DOMINION.COLOUR.VIRIDIAN,
-																											TEXT: { COLOUR: "rgb(255,239,000)" }, STYLE: BUTTON.STYLE.RAISED }
-										 }
+													  DECLINE: {  L: 140, T: 160, W: 60, H: 25, LW: 3, LABEL: "Decline", COLOUR: DOMINION.COLOUR.VIRIDIAN,
+																													TEXT: { COLOUR: "rgb(255,239,000)" }, STYLE: BUTTON.STYLE.RAISED },
+													  OTHER: { L: 5, T: 370, W: 95, H: 25, LW: 3, LABEL: "Other", COLOUR: DOMINION.COLOUR.VIRIDIAN,
+																																										STYLE: BUTTON.STYLE.RAISED },
+													  YES: { L: 105, T: 370, W: 100, H: 25, LW: 3, LABEL: "Yes", COLOUR: DOMINION.COLOUR.VIRIDIAN,
+																																										STYLE: BUTTON.STYLE.RAISED },
+													  NO: { L: 210, T: 370, W: 90, H: 25, LW: 3, LABEL: "No", COLOUR: DOMINION.COLOUR.VIRIDIAN,
+																																										STYLE: BUTTON.STYLE.RAISED },
+													  PROPOSE: { L: 40, T: 160, W: 60, H: 25, LW: 3, LABEL: "Propose", COLOUR: DOMINION.COLOUR.VIRIDIAN,
+																													TEXT: { COLOUR: "rgb(255,239,000)" }, STYLE: BUTTON.STYLE.RAISED },
+													  INVEST: { L: 40, T: 160, W: 60, H: 25, LW: 3, LABEL: "Invest", COLOUR: DOMINION.COLOUR.VIRIDIAN,
+																													TEXT: { COLOUR: "rgb(255,239,000)" }, STYLE: BUTTON.STYLE.RAISED },
+													  PURCHASE: { L: 40, T: 160, W: 60, H: 25, LW: 3, LABEL: "Purchase", COLOUR: DOMINION.COLOUR.VIRIDIAN,
+																													TEXT: { COLOUR: "rgb(255,239,000)" }, STYLE: BUTTON.STYLE.RAISED },
+													  PASS: { L: 140, T: 160, W: 60, H: 25, LW: 3, LABEL: "Pass", COLOUR: DOMINION.COLOUR.VIRIDIAN,
+																													TEXT: { COLOUR: "rgb(255,239,000)" }, STYLE: BUTTON.STYLE.RAISED }
+													}
+									  }
 							},
-				 DOCUMENTATION: { COLOUR: GREY.SILVER
+				 DOCUMENTATION: { COLOUR: GREY.SILVER,
+										BUTTON: { HELP: { L: 36, T: 12, W: 84, H: 25, LW: 3, LABEL: "Help", COLOUR: DOMINION.COLOUR.LINK,
+																											TEXT: { COLOUR: GREY.SILVER }, STYLE: BUTTON.STYLE.RAISED },
+													 GUIDE: {  L: 36, T: 50, W: 84, H: 25, LW: 3, LABEL: "Guide", COLOUR: DOMINION.COLOUR.LINK,
+																											TEXT: { COLOUR: GREY.SILVER }, STYLE: BUTTON.STYLE.RAISED },
+													 GAZETTEER: { L: 36, T: 88, W: 84, H: 25, LW: 3, LABEL: "Gazetter", COLOUR: DOMINION.COLOUR.LINK,
+																											TEXT: { COLOUR: GREY.SILVER }, STYLE: BUTTON.STYLE.RAISED },
+													 DOMPAEDIA: { L: 36, T: 126, W: 84, H: 25, LW: 3, LABEL: "Dompaedia", COLOUR: DOMINION.COLOUR.LINK,
+																											TEXT: { COLOUR: GREY.SILVER }, STYLE: BUTTON.STYLE.RAISED },
+													 UNITS: { L: 36, T: 164, W: 84, H: 25, LW: 3, LABEL: "Unit List", COLOUR: DOMINION.COLOUR.LINK,
+																											TEXT: { COLOUR: GREY.SILVER }, STYLE: BUTTON.STYLE.RAISED },
+													 FAQ: { L: 36, T: 202, W: 84, H: 25, LW: 3, LABEL: "FAQ", COLOUR: DOMINION.COLOUR.LINK,
+																											TEXT: { COLOUR: GREY.SILVER }, STYLE: BUTTON.STYLE.RAISED }
+							  }
 									 },
 				 FORCES: { COLOUR: PASTEL.CREAM, STATE: { OVERALL: 0, COMBATANTS: 1, VEHICLES: 2, JETS: 3, VESSELS: 4 },
 							  IMAGE: { DIGITS: { L: 506, T: 254, W: 98, H: 13, O: 2, C: 10, R: 1, PATCH: { W: 8, H: 13 } } },

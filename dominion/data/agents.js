@@ -1,7 +1,13 @@
 
 //-- ARMY --
 
-var BATTLER = { LART: 0, MART: 1, HART: 2, JEEP: 3, HOWITZER: 4, AV: 5, MOBILeGUN: 6, ARTILLERY: 7, TANK: 8, ATW: 9, AAGUN: 10, TYPES: 11, BATTALION: 128 };
+var COMBATANT = { LART: 0, MART: 1, HART: 2, JEEP: 3, HOWITZER: 4, AV: 5, MOBILeGUN: 6, ARTILLERY: 7, TANK: 8, ATW: 9, AAGUN: 10, TYPES: 11,
+						BATTALION: 128 };
+var LART = { ARM: { L: { X: 3, Y: -5 }, R: { X: 4, Y: -5 } } };
+var MART = { ARM: { F: { L: { X: 3, Y: -5 }, R: { X: 4, Y: -5 } }, B: { L: { X: 5, Y: -8 }, R: { X: 0, Y: -8 } } },
+				 GRENADE: { L: { X: 8, Y: -9 }, R: { X: -4, Y: -9 } } };
+var HART = { ARM: { L: { X: 3, Y: -7 }, R: { X: 0, Y: -7 } }, GUN: { L: { X: 1, Y: -1 }, R: { X: 4, Y: -1 } },
+				 BAZOOKA: { L: { X: -1, Y: -10 }, R: { X: -3, Y: -10 } } };
 
 //-- NAVY --
 
