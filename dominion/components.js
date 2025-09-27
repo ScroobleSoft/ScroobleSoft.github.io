@@ -5,6 +5,7 @@
 var DominionScape, DominionGraphics, DominionCalcPad, DominionText, DominionRandomizer, Controller;		//library
 var Nations, Powers, PlayerPower, AlliedStates, CityStates, Tomcat, DiplomacyTable;								//nations
 var Continents, Archipelagos, Atolls, Map, WorldMap;																		//maps
+var Calendar;																															//utility
 var Intro, Demo, Tutorial, MiniGames;																							//sim
 
 //------------------------------------
@@ -47,7 +48,7 @@ var StepButton;					//UNLOGGED
 
 var DemoImage, TutorialImage, MiniGamesImage, TestingImage;		//image maps
 var MinistryPanelImage, MinistryImagePanel;							//image panels
-var ArverniDigitImages;
+var FortnightDigitImages, JetLetterImages, TinyDigitImages, ArverniDigitImages, MediumDigitImages;
 var PowerLabelImages, AlliedLabelImages;
 var AllianceImage;										//UNLOGGED - REDUNDANT
 
@@ -66,15 +67,13 @@ var FirebrandHorizontalWarheadImages, SilklightHorizontalWarheadImages, Firebran
 //Wards
 var FlareImage, ChaffImage, FlareSymbolImage, ChaffSymbolImage;
 
-var FortnightDigitImages, JetLetterImages, TinyDigitImages;
-
 //--------------------------------------
 //---------- SPRITES -------------------
 
 //Army
 var LeftTrooperSprite, RightTrooperSprite, GrenadeSprite, LeftBazookaSprite, RightBazookaSprite,
 	 LeftGunArmSprite, RightGunArmSprite, LeftGrenadierArmSprite, RightGrenadierArmSprite, LeftBazookerArmSprite, RightBazookerArmSprite;	//troopers
-var LeftHowitzerSprite, RightHowitzerSprite, JeepSprite, APCSprite, SmallBarrelSprite, LeftJeepGunSprite, RightJeepGunSprite;		//light units - UNLOGGED
+var LeftHowitzerSprite, RightHowitzerSprite, JeepSprite, APCSprite, SmallBarrelSprite, LeftJeepGunSprite, RightJeepGunSprite;					//light units
 var AVSprite, ArtillerySprite, IFVSprite, LeftAVCannonSprite, RightAVCannonSprite, LeftBarrelSprite, RightBarrelSprite;				//medium units
 var MobileGunSprite, LeftTruckSprite, RightTruckSprite, TankSprite, TankHutchSprite, LargeBarrelSprite;	//heavy units - UNLOGGED
 var ATWSprite, LeftATMSprite, RightATMSprite, AAGunSprite, LeftLCGSprite, RightLCGSprite, LeftLCGBarrelSprite, RightLCGBarrelSprite; //defence units - U
@@ -140,7 +139,7 @@ var PurchaseView, GrantView, PactView, TreatyView, IntrigueView;
 var AssetsView, ForcesView, InvestmentView, BondsView;
 var AirMissionView, ChampionsView;									//missions
 var SeaTheatre, BeachheadTheatre;									//theatres
-var SolicitationView, SolicitationInfoView, TurnConsoleView, MultipleChoiceView;
+var SolicitationView, SolicitationInfoView, TurnConsoleView, ChoiceView, ChoiceInfoView;
 var GuideView, GuideInfoView, DocumentationConsoleView;
 
 //--------------------------------------------------
@@ -249,6 +248,7 @@ DominionComponents.prototype = {
 		Map = new DominionMap();
 		WorldMap = new DominionWorldMap();
 //		Office = new DominionOffice();
+		Calendar = new GenieCalendar();
 	},
 	SetCoreObjects() {
 		var i, j;
@@ -275,6 +275,9 @@ DominionComponents.prototype = {
 		Map.Set(this.Screen, this.InfoBox, this.ControlPanel, this.GraphicsTool, this.CalcPad, this.TextWriter, this.ScreenRect);
 		Map.Generate();
 		WorldMap.Set(this.Screen, this.InfoBox, this.ControlPanel, this.GraphicsTool, this.CalcPad, this.TextWriter, this.ScreenRect);
+		Calendar.Set();
+		Calendar.SetYear(2025);
+		Calendar.SetBaseDate(DOMINION.DATE);
 	},
 	CreateSimObjects() {
 
@@ -386,8 +389,6 @@ DominionComponents.prototype = {
 		MiniGamesImage = new GenieImageMap();
 		TestingImage = new GenieImageMap();
 
-		ArverniDigitImages = new GenieImage();
-
 		PowerLabelImages = new GenieImage();
 		AlliedLabelImages = new GenieImage();
 
@@ -403,6 +404,8 @@ DominionComponents.prototype = {
 
 		JetLetterImages = new GenieImage();
 		TinyDigitImages = new GenieImage();
+		ArverniDigitImages = new GenieImage();
+		MediumDigitImages = new GenieImage();
 
 		//Controls
 		CheckBoxImage = new GenieImage();
@@ -416,8 +419,6 @@ DominionComponents.prototype = {
 		TutorialImage.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.TUTORIAL], TUTORIAlIMAGE, TutorialMap);
 		MiniGamesImage.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.MINiGAMES], MINiGAMEsIMAGE, MiniGamesMap);
 		TestingImage.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.TESTING], TESTINgIMAGE, TestingMap);
-
-		ArverniDigitImages.Set(this.InfoBox, ImageManager.Pics[IMAGeINDEX.GENIeIMAGES], ARVERNiDIGItIMAGEs);
 
 		PowerLabelImages.Set(this.InfoBox, ImageManager.Pics[IMAGeINDEX.IMAGES], POWErLABElIMAGEs);
 		AlliedLabelImages.Set(this.InfoBox, ImageManager.Pics[IMAGeINDEX.IMAGES], ALLIEdLABElIMAGEs);
@@ -435,6 +436,8 @@ DominionComponents.prototype = {
 		//Digits
 		JetLetterImages.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.IMAGES], JEtLETTErIMAGES);
 		TinyDigitImages.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.IMAGES], TINyDIGItIMAGES);
+		ArverniDigitImages.Set(this.InfoBox, ImageManager.Pics[IMAGeINDEX.GENIeIMAGES], ARVERNiDIGItIMAGEs);
+		MediumDigitImages.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.GENIeIMAGES], MEDIUmDIGITsIMAGE);
 
 		//Controls
 		CheckBoxImage.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.GENIeCONTROLS], CHECkBOxIMAGE);
@@ -577,8 +580,6 @@ DominionComponents.prototype = {
 		//Turns
 		SolicitationView = new DominionSolicitationView();
 		SolicitationInfoView = new DominionSolicitationInfoView();
-		TurnConsoleView = new DominionTurnConsoleView();
-		MultipleChoiceView = new DominionChoiceInfoView();
 
 		DocumentationConsoleView = new DominionDocumentationConsoleView();
 	},

@@ -5,8 +5,9 @@ var OctagonalNations = function () {
 	var CalcPad;
 	var ScreenRect;
 
-	var Type, DailyDate;
+	var Type;
 	var Turn, Fortnight, Phase, TurnLimit;  //TODO: replace .Turn with .Fortnight
+	var DailyCharacters;
 };
 OctagonalNations.prototype = new GenieGame();
 OctagonalNations.prototype.Set = function(intrfc, gTool, cPad, tWriter, rGenerator) {
@@ -20,7 +21,6 @@ OctagonalNations.prototype.Set = function(intrfc, gTool, cPad, tWriter, rGenerat
 	this.Settings += GAME.STATE.RUNNING;
 	this.Components = new DominionComponents();
 
-	this.DailyDate = DOMINION.DATE;
 	this.Turn = 1;
 	this.Fortnight = 0;
 	this.Phase = 0;
@@ -41,10 +41,11 @@ OctagonalNations.prototype.Start = function() {
 	GlobalView.Open();
 	if (Game.CheckMobile()) {
 		GlobalView.Disable();
+//		this.Randomizer.SetDailySeed(DOMINION.DATE);
+		this.SetDaily(DOMINION.DATE);
 		IntroView.Open();
 		IntroView.Update();
 		IntroView.ConsoleView.DeActivateControls();
-		this.Randomizer.SetDailySeed(DOMINION.DATE);
 	} else
 		GlobalView.Update();
 };

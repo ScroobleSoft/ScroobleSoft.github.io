@@ -17,6 +17,7 @@ var DominionMap = function() {
 	var PowerOctagon, AlliedOctagon, AlliedSash, CityStateOctagon, AtollOctagon;
 	var ScaledPowerOctagon, ScaledAlliedOctagon, ScaledSash, ScaledCityStateOctagon, ScaledAtollOctagon;
 	var ScaledPowerLocations, ScaledAlliedLocations, ScaledCityStateLocations;
+	var SelectedNation;
 
 	var i, j, x, y, colour;
 };

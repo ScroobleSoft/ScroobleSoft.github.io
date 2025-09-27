@@ -53,7 +53,7 @@ var MOBILE = { SCALE: SCREEN.MOBILE.W/SCREEN.WIDTH };
 
 const ATTACK = true;
 
-var DOMINION = { GAME: { DAILY: 0, FREeFORM: 1, MULTiCHOICE: 2, SURVIVAL: 3 }, DATE: "2025-08-05",
+var DOMINION = { GAME: { RANDOM: 0, DAILY: 1, FREeFORM: 2, MULTiCHOICE: 4, SURVIVAL: 8 }, DATE: "2025-08-05",
 					  COLOUR: { CITySTATE: "rgb(175,175,255)",
 									FOOD: "rgb(223,239,143)", ENTERTAINMENT: "rgb(209,255,095)", ARMS: "rgb(255,175,175)", LAVENOIL: "rgb(175,143,207)",
 									BONDS: "rgb(255,239,239)", MEDICINE: "rgb(159,255,255)", GOODS: "rgb(191,223,239)", SURVEILLANCE: "rgb(255,223,111)",
@@ -69,17 +69,23 @@ var DOMINION = { GAME: { DAILY: 0, FREeFORM: 1, MULTiCHOICE: 2, SURVIVAL: 3 }, D
 										BITS: { GENDER: 0, HAIR: { S: 3, E: 1 }, FACE: { S: 6, E: 4 }, EYES: { S: 12, E: 7 }, NOSE: { S: 15, E: 13 } }
 												//TODO: more bits needed for different face and hair types
 									 },
-					  TURNS: { SHORT: 17, MEDIUM: 34, LONG: 51 }, FORTNIGHTS: 100, YEARS: 4
+					  TURNS: { SHORT: 40, MEDIUM: 70, LONG: 100 }, VOTES: { SHORT: 20, MEDIUM: 35, LONG: 50 }, FORTNIGHTS: 100, YEARS: 4
 };
-var SITUATION = { OFFER: 0, PROPOSAL: 1, INVESTMENT: 2, BOND: 3, INTRIGUE: 4, MISSION: 5, BLOCKADE: 6, INVASION: 7, TYPES: 8,					//Standard
-						OIL: 8, CULT: 9, SOVEREIGNITY: 10, INTERVENTION: 11, SPLINTERING: 12, SECESSION: 13, ACCESSION: 14, DISSIDENT: 15 };		//Rare
+var SITUATION = { OFFER: 0, PROPOSAL: 1, INVESTMENT: 2, BOND: 3, AID: 4, CONQUEST: 5, GRANT: 6, DISASTER: 7,										//Common -		40%
+						INTRIGUE: 8, PACT: 9, PURCHASE: 10, TREATY: 11, SOVEREIGNITY: 12, AUCTION: 13, DRAFT: 14, SATELLITE: 15,						//Occasional - 30%
+						BLOCKADE: 16, CHAMPIONS: 17, DOGFIGHT: 18, HUNTING: 19, ICBM: 20, INTERDICTION: 21, SABOTAGE: 22, STRIKE: 23,				//Unusual -		20%
+						OIL: 24, CULT: 25, INTERVENTION: 26, SPLINTERING: 27, SECESSION: 28, ACCESSION: 29, DISSIDENT: 30,	PEACEKEEPING: 31,		//Rare -			10%
+						COUP: 32,
+						TYPES: { COMMON: 0, OCCASIONAL: 1, UNUSUAL: 2, RARE: 3 } };
 var BONDS = { TYPES: 10 };
 var OIL = { INDIGOIL: 0, LAPISOIL: 1, COBALOIL: 2, CERULOIL: 3, AZUROIL: 4, MAGENOIL: 5, BOYSENOIL: 6, PAISLIOIL: 7, TYPES: 8 };
 var Oils = [ "Indigoil", "Lapisoil", "Cobaloil", "Ceruloil", "Azuroil", "Magenoil", "Boysenoil", "Paislioil" ];
 var NewspaperTitles = [ "Chronicle", "Courant", "Bugle", "Dispatch", "Echo", "Examiner", "Gazette", "Guardian", "Herald", "Independent",
 								"Journal", "Mercury", "Metro", "Phoenix", "Post", "Record", "Standard", "Times", "Tribune", "Voice"
 ];
-var Profanities = [ "sineP", "gin", "noroM", "renoB", "cuf", "kuf", "quf", "gaf", "par", "cid", "kid", "tit", "muc", "gav" ];
+var Profanities = [ "sineP", "gin", "noroM", "renoB", "cuf", "kuf", "quf", "gaf", "par", "cid", "kid", "tit", "muc", "gav", "coc", "koc", "qoc",
+						  "cok", "kok", "qok", "qoc", "qok", "qoq", "naruQ" ];
+						//"cixoT"?
 
 //---------------------------------------
 //---------- CONTROLS -------------------
