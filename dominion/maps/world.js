@@ -136,3 +136,30 @@ DominionWorldMap.prototype.DrawAtolls = function() {
 		this.AtollOctagon.Draw(Atolls[this.i].Location.X, Atolls[this.i].Location.Y);
 	}
 };
+DominionWorldMap.prototype.CheckNationClicked = function() {
+	var i;
+	var r;
+
+	this.SelectedNation = null;
+	for (i=0;i<POWER.COUNT;++i)
+		if (SpaceUtils.CheckPointInCircle(Mouse.Click, Powers[i].Location, MAP.SIZE.POWER/2)) {
+			this.SelectedNation = Powers[i];
+			return;
+		}
+
+	for (i=0;i<ALLIED.COUNT;++i)
+		if (SpaceUtils.CheckPointInCircle(Mouse.Click, AlliedStates[i].Location, MAP.SIZE.ALLIED/2)) {
+			this.SelectedNation = AlliedStates[i];
+			return;
+		}
+
+	r = MAP.SIZE.CITySTATE / 2;
+	if (Game.CheckMobile())
+		r += 5;
+	for (i=0;i<CITySTATE.COUNT;++i) {
+		if (SpaceUtils.CheckPointInCircle(Mouse.Click, CityStates[i].Location, r)) {
+			this.SelectedNation = CityStates[i];
+			return;
+		}
+	}
+};
