@@ -17,9 +17,10 @@
 //------------------------------------------------
 //---------- GENIE RANDOMIZER --------------------
 var GenieRandomizer = function() {
-	var Seed1, Seed2, DailySeed;
+	var Seed1, Seed2;
+	var DailySeed, DailySeed1, DailySeed2;
 	var SavedSeed1, SavedSeed2;
-	var Mode;						//Javascript/Middle Square/Xorshift/Mersenne Twister
+	var Mode;								//Javascript/Middle Square/Xorshift/Mersenne Twister
 	var Value;
 
 	var i, j, sum, thrshld, num1, num2;		//scratch variables
@@ -63,16 +64,41 @@ GenieRandomizer.prototype = {
 		this.Seed1 = Math.round(Math.pow(2, 31)*Math.random());		//NOTE: picking 2^32 as max number to be on the safe side and avoid overflows
 		this.Seed2 = this.Seed1 + 1;
 	},
+	SetStringSeed(str) {
+		var i;
+		var num;
+
+		//Safety check - keeping numbers under 32 bits 
+		if (str.length>9)
+			return;
+
+		num = 0;
+		str = str.toLowerCase();
+		for (i=0;i<str.length;++i)
+			num += Math.pow(10,i) * StringUtils.GetLetterIndex(str[i]);
+
+		this.SetSeeds(num, num+1);
+	},
+/*
+	SetDailyDate(date) {
+		var dt;
+
+		dt = new Date(date);
+		this.DailyMS = dt.getTime();
+	},
+*/
 	SetDailySeed(date) {
 		var dt;
 
 		this.DailySeed = MILLISECONDS;
 		dt = new Date(date);
-		this.DailySeed += dt.getDay();
-		this.DailySeed += 10 * dt.getDate();
+		this.DailySeed += dt.getDay();									//weekday (0-6)
+		this.DailySeed += 10 * dt.getDate();							//day of month
 		this.DailySeed += 1000 * dt.getMonth();
+		this.DailySeed += 100000 * (dt.getFullYear() % 100);
 	},
-	GetDailySeed(date) {
+/*
+	SetDateSeed(date) {
 		var dt, day;
 		var ms;
 		var seed;
@@ -85,9 +111,23 @@ GenieRandomizer.prototype = {
 
 		return (seed);
 	},
-	GetNumberedSeed(num) {
+*/
+	ActivateDailySeeds() {
 
-		return (num*this.DailyDate);
+		this.SetSeeds(this.DailySeed, this.DailySeed+1);
+	},
+	SuspendDailySeeds() {
+
+		this.DailySeed1 = this.Seed1;
+		this.DailySeed2 = this.Seed2;
+		this.Seed1 = this.SavedSeed1;
+		this.Seed2 = this.SavedSeed2;
+	},
+	ResumeDailySeeds() {
+
+		this.SaveSeeds();
+		this.Seed1 = this.DailySeed1;
+		this.Seed2 = this.DailySeed2;
 	},
 	GetValue() {  //returns between 0 and 2^32 . . . this is the main algorithm implementation
 

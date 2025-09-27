@@ -45,15 +45,12 @@ GenieGame.prototype = {
 
 		this.View = view;
 	},
-	SetDaily() {
-		var seed;
+	SetDaily(date) {
+		var dt;
 
-		seed = this.Randomizer.GetDailySeed(this.DailyDate);
-		this.Randomizer.SetSeed(seed);
-	},
-	ResetDaily() {
-
-		this.Randomizer.ResetSeeds();
+		dt = new Date();
+		this.Randomizer.SetDailySeed(dt);
+		Calendar.SetBaseDate(date);
 	},
 	ShowButtons() {  //REDUNDANT
 

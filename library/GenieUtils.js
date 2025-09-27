@@ -191,6 +191,23 @@ GeneralGenieUtilities.prototype = {
 		tSpecs = Object.assign({}, bSpecs, tSpecs);
 
 		return (tSpecs);		//NOTE: this step is only needed when pointers aren't passed
+	},
+	GetOrdinalNumber(num) {
+
+		//Process numbers ending in '11' to '20'
+		if ( (num % 100)>10 && (num % 100)<21 )
+			return (num+"th");
+
+		switch (num % 10) {
+			case 1:
+				return (num+"st");
+			case 2:
+				return (num+"nd");
+			case 3:
+				return (num+"rd");
+			default:
+				return (num+"th");
+		}
 	}
 };
 
