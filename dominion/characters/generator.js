@@ -4,7 +4,7 @@
 var DominionCharacterGenerator = function() {
 	var GraphicsTool, Randomizer;
 	var Nation, Colour;
-	var Profile;
+	var FirstName, LastName, Profile;
 	var Gender, HairIndex, FaceIndex, EyesIndex, NoseIndex, EyelidIndex;
 	var State, EyeState, MouthState;
 	var Frames, EyeFrames, MouthFrames;
@@ -42,7 +42,7 @@ DominionCharacterGenerator.prototype = {
 
 		this.Frames = 60 * secs;
 	},
-	GenerateName() {
+	GenerateName() {  //NOTE: no gender specified here
 		var iName;
 		var name;
 
@@ -74,8 +74,8 @@ DominionCharacterGenerator.prototype = {
 			if (Profanities[this.i].length==3) {
 				if (StringUtils.Compare(StringUtils.GetSubString(name, 2, 3), this.strng)==true)
 					return (true);
-				this.strng = StringUtils.CapitalizeFirstLetter(this.strng);
-				if (StringUtils.Compare(StringUtils.GetSubString(name, 0, 3), this.strng)==true)
+//				this.strng = StringUtils.CapitalizeFirstLetter(this.strng);
+				if (StringUtils.Compare(StringUtils.GetSubString(name, 0, 3).toLowerCase(), this.strng)==true)
 					return (true);
 			} else {
 				if (StringUtils.Compare(StringUtils.GetSubString(name, 0, 5), this.strng)==true)
@@ -85,12 +85,38 @@ DominionCharacterGenerator.prototype = {
 
 		return (false);
 	},
-	GenerateProfile(bGender) {
+	GenerateCleanName() {
+		var name;
+
+		do {
+			name = this.GenerateName();
+		} while (this.CheckNameProfane(name));
+
+		return (name);
+	},
+	GenerateNames() {
+
+		this.FirstName = this.GenerateCleanName();
+		this.LastName = this.GenerateCleanName();
+	},
+	GenerateMaleName() {
+
+		this.GenerateNames();
+
+		return (this.FirstName + " " + this.LastName);
+	},
+	GenerateFemaleName() {
+
+		this.GenerateNames();
+
+		return (this.FirstName + "a " + this.LastName);
+	},
+	GenerateProfile(gender) {
 
 		//Gender
 		this.Profile = 0;
-		if (bGender) {
-			switch (bGender) {
+		if (gender) {
+			switch (gender) {
 				case GENDER.MALE:
 					this.Profile = 0;
 					break;
@@ -120,11 +146,11 @@ DominionCharacterGenerator.prototype = {
 	},
 	GenerateMaleProfile() {
 
-		this.GenerateProfile(GENDER.MALE);
+		return (this.GenerateProfile(GENDER.MALE));
 	},
 	GenerateFemaleProfile() {
 
-		this.GenerateProfile(GENDER.FEMALE);
+		return (this.GenerateProfile(GENDER.FEMALE));
 	},
 	Draw(x, y) {
 

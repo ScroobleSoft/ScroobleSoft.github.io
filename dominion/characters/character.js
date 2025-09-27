@@ -9,13 +9,25 @@ DominionCharacter.prototype = {
 	Set() {
 		this.Generate();		//TODO: this could be removed from here
 	},
-	Generate() {  //TODO: may also have ::GenerateMale/::GenerateFemale
+	Generate(gender) {
 
-		this.Profile = CharacterGenerator.GenerateProfile();
-		if (this.GetGender()==GENDER.MALE)
-			this.Name = CharacterGenerator.GenerateName() + " " + CharacterGenerator.GenerateName();
-		else
-			this.Name = CharacterGenerator.GenerateName() + "a " + CharacterGenerator.GenerateName();
+		this.Profile = CharacterGenerator.GenerateProfile(gender);
+		if (gender) {
+			switch (gender) {
+				case GENDER.MALE:
+					this.Name = CharacterGenerator.GenerateMaleName();
+					break;
+				case GENDER.FEMALE:
+					this.Name = CharacterGenerator.GenerateFemaleName();
+					break;
+			}
+		} else {
+			this.Profile = CharacterGenerator.GenerateProfile();
+			if (this.GetGender()==GENDER.MALE)
+				this.Name = CharacterGenerator.GenerateMaleName();
+			else
+				this.Name = CharacterGenerator.GenerateFemaleName();
+		}
 	},
 	GetGender() {
 
