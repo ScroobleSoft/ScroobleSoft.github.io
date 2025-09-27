@@ -68,9 +68,9 @@ DominionTurnConsoleView.prototype.UpdateButtons = function() {
 	if (this.StartButton.CheckClicked()) {
 		this.MainView.State = this.MainView.Specs.STATE.OFFERED;		//TODO: actually, will switch to Investment and Bonds screens as needed
 		this.MainView.InfoView.Close();
-		this.MainView.SetInfoView(MultipleChoiceView);
+		this.MainView.SetInfoView(ChoiceInfoView);
 		PlayerPower.GenerateSituation();
-		MultipleChoiceView.SetNation(PlayerPower);
+		ChoiceInfoView.SetNation(PlayerPower);
 		this.MainView.InfoView.Open();
 	}
 
