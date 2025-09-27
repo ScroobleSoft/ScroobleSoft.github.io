@@ -2,15 +2,14 @@
 //---------------------------------------------------
 //---------- DOMINION INTRO VIEW --------------------  NOTE: ramdomly determined whether male or female head of state is shown first
 var DominionIntroView = function() {
-	var DailyButton, FreeFormButton, MultiChoiceButton, SurvivalButton, PlayButton, GuideButton, InfoButton;
-	var PickMaleButton, ModifyMaleButton, PickFemaleButton, ModifyFemaleButton;
-	var ShortButton, MediumButton, LongButton;
-	var GameRadioOptions, PastButton;
-	var OkButton, CancelButton;
-	var FemaleFirstFlag, PastGamesFlag, LeaderPickedFlag;
-	var MaleX, FemaleX;
-	var MaleName, FemaleName, MaleProfile, FemaleProfile;
-	var GameInfo, InfoCount;
+	var DailyButton, FreeFormButton, MultiChoiceButton, SurvivalButton, PlayButton, GuideButton, InfoButton;										//open page
+	var PickMaleButton, ModifyMaleButton, PickFemaleButton, ModifyFemaleButton, ShortButton, MediumButton, LongButton, PastButton;		//start page
+	var GameRadioOption, FemaleFirstFlag, LeaderPickedFlag, PastGamesFlag, MaleX, FemaleX, DailyDate, GameInfo;									//start page
+	var OkButton, CancelButton;																																			//character page
+	var GenderRadioOptions, MonthsTouchBar, CellImage, SelectionImage, DeselectionImage, GenderFlag;												//past page
+	var PastGameDate, SelectedSlot, StartingSlot, EndingSlot, PastGameIndex, FirstDayIndex;															//past page
+	var MaleName, FemaleName, MaleProfile, FemaleProfile, SelectedName, SelectedProfile;																//open page
+	var InfoCount;																																								//info page
 };
 DominionIntroView.prototype = new GenieView();
 DominionIntroView.prototype.Set = function(cnvs, specs) {
@@ -18,16 +17,99 @@ DominionIntroView.prototype.Set = function(cnvs, specs) {
 
 	this.State = this.Specs.STATE.OPEN;
 	this.InfoCount = 0;
+	this.GenderFlag = GENDER.FEMALE;
+};
+DominionIntroView.prototype.SetImages = function() {
+
+	this.CellImage = this.SetImage(ImageManager.Pics[IMAGeINDEX.IMAGES], this.Specs.IMAGE.CELL);
+	this.SelectionImage = this.SetImage(ImageManager.Pics[IMAGeINDEX.IMAGES], this.Specs.IMAGE.SELECTION);
+	this.DeselectionImage = this.SetImage(ImageManager.Pics[IMAGeINDEX.IMAGES], this.Specs.IMAGE.DESELECTION);
+};
+DominionIntroView.prototype.SetControls = function() {
+
+	//Choice
+	this.DailyButton = this.SetTextButton(this.Specs.BUTTON.DAILY, RaisedCornerImages, this.TextWriter);
+	this.FreeFormButton = this.SetTextButton(this.Specs.BUTTON.FREeFORM, RaisedCornerImages, this.TextWriter);
+	this.MultiChoiceButton = this.SetTextButton(this.Specs.BUTTON.MULTiCHOICE, RaisedCornerImages, this.TextWriter);
+	this.SurvivalButton = this.SetTextButton(this.Specs.BUTTON.SURVIVAL, RaisedCornerImages, this.TextWriter);
+	this.PlayButton = this.SetTextButton(this.Specs.BUTTON.PLAY, RaisedCornerImages, this.TextWriter);
+	this.GuideButton = this.SetTextButton(this.Specs.BUTTON.GUIDE, RaisedCornerImages, this.TextWriter);
+	this.InfoButton = this.SetTextButton(this.Specs.BUTTON.INFO, RaisedCornerImages, this.TextWriter);
+
+	//Head of state
+	this.PickMaleButton = this.SetTextButton(this.Specs.BUTTON.PICkMALE, RaisedCornerImages, this.TextWriter);
+	this.ModifyMaleButton = this.SetTextButton(this.Specs.BUTTON.MODIFyMALE, RaisedCornerImages, this.TextWriter);
+	this.PickFemaleButton = this.SetTextButton(this.Specs.BUTTON.PICkFEMALE, RaisedCornerImages, this.TextWriter);
+	this.ModifyFemaleButton = this.SetTextButton(this.Specs.BUTTON.MODIFyFEMALE, RaisedCornerImages, this.TextWriter);
+
+	//Game Options
+	this.ShortButton = this.SetTextButton(this.Specs.BUTTON.SHORT, RaisedCornerImages, this.TextWriter);
+	this.MediumButton = this.SetTextButton(this.Specs.BUTTON.MEDIUM, RaisedCornerImages, this.TextWriter);
+	this.LongButton = this.SetTextButton(this.Specs.BUTTON.LONG, RaisedCornerImages, this.TextWriter);
+	this.PastButton = this.SetTextButton(this.Specs.BUTTON.PAST, RaisedCornerImages, this.TextWriter);
+
+	//Profile
+	this.OkButton = this.SetTextButton(this.Specs.BUTTON.OK, RaisedCornerImages, this.TextWriter);
+	this.CancelButton = this.SetTextButton(this.Specs.BUTTON.CANCEL, RaisedCornerImages, this.TextWriter);
+
+	//Radio Options
+	this.GameRadioOptions = this.SetRadioControls(this.Specs.RADIO.GAME, RadioOptionImage, this.TextWriter)
+	this.GenderRadioOptions = this.SetRadioControls(this.Specs.RADIO.GENDER, RadioOptionImage, this.TextWriter)
+
+	//Touch bar
+	this.MonthsTouchBar = this.SetTouchBar(this.Specs.TOUChBAR.MONTHS, this.Specs.TOUChBAR.MONTHS.IMAGE, ImageManager.Pics[IMAGeINDEX.CONTROLS]);
+};
+DominionIntroView.prototype.ShowControls = function() {
+
+	this.Controls.forEach(function(cntrl) {cntrl.DeActivate();});
+
+	switch (this.State) {
+		case this.Specs.STATE.OPEN:
+			this.ShowOpenControls();
+			break;
+		case this.Specs.STATE.START:
+			this.ShowStartControls();
+			break;
+		case this.Specs.STATE.INFO:
+			this.PlayButton.Show();
+			this.InfoButton.Show();
+			break;
+		case this.Specs.STATE.CHARACTER:
+			this.OkButton.Show();
+			this.CancelButton.Show();
+			break;
+		case this.Specs.STATE.PAST:
+			this.ShowPastControls();
+			break;
+	}
+};
+DominionIntroView.prototype.SetDailyCharacters = function() {
+	var i;
+	var nDays;
+	var mName, fName, mProfile, fProfile;
+
+	this.Randomizer.SetStringSeed("Dominion");
+
+	nDays = Calendar.GetScheduledGames();
+	Game.DailyCharacters = new Array(nDays);
+	for (i=0;i<nDays;++i) {
+		mName = CharacterGenerator.GenerateMaleName();
+		fName = CharacterGenerator.GenerateFemaleName();
+		mProfile = CharacterGenerator.GenerateMaleProfile();
+		fProfile =  CharacterGenerator.GenerateFemaleProfile();
+		Game.DailyCharacters[i] = { Male: { Name: mName, Profile: mProfile }, Female: { Name: fName, Profile: fProfile } };
+	}
+
+	this.Randomizer.ResetSeeds();
 };
 DominionIntroView.prototype.Open = function() {
-	var date;
-
 	GenieView.prototype.Open.call(this);
 
+	this.SetDailyCharacters();
 	if (this.State==this.Specs.STATE.OPEN) {
-		date = new Date();
-		date.getTime();
-		this.GameInfo = date.toDateString();
+		this.DailyDate = new Date();
+		this.DailyDate.getTime();
+		this.GameInfo = this.DailyDate.toDateString();
 	}
 };
 DominionIntroView.prototype.Update = function() {
@@ -45,6 +127,8 @@ DominionIntroView.prototype.Update = function() {
 	}
 	if (this.State==VIEW.INTRO.STATE.CHARACTER)
 		this.UpdateCharacterControls();
+	if (this.State==VIEW.INTRO.STATE.PAST)
+		this.UpdatePastControls();
 };
 DominionIntroView.prototype.Draw = function() {
 
@@ -59,81 +143,6 @@ DominionIntroView.prototype.Draw = function() {
 	this.TextWriter.ResetColour();
 
 //	this.Update();
-};
-DominionIntroView.prototype.DisplayInfo = function() {
-
-	this.GraphicsTool.DrawRectangle(80, 50, 240, 260, this.Specs.COLOUR, 0);
-	this.GraphicsTool.DrawRectangle(80, 50, 240, 300, "white", 3);
-
-	this.TextWriter.SetColour("white");
-
-	this.TextWriter.WriteParagraphs(IntroInfo[this.InfoCount], 87, 68, null, null, 6)
-
-	this.TextWriter.ResetColour();
-};
-DominionIntroView.prototype.SetProfiles = function() {
-
-	if (this.Randomizer.CheckBoolean()) {		//male first
-		this.MaleX = 70;
-		this.FemaleX = 210;
-	} else {												//female first
-		this.FemaleFirstFlag = true;
-		this.MaleX = 210;
-		this.FemaleX = 70;
-	}
-};
-DominionIntroView.prototype.DisplayProfiles = function() {
-	var x;
-	var date;
-
-	this.GraphicsTool.DrawRectangle(50, 50, 300, 300, this.Specs.COLOUR, 0);
-	this.GraphicsTool.DrawRectangle(50, 50, 300, 300, "white", 3);
-
-	//Male
-	CharacterGenerator.GenerateMaleProfile();
-	this.MaleProfile = CharacterGenerator.Profile;
-	CharacterGenerator.SetNation(PlayerPower);
-	this.GraphicsTool.DrawRectangle(this.MaleX, 70, 100, 100, "rgb(175,239,255)", 0);
-	this.GraphicsTool.DrawRectangle(this.MaleX-3, 67, 106, 106, "black", 3);
-	CharacterGenerator.Draw(this.MaleX, 70);
-	this.MaleName = CharacterGenerator.GenerateName() + " " + CharacterGenerator.GenerateName();
-	x = (106-StringUtils.GetTextWidth(this.MaleName, null, this.Context))/2;
-	this.TextWriter.Write(this.MaleName, this.MaleX+x-3, 188, { COLOUR: "white" } );
-
-	//Female
-	CharacterGenerator.GenerateFemaleProfile();
-	this.FemaleProfile = CharacterGenerator.Profile;
-	CharacterGenerator.SetNation(PlayerPower);
-	this.GraphicsTool.DrawRectangle(this.FemaleX, 70, 100, 100, "rgb(175,239,255)", 0);
-	this.GraphicsTool.DrawRectangle(this.FemaleX-3, 67, 106, 106, "black", 3);
-	CharacterGenerator.Draw(this.FemaleX, 70);
-	this.FemaleName = CharacterGenerator.GenerateName() + "a " + CharacterGenerator.GenerateName();
-	x = (106-StringUtils.GetTextWidth(this.FemaleName, null, this.Context))/2;
-	this.TextWriter.Write(this.FemaleName, this.FemaleX+x-3, 188, { COLOUR: "white" } );
-
-	//Daily game info
-	if (Game.Type==DOMINION.GAME.DAILY) {
-		this.GraphicsTool.DrawRectangle(60, 235, 125, 100, "white", 2);
-		this.GraphicsTool.DrawRectangle(70, 235, 50, 10, this.Specs.COLOUR, 0);
-		this.TextWriter.Write("Game", 75, 240, { COLOUR: "white" } );
-		if (this.PastGamesFlag) {
-			this.TextWriter.Write("Past", 70, 262, { COLOUR: "white", STYLE: FONT.STYLE.UNDERLINED } );
-			//-name of game chosen
-		} else {
-			this.TextWriter.Write("Daily", 70, 262, { COLOUR: "white", STYLE: FONT.STYLE.UNDERLINED } );
-			this.TextWriter.Write(this.GameInfo, 70, 286, { COLOUR: "white" } );
-		}
-	}
-
-	//Game options
-	if (Game.Type==DOMINION.GAME.DAILY)
-		x = 90;
-	else
-		x = 0;
-	this.TextWriter.Write("Votes", 210+x, 240, { COLOUR: "white", STYLE: FONT.STYLE.UNDERLINED } );
-	this.TextWriter.Write("20", 220+x, 267, { COLOUR: "white" } );
-	this.TextWriter.Write("35", 220+x, 297, { COLOUR: "white" } );
-	this.TextWriter.Write("50", 220+x, 327, { COLOUR: "white" } );
 };
 DominionIntroView.prototype.OpenGlobalView = function() {  //UNLOGGED - probably REDUNDANT
 
@@ -161,6 +170,14 @@ DominionIntroView.prototype.OpenOfficeView = function() {
 };
 DominionIntroView.prototype.OpenGuideView = function() {
 
+	this.ConsoleView.Close();
+	this.SetConsoleView(DocumentationConsoleView);
 	GuideView.Open();
 	GuideView.Update();
+};
+DominionIntroView.prototype.OpenChoiceView = function() {  //UNLOGGED
+
+	ChoiceView.SetNation(PlayerPower);
+	ChoiceView.Open();
+	ChoiceView.Update();
 };

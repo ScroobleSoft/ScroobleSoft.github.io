@@ -133,7 +133,7 @@ DominionAssetsView.prototype.UpdateViewButtons = function() {  //UNLOGGED
 	if (this.CloseButton.CheckClicked()) {
 		if (Game.Type==DOMINION.GAME.DAILY)
 			this.Close(this.OpenSolicitationView.bind(this), 100);
-		else if (Game.Type==DOMINION.GAME.MULTiCHOICE)
+		else if (Game.Type==DOMINION.GAME.FREeFORM)
 			this.Close(this.OpenGlobalView.bind(this), 100);
 	}
 };
