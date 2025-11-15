@@ -73,6 +73,14 @@ ArrayUtilities.prototype = {
 
 		return (arry.splice(eIndx, 1)[0]);
 	},
+	Split(arry, eIndx) {
+		var aSub;
+
+		aSub = arry.slice(eIndx);
+		arry = arry.slice(0, eIndx);
+
+		return (aSub);
+	},
 	InsertAtFront(arry, elmnt) {
 
 		arry.unshift(elmnt);
