@@ -1,0 +1,9 @@
+
+DominionChoiceInfoView.prototype.OpenSplinteringScreen = function() {  //UNLOGGED
+
+	this.TextWriter.SetContext(this.Context);
+	this.TextWriter.Write("Splintering", 5, 20);
+	this.TextWriter.ResetContext();
+};
+DominionChoiceInfoView.prototype.AcceptSplinteringScreen = function() {  //UNLOGGED
+};

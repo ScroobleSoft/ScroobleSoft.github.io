@@ -8,25 +8,36 @@ DominionChoiceView.prototype = new GenieView();
 DominionChoiceView.prototype.Set = function(cnvs, specs) {
 	GenieView.prototype.Set.call(this, cnvs, specs);
 
+	this.State = this.Specs.STATE.GAZETTEER;
 	WorldMap.SelectNation(PlayerPower);
 };
-DominionChoiceView.prototype.SetNation = function(nation) {  //UNLOGGED - REDUNDANT?
+DominionChoiceView.prototype.SetNation = function(nation) {
 
 	this.Nation = nation;
-	this.InfoView.SetNation(this.Nation);		//REDUNDANT?
+	ChoiceInfoView.SetNation(this.Nation);
 };
-DominionChoiceView.prototype.Update = function() {  //UNLOGGED
-	GenieView.prototype.Update.call(this);
+DominionChoiceView.prototype.Update = function() {
+
+	this.AnimationFrameHandle = requestAnimationFrame(this.Update.bind(this));
 
 	if (Mouse.CheckLeftClicked(CANVAS.PRIME)) {
-		WorldMap.CheckNationClicked();
-		if (this.SelectedNation)
-			WorldMap.Draw();
-	} else if (Mouse.CheckLeftClicked(CANVAS.ZOOM)) {
+		if (this.State==this.Specs.STATE.GAZETTEER) {
+			WorldMap.CheckNationClicked();
+			if (WorldMap.SelectedNation) {
+				WorldMap.Draw();
+				this.InfoView.SetNation(WorldMap.SelectedNation);
+				this.InfoView.DisplayNationInfo();
+			}
+		}
+	} else if (Mouse.CheckLeftClicked(CANVAS.ZOOM))
+		this.InfoView.UpdateClick();
+	else if (Mouse.CheckLeftClicked(CANVAS.CONSOLE))
 		Mouse.ClearAll();
-	} else if (Mouse.CheckLeftClicked(CANVAS.CONSOLE)) {
-		Mouse.ClearAll();
-	}
+
+	WorldMap.Update();
+
+	this.InfoView.Update();
+	this.ConsoleView.Update();
 };
 DominionChoiceView.prototype.Draw = function() {  //UNLOGGED
 
