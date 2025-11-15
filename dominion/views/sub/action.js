@@ -2,12 +2,11 @@
 //---------------------------------------------------------------
 //---------- DOMINION ACTION CONSOLE VIEW -----------------------
 var DominionActionConsoleView = function() {
-	var InfoBevelImage, InfoIconPanel;
-	var ExpansionButtonImages, ExpansionBevelImages, ExpansionButtonPanel;
-
+	var InfoIconPanel;
+	var ExpansionButtonPanel;
+	var ModeIconPanel, LeaderIcon;
 	var TurnImage, TurnDigitImages;
-	var AdvisorIconImage, AdvisorIcon, MapIconImage, MapIcon, OfficeIconImage, OfficeIcon;
-	var TurnButton;
+//	var ModeIconImage, LeaderIconImage, ExpansionButtonImages, ExpansionBevelImages, InfoBevelImage;		//REDUNDANT
 
 	var i, x, y, digit;
 };
@@ -18,25 +17,23 @@ DominionActionConsoleView.prototype.Set = function(cnvs, specs, mView) {
 };
 DominionActionConsoleView.prototype.SetControls = function() {
 
-	this.SetPanels();
-	this.SetIcons();
-
-	//Turn button
-	this.TurnButton = new ImageButton();
-	if (Game.CheckMobile())
-		this.TurnButton.Set(this.Canvas, this.Specs.MOBILE.BUTTON.TURN, ImageManager.Pics[IMAGeINDEX.CONTROLS]);
-	else
-		this.TurnButton.Set(this.Canvas, this.Specs.BUTTON.TURN, ImageManager.Pics[IMAGeINDEX.CONTROLS]);
-	this.TurnButton.SetCornersPic(RaisedCornerImages);
-	this.Controls.push(this.TurnButton);
+//	this.SetPanels();
+//	this.SetIcons();
+	this.LeaderIcon = this.SetCornersIcon(this.Specs.MOBILE.ICON.LEADER, ImageManager.Pics[IMAGeINDEX.CONTROLS], this.Specs.IMAGE.LEADErICON,
+																																										IconCornerImages);
+	this.InfoIconPanel = this.SetBevelledIconPanel(this.Specs.MOBILE.ICOnPANEL.INFO, this.Specs.IMAGE.INFoICONs, this.Specs.IMAGE.BEVEL.INFO,
+																																			ImageManager.Pics[IMAGeINDEX.CONTROLS]);
+	this.ExpansionButtonPanel = this.SetButtonPanel(this.Specs.MOBILE.BUTTOnPANEL.EXPANSION, this.Specs.IMAGE.EXPANSIOnBUTTONs,
+																								this.Specs.IMAGE.BEVEL.EXPANSION, ImageManager.Pics[IMAGeINDEX.CONTROLS]);
+	this.ModeIconPanel = this.SetCornersIconPanel(this.Specs.MOBILE.ICOnPANEL.MODE, this.Specs.IMAGE.MODeICONs, IconCornerImages,
+																													this.GraphicsTool, ImageManager.Pics[IMAGeINDEX.CONTROLS]);
 };
 DominionActionConsoleView.prototype.SetImages = function() {
 
-	this.TurnImage = new GenieImage();
-	this.TurnImage.Set(this.Context, ImageManager.Pics[IMAGeINDEX.IMAGES], this.Specs.IMAGE.TURN);
-	this.TurnDigitImages = new GenieImage();
-	this.TurnDigitImages.Set(this.Context, ImageManager.Pics[IMAGeINDEX.IMAGES], this.Specs.IMAGE.TURnDIGITs);
+	this.TurnImage = this.SetImage(ImageManager.Pics[IMAGeINDEX.IMAGES], this.Specs.IMAGE.TURN);
+	this.TurnDigitImages = this.SetImage(ImageManager.Pics[IMAGeINDEX.IMAGES], this.Specs.IMAGE.TURnDIGITs);
 };
+/*
 DominionActionConsoleView.prototype.SetPanels = function() {
 
 	//Info icon panel
@@ -99,6 +96,7 @@ DominionActionConsoleView.prototype.SetIcons = function() {
 	this.OfficeIcon.SetCornersPic(IconCornerImages);
 	this.Controls.push(this.OfficeIcon);
 };
+*/
 /*
 DominionActionConsoleView.prototype.SetComponents = function() {
 
@@ -119,8 +117,8 @@ DominionActionConsoleView.prototype.Update = function() {  //UNLOGGED
 	if (this.ExpansionButtonPanel.ButtonPressed!=-1)
 		return;
 
-	if (this.OfficeIcon.CheckPressed())
-		this.MainView.Close(this.MainView.OpenOfficeView.bind(this), 100);
+//	if (this.OfficeIcon.CheckPressed())
+//		this.MainView.Close(this.MainView.OpenOfficeView.bind(this), 100);
 };
 DominionActionConsoleView.prototype.Draw = function() {
 	GenieSubView.prototype.Draw.call(this);
@@ -129,7 +127,7 @@ DominionActionConsoleView.prototype.Draw = function() {
 		this.TurnImage.Draw(this.TurnImage.Specs.MOBILE.X, this.TurnImage.Specs.MOBILE.Y);
 		for (this.i=2;this.i>=0;--this.i) {
 			this.digit = Math.floor(Game.Turn/Math.pow(10,this.i)) % 10;
-			this.x = this.TurnImage.Specs.MOBILE.X + 33 + (7*(2-this.i));
+			this.x = this.TurnImage.Specs.MOBILE.X + 32 + (7*(2-this.i));
 			this.TurnDigitImages.DrawPatchNumber(this.digit, this.x, this.TurnImage.Specs.MOBILE.Y);
 		}
 	} else {
