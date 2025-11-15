@@ -5,12 +5,12 @@
 //---------- DOMINION POWER --------------------
 var DominionPower = function() {
 	var Alliances;
-	var GovernmentsList;		//sorted by affinity, used in forming alliances
-	var ContinentIndices;	//random, used in alliances
+	var GovernmentsList;													//sorted by affinity, used in forming alliances
+	var ContinentIndices;												//random, used in alliances
 	var Investments, Bonds;
 	var Ambassadors, ConsulGenerals, HighCommissioners;
-	var Allieds;
-	var Situation;
+	var Allieds;															//used in determining alliances
+	var Situation, SituationSlots, Action, ActionSlots;
 	var Fleets;
 
 	var i, j;
@@ -26,11 +26,22 @@ DominionPower.prototype.Set = function(rGenerator) {
 	this.ContinentIndices = new Array(MAP.CONTINENT.COUNT);
 	ArrayUtils.Index(this.ContinentIndices);
 	this.Bonds = new Array();
-
-	//TODO: this is TEMP for Mobile/Multiple-Choice game
-	this.Units = 88 * 17;		//NOTE: missiles not included
-
    this.Allieds = ArrayUtils.Create(ALLIED.COUNT, function() {var Index, Proximity;} );
+	this.SetData();
+};
+DominionPower.prototype.SetData = function() {
+	var i;
+
+	this.Units = 88 * 17;		//TODO: this is TEMP for Mobile/Multiple-Choice game - NOTE: missiles not included
+	this.SituationSlots = [ 4,3,2,1 ];
+	this.ActionSlots = new Array(EXPANSION.METHODS);
+	for (i=0;i<EXPANSION.METHODS;++i)
+		if (i==EXPANSION.CONQUEST)
+			this.ActionSlots[i] = PowerProfiles[this.Index][POWER.PROFILE.POSTURE];
+		else if (i==EXPANSION.MISSION)
+			this.ActionSlots[i] = Math.round(PowerProfiles[this.Index][POWER.PROFILE.POSTURE]/2);
+		else
+			this.ActionSlots[i] = 1;
 };
 DominionPower.prototype.SetPopulation = function() {
 	DominionNation.prototype.SetPopulation.call(this);
@@ -285,10 +296,16 @@ DominionPower.prototype.DetermineAllianceType = function() {
 	//-at the moment, it is just aid
 	this.AllianceType = ALLIANCE.AID;
 };
-DominionPower.prototype.ForgeAlliance = function(alliance) {  //UNLOGGED
+DominionPower.prototype.ForgeAlliance = function(partner, situation) {  //UNLOGGED
+	var allnc;
 
 	//-in case this is an upgraded alliance, scan the list and delete the previous one
-	this.Alliances.push(alliance);
+
+	allnc = new DominionAlliance();
+	allnc.Set(this, partner, AllianceSituationMap[situation]);
+	this.Alliances.push(allnc);
+};
+DominionPower.prototype.DissolveAlliance = function(partner, situation) {  //UNLOGGED
 };
 DominionPower.prototype.SetGovernmentsList = function() {
 	var nGvrnmnts;
@@ -324,7 +341,41 @@ DominionPower.prototype.CheckAnnexable = function(ntn) {
 
 	return (true);
 };
-DominionPower.prototype.GenerateSituation = function() {
+DominionPower.prototype.GenerateSituation = function() {  //only for Tomcat
+	var slot;
 
-	this.Situation = this.Randomizer.GetIndex(SITUATION.TYPES);
+	slot = this.Randomizer.GetSlot(this.SituationSlots);
+	this.Situation = (slot*SITUATION.BAND.SLOTS) + this.Randomizer.GetIndex(SITUATION.BAND.SLOTS);
+};
+DominionPower.prototype.DetermineAction = function() {  //Power AI
+	var odds;
+	var actn;
+
+	//Check first if any action is taken (22% for Mirage to 50% for Hornet)
+	odds = ArrayUtils.GetSum(this.ActionSlots);
+	if (this.Randomizer.CheckOverOdds(odds, 36)) {		//max odds can be are 18 for Hornet, min 8 for Mirage
+		this.Action = -1;
+		return;
+	} else
+		this.Action = this.Randomizer.GetSlot(this.ActionSlots);
+/* REDUNDANT
+	//1/16th to half chance of initiating Conquest or Mission
+	if (this.Randomizer.CheckUnderOdds(PowerProfiles[this.Index][0], 2*BELLIGERENCE.TYPES)) {
+		this.Action = ALLIANCE.CONQUEST;
+	} else
+		if (this.Randomizer.FlipCoin()) {		//pick Power's specialty (except for Hornet)
+			if (this.Index==POWER.HORNET) {
+				do {
+					actn = this.Randomizer.GetIndex(ALLIANCE.TYPES);
+				} while (actn==ALLIANCE.CONQUEST);
+				this.Action = actn;
+			} else
+				this.Action = PowerProfiles[this.Index][1];
+		} else {											//pick any specialty other than conquest
+			do {
+				actn = this.Randomizer.GetIndex(ALLIANCE.TYPES);
+			} while (actn==ALLIANCE.CONQUEST);
+			this.Action = actn;
+		}
+*/
 };

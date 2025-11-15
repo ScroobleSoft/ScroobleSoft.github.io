@@ -5,7 +5,7 @@ var DominionAlliedState = function() {
 	var Randomizer;
 	var AssociatedIndex, SecondaryIndex, NameIndex;		//.Associated - most closely associated Power, .Secondary - more peripheral association
 	var PrimaryColour, SecondaryColour;
-	var Alliance, Grants, Aid, Treaties, Pacts;
+	var Alliance, Credit;
 	var Orientation, Belligerence;
 	var ConsulGenerals;
 };
@@ -21,14 +21,8 @@ DominionAlliedState.prototype.Set = function(rGenerator) {
 };
 DominionAlliedState.prototype.SetData = function() {
 
-	this.Grants = new Array(POWER.COUNT);
-	this.Grants.fill(0);
-	this.Aid = new Array(POWER.COUNT);
-	this.Aid.fill(0);
-	this.Treaties = new Array(POWER.COUNT);
-	this.Treaties.fill(0);
-	this.Pacts = new Array(POWER.COUNT);
-	this.Pacts.fill(0);
+	this.Credit = new Array(POWER.COUNT);
+	this.Credit.fill(0);
 };
 /*
 DominionAlliedState.prototype.Generate = function(blgrnc) {
