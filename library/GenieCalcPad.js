@@ -136,3 +136,6 @@ GenieCalcPad.prototype = {
 		return(this.GetPolygonVertices(VERTICES.OCTAGON, size, bAntiClockWise, ANGLE.SEMiISOMETRIC+angle));
 	}
 };
+
+var Geometry = new GenieCalcPad();
+Geometry.Set();

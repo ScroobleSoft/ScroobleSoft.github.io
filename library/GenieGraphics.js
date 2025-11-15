@@ -330,10 +330,12 @@ GenieGraphics.prototype = {
 	},
 	DrawOctagon(x, y, size, colour, lWidth, opcty) {
 
+		//Adjust vertices accurately
 		for (this.i=0;this.i<SIDES.OCTAGON;++this.i) {
-	 this.Vertices[this.i].X = (size/24)*this.Octagon[this.i].X;
-	 this.Vertices[this.i].Y = (size/24)*this.Octagon[this.i].Y;
+			this.Vertices[this.i].X = (size/24)*this.Octagon[this.i].X;
+			this.Vertices[this.i].Y = (size/24)*this.Octagon[this.i].Y;
 		}
+
 		this.DrawPolygon(x, y, this.Vertices, colour, lWidth, opcty);
 	},
 	DrawPolygon(x, y, vrtcs, colour, lWidth, opcty) {
@@ -395,3 +397,6 @@ GenieGraphics.prototype = {
 			this.DrawRectangle(l+6, t-1, wLabel, 3, colour, 0);		//HARD-CODED!
 	}
 };
+
+var Graphics = new GenieGraphics();
+//Graphics.Set(Interface.Screen, Interface.InfoBox, Interface.ControlPanel);  //TODO: enable when Interface is defined

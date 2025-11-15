@@ -79,14 +79,6 @@ GenieRandomizer.prototype = {
 
 		this.SetSeeds(num, num+1);
 	},
-/*
-	SetDailyDate(date) {
-		var dt;
-
-		dt = new Date(date);
-		this.DailyMS = dt.getTime();
-	},
-*/
 	SetDailySeed(date) {
 		var dt;
 
@@ -97,22 +89,7 @@ GenieRandomizer.prototype = {
 		this.DailySeed += 1000 * dt.getMonth();
 		this.DailySeed += 100000 * (dt.getFullYear() % 100);
 	},
-/*
-	SetDateSeed(date) {
-		var dt, day;
-		var ms;
-		var seed;
-
-		dt = new Date(date);
-		ms = dt.getTime();
-		dt = new Date();
-		day = Math.floor((dt.getTime()-ms)/MILLISECONDS);
-		seed = day * this.DailySeed;
-
-		return (seed);
-	},
-*/
-	ActivateDailySeeds() {
+	ActivateDailySeed() {
 
 		this.SetSeeds(this.DailySeed, this.DailySeed+1);
 	},
@@ -323,3 +300,6 @@ GenieRandomizer.prototype = {
 		this.Seed2 = Math.pow(2, 32) - this.Seed1;
 	},
 */
+
+var Randomizer = new GenieRandomizer();
+Randomizer.Set();

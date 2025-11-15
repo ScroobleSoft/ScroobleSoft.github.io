@@ -80,13 +80,14 @@ GenieAgent.prototype.Set = function(specs, sprite) {
 	this.SetAlignmentOffsets();
 	this.SetBoundingBox();
 	this.SetFootprint();
+	this.SetTiled();
 
 	if (this.Specs) {
 		this.SetTransform();
 		if (this.Specs.PEAK)
 			this.SetPeak();
 		this.ActivatePacks();
-		if (GAME.TILES)
+		if (GAME.TILES)							//make REDUNDANT
 			this.Tile = new GenieTile();
 	}
 };
@@ -251,6 +252,14 @@ GenieAgent.prototype.SetTerrain = function(trrn) {
 
 	this.Terrain = trrn;
 };
+GenieAgent.prototype.SetTiled = function() {  //enable tiling if necessary
+	var game;
+
+	game = typeof Game;
+	if (game!="undefined")
+		if (Game.CheckTiled())
+			this.Tile = new GenieTile();
+};		
 GenieAgent.prototype.SetTile = function(c, r) {
 
 	this.Tile.Set(c, r);
@@ -258,8 +267,8 @@ GenieAgent.prototype.SetTile = function(c, r) {
 		this.Position.X = this.Tile.C * this.Terrain.Specs.TILE.W;
 		this.Position.Y = this.Tile.R * this.Terrain.Specs.TILE.H;
 		if (this.Specs.OFFSET) {
-	 this.Position.X += this.Specs.OFFSET.X;
-	 this.Position.Y += this.Specs.OFFSET.Y;
+			this.Position.X += this.Specs.OFFSET.X;
+			this.Position.Y += this.Specs.OFFSET.Y;
 		}
 	}
 };

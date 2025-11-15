@@ -137,6 +137,10 @@ GenieGame.prototype = {
 
 		return (this.Settings & GAME.FOgOfWAR);
 	},
+	SetTiled() {
+
+		this.Settings += GAME.TILED;
+	},
 	CheckTiled() {
 
 		return (this.Settings & GAME.TILED);
@@ -156,8 +160,12 @@ GenieGame.prototype = {
 
 		return (this.Settings & GAME.PLATFORM.PHONE);
 	},
-	CheckPC() {  //UNLOGGED - this could change when approach to tablets is decided
+	CheckPC() {  //UNLOGGED - this could change when approach to tablets is decided (tablets can be called PC's too)
 
 		return (!this.CheckMobile());
+	},
+	CheckDesktop() {  //UNLOGGED - desktop only, not tablet
+
+		//-
 	}
 };

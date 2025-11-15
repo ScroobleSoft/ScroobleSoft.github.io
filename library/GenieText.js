@@ -175,9 +175,11 @@ GenieText.prototype = {
 
 		//Write strings
 		for (i=0;i<aStrngs.length;++i) {
-//			for (j=0;j<aStrngs[i].length;++j) {
-				this.WriteMulti(aStrngs[i], x, y+(space*i), specs, cnvs);
-				y += gap * aStrngs[i].length;
-			}
+			this.WriteMulti(aStrngs[i], x, y+(space*i), specs, cnvs);
+			y += gap * aStrngs[i].length;
+		}
 	}
 };
+
+var Text = new GenieText();
+//Text.Set(Interface.Screen, Interface.InfoBox, Interface.ControlPanel);  //TODO: enable when Interface is defined

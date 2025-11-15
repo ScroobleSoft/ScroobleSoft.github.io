@@ -267,6 +267,40 @@ GenieView.prototype = {
 
 		return (btn);
 	},
+/*
+	SetCornersButtonPanel(specs, iSpecs, cImg, gTool, img) {  //UNLOGGED - only bevelld Icon Panel currently supported
+		var bPnl;
+		var iPnl;
+
+		iPnl = new GenieImage();
+		iPnl.Set(this.Context, img, iSpecs);
+
+		bPnl = new GenieButtonPanel();
+		bPnl.Set(this.Canvas, specs, iSpecs, img);
+		bPnl.SetCornersPic(cImg);
+		bPnl.SetButtonPics(iPnl);
+		bPnl.SetLinks(gTool);
+		this.Controls.push(bPnl);
+
+		return (bPnl);
+	},
+*/
+	SetButtonPanel(specs, iSpecs, bSpecs, img) {
+		var bPnl;
+		var iPnl, iBvl;
+
+		iPnl = new GenieImage();
+		iPnl.Set(this.Context, img, iSpecs);
+		iBvl = new GenieImage();
+		iBvl.Set(this.Context, img, bSpecs);
+
+		bPnl = new GenieButtonPanel();
+		bPnl.Set(this.Canvas, specs, iBvl);
+		bPnl.SetButtonPics(iPnl);
+		this.Controls.push(bPnl);
+
+		return (bPnl);
+	},
 	SetCheckBox(specs, img, tWriter) {
 		var chkbx;
 
@@ -301,12 +335,12 @@ GenieView.prototype = {
 
 		return (iPnl);
 	},
-	SetBevelledIconPanel(specs, iSpecs, bSpecs) {
+	SetBevelledIconPanel(specs, iSpecs, bSpecs, img) {
 		var iPnl;
 		var iBvl;
 
 		iBvl = new GenieImage();
-		iBvl.Set(this.Context, ImageManager.Pics[IMAGeINDEX.CONTROLS], bSpecs);
+		iBvl.Set(this.Context, img, bSpecs);
 
 		iPnl = new GenieIconPanel();
 		iPnl.Set(this.Canvas, specs, iSpecs);

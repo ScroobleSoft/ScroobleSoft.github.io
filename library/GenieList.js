@@ -48,6 +48,15 @@ GenieList.prototype.Remove = function(iItem) {
 	--this.Length;
 	this.Extend();	//NOTE: doing this to ensure original list size remains constant
 };
+GenieList.prototype.Slot = function(item) {
+	var i;
+
+	for (i=0;i<this.length;++i)
+		if (!this[i]) {
+			this[i] = item;
+			return (i);
+		}
+};
 GenieList.prototype.Extend = function(nItems) {		//NOTE: may never be used
 	var i;
 	var item;
