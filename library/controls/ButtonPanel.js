@@ -1,5 +1,6 @@
 /*
  *		** need a 'spacing out' Option for gaps between buttons
+ *		** NOTE: only bevelled buttons are supported right now
  */
 //--------------------------------------------------	Specs: { L: -1, T: -1, W: -1, H: -1, C: -1, R: -1, LW: -1,
 //---------- GENIE BUTTON PANEL --------------------				BUTTON: { W: -1, H: -1 }, OFFSETS: { X: -1, Y: -1 } };
@@ -65,7 +66,7 @@ GenieButtonPanel.prototype.MouseDown = function() {
 	this.ButtonPressed = (r*this.Specs.C) + c;
 	this.DrawButton(c, r, PRESSED);
 
-	setTimeout(this.ResetButton.bind(this), 150);
+	setTimeout(this.ResetButton.bind(this), 60);
 };
 GenieButtonPanel.prototype.CheckButtonPressed = function() {
 
