@@ -83,9 +83,9 @@ DominionIntroView.prototype.DisplayGameInfo = function() {
 
 	//Game options
 	this.TextWriter.Write("Votes", 300, 240, { COLOUR: "white", STYLE: FONT.STYLE.UNDERLINED } );
-	this.TextWriter.Write("20", 310, 267, { COLOUR: "white" } );
-	this.TextWriter.Write("35", 310, 297, { COLOUR: "white" } );
-	this.TextWriter.Write("50", 310, 327, { COLOUR: "white" } );
+	this.TextWriter.Write(DOMINION.VOTES.SHORT, 310, 267, { COLOUR: "white" } );
+	this.TextWriter.Write(DOMINION.VOTES.MEDIUM, 310, 297, { COLOUR: "white" } );
+	this.TextWriter.Write(DOMINION.VOTES.LONG, 310, 327, { COLOUR: "white" } );
 };
 DominionIntroView.prototype.UpdateProfileButtons = function() {
 
@@ -130,7 +130,7 @@ DominionIntroView.prototype.UpdateModifyButtons = function() {  //UNLOGGED
 
 	//Male
 	if (this.ModifyMaleButton.CheckClicked()) {
-		alert ("Feature not yet implemented.");
+		alert ("Feature not yet available.");
 		return;
 
 		this.State = this.Specs.STATE.MALE;
@@ -140,7 +140,7 @@ DominionIntroView.prototype.UpdateModifyButtons = function() {  //UNLOGGED
 
 	//Female
 	if (this.ModifyFemaleButton.CheckClicked()) {
-		alert ("Feature not yet implemented.");
+		alert ("Feature not yet available.");
 		return;
 
 		this.State = this.Specs.STATE.FEMALE;
@@ -193,10 +193,33 @@ DominionIntroView.prototype.UpdateRadioControl = function() {
 };
 DominionIntroView.prototype.StartGame = function() {
 
+	//Adjust for daily games
+	if (Game.Type==DOMINION.GAME.DAILY)
+		Game.Type += DOMINION.GAME.MULTiCHOICE;
+	else
+		if (this.GameRadioOptions.Selected==1)
+			Game.Type += DOMINION.GAME.DAILY;
+
+	//Double the number of turns for multi-choice games
+	if (Game.Type & DOMINION.GAME.MULTiCHOICE)
+		Game.TurnLimit *= 2;
+
+	//Pick correct icon profile pic (by modifying control specs)
+	if (PlayerPower.HeadOfState.GetGender()==GENDER.FEMALE) {
+		if (Game.CheckMobile)
+			VIEW.ACTION.MOBILE.ICON.LEADER.T += VIEW.ACTION.MOBILE.ICON.LEADER.H + VIEW.ACTION.MOBILE.ICON.LEADER.O;
+		else
+			VIEW.ACTION.ICON.LEADER.T += VIEW.ACTION.ICON.LEADER.H + VIEW.ACTION.ICON.LEADER.O;
+	}
+
 	//Set personnel here
-	if (Game.Type & DOMINION.GAME.DAILY)
+	if (Game.Type & DOMINION.GAME.DAILY) {
 		if (this.PastGameDate)
 			this.Randomizer.SetDailySeed(this.PastGameDate);
+		else
+			this.Randomizer.SetDailySeed(this.DailyDate);
+		this.Randomizer.ActivateDailySeed();
+	}
 
 	Powers.forEach(function(pwr) {pwr.SetPersonnel();});
 	AlliedStates.forEach(function(alld) {alld.SetPersonnel();});
@@ -208,11 +231,10 @@ DominionIntroView.prototype.StartGame = function() {
 	PlayerPower.HeadOfState.Name = this.SelectedName;
 	PlayerPower.HeadOfState.Profile = this.SelectedProfile;
 
-	switch (Game.Type & 0xF) {
+	switch (Game.Type & 0xE) {
 		case DOMINION.GAME.FREeFORM:
 			this.Close(this.OpenAssetsView.bind(this), 100);
 			break;
-		case DOMINION.GAME.DAILY:
 		case DOMINION.GAME.MULTiCHOICE:
 //			GlobalView.SetConsoleView(TurnConsoleView);
 //			this.Close(this.OpenGlobalView.bind(this), 100);
