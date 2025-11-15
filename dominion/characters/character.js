@@ -35,5 +35,19 @@ DominionCharacter.prototype = {
 			return (GENDER.FEMALE);
 		else
 			return (GENDER.MALE);
+	},
+	GetFirstName() {
+
+		if (this.GetGender()==GENDER.MALE)
+			StringUtils.GetSubString(this.Name, 0, 5);
+		else
+			StringUtils.GetSubString(this.Name, 0, 6);
+	},
+	GetLastName() {
+
+		if (this.GetGender()==GENDER.MALE)
+			StringUtils.GetSubString(this.Name, 6, 5);
+		else
+			StringUtils.GetSubString(this.Name, 7, 5);
 	}
 };
