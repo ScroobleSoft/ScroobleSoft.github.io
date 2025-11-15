@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+    <head>
+	<div id="PrimeDiv" style="position:absolute; top:8px; left:8px; z-index:1">
+	    <canvas id="PrimeCanvas" width="400" height="400"></canvas>
+	</div>
+	<div id="InfoDiv" style="position:absolute; top:412px; left:8px; z-index:2">
+	    <canvas id="InfoCanvas" width="250" height="250"></canvas>
+	</div>
+	<div id="ConsoleDiv" style="position:absolute; top:412px; left:258px; z-index:3">
+	    <canvas id="ConsoleCanvas" width="146" height="250"></canvas>
+	</div>
+    </head>
+
+    <body onload="RunTacticalTrix()">
+
+	<!-- Data -->
+	<script src="..\library\GenieData.js"></script>
+	<script src="..\library\data\Consts.js"></script>
+	<script src="..\library\data\Colours.js"></script>
+	<script src="..\library\data\Geo.js"></script>
+	<script src="..\library\data\IO.js"></script>
+	<script src="..\library\data\Controls.js"></script>
+	<script src="..\library\data\Images.js"></script>
+	<script src="..\library\data\Sprites.js"></script>
+	<script src="..\library\data\Agents.js"></script>
+	<script src="..\library\data\Weapons.js"></script>
+
+	<!-- Types -->
+	<script src="..\library\GenieTypes.js"></script>
+	<script src="..\library\GenieColour.js"></script>
+	<script src="..\library\GenieArray.js"></script>
+	<script src="..\library\GenieList.js"></script>
+	<script src="..\library\AgentArray.js"></script>
+
+	<!-- Utilities -->
+	<script src="..\library\GenieUtils.js"></script>
+	<script src="..\library\utils\ArrayUtils.js"></script>
+	<script src="..\library\utils\BitUtils.js"></script>
+	<script src="..\library\utils\GeoUtils.js"></script>
+	<script src="..\library\utils\SpaceUtils.js"></script>
+	<script src="..\library\utils\StringUtils.js"></script>
+
+	<!-- Controls -->
+	<script src="..\library\GenieControl.js"></script>
+	<script src="..\library\controls\GenieButton.js"></script>
+	<script src="..\library\controls\TextButton.js"></script>
+	<script src="..\library\controls\ImageButton.js"></script>
+
+	<!-- Objects -->
+	<script src="..\library\GenieBuffer.js"></script>
+	<script src="..\library\GenieStructure.js"></script>
+	<script src="..\library\MobileObject.js"></script>
+
+	<!-- Tools -->
+	<script src="..\library\GenieRandom.js"></script>
+	<script src="..\library\ScreenManager.js"></script>
+	<script src="..\library\GenieCalcPad.js"></script>
+	<script src="..\library\GenieText.js"></script>
+
+	<!-- Graphics -->
+	<script src="..\library\GenieImage.js"></script>
+	<script src="..\library\ImageMap.js"></script>
+	<script src="..\library\GenieGraphics.js"></script>
+	<script src="..\library\GenieShape.js"></script>
+	<script src="..\library\shapes\GenieLine.js"></script>
+	<script src="..\library\shapes\GeniePolygon.js"></script>
+
+	<!-- Sprites -->
+	<script src="..\library\GenieSprite.js"></script>
+	<script src="..\library\sprites\AnimatedSprite.js"></script>
+
+	<!-- Agents -->
+	<script src="..\library\GenieAgent.js"></script>
+	<script src="..\library\agent\Draw.js"></script>
+	<script src="..\library\agent\Update.js"></script>
+	<script src="..\library\agent\Space.js"></script>
+	<script src="..\library\agent\Collision.js"></script>
+
+	<!-- FX -->
+	<script src="..\library\GenieSound.js"></script>
+
+	<!-- Interface -->
+	<script src="..\library\GenieMouse.js"></script>
+	<script src="..\library\GenieKeyboard.js"></script>
+	<script src="..\library\GenieGamepad.js"></script>
+	<script src="..\library\TouchScreen.js"></script>
+	<script src="..\library\TrackPad.js"></script>
+
+	<!-- Framework -->
+	<script src="..\library\ImageManager.js"></script>
+	<script src="..\library\GenieCanvas.js"></script>
+	<script src="..\library\GenieScape.js"></script>
+	<script src="..\library\GenieView.js"></script>
+	<script src="..\library\views\SubView.js"></script>
+	<script src="..\library\views\NestedView.js"></script>
+	<script src="..\library\views\Dialog.js"></script>
+	<script src="..\library\views\OptionsDialog.js"></script>
+	<script src="..\library\GenieIntro.js"></script>
+	<script src="..\library\GenieGame.js"></script>
+
+	<!-- data -->
+	<script src="data.js"></script>
+	<script src="data\agents.js"></script>
+	<script src="data\colours.js"></script>
+	<script src="data\views.js"></script>
+
+	<!-- units -->
+	<script src="unit.js"></script>
+	<script src="units\trooper.js"></script>
+	<script src="units\gunner.js"></script>
+	<script src="units\bazooker.js"></script>
+	<script src="units\missiler.js"></script>
+	<script src="units\jeep.js"></script>
+	<script src="units\pod.js"></script>
+	<script src="units\launcher.js"></script>
+
+	<!-- map -->
+	<script src="city.js"></script>
+	<script src="island.js"></script>
+	<script src="map.js"></script>
+	<script src="map\tile.js"></script>
+
+	<!-- core -->
+	<script src="stack.js"></script>
+	<script src="clan.js"></script>
+
+	<!-- components -->
+	<script src="components.js"></script>
+	<script src="components\core.js"></script>
+	<script src="components\data.js"></script>
+	<script src="components\sprites.js"></script>
+
+	<!-- views -->
+	<script src="views\intro.js"></script>
+	<script src="views\sub\docs.js"></script>
+
+	    <!-- map views -->
+	    <script src="views\map.js"></script>
+	    <script src="views\play.js"></script>
+	    <script src="views\sub\city.js"></script>
+	    <script src="views\sub\map.js"></script>
+	    <script src="views\sub\stack.js"></script>
+
+	    <!-- stack views -->
+	    <script src="views\combat.js"></script>
+	    <script src="views\teleport.js"></script>
+	    <script src="views\transfer.js"></script>
+
+	<script src="utils.js"></script>
+	<script src="tConquest.js"></script>
+
+	<script>
+
+	    //Main game object
+	    var Game;
+
+	    function RunTacticalTrix() {
+
+		//Create library components
+		TacticalScape = new GenieScape();
+		TacticalCalcPad = new GenieCalcPad();
+		TacticalGraphics = new GenieGraphics();
+		TacticalText = new GenieText();
+		TacticalRandomizer = new GenieRandomizer();
+
+		//Set library components
+		TacticalScape.Set("PrimeCanvas", "InfoCanvas", "ConsoleCanvas");
+		TacticalCalcPad.Set();
+		TacticalGraphics.Set(TacticalScape.Screen, TacticalScape.InfoBox, TacticalScape.ControlPanel);
+		TacticalText.Set(TacticalScape.Screen, null, TacticalScape.InfoBox, TacticalScape.ControlPanel);
+		TacticalScape.PrimeScape.Context.font = FONT.DEFAULT;
+		TacticalScape.AddController(GAMePAD.ARROWS);
+		Controller = TacticalScape.ControllerA;
+		TacticalRandomizer.Set();
+
+		//Load and assign graphic images
+		ImageManager.Set(TacticalImages);
+		ImageManager.LoadImages();
+		ImageManager.Check();				//Check if images have loaded
+
+		//Begin as soon as images have loaded
+		Game = new TacticalConquest();
+		Game.Set(TacticalScape, TacticalGraphics, TacticalCalcPad, TacticalText, TacticalRandomizer, Controller);
+		Game.CheckImagesLoaded();
+	    }
+
+	</script>
+    </body>
+</html>
