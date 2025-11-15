@@ -44,6 +44,10 @@ DominionCabinet.prototype = {
 		this.Industry.Set(this);
 		this.Information.Set(this);
 	},
+	SetMinisters() {
+
+		this.Ministries.forEach( function(mnstry) {mnstry.Minister.Set()} );
+	},
 	SetSurplusPercentages() {
 		var i;
 
@@ -61,7 +65,7 @@ DominionCabinet.prototype = {
 		var i;
 
 		for (i=0;i<MINISTRY.PORTFOLIOS;++i)
-			this.Ministries[i].Inventory = Math.round(this.Treasury*this.SurplusPercentages[i]/100);
+			this.Ministries[i].Inventory = Math.round(this.Nation.Treasury*this.SurplusPercentages[i]/100);
 		this.Nation.Treasury = 0;
 	},
 	UpdateInventory() {

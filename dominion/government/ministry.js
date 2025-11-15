@@ -15,12 +15,7 @@ DominionMinistry.prototype = {
       this.Level = 1;
       this.Inventory = 0;
 		this.LiquidateFlag = false;
-		this.SetMinister();
-   },
-	SetMinister() {
-
 		this.Minister = new DominionCharacter();
-		this.Minister.Set();
 	},
 	GetFortnightlyRevenue() {
 
