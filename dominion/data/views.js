@@ -27,9 +27,9 @@ var VIEW = { CURRENT: { GLOBAL: 0, OFFICE: 1, ASSETS: -1, BONDS: -1, FORCES: -1,
 																																		STYLE: BUTTON.STYLE.RAISED },
 										  SURVIVAL: { L: 150, T: 255, W: 100, H: 25, LW: 3, LABEL: "Management", COLOUR: "rgb(079,191,239)",
 																																		STYLE: BUTTON.STYLE.RAISED },
-										  GUIDE: { L: 95, T: 295, W: 80, H: 25, LW: 3, LABEL: "Guide . . . ", COLOUR: "rgb(079,191,239)",
+										  GUIDE: { L: 95, T: 295, W: 80, H: 25, LW: 3, LABEL: "Guide . . . ", COLOUR: "rgb(223,239,255)",
 																																				STYLE: BUTTON.STYLE.RAISED },
-										  INFO: { L: 185, T: 295, W: 120, H: 25, LW: 3, LABEL: "More info . . . ", COLOUR: "rgb(079,191,239)",
+										  INFO: { L: 185, T: 295, W: 120, H: 25, LW: 3, LABEL: "More info . . . ", COLOUR: "rgb(223,239,255)",
 																																										STYLE: BUTTON.STYLE.RAISED },
 										  PLAY: { L: 95, T: 315, W: 60, H: 25, LW: 3, LABEL: "Play", COLOUR: "rgb(079,191,239)", STYLE: BUTTON.STYLE.RAISED },
 										  PICkMALE: { L: 60, T: 195, W: 60, H: 25, LW: 3, LABEL: "Pick", COLOUR: "rgb(079,191,239)", STYLE: BUTTON.STYLE.RAISED },
@@ -55,6 +55,35 @@ var VIEW = { CURRENT: { GLOBAL: 0, OFFICE: 1, ASSETS: -1, BONDS: -1, FORCES: -1,
 															COLOUR: { KEY: "white", SELECTION: "rgb(079,191,239)" },
 															ORIENT: ORIENTATION.BOTH, IMAGE: { L: 2, T: 250, W: 169, H: 31 } }
 											}
+							},
+				 ACTION: { COLOUR: GREY.SILVER,
+							  IMAGE: { TURN: { L: 732, T: 18, W: 29, H: 10, MOBILE: { X: 99, Y: 6 } },
+										  TURnDIGITs: { L: 766, T: 18, W: 80, H: 10, O: 0, C: 10, R: 1, PATCH: { W: 8, H: 10 },
+															 X: 232, Y: 125, MOBILE: { X: 131, Y: 6 } },
+										  INFoICONs: { L: 282, T: 2, W: 24, H: 199, O: 1, C: 1, R: 8, PATCH: { W: 24, H: 24 } },
+										  MODeICONs: { L: 59, T: 69, W: 148, H: 48, O: 2, C: 3, R: 1, PATCH: { W: 48, H: 48 } },
+										  LEADErICON: { L: 402, T: 158, W: 48, H: 48 },
+										  EXPANSIOnBUTTONs: { L: 226, T: 2, W: 54, H: 199, C: 1, R: 8, O: 1, PATCH: { W: 54, H: 24 } },
+										  BEVEL: { INFO: { L: 2, T: 198, W: 62, H: 30, O: 2, C: 2, R: 1, PATCH: { W: 30, H: 30 } },
+													  EXPANSION: { L: 158, T: 153, W: 60, H: 62, C: 1, R: 2, O: 2, PATCH: { W: 60, H: 30 } }
+													}
+										},
+							  ICON: { LEADER: { L: 0, T: 100, W: 54, H: 54, LW: 3, O: 2 }
+									  },
+							  ICOnPANEL: { INFO: { L: 0, T: 0, W: 240, H: 30, LW: 3, R: 1, C: 8, ICONS: 8, ICON: { W: 30, H: 30 }, PRESS: 0 }
+											 },
+							  BUTTOnPANEL: { EXPANSION: { L: 0, T: 35, W: 240, H: 60, C: 4, R: 2, LW: 3, BUTTON: { W: 60, H: 30 } }
+												},
+							  MOBILE: { ICON: { LEADER: { L: 99, T: 183, W: 54, H: 54, LW: 3, O: 2 }
+													},
+											BUTTON: { TURN: { L: 100, T: 168, W: 56, H: 56, LW: 3, SX: 66, SY: 198, STYLE: BUTTON.STYLE.RAISED }
+													  },
+											ICOnPANEL: { INFO: { L: 0, T: 0, W: 30, H: 240, LW: 3, R: 8, C: 1, ICONS: 8, ICON: { W: 30, H: 30 }, PRESS: 0 },
+															 MODE: { L: 99, T: 21, W: 54, H: 162, LW: 3, R: 3, C: 1, ICONS: 3, ICON: { W: 54, H: 54 } }
+														  },
+										   BUTTOnPANEL: { EXPANSION: { L: 35, T: 0, W: 60, H: 240, C: 1, R: 8, LW: 3, BUTTON: { W: 60, H: 30 } }
+															 }
+										 }
 							},
 				 ALLIANCE: { COLOUR: GREY.LIGHT, MISSION: { L: 5, T: 407, W: 110, H: 110, O: 5, C: 4, R: 2, LW: 3, TITLE: 87 } },
 				 ASSETS: { COLOUR: DOMINION.COLOUR.CITySTATE, TEXT: { COLOUR: "rgb(079,079,175)" },
@@ -82,12 +111,15 @@ var VIEW = { CURRENT: { GLOBAL: 0, OFFICE: 1, ASSETS: -1, BONDS: -1, FORCES: -1,
 												 IMAGE: { L: 118, T: 198, W: 32, H: 52, O: 2, C: 1, R: 2, PATCH: { W: 32, H: 25 } }
 											  }
 							},
-				 CHOICE: { 
-							  INFO: { COLOUR: DOMINION.COLOUR.YELLOW,
-										 BUTTON: { ACCEPT: { L: 40, T: 160, W: 60, H: 25, LW: 3, LABEL: "Accept", COLOUR: DOMINION.COLOUR.VIRIDIAN,
-																											TEXT: { COLOUR: "rgb(255,239,000)" }, STYLE: BUTTON.STYLE.RAISED },
-													  DECLINE: {  L: 140, T: 160, W: 60, H: 25, LW: 3, LABEL: "Decline", COLOUR: DOMINION.COLOUR.VIRIDIAN,
-																													TEXT: { COLOUR: "rgb(255,239,000)" }, STYLE: BUTTON.STYLE.RAISED },
+				 CHOICE: { STATE: { GAZETTEER: 0, SUGGESTION: 1, ACCEPTED: 2 },
+							  INFO: { COLOUR: DOMINION.COLOUR.YELLOW, TEXT: { COLOUR: DOMINION.COLOUR.VIRIDIAN },
+										 IMAGE: { PROS: { L: 565, T: 214, W: 37, H: 15, X: 5, Y: 142 },
+													 CONS: { L: 565, T: 231, W: 37, H: 15, X: 5, Y: 172 }
+												  },
+										 BUTTON: { DECLINE: { L: 5, T: 210, W: 60, H: 25, LW: 3, LABEL: "Decline", COLOUR: DOMINION.COLOUR.VIRIDIAN,
+																													TEXT: { COLOUR: "white" }, STYLE: BUTTON.STYLE.RAISED },
+													  ACCEPT: { L: 175, T: 210, W: 60, H: 25, LW: 3, LABEL: "Accept", COLOUR: DOMINION.COLOUR.VIRIDIAN,
+																													TEXT: { COLOUR: "white" }, STYLE: BUTTON.STYLE.RAISED },
 													  OTHER: { L: 5, T: 370, W: 95, H: 25, LW: 3, LABEL: "Other", COLOUR: DOMINION.COLOUR.VIRIDIAN,
 																																										STYLE: BUTTON.STYLE.RAISED },
 													  YES: { L: 105, T: 370, W: 100, H: 25, LW: 3, LABEL: "Yes", COLOUR: DOMINION.COLOUR.VIRIDIAN,
@@ -184,39 +216,6 @@ var VIEW = { CURRENT: { GLOBAL: 0, OFFICE: 1, ASSETS: -1, BONDS: -1, FORCES: -1,
 						 },
 				 ARMS: { },
 				 EVENTS: { },
-				 ACTION: { COLOUR: GREY.SILVER,
-							  IMAGE: { TURN: { L: 732, T: 18, W: 29, H: 10, O: -1, C: 4, R: 1, PATCH: { W: 8, H: 10, COUNT: 4 },
-													 X: 224, Y: 115, MOBILE: { X: 99, Y: 227 } },
-										  TURnDIGITs: { L: 766, T: 18, W: 80, H: 10, O: 0, C: 10, R: 1, PATCH: { W: 8, H: 10 },
-															 X: 232, Y: 125, MOBILE: { X: 131, Y: 227 } },
-										  INFoICONs: { L: 282, T: 2, W: 24, H: 199, O: 1, C: 1, R: 8, PATCH: { W: 24, H: 24 } },
-										  EXPANSIOnBUTTONs: { L: 226, T: 2, W: 54, H: 199, C: 1, R: 8, O: 1, PATCH: { W: 54, H: 24 } },
-										  BEVEL: { INFO: { L: 2, T: 198, W: 62, H: 30, O: 2, C: 2, R: 1, PATCH: { W: 30, H: 30 } },
-													  EXPANSION: { L: 158, T: 153, W: 60, H: 62, C: 1, R: 2, O: 2, PATCH: { W: 60, H: 30 } }
-													}
-										},
-							  ICON: { ADVISOR: { L: 0, T: 100, W: 56, H: 56, LW: 3, IMAGE: { L: 59, T: 69, W: 50, H: 50 } },
-										 MAP: { L: 56, T: 100, W: 56, H: 56, LW: 3, IMAGE: { L: 111, T: 69, W: 50, H: 50 } },
-										 OFFICE: { L: 112, T: 100, W: 56, H: 56, LW: 3, IMAGE: { L: 163, T: 69, W: 50, H: 50 } }
-									  },
-							  BUTTON: { TURN: { L: 168, T: 100, W: 56, H: 56, LW: 3, SX: 66, SY: 198, STYLE: BUTTON.STYLE.RAISED }
-										 },
-							  ICOnPANEL: { INFO: { L: 0, T: 0, W: 240, H: 30, LW: 3, R: 1, C: 8, ICONS: 8, ICON: { W: 30, H: 30 }, PRESS: 0 }
-											 },
-							  BUTTOnPANEL: { EXPANSION: { L: 0, T: 35, W: 240, H: 60, C: 4, R: 2, LW: 3, BUTTON: { W: 60, H: 30 } }
-												},
-							  MOBILE: { ICON: { ADVISOR: { L: 100, T: 0, W: 56, H: 56, LW: 3 },
-													  MAP: { L: 100, T: 56, W: 56, H: 56, LW: 3 },
-													  OFFICE: { L: 100, T: 112, W: 56, H: 56, LW: 3 }
-													},
-											BUTTON: { TURN: { L: 100, T: 168, W: 56, H: 56, LW: 3, SX: 66, SY: 198, STYLE: BUTTON.STYLE.RAISED }
-													  },
-											ICOnPANEL: { INFO: { L: 0, T: 0, W: 30, H: 240, LW: 3, R: 8, C: 1, ICONS: 8, ICON: { W: 30, H: 30 }, PRESS: 0 }
-														  },
-										   BUTTOnPANEL: { EXPANSION: { L: 35, T: 0, W: 60, H: 240, C: 1, R: 8, LW: 3, BUTTON: { W: 60, H: 30 } }
-															 }
-										 }
-							},
 				 MAP: { STATE: { SCANNING: 0, SELECTED: 1 } },
 				 ALLIANCeSELECTION: { L: 140, T: 90, W: 360, H: 465, SLOT: { W: 136, H: 86, C: 2, R: 4 } },
 				 CONQUEST: { COLOUR: PAINT.SKY, PHASE: { AIR: 0, SEA: 1, LAND: 2, CONQUERED: 3, DEFENDED: 4, SURRENDERED: 5, WITHDRAWN: 6 },
@@ -312,19 +311,22 @@ var VIEW = { CURRENT: { GLOBAL: 0, OFFICE: 1, ASSETS: -1, BONDS: -1, FORCES: -1,
 				 TURN: { COLOUR: "rgb(111,175,255)", TEXT: "rgb(111,000,127)", MUGSHOT: "rgb(223,223,191)",
 							PHASE: { INVESTMENT: 0, PASSIVE: 1, ACTIVE: 2 },
 							BUTTON: { OFFER: { L: 18, T: 180, W: 120, H: 25, LW: 3, LABEL: "See Offer...", COLOUR: "rgb(111,000,127)",
+																									TEXT: { COLOUR: "rgb(111,175,255)" }, STYLE: BUTTON.STYLE.RAISED },  //REDUNDANT?
+										 START: { L: 5, T: 100, W: 75, H: 75, LW: 3, SX: 456, SY: 130, STYLE: BUTTON.STYLE.RAISED, BACKGROUND: "rgb(111,175,255)" },
+										 ADVICE: { L: 5, T: 180, W: 75, H: 25, LW: 3, LABEL: "Advice...", COLOUR: "rgb(111,000,127)",
 																									TEXT: { COLOUR: "rgb(111,175,255)" }, STYLE: BUTTON.STYLE.RAISED },
-										 START: { L: 18, T: 180, W: 120, H: 25, LW: 3, LABEL: "Start Week...", COLOUR: "rgb(111,000,127)",
-																									TEXT: { COLOUR: "rgb(111,175,255)" }, STYLE: BUTTON.STYLE.RAISED },
-										 ADVICE: { L: 5, T: 210, W: 70, H: 25, LW: 3, LABEL: "Advice...", COLOUR: "rgb(111,000,127)",
-																									TEXT: { COLOUR: "rgb(111,175,255)" }, STYLE: BUTTON.STYLE.RAISED },
-										 HELP: { L: 81, T: 210, W: 70, H: 25, LW: 3, LABEL: "Help...", COLOUR: "rgb(111,000,127)",
+										 HELP: { L: 5, T: 210, W: 75, H: 25, LW: 3, LABEL: "Help...", COLOUR: "rgb(111,000,127)",
 																									TEXT: { COLOUR: "rgb(111,175,255)" }, STYLE: BUTTON.STYLE.RAISED }
 									  },
 							IMAGE: { TURN: { L: 328, T: 345, W: 50, H: 15, X: 2, Y: 2 },
-										DIGITS: { L: 380, T: 345, W: 129, H: 15, O: 2, C: 10, R: 1, PATCH: { W: 12, H: 15 }, GAP: 14,
-																										DAILY: { X: 56, Y: 2 }, CHOICE: { X: 63, Y: 7 } },
-										WEEK: { L: 511, T: 345, W: 52, H: 15, X: 7, Y: 7 },
-										FORTNIGHT: { L: 565, T: 345, W: 115, H: 15, X: 2, Y: 2 }
+										DIGITS: { L: 380, T: 345, W: 129, H: 15, O: 1, C: 10, R: 1, PATCH: { W: 12, H: 15 }, GAP: 14,
+																										DAILY: { X: 56, Y: 2 }, CHOICE: { X: 56, Y: 2 } },
+										NUMERALS: { L: 767, T: 30, W: 78, H: 8, O: 2, C: 10, R: 1, PATCH: { W: 6, H: 8 } },
+										PARENTHESES: { L: 535, T: 214, W: 12, H: 15, O: 2, C: 2, R: 1, X: 100, Y: 2, PATCH: { W: 5, H: 15 }, GAP: 49 },
+										FORTNIGHT: { L: 328, T: 281, W: 65, H: 8, X: 4, Y: 21, NUMERALS: { X: 73, Y: 21, GAP: 8 } },
+										WEEK: { L: 395, T: 281, W: 32, H: 8, X: 4, Y: 33, NUMERALS: { X: 40, Y: 33, GAP: 8 } },
+										DAY: { L: 429, T: 281, W: 21, H: 8, X: 4, Y: 45, NUMERALS: { X: 29, Y: 45 } },
+										PHASE: { L: 452, T: 281, W: 34, H: 8, X: 4, Y: 45, NUMERALS: { X: 42, Y: 45 } }
 									 }
 						 },
 				 SOLICITATION: { STATE: { CLICKABLE: 0, OFFERED: 1 },

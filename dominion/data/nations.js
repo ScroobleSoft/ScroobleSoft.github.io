@@ -23,6 +23,8 @@ var InternalRival = [ [ "Minister", "Priest", "Citizen", "Secretary", "Senator",
 							 [ "Minister", "Priestess", "Citizen", "Secretary", "Senator", "Legislator", "Dame", "Crown Princess", "General", "V.P." ] ];
 var ExternalRival = [ [ "Parliamentarian", "Dr.", "Citizen", "Director", "Governor", "Premier", "Count", "Duke", "Magistrate", "Director" ],
 							 [ "Parliamentarian", "Dr.", "Citizen", "Director", "Governor", "Premier", "Countess", "Duchess", "Magistrate", "Director" ] ];
+var Title = [ [ "Baron",	 "Viscount",	 "Earl",		 "Marquis",	 "Duke",	   "Prince",	"King",	"Emperor" ],
+				  [ "Baroness", "Viscountess", "Countess", "Marquise", "Duchess", "Princess", "Queen", "Empress" ]  ];
 
 //-- DIPLOMACY --
 
@@ -30,14 +32,14 @@ var BELLIGERENCE = { INERT: 0, PASSIVE: 1, BENIGN: 2, MILD: 3, CAUTIOUS: 4, MODE
 var Belligerence = [ "Inert", "Passive", "Benign", "Mild", "Cautious", "Moderate", "Aggressive", "Hostile", "Bellicose" ];
 var DIPLOMACY = { SIDES: 9, LEVELS: 8 };
 var Relations = [ "Excellent", "Friendly", "Amicable", "Neutral", "Wary", "Tense", "Fraught", "War" ];
-var COMMODITY = { FOOD: 0, ENTERTAINMENT: 1, ARMS: 2, LAVENOIL: 3, BONDS: 4, MEDICINE: 2, GOODS: 3, SURVEILLANCE: 7, TYPES: 8 };
-var Commodity = [ "Food", "Entertainment", "Arms", "Lavenoil", "Bonds", "Medicine", "Goods", "Surveillance" ];
+var COMMODITY = { FOOD: 0, ENTERTAINMENT: 1, ARMS: 2, LAVENOIL: 3, MONEY: 4, MEDICINE: 5, GOODS: 6, SURVEILLANCE: 7, TYPES: 8 };
+var Commodity = [ "Food", "Entertainment", "Arms", "Lavenoil", "Money", "Medicine", "Goods", "Surveillance" ];
 var CommodityPreference = [ "Food and Beverages", "Entertainment and Educational Fare", "Military Units and Supplies", "Lavenoil",
-									 "Dominion Bonds", "Medicines and Hospital Equipment", "TVs and Appliances", "Surveillance Equipment"  ];
+									 "Financial Aid", "Medicines and Hospital Equipment", "TVs and Appliances", "Surveillance Equipment"  ];
 
 //-- EXPANSION --
 
-var EXPANSION = { FUNDING: 0, BENEFICENCE: 1, NEGOTIATION: 2, AGREEMENT: 3, UNDERTAKING: 4, SUBVERSION: 5, BUYING: 6, CONQUEST: 7, METHODS: 8 };
+var EXPANSION = { FUNDING: 0, BENEFICENCE: 1, NEGOTIATION: 2, AGREEMENT: 3, UNDERTAKING: 4, SUBVERSION: 5, BUYING: 6, CONQUEST: 7, METHODS: 8 };  //RDNDNT?
 var MISSION = { SABOTAGE: 0, RAID: 1, BLOCKADE: 2, CHAMPIONS: 3, INTERDICTION: 4, ICBM: 5, DOGFIGHT: 6, HUNTING: 7, TYPES: 8 };
 var ALLIANCE = { GRANT: 0, AID: 1, TREATY: 2, PACT: 3, MISSION: 4, INTRIGUE: 5, PURCHASE: 6, CONQUEST: 7, TYPES: 8,
 					  NONE: 0, NOMINAL: 1, MILD: 2, MODERATE: 3, SOLID: 4, STRONG: 5, STURDY: 6, RESOLUTE: 7, IMPREGNABLE: 8 };
