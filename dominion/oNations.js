@@ -6,7 +6,7 @@ var OctagonalNations = function () {
 	var ScreenRect;
 
 	var Type;
-	var Turn, Fortnight, Phase, TurnLimit;  //TODO: replace .Turn with .Fortnight
+	var Turn, Fortnight, Week, Day, Phase, TurnLimit;
 	var DailyCharacters;
 };
 OctagonalNations.prototype = new GenieGame();
@@ -22,8 +22,10 @@ OctagonalNations.prototype.Set = function(intrfc, gTool, cPad, tWriter, rGenerat
 	this.Components = new DominionComponents();
 
 	this.Turn = 1;
-	this.Fortnight = 0;
-	this.Phase = 0;
+	this.Fortnight = 1;
+	this.Week = 1;
+	this.Day = 1;
+	this.Phase = 1;
 };
 OctagonalNations.prototype.SetComponents = function() {
 

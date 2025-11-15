@@ -71,12 +71,16 @@ var DOMINION = { GAME: { RANDOM: 0, DAILY: 1, FREeFORM: 2, MULTiCHOICE: 4, SURVI
 									 },
 					  TURNS: { SHORT: 40, MEDIUM: 70, LONG: 100 }, VOTES: { SHORT: 20, MEDIUM: 35, LONG: 50 }, FORTNIGHTS: 100, YEARS: 4
 };
-var SITUATION = { OFFER: 0, PROPOSAL: 1, INVESTMENT: 2, BOND: 3, AID: 4, CONQUEST: 5, GRANT: 6, DISASTER: 7,										//Common -		40%
-						INTRIGUE: 8, PACT: 9, PURCHASE: 10, TREATY: 11, SOVEREIGNITY: 12, AUCTION: 13, DRAFT: 14, SATELLITE: 15,						//Occasional - 30%
-						BLOCKADE: 16, CHAMPIONS: 17, DOGFIGHT: 18, HUNTING: 19, ICBM: 20, INTERDICTION: 21, SABOTAGE: 22, STRIKE: 23,				//Unusual -		20%
-						OIL: 24, CULT: 25, INTERVENTION: 26, SPLINTERING: 27, SECESSION: 28, ACCESSION: 29, DISSIDENT: 30,	PEACEKEEPING: 31,		//Rare -			10%
+var SITUATION = { OFFER: 0, PROPOSAL: 1, INVESTMENT: 2, BONDS: 3, AID: 4, CONQUEST: 5, PEACEKEEPING: 6, DISASTER: 7,							//Common -		40%
+						INTRIGUE: 8, PACT: 9, PURCHASE: 10, TREATY: 11, SOVEREIGNITY: 12, AUCTION: 13, DRAFT: 14, SATELLITE: 15,					//Occasional - 30%
+						BLOCKADE: 16, CHAMPIONS: 17, DOGFIGHT: 18, HUNTING: 19, ICBM: 20, INTERDICTION: 21, SABOTAGE: 22, STRIKE: 23,			//Unusual -		20%
+						OIL: 24, CULT: 25, INTERVENTION: 26, SPLINTERING: 27, SECESSION: 28, ACCESSION: 29, DISSIDENT: 30,	COUP: 31,			//Rare -			10%
 						COUP: 32,
-						TYPES: { COMMON: 0, OCCASIONAL: 1, UNUSUAL: 2, RARE: 3 } };
+						TYPES: { COMMON: 0, OCCASIONAL: 1, UNUSUAL: 2, RARE: 3 }, BANDS: 4, BAND: { SLOTS: 8, COMMON: 8, OCCASIONAL: 16, UNUSUAL: 24, RARE: 32 } };
+var Situations = [ "Alliance offer", "Alliance proposal", "Investment", "Bonds", "Research grant", "Conquest", "Peacekeeping mission", "Disaster assistance",
+						 "Internal interference", "Defence Pact", "Nation purchase", "Treaty", "Sovereignity claim", "Auction", "Draft", "Satellite hacking",
+						 "Port blockade", "Champions' challenge", "Dogfight contest", "Hunting pirates", "ICBM", "Interdiction", "Sabotage", "Air strike",
+						 "Oil discovery", "Cult threat", "Intervention", "Allied splintering", "Seceding province", "Dissident refuge", "Peacekeeping mission" ];
 var BONDS = { TYPES: 10 };
 var OIL = { INDIGOIL: 0, LAPISOIL: 1, COBALOIL: 2, CERULOIL: 3, AZUROIL: 4, MAGENOIL: 5, BOYSENOIL: 6, PAISLIOIL: 7, TYPES: 8 };
 var Oils = [ "Indigoil", "Lapisoil", "Cobaloil", "Ceruloil", "Azuroil", "Magenoil", "Boysenoil", "Paislioil" ];

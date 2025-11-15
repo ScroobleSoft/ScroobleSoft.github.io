@@ -7,6 +7,7 @@ var Nations, Powers, PlayerPower, AlliedStates, CityStates, Tomcat, DiplomacyTab
 var Continents, Archipelagos, Atolls, Map, WorldMap;																		//maps
 var Calendar;																															//utility
 var Intro, Demo, Tutorial, MiniGames;																							//sim
+var Disaster, Intrigue, Pact;			//situations
 
 //------------------------------------
 //---------- TOOLS -------------------
@@ -25,6 +26,7 @@ var JEtCOLOUrINDICEs, CARRIErBOwOFFSETs;
 var LEFtFLAReOFFSETs, RIGHtFLAReOFFSETs, LEFtCHAFfOFFSETs, RIGHtCHAFfOFFSETs;
 var AlliedsIndex, SatelliteIndex, GovernmentsMatrix, ContinentLocations;
 var ArmsDistribution;		//MOBILE
+var AllianceSituationMap, MinisterSituationMap;
 
 //---------------------------------------
 //---------- CONTROLS -------------------
@@ -74,11 +76,11 @@ var FlareImage, ChaffImage, FlareSymbolImage, ChaffSymbolImage;
 var LeftTrooperSprite, RightTrooperSprite, GrenadeSprite, LeftBazookaSprite, RightBazookaSprite,
 	 LeftGunArmSprite, RightGunArmSprite, LeftGrenadierArmSprite, RightGrenadierArmSprite, LeftBazookerArmSprite, RightBazookerArmSprite;	//troopers
 var LeftHowitzerSprite, RightHowitzerSprite, JeepSprite, APCSprite, SmallBarrelSprite, LeftJeepGunSprite, RightJeepGunSprite;					//light units
-var AVSprite, ArtillerySprite, IFVSprite, LeftAVCannonSprite, RightAVCannonSprite, LeftBarrelSprite, RightBarrelSprite;				//medium units
-var MobileGunSprite, LeftTruckSprite, RightTruckSprite, TankSprite, TankHutchSprite, LargeBarrelSprite;	//heavy units - UNLOGGED
-var ATWSprite, LeftATMSprite, RightATMSprite, AAGunSprite, LeftLCGSprite, RightLCGSprite, LeftLCGBarrelSprite, RightLCGBarrelSprite; //defence units - U
-var MissilePadSprite, SAMSprite, LeftSSMSprite, RightSSMSprite;		//missile - UNLOGGED
-var LargeWheelSprite, MediumWheelSprite, SmallWheelSprite, TreadSprite;		//wheels - UNLOGGED
+var AVSprite, ArtillerySprite, IFVSprite, LeftAVCannonSprite, RightAVCannonSprite, LeftBarrelSprite, RightBarrelSprite;							//medium units
+var MobileGunSprite, LeftTruckSprite, RightTruckSprite, TankSprite, TankHutchSprite, LargeBarrelSprite;												//heavy units
+var ATWSprite, LeftATMSprite, RightATMSprite, AAGunSprite, LeftLCGSprite, RightLCGSprite, LeftLCGBarrelSprite, RightLCGBarrelSprite;		//defence units
+var MissilePadSprite, SAMSprite, LeftSSMSprite, RightSSMSprite;																									//missile
+var LargeWheelSprite, MediumWheelSprite, SmallWheelSprite, TreadSprite;																							//wheels
 
 //Navy
 var GunBoatSprite, MissileBoatSprite, FrigateSprite, DestroyerSprite, CruiserSprite, BattleshipSprite,
@@ -173,6 +175,7 @@ DominionComponents.prototype = {
 
 		this.CreateCoreObjects();
 		this.CreateSimObjects();
+		this.CreateSituationObjects();
 		this.CreateTools();
 		this.CreateControls();
 		this.CreateImages();
@@ -185,6 +188,7 @@ DominionComponents.prototype = {
 
 		this.SetCoreObjects();
 		this.SetSimObjects();
+		this.SetSituationObjects();
 		this.SetTools();
 		this.SetControls();
 		this.SetImages();
@@ -230,6 +234,10 @@ DominionComponents.prototype = {
 									[ 0,0,3 ],		// 9/27-Mirage
 									[ 2,2,2 ]		//36/54-Tomcat
 		];
+
+		//Maps
+		AllianceSituationMap = [ 0,0,-1,-1,1,7,-1,-1, 5,3,6,2,-1,-1,-1,-1, 4,4,4,4,4,4,4,4 ];
+		MinisterSituationMap = [ -1,-1,4,6,1,2,2,-1, 4,6,4,6,4,4,4,7, 4,6,6,6,6,6,7,6, 3,1,4,4,4,4,4,4 ];
 	},
 	CreateCoreObjects() {
 
@@ -269,7 +277,7 @@ DominionComponents.prototype = {
 		for (i=0;i<POWER.COUNT;++i) {
 			Continents[i].AddPower(Powers[i]);
 			for (j=0;j<POWER.SATELLITES;++j)
-				Continents[i].AddAllied((i*POWER.SATELLITES)+j);
+				Continents[i].AddAllied(AlliedStates[(i*POWER.SATELLITES)+j]);
 		}
 		Atolls.Set(ATOLL.COUNT, DominionAtoll, INDEXED);
 		Map.Set(this.Screen, this.InfoBox, this.ControlPanel, this.GraphicsTool, this.CalcPad, this.TextWriter, this.ScreenRect);
@@ -278,6 +286,20 @@ DominionComponents.prototype = {
 		Calendar.Set();
 		Calendar.SetYear(2025);
 		Calendar.SetBaseDate(DOMINION.DATE);
+	},
+	CreateSituationObjects() {  //UNLOGGED
+
+		this.CreateCommonSituationObjects();
+		this.CreateOccasionalSituationObjects();
+		this.CreateUnusualSituationObjects();
+		this.CreateRareSituationObjects();
+	},
+	SetSituationObjects() {  //UNLOGGED
+
+		this.SetCommonSituationObjects();
+		this.SetOccasionalSituationObjects();
+		this.SetUnusualSituationObjects();
+		this.SetRareSituationObjects();
 	},
 	CreateSimObjects() {
 

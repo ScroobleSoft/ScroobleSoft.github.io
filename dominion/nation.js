@@ -9,7 +9,7 @@ var DominionNation = function() {
 	var SurplusPercentages, SurplusAllocations;		//both REDUNDANT? - moving this to cabinet
 	var Treasury, Reserves;									//coffers - .Reserves REDUNDANT?
 	var Popularity, Government, Opposition;			//internal
-	var HeadOfState, Adviser;
+	var HeadOfState, Adviser, Rival;
 	var Cabinet;
 	var Army, AirForce, Navy, Missilery;
 	var MicroUnits, MidUnits, MegaUnits, Units;		//for MOBILE game (maybe TEMP)
@@ -42,9 +42,9 @@ DominionNation.prototype = {
 
 		this.SetPopulation();
 		this.SetGovernment();
+		this.SetCabinet();
 		this.SetPersonnel();
 		this.SetEconomy();
-		this.SetCabinet();
 		this.SetMilitary();
 		this.SetInvestments();
 
@@ -69,6 +69,9 @@ DominionNation.prototype = {
 		this.HeadOfState.Set();
 		this.Adviser = new DominionCharacter();			//TODO: cabinet will be generated, adviser will be selected among ministers
 		this.Adviser.Set();
+		this.Rival = new DominionCharacter();
+		this.Rival.Set();
+		this.Cabinet.SetMinisters();
 	},
 	SetCabinet() {
 
