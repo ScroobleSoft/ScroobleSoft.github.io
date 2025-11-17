@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <canvas id="PrimeCanvas" width="800" height="600"></canvas>
+      <div id="CanvasDiv" style="position:absolute; top:8px; left:812px; z-index:2">
+         <canvas id="ZoomCanvas" width="240" height="240"></canvas>
+      </div>
+      <div id="ConsoleDiv" style="position:absolute; top:252px; left:812px; z-index:2">
+         <canvas id="ConsoleCanvas" width="240" height="360"></canvas>
+      </div>
+   </head>
+
+   <button type="button" id="StartButton" onclick="EventHandler(0)">Start</button>
+   <button type="button" id="LoadButton"  onclick="EventHandler(1)">Load</button>
+   <button type="button" id="SaveButton"  onclick="EventHandler(2)">Save</button>
+   <button type="button" id="TestButton"  onclick="EventHandler(3)">Test</button>
+
+   <body onload="RunRobotGame()">
+
+      <script src="..\modules\GenieData.js"></script>
+ 
+      <script src="..\modules\GenieTypes.js"></script>
+      <script src="..\library\GenieArray.js"></script>
+      <script src="..\library\AgentArray.js"></script>
+      <script src="..\library\GenieList.js"></script>
+
+      <script src="..\modules\GenieUtils.js"></script>
+      <script src="..\library\utils\ArrayUtils.js"></script>
+      <script src="..\library\utils\GeoUtils.js"></script>
+      <script src="..\library\utils\SpaceUtils.js"></script>
+
+      <script src="..\modules\GenieRandom.js"></script>
+      <script src="..\modules\GenieObject.js"></script>
+      <script src="..\modules\GenieAgent.js"></script>
+      <script src="..\modules\GenieAgentPacks.js"></script>
+      <script src="..\modules\GenieIO.js"></script>
+      <script src="..\modules\GenieCalcPad.js"></script>
+      <script src="..\library\GenieGraphics.js"></script>
+
+      <script src="..\library\GenieShape.js"></script>
+      <script src="..\library\shapes\GenieRectangle.js"></script>
+
+      <script src="..\modules\GenieText.js"></script>
+      <script src="..\modules\GenieMedia.js"></script>
+      <script src="..\library\GenieImage.js"></script>
+      <script src="..\library\ImageMap.js"></script>
+
+      <script src="..\modules\GenieControls.js"></script>
+      <script src="..\modules\controls\GenieButtons.js"></script>
+      <script src="..\library\GenieControl.js"></script>
+      <script src="..\library\controls\GenieButton.js"></script>
+      <script src="..\library\controls\TextButton.js"></script>
+      <script src="..\library\controls\ImageButton.js"></script>
+
+	<!-- Framework -->
+      <script src="..\modules\GenieSprite.js"></script>
+      <script src="..\modules\GenieSprites.js"></script>
+      <script src="..\modules\GenieScape.js"></script>
+	<script src="..\library\GenieView.js"></script>
+	<script src="..\library\views\SubView.js"></script>
+	<script src="..\library\views\NestedView.js"></script>
+	<script src="..\library\views\Dialog.js"></script>
+	<script src="..\library\views\OptionsDialog.js"></script>
+	<script src="..\library\GenieGame.js"></script>
+
+      <script src="..\library\GenieFX.js"></script>
+      <script src="..\library\FX\PulsatingExplosion.js"></script>
+
+      <script src="data.js"></script>
+      <script src="data\names.js"></script>
+      <script src="data\colours.js"></script>
+	<script src="data\views.js"></script>
+
+      <script src="ionblaster.js"></script>
+      <script src="percutterdisc.js"></script>
+      <script src="percutter.js"></script>
+      <script src="wimp.js"></script>
+
+      <script src="terrain.js"></script>
+
+      <script src="facility.js"></script>
+      <script src="intersection.js"></script>
+      <script src="industrialist.js"></script>
+      <script src="components.js"></script>
+
+      <script src="intro.js"></script>
+
+      <script src="demo.js"></script>
+
+      <script src="tutorial.js"></script>
+
+      <script src="minigames.js"></script>
+
+      <script src="testing.js"></script>
+      <script src="testing\navigation.js"></script>
+      <script src="testing\disintegration.js"></script>
+      <script src="testing\intersection.js"></script>
+      <script src="testing\facility.js"></script>
+      <script src="testing\mastermind.js"></script>
+
+      <script src="sRobots.js"></script>
+
+      <script>
+
+	 //Main game object
+	 var Game;
+
+         function RunRobotGame() {
+
+	    //Create library components
+	    GalleryScape = new GenieScape();
+	    GalleryCalcPad = new GenieCalcPad();
+	    GalleryGraphics = new GenieGraphics();
+	    GalleryText = new GenieText();
+	    GalleryRandomizer = new GenieRandomizer();
+
+	    //Set library components
+	    GalleryScape.Set("PrimeCanvas", "ZoomCanvas", GalleryControls, "ConsoleCanvas");
+	    GalleryCalcPad.Set();
+	    GalleryGraphics.Set(GalleryScape.PrimeScape.Context, GalleryScape.ZoomScape.Context);
+	    GalleryText.Set(GalleryScape.PrimeScape.Context, null, GalleryScape.ZoomScape.Context, GalleryScape.Console);
+	    GalleryScape.PrimeScape.Context.font = DEFAULT.FONT;
+	    GalleryScape.AddController(GAMePAD.ARROWS, [ ARROwPAD.LEFT, ARROwPAD.RIGHT ] );
+	    Controller = GalleryScape.ControllerA;
+	    GalleryRandomizer.Set(2000);
+
+	    //Load and assign graphic images
+	    ImageManager.Set(GalleryImages);
+	    ImageManager.LoadImages();
+	    ImageManager.Check();				//Check if images have loaded
+
+	    //Begin as soon as images have loaded
+	    Game = new StealthRobots();
+	    Game.Set(GalleryScape, GalleryGraphics, GalleryCalcPad, GalleryText, GalleryRandomizer);
+	    Game.CheckImagesLoaded();
+	 }
+
+	 function EventHandler(EventNumber) {
+	    cancelAnimationFrame(Game.AnimationFrameHandle);
+	    Game.HideButtons();
+	    switch (EventNumber) {
+	       case EVENT.STARtBUTTOnCLICKED:
+		  Game.Play();
+		  break;
+	       case EVENT.LOAdBUTTOnCLICKED:
+		  Game.Reset = true;
+	          break;
+	       case EVENT.SAVeBUTTOnCLICKED:
+	          break;
+	       case EVENT.TEStBUTTOnCLICKED:
+		  Testing.Start();
+		  break;
+	    }
+	 };
+
+      </script>
+   </body>
+</html>

@@ -1,0 +1,5 @@
+/*
+ *  UNLOGGED
+ */
+var NerdPad = function() {
+};
