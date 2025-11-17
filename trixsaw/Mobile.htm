@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+    <head>
+	<div id="PrimeDiv" style="position:absolute; top:8px; left:8px; z-index:1">
+	    <canvas id="PrimeCanvas" width="360" height="360"></canvas>
+	</div>
+	<div id="InfoDiv" style="position:absolute; top:372px; left:8px; z-index:2">
+	    <canvas id="InfoCanvas" width="284" height="240"></canvas>
+	</div>
+	<div id="ConsoleDiv" style="position:absolute; top:372px; left:296px; z-index:3">
+	    <canvas id="ConsoleCanvas" width="72" height="240"></canvas>
+	</div>
+    </head>
+
+    <body onload="RunMobileTrixSaw()">
+
+	<!-- Data -->
+	<script src="..\library\GenieData.js"></script>
+	<script src="..\library\data\Consts.js"></script>
+	<script src="..\library\data\Colours.js"></script>
+	<script src="..\library\data\Geo.js"></script>
+	<script src="..\library\data\IO.js"></script>
+	<script src="..\library\data\Controls.js"></script>
+	<script src="..\library\data\Images.js"></script>
+	<script src="..\library\data\Sprites.js"></script>
+	<script src="..\library\data\Agents.js"></script>
+	<script src="..\library\data\Weapons.js"></script>
+
+	<!-- Types -->
+	<script src="..\library\GenieTypes.js"></script>
+	<script src="..\library\GenieColour.js"></script>
+	<script src="..\library\GenieArray.js"></script>
+	<script src="..\library\GenieList.js"></script>
+	<script src="..\library\AgentArray.js"></script>
+
+	<!-- Utilities -->
+	<script src="..\library\GenieUtils.js"></script>
+	<script src="..\library\utils\ArrayUtils.js"></script>
+	<script src="..\library\utils\GeoUtils.js"></script>
+	<script src="..\library\utils\SpaceUtils.js"></script>
+
+	<!-- Controls -->
+	<script src="..\library\GenieControl.js"></script>
+	<script src="..\library\controls\GenieButton.js"></script>
+	<script src="..\library\controls\TextButton.js"></script>
+	<script src="..\library\controls\ImageButton.js"></script>
+
+	<!-- Objects -->
+	<script src="..\library\GenieBuffer.js"></script>
+	<script src="..\library\GenieStructure.js"></script>
+	<script src="..\library\MobileObject.js"></script>
+
+	<!-- Tools -->
+	<script src="..\library\GenieRandom.js"></script>
+	<script src="..\library\ScreenManager.js"></script>
+	<script src="..\library\GenieCalcPad.js"></script>
+	<script src="..\library\GenieText.js"></script>
+
+	<!-- Graphics -->
+	<script src="..\library\GenieImage.js"></script>
+	<script src="..\library\ImageMap.js"></script>
+	<script src="..\library\GenieGraphics.js"></script>
+	<script src="..\library\GenieShape.js"></script>
+	<script src="..\library\shapes\GenieLine.js"></script>
+	<script src="..\library\shapes\GeniePolygon.js"></script>
+
+	<!-- Sprites -->
+	<script src="..\library\GenieSprite.js"></script>
+	<script src="..\library\sprites\AnimatedSprite.js"></script>
+
+	<!-- Agents -->
+	<script src="..\library\GenieAgent.js"></script>
+	<script src="..\library\agent\Draw.js"></script>
+	<script src="..\library\agent\Update.js"></script>
+	<script src="..\library\agent\Space.js"></script>
+	<script src="..\library\agent\Collision.js"></script>
+
+	<!-- FX -->
+	<script src="..\library\GenieSound.js"></script>
+
+	<!-- Interface -->
+	<script src="..\library\GenieMouse.js"></script>
+	<script src="..\library\GenieKeyboard.js"></script>
+	<script src="..\library\GenieGamepad.js"></script>
+	<script src="..\library\TouchScreen.js"></script>
+	<script src="..\library\TrackPad.js"></script>
+
+	<!-- Framework -->
+	<script src="..\library\ImageManager.js"></script>
+	<script src="..\library\GenieCanvas.js"></script>
+	<script src="..\library\GenieScape.js"></script>
+	<script src="..\library\GenieView.js"></script>
+	<script src="..\library\views\SubView.js"></script>
+	<script src="..\library\views\NestedView.js"></script>
+	<script src="..\library\views\Dialog.js"></script>
+	<script src="..\library\views\OptionsDialog.js"></script>
+	<script src="..\library\GenieIntro.js"></script>
+	<script src="..\library\GenieGame.js"></script>
+
+	<script src="data.js"></script>
+	<script src="data\views.js"></script>
+
+	<script src="components.js"></script>
+
+	<script src="views\intro.js"></script>
+
+	<script src="tPuzzle.js"></script>
+
+	<script>
+
+	    //Main game object
+	    var Game;
+
+	    function RunMobileTrixSaw() {
+
+		//Create library components
+		SawScape = new GenieScape();
+		SawCalcPad = new GenieCalcPad();
+		SawGraphics = new GenieGraphics();
+		SawText = new GenieText();
+		SawRandomizer = new GenieRandomizer();
+
+		//Set library components
+		SawScape.Set("PrimeCanvas", "InfoCanvas", "ConsoleCanvas");
+		SawCalcPad.Set();
+		SawGraphics.Set(SawScape.Screen, SawScape.InfoBox, SawScape.ControlPanel);
+		SawText.Set(SawScape.Screen, null, SawScape.InfoBox, SawScape.ControlPanel);
+		SawScape.AddController(GAMePAD.ARROWS);
+		Controller = SawScape.ControllerA;
+		SawRandomizer.Set();
+
+		//Load and assign graphic images
+		ImageManager.Set(SawImages);
+		ImageManager.LoadImages();
+		ImageManager.Check();				//Check if images have loaded
+
+		//Begin as soon as images have loaded
+		Game = new TriangularPuzzle();
+		Game.Set(SawScape, SawGraphics, SawCalcPad, SawText, SawRandomizer, Controller);
+		Game.CheckImagesLoaded();
+	    }
+
+	</script>
+    </body>
+</html>
