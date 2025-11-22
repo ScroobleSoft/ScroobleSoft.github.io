@@ -6,7 +6,7 @@ var SawImages = [
 //	"SawSprites.png",
 	"SawImages.png",
 	"SawControls.png",
-	"Puzzle.png",
+	"puzzle.png",
 	"../library/GenieImages.png"
 ];
 var IMAGeINDEX = {
@@ -41,3 +41,4 @@ var CONTROlPANEL = { WIDTH: 72, HEIGHT: 240 };
 
 //---------------------------------
 //---------- FX -------------------
+
