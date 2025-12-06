@@ -3,29 +3,21 @@
 //---------- UNIT TRANSFER VIEW --------------------
 var UnitTransferView = function() {
 	var Clan;
-	var Stack, TargetCity;
+	var SourceStack, DestinationStack;
 };
 UnitTransferView.prototype = new GenieView();
 UnitTransferView.prototype.Set = function(cnvs, specs) {
 	GenieView.prototype.Set.call(this, cnvs, specs);
 
-//	this.SetData();
 };
-/*
-UnitTransferView.prototype.SetData = function() {
-};
-*/
 UnitTransferView.prototype.SetClan = function(clan) {  //UNLOGGED
 
 	this.Clan = clan;
 };
-UnitTransferView.prototype.SetStack = function(stack) {  //UNLOGGED
+UnitTransferView.prototype.SetStacks = function(sStack, tStack) {  //UNLOGGED
 
-	this.Stack = stack;
-};
-UnitTransferView.prototype.SetTargetCity = function(city) {  //UNLOGGED
-
-	this.TargetCity = city;
+	this.SourceStack = sStack;
+	this.DestinationStack = dStack;
 };
 UnitTransferView.prototype.Update = function() {  //UNLOGGED
 

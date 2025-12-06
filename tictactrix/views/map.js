@@ -5,7 +5,6 @@ var TacticalScreenMapView = function() {
 	var TinyOctagon, SmallOctagon, MediumOctagon, LargeOctagon, HugeOctagon, Octagons;
 	var Clan;
 	var GridFlag;
-	var State;		//TEMP
 };
 TacticalScreenMapView.prototype = new GenieView();
 TacticalScreenMapView.prototype.Set = function(cnvs, specs) {
@@ -13,7 +12,6 @@ TacticalScreenMapView.prototype.Set = function(cnvs, specs) {
 
 	this.GridFlag = true;
 	this.SetData();
-	this.State = 0;		//TEMP
 };
 TacticalScreenMapView.prototype.SetData = function() {
 
@@ -44,24 +42,22 @@ TacticalScreenMapView.prototype.Update = function() {
 	this.AnimationFrameHandle = requestAnimationFrame(this.Update.bind(this));
 
 	if (Mouse.CheckLeftClicked(CANVAS.PRIME)) {  //TODO: call ::Close, as is usual, especially when this has sub-views
-		if (this.State==0) {
-			this.DrawDarkMap();
-			++this.State;
-		} else {
-			cancelAnimationFrame(this.AnimationFrameHandle);
-			this.AlignRects();
-			PlayView.SetClan(this.Clan);
-			PlayView.Open();
-			PlayView.Update();
-		}
+		cancelAnimationFrame(this.AnimationFrameHandle);
+		this.AlignRects();
+		PlayView.SetClan(this.Clan);
+		PlayView.Open();
+		PlayView.Update();
 	}
 };
 TacticalScreenMapView.prototype.Draw = function() {
 
 	Graphics.DrawRectangle(0, 0, SCREEN.WIDTH, SCREEN.HEIGHT, MAP.COLOUR.SEA, 0);
 	this.DrawIslands();
+	Platforms.forEach( function(pltfrm) {pltfrm.MiniDraw();} );
 	if (this.GridFlag)
 		this.DrawGrid();
+//	if (Map.CheckDarkMapOn())
+//		this.DrawDarkMap();
 };
 TacticalScreenMapView.prototype.DrawIslands = function() {
 	var i, j, k;
@@ -83,6 +79,7 @@ TacticalScreenMapView.prototype.DrawIslands = function() {
 					CityOctagonImages.DrawPatchNumber(Islands[i][j].Cities[k].Clan.Index, x, y);
 				else
 					CityOctagonImages.DrawPatchNumber(CLAN.NEUTRAL, x, y);
+				Text.Write(Islands[i][j].Cities[k].Unit, x-6, y-2, { COLOUR: "white" } );
 			}
 		}
 };
@@ -103,19 +100,21 @@ TacticalScreenMapView.prototype.DrawDarkMap = function() {
 };
 TacticalScreenMapView.prototype.AlignRects = function() {
 
-	TopLeftTile.C = Math.floor(Mouse.Click.X/this.Specs.TILE.W);
-	if (TopLeftTile.C<(VIEW.PLAY.TILE.C/2))
+	//Cols
+	TopLeftTile.C = Math.floor(Mouse.Click.X/this.Specs.TILE.W) - (VIEW.PLAY.TILE.C/2);
+	if (TopLeftTile.C<0)
 		TopLeftTile.C = 0;
-	else
-		TopLeftTile.C -= VIEW.PLAY.TILE.C / 2;
+	if (TopLeftTile.C>(MAP.TILE.C-VIEW.PLAY.TILE.C))
+		TopLeftTile.C = MAP.TILE.C - VIEW.PLAY.TILE.C;
 	InfoRect.L = TopLeftTile.C * VIEW.PLAY.INFO.TILE.W;
 	ScreenRect.L = TopLeftTile.C * MAP.TILE.W;
 
-	TopLeftTile.R = Math.floor(Mouse.Click.Y/this.Specs.TILE.H);
-	if (TopLeftTile.R<(VIEW.PLAY.TILE.R/2))
+	//Rows
+	TopLeftTile.R = Math.floor(Mouse.Click.Y/this.Specs.TILE.H) - (VIEW.PLAY.TILE.R/2);
+	if (TopLeftTile.R<0)
 		TopLeftTile.R = 0;
-	else
-		TopLeftTile.R -= VIEW.PLAY.TILE.R / 2;
+	if (TopLeftTile.R>(MAP.TILE.R-VIEW.PLAY.TILE.R))
+		TopLeftTile.R = MAP.TILE.R - VIEW.PLAY.TILE.R;
 	InfoRect.T = TopLeftTile.R * VIEW.PLAY.INFO.TILE.H;
 	ScreenRect.T = TopLeftTile.R * MAP.TILE.H;
 };
