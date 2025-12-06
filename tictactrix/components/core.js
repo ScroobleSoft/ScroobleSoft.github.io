@@ -1,5 +1,6 @@
 
 TacticalComponents.prototype.SetIslands = function() {
+	var i;
 
 	TinyIslands = new GenieArray();
 	TinyIslands.Set(MAP.ISLANDS.TINY, TacticalIsland);
@@ -16,5 +17,8 @@ TacticalComponents.prototype.SetIslands = function() {
 	HugeIslands = new GenieArray();
 	HugeIslands.Set(MAP.ISLANDS.HUGE, TacticalIsland);
 	HugeIslands.forEach(function(islnd) {islnd.SetType(ISLAND.HUGE);} );
+
+	CapitalIslands = new Array(MAP.ISLANDS.CAPITAL);
+
 	Islands = [ TinyIslands, SmallIslands, MediumIslands, LargeIslands, HugeIslands ];
 };
