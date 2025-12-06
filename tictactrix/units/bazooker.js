@@ -4,12 +4,12 @@
 var TacticalBazooker = function() {
 };
 TacticalBazooker.prototype = new TacticalTrooper();
-TacticalBazooker.prototype.Set = function(specs, sprite) {
-	TacticalTrooper.prototype.Set.call(this, specs, sprite);
+TacticalBazooker.prototype.Set = function(specs, sprite, wSprite) {
+	TacticalTrooper.prototype.Set.call(this, specs, sprite, wSprite);
 
 	this.Type = TACTICAlUNIT.BAZOOKER;
 };
-TacticalBazooker.prototype.Draw = function(specs, sprite) {  //UNLOGGED - TODO: adjust for animation (and firing)
+TacticalBazooker.prototype.Draw = function() {  //UNLOGGED - TODO: adjust for animation (and firing)
 	TacticalTrooper.prototype.Draw.call(this);
 
 	if (this.Direction==DIRECTION.E)

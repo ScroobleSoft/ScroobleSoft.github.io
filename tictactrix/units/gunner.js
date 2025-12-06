@@ -4,12 +4,12 @@
 var TacticalGunner = function() {
 };
 TacticalGunner.prototype = new TacticalTrooper();
-TacticalGunner.prototype.Set = function(specs, sprite) {
-	TacticalTrooper.prototype.Set.call(this, specs, sprite);
+TacticalGunner.prototype.Set = function(specs, sprite, wSprite) {
+	TacticalTrooper.prototype.Set.call(this, specs, sprite, wSprite);
 
 	this.Type = TACTICAlUNIT.GUNNER;
 };
-TacticalGunner.prototype.Draw = function(specs, sprite) {  //UNLOGGED - TODO: adjust for animation (and firing)
+TacticalGunner.prototype.Draw = function() {  //UNLOGGED - TODO: adjust for animation (and firing)
 	TacticalTrooper.prototype.Draw.call(this);
 
 	if (this.Direction==DIRECTION.E)

@@ -4,12 +4,12 @@
 var TacticalMissileLauncher = function() {
 };
 TacticalMissileLauncher.prototype = new TacticalUnit();
-TacticalMissileLauncher.prototype.Set = function(specs, sprite) {
-	TacticalUnit.prototype.Set.call(this, specs, sprite);
+TacticalMissileLauncher.prototype.Set = function(specs, sprite, wSprite) {
+	TacticalUnit.prototype.Set.call(this, specs, sprite, wSprite);
 
 	this.Type = TACTICAlUNIT.MISSILeLAUNCHER;
 };
-TacticalMissileLauncher.prototype.Draw = function(specs, sprite) {  //UNLOGGED - TODO: adjust for animation (and firing)
+TacticalMissileLauncher.prototype.Draw = function() {  //UNLOGGED - TODO: adjust for animation (and firing)
 	TacticalUnit.prototype.Draw.call(this);
 
 	TireSprite.Draw(this.ScreenCoords.X+this.Specs.WHEEL.L.X, this.ScreenCoords.Y+this.Specs.WHEEL.L.Y);		//left
