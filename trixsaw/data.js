@@ -3,9 +3,9 @@
 //---------- BITMAPS --------------------
 
 var SawImages = [
-//	"SawSprites.png",
-	"SawImages.png",
-	"SawControls.png",
+//	"TriSprites.png",
+	"TriImages.png",
+	"TriControls.png",
 	"puzzle.png",
 	"../library/GenieImages.png"
 ];
@@ -30,6 +30,8 @@ var CONTROlPANEL = { WIDTH: 72, HEIGHT: 240 };
 //----------------------------------------
 //---------- GAME DATA -------------------
 
+var TRAY = { C: 4, R: 36 };
+
 //---------------------------------------
 //---------- CONTROLS -------------------
 
@@ -41,4 +43,3 @@ var CONTROlPANEL = { WIDTH: 72, HEIGHT: 240 };
 
 //---------------------------------
 //---------- FX -------------------
-
