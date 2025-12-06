@@ -2,15 +2,17 @@
 //-------------------------------------------
 //---------- MAIN OBJECTS -------------------
 
-var TacticalScape, TacticalGraphics, TacticalCalcPad, TacticalText, TacticalRandomizer, Controller;		//library
-var Cities, TinyIslands, SmallIslands, MediumIslands, LargeIslands, HugeIslands, Islands, Map;				//map
-var Clans, PlayerClan, Stacks;																									//core
-var TacticalUtils, ScreenRect, InfoRect, TopLeftTile;																		//tools
+var TacticalScape, TacticalGraphics, TacticalCalcPad, TacticalText, TacticalRandomizer, Controller;				//library
+var TinyIslands, SmallIslands, MediumIslands, LargeIslands, HugeIslands, CapitalIslands, Islands;					//islands
+var Cities, Platforms, Map;																												//geography
+var Clans, PlayerClan, Stacks, AI;																										//core
+var TacticalUtils, ScreenRect, InfoRect, TopLeftTile;																				//tools
 
 //-----------------------------------
 //---------- DATA -------------------
 
-var TinyIslandClearTiles, SmallIslandClearTiles, MediumIslandClearTiles, LargeIslandClearTiles, HugeIslandClearTiles, IslandClearTiles;
+var TinyIslandClearTiles, SmallIslandClearTiles, MediumIslandClearTiles, LargeIslandClearTiles, HugeIslandClearTiles, IslandClearTiles,
+																																								CapitalIslandClearTiles;
 var NeighbouringTiles, VisibleTiles;
 var TinyCityOffsets, SmallCityOffsets, MediumCityOffsets, LargeCityOffsets, HugeCityOffsets, CityOffsets;
 
@@ -18,12 +20,13 @@ var TinyCityOffsets, SmallCityOffsets, MediumCityOffsets, LargeCityOffsets, Huge
 //---------- CONTROLS -------------------
 
 //Buttons
-var RaisedCornerImages;
+var RaisedCornerImages, CheckBoxImages;
 
 //-------------------------------------
 //---------- IMAGES -------------------
 
-var CityOctagonImages;
+var CityOctagonImages, PlatformImages;
+var NoEntryImage;
 
 //--------------------------------------
 //---------- SPRITES -------------------
@@ -32,15 +35,21 @@ var EastTrooperSprite, WestTrooperSprite, FeetSprite, RightArmSprite, LeftArmSpr
 var EastRifleSprite, WestRifleSprite, EastBazookaSprite, WestBazookaSprite, EastLauncherSprite, WestLauncherSprite;							//weapons
 var EastJeepSprite, WestJeepSprite, EastRocketPodSprite, WestRocketPodSprite, EastMissileLauncherSprite, WestMissileLauncherSprite;		//light vehicles
 var EastHowitzerSprite, WestHowitzerSprite, EastArtillerySprite, WestArtillerySprite, EastAVSprite, WestAVSprite;								//medium vehicles
-var EastSwiftTankSprite, WestHybridTankSprite, EastMegaTankSprite, WestSwiftTankSprite, EastHybridTankSprite, WestMegaTankSprite;		//heavy vehicles - U
-var TireSprite, SmallTreadSprite, MediumTreadSprite, LargeTreadSprite, SwiftTankSprite, HybridTrackSprite, MegaTankSprite;					//treads - U
+var EastSwiftTankSprite, WestHybridTankSprite, EastMegaTankSprite, WestSwiftTankSprite, EastHybridTankSprite, WestMegaTankSprite;		//heavy vehicles
+var TireSprite, SmallTreadSprite, MediumTreadSprite, LargeTreadSprite, SwiftTrackSprite, HybridTrackSprite, MegaTrackSprite;				//undercarriage
+var EastFrigateSprite, WestFrigateSprite, EastCruiserSprite, WestCruiserSprite, EastDestroyerSprite, WestDestroyerSprite,
+																											EastBattleshipSprite, WestBattleshipSprite;				//ships
+var EastFighterSprite, WestFighterSprite, EastBomberSprite, WestBomberSprite, EastStraferSprite, WestStraferSprite,
+																										EastHelicopterSprite, WestHelicopterSprite;					//jets - UNLOGGED
+var BulletSprite, ShellSprite, EastMissileHeadSprite, WestMissileHeadSprite;																				//trooper ammo - U
+var EastAAMSprite, WestAAMSprite, EastBombSprite, WestBombSprite, EastMissileSprite, WestMissileSprite, MineSprite;							//large ammo - U
 
 //-------------------------------------
 //---------- AGENTS -------------------
 
-var Gunner, Bazooker, Missiler, Jeep, RocketPod, MissileLauncher, Howitzer, Artillery, AV, SwiftTank, HybridTank, MegaTank;	//army units
+var Gunner, Bazooker, Missiler, Jeep, RocketPod, MissileLauncher, Howitzer, Artillery, ArmouredVehicle, SwiftTank, HybridTank, MegaTank;	//army units
 var Frigate, Cruiser, Destroyer, Battleship, Helicopter, Strafer, Fighter, Bomber;															//navy and air force units
-var TacticalAgents;
+var TacticalUnits;
 
 //---------------------------------
 //---------- FX -------------------
@@ -51,9 +60,9 @@ var TacticalAgents;
 //------------------------------------
 //---------- VIEWS -------------------
 
-var IntroView, DocsConsoleView;
-var ScreenMapView, PlayView, MapInfoView;
-var TransferView, TeleportView, CombatView;
+var IntroView, OptionsView, DocsConsoleView;
+var ScreenMapView, PlayView, MapInfoView, CityConsoleView;
+var TransferView, TeleportView, CombatView;		//stacks
 
 //--------------------------------------------------
 //---------- Tactical COMPONENTS -------------------
@@ -107,14 +116,16 @@ TacticalComponents.prototype = {
 	},
 	CreateCoreObjects() {  //UNLOGGED
 
-		Cities = new GenieArray();
+		Cities = new Array(CITY.COUNT.TOTAL);
+		Platforms = new GenieArray();
 		Map = new TacticalMap();
 		Clans = new GenieArray();
 		Stacks = new GenieList();
+		AI = new TacticalAI();
 	},
 	SetCoreObjects() {  //UNLOGGED
 
-		Cities.Set(CITY.COUNT.TOTAL, TacticalCity, INDEXED);
+		Platforms.Set(PLATFORM.COUNT, TacticalPlatform, INDEXED);
 		this.SetIslands();
 		Map.Set(MAP, this.GraphicsTool, this.Randomizer, this.CalcPad);
 		Clans.Set(CLAN.COUNT, TacticalClan, INDEXED);
@@ -138,22 +149,27 @@ TacticalComponents.prototype = {
 
 		//UNLOGGED
 
-		//Buttons
 		RaisedCornerImages = new GenieImage();
+		CheckBoxImages = new GenieImage();
 	},
 	SetControls() {
 
 		//UNLOGGED
-		//Buttons
+
 		RaisedCornerImages.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.GENIeCONTROLS], RAISEdBUTTOnCORNErIMAGEs);
+		CheckBoxImages.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.GENIeCONTROLS], CHECkBOxIMAGE);
 	},
 	CreateImages() {  //UNLOGGED
 
 		CityOctagonImages = new GenieImage();
+		PlatformImages = new GenieImage();
+		NoEntryImage = new GenieImage();
 	},
 	SetImages() {  //UNLOGGED
 
 		CityOctagonImages.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.IMAGES], CITyOCTAGOnIMAGEs);
+		PlatformImages.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.IMAGES], PLATFORmIMAGEs);
+		NoEntryImage.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.IMAGES], NoENTRyIMAGE);
 	},
 	CreateSprites() {  //UNLOGGED
 
@@ -161,6 +177,12 @@ TacticalComponents.prototype = {
 		this.CreateWeaponSprites();
 		this.CreateLightVehicleSprites();
 		this.CreateMediumVehicleSprites();
+		this.CreateHeavyVehicleSprites();
+		this.CreateUndercarriageSprites();
+		this.CreateShipSprites();
+		this.CreateJetSprites();
+		this.CreateMiniAmmoSprites();
+		this.CreateLargeAmmoSprites();
 	},
 	SetSprites() {  //UNLOGGED
 
@@ -168,6 +190,12 @@ TacticalComponents.prototype = {
 		this.SetWeaponSprites();
 		this.SetLightVehicleSprites();
 		this.SetMediumVehicleSprites();
+		this.SetHeavyVehicleSprites();
+		this.SetUndercarriageSprites();
+		this.SetShipSprites();
+		this.SetJetSprites();
+		this.SetMiniAmmoSprites();
+		this.SetLargeAmmoSprites();
 	},
 	CreateAgents() {  //UNLOGGED
 
@@ -177,10 +205,9 @@ TacticalComponents.prototype = {
 		Jeep = new TacticalJeep();
 		RocketPod = new TacticalRocketPod();
 		MissileLauncher = new TacticalMissileLauncher();
-/*
 		Howitzer = new TacticalHowitzer();
 		Artillery = new TacticalArtillery();
-		AV = new TacticalAV();
+		ArmouredVehicle = new TacticalAV();
 		SwiftTank = new TacticalSwiftTank();
 		HybridTank = new TacticalHybridTank();
 		MegaTank = new TacticalMegaTank();
@@ -192,39 +219,36 @@ TacticalComponents.prototype = {
 		Strafer = new TacticalStrafer();
 		Fighter = new TacticalFighter();
 		Bomber = new TacticalBomber();
-*/
 	},
 	SetAgents() {  //UNLOGGED
 		var i;
 
-		Gunner.Set(GUNNER, EastTrooperSprite);
-		Bazooker.Set(BAZOOKER, EastTrooperSprite);
-		Missiler.Set(MISSILER, EastTrooperSprite);
-		Jeep.Set(JEEP, EastJeepSprite);
-		RocketPod.Set(ROCKEtPOD, EastRocketPodSprite);
-		MissileLauncher.Set(MISSILeLAUNCHER, EastMissileLauncherSprite);
-/*
-		Howitzer.Set(HOWITZER, EastHowitzerSprite);
-		Artillery.Set(ARTILLERY, EastArtillerySprite);
-		AV.Set(AV, EastAVSprite);
-		SwiftTank.Set(SWIFtTANK, EastSwiftTankSprite);
-		HybridTank.Set(HYBRIdTANK, EastHybridTankSprite);
-		MegaTank.Set(MEGaTANK, EastMegaTankSprite);
-		Frigate.Set(FRIGATE, EastFrigateSprite);
-		Cruiser.Set(CRUISER, EastCruiserSprite);
-		Destroyer.Set(DESTROYER, EastDestroyerSprite);
-		Battleship.Set(BATTLESHIP, EastBattleshipSprite);
-		Helicopter.Set(HELICOPTER, EastHelicopterSprite);
-		Strafer.Set(STRAFER, EastStraferSprite);
-		Fighter.Set(FIGHTER, EastFighterSprite);
-		Bomber.Set(BOMBER, EastBomberSprite);
-*/
-		TacticalAgents = [ Gunner, Bazooker, Missiler, Jeep, RocketPod, MissileLauncher, Howitzer, Artillery, AV, SwiftTank, HybridTank, MegaTank,
-								 Frigate, Cruiser, Destroyer, Battleship, Helicopter, Strafer, Fighter, Bomber
+		Gunner.Set(GUNNER, EastTrooperSprite, WestTrooperSprite);
+		Bazooker.Set(BAZOOKER, EastTrooperSprite, WestTrooperSprite);
+		Missiler.Set(MISSILER, EastTrooperSprite, WestTrooperSprite);
+		Jeep.Set(JEEP, EastJeepSprite, WestJeepSprite);
+		RocketPod.Set(ROCKEtPOD, EastRocketPodSprite, WestRocketPodSprite);
+		MissileLauncher.Set(MISSILeLAUNCHER, EastMissileLauncherSprite, WestMissileLauncherSprite);
+		Howitzer.Set(HOWITZER, EastHowitzerSprite, WestHowitzerSprite);
+		Artillery.Set(ARTILLERY, EastArtillerySprite, WestArtillerySprite);
+		ArmouredVehicle.Set(AV, EastAVSprite, WestAVSprite);
+		SwiftTank.Set(SWIFtTANK, EastSwiftTankSprite, WestSwiftTankSprite);
+		HybridTank.Set(HYBRIdTANK, EastHybridTankSprite, WestHybridTankSprite);
+		MegaTank.Set(MEGaTANK, EastMegaTankSprite, WestMegaTankSprite);
+		Frigate.Set(FRIGATE, EastFrigateSprite, WestFrigateSprite);
+		Cruiser.Set(CRUISER, EastCruiserSprite, WestCruiserSprite);
+		Destroyer.Set(DESTROYER, EastDestroyerSprite, WestDestroyerSprite);
+		Battleship.Set(BATTLESHIP, EastBattleshipSprite, WestBattleshipSprite);
+		Helicopter.Set(HELICOPTER, EastHelicopterSprite, WestHelicopterSprite);
+		Strafer.Set(STRAFER, EastStraferSprite, WestStraferSprite);
+		Fighter.Set(FIGHTER, EastFighterSprite, WestFighterSprite);
+		Bomber.Set(BOMBER, EastBomberSprite, WestBomberSprite);
+
+		TacticalUnits = [ Gunner, Bazooker, Missiler, Jeep, RocketPod, MissileLauncher, Howitzer, Artillery, ArmouredVehicle,
+								 SwiftTank, HybridTank, MegaTank, Frigate, Cruiser, Destroyer, Battleship, Helicopter, Strafer, Fighter, Bomber
 		];
-//		for (i=0;i<TACTICAlUNIT.TYPES;++i)
-		for (i=0;i<6;++i)
-			TacticalAgents[i].ScreenRect = ScreenRect;
+		for (i=0;i<TACTICAlUNIT.TYPES;++i)
+			TacticalUnits[i].ScreenRect = ScreenRect;
 	},
 	CreateFX() {
 	},
@@ -237,19 +261,22 @@ TacticalComponents.prototype = {
 	CreateViews() {  //UNLOGGED
 
 		IntroView = new TacticalIntroView();
+		OptionsView = new GameOptionsView();
 		DocsConsoleView = new TacticalDocsConsoleView();
 		ScreenMapView = new TacticalScreenMapView();
 		PlayView = new TacticalPlayView();
 		MapInfoView = new TacticalMapInfoView();
+		CityConsoleView = new TacticalCityConsoleView();
 
 		//Stack views
 		TransferView = new UnitTransferView();
-//		TeleportView = new UnitTeleportView();
-//		CombatView = new StackCombatView();
+		TeleportView = new UnitTeleportView();
+		CombatView = new TacticalCombatView();
 	},
 	SetViews() {  //UNLOGGED
 
 		IntroView.SetLinks(null, this.TextWriter);
+		OptionsView.Set(this.Interface.PrimeScape, VIEW.OPTIONS);
 		IntroView.Set(this.Interface.PrimeScape, VIEW.INTRO);
 		DocsConsoleView.Set(this.Interface.Console, VIEW.INTRO.CONSOLE);
 		IntroView.SetSubViews(null, DocsConsoleView);
@@ -258,10 +285,11 @@ TacticalComponents.prototype = {
 		PlayView.Set(this.Interface.PrimeScape, VIEW.PLAY);
 		MapInfoView.Set(this.Interface.ZoomScape, VIEW.PLAY.INFO, PlayView);
 		PlayView.SetSubViews(MapInfoView);
+		CityConsoleView.Set(this.Interface.ControlPanel, VIEW.CITY, PlayView);
 
 		//Stack views
 		TransferView.Set(this.Interface.PrimeScape, VIEW.TRANSFER);
-//		TeleportView.Set(this.Interface.PrimeScape, VIEW.TELEPORT);
-//		CombatView.Set(this.Interface.PrimeScape, VIEW.COMBAT);
+		TeleportView.Set(this.Interface.PrimeScape, VIEW.TELEPORT);
+		CombatView.Set(this.Interface.PrimeScape, VIEW.COMBAT);
 	}
 };

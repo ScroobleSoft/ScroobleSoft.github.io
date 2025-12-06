@@ -3,7 +3,8 @@
 //---------- TACTICAL CLAN --------------------
 var TacticalClan = function() {
 	var Cities;
-	var Stacks;
+	var Stacks, ActiveStack;
+	var ExplorationEndeavour, ExpansionAmbition;
 	var TravelledTiles;
 };
 TacticalClan.prototype = {
@@ -19,7 +20,7 @@ TacticalClan.prototype = {
 
 		this.TravelledTiles = ArrayUtils.Create2D(MAP.TILE.C, MAP.TILE.R);
 	},
-	Generate() {  //UNLOGGED
+	Generate() {  //UNLOGGED - REDUNDANT
 		//-one city - actually, this will be assigned
 		//-one unit
 	},
@@ -37,5 +38,24 @@ TacticalClan.prototype = {
 
 		city.SetClan(this);
 		this.Cities.push(city);
+	},
+	ExecuteTurn() {  //UNLOGGED
+		//-maybe have 8 'explorer' units, preferrably Gunners, stronger units left to garrison
+		//-leave one 8-stack to defend city, send rest to conquer
+		//-actually, there will be a separate exploration and acquisition aggressiveness rating; in fact, there are dynamics,
+		//	.exploration (number of scouts sent out, maybe even varied strength stacks per clan)
+		//	.pace of city acquisition
+		// .garrision size
+		//-explore island first
+		//-locate port as priority
+		//-for ships, when they discover an island, they circle it until all shore tiles are visible to clan (**)
+		//		otherwise, head to the centre of the map
+		//		in later turns, least explored sectors with unexplored tiles are sailed towards, sectors being 5x5 in a 10x10 grid
+		if (this.ActiveStack)
+			this.ActiveStack.Update();		//-probably won't happen like this, but it might, a value being returned to determine whether .ActiveStack
+													// needs to be switched to another, etc.
+	},
+	GetLeastExploredSector() {  //UNLOGGED - called by ::ExecuteTurn (OR, might be better in TacticalMap)
+		//-for ties, go to closest sector
 	}
 };

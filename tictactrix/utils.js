@@ -10,22 +10,12 @@ TacticalUtilities.prototype = {
 
 		switch (true) {
 			case unit<=TACTICAlUNIT.MEGaTANK:
-				return (TACTICAlUNIT.VARIETIES.LAND);
+				return (TACTICAlUNIT.TYPE.LAND);
 			case unit<=TACTICAlUNIT.BATTLESHIP:
-				return (TACTICAlUNIT.VARIETIES.SEA);
+				return (TACTICAlUNIT.TYPE.SEA);
 			default:
-				return (TACTICAlUNIT.VARIETIES.AIR);
+				return (TACTICAlUNIT.TYPE.AIR);
 		}
-	},
-	GetNeighbouringTile(tile) {
-		var iTle;
-		var tle;
-
-		iTle = Randomizer.GetIndex(NeighbouringTiles.length);
-		tle = new GenieTile();
-		tle.Set(tile.C+NeighbouringTiles[iTle][0], tile.R+NeighbouringTiles[iTle][1]);
-
-		return (tle);
 	},
 	CreateStack(type, clan, tile, unit) {
 		var stck;

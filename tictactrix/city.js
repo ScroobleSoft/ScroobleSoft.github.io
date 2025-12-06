@@ -1,17 +1,25 @@
-
+/*
+		** cities can also be used to transfer units to any garrison around them
+*/
 //---------------------------------------------
 //---------- TACTICAL CITY --------------------
 var TacticalCity = function() {
 	var Clan;
 	var Island;
-	var Unit;		//index
-	var Tile;		//TODO: this will hold garrison? will there be a garrison?
-	var Turns;
+	var Unit;						//index
+	var Tile;
+	var TurnsLeft;
+	var ContentsVisibleFlag;
 };
 TacticalCity.prototype = {
 	Set() {
 		this.Tile = new GenieTile();
 		this.Turns = CITY.PRODUCTION.TURNS;
+	},
+	SetUnit(unit) {
+
+		this.Unit = unit;
+		this.TurnsLeft = UnitTurns[this.Unit];
 	},
 	SetClan(clan) {
 
@@ -21,9 +29,10 @@ TacticalCity.prototype = {
 
 		this.Island = island;
 	},
-	SetTile(c, r) {
+	SetTile(tile) {
 
-		this.Tile.Set(c, r);
+		this.Tile = tile;
+		this.Tile.City = this;
 	},
 	CheckOnScreen() {
 
@@ -36,10 +45,10 @@ TacticalCity.prototype = {
 	},
 	Update() {  //UNLOGGED
 
-		--this.Turns;
-		if (!this.Turns) {
+		--this.TurnsLeft;
+		if (!this.TurnsLeft) {
 			this.ProduceUnit();
-			this.Turns = CITY.PRODUCTION.TURNS;
+			this.TurnsLeft = UnitTurns[this.Unit];
 		}
 	},
 	ProduceUnit() {  //UNLOGGED
@@ -100,5 +109,35 @@ TacticalCity.prototype = {
 
 		//If all stacks were full, maybe teleport? fill a slightly further tile?
 		//-TODO:
+	},
+	Draw() {  //UNLOGGED - should city images move out of play view?
+		var x, y;
+		var nClan;
+
+		x = MAP.TILE.W * (this.Tile.C-TopLeftTile.C);
+		x += VIEW.PLAY.IMAGE.CITY.OFFSET.X;
+		y = MAP.TILE.H * (this.Tile.R-TopLeftTile.R);
+		y += VIEW.PLAY.IMAGE.CITY.OFFSET.Y;
+
+		//Determine image index
+		if (this.Clan)
+			nClan = this.Clan.Index;
+		else
+			nClan = CLAN.NEUTRAL;
+
+		PlayView.CityImages.DrawPatchNumber(nClan, x, y);
+	},
+	GetNeighbouringTile() {  //returns a random neighbour - NOTE: only works for army cities surrounded entirely by land
+		var c, r;
+		var iTile;
+
+		iTile = Randomizer.GetIndex(NeighbouringTiles.length);
+		c = this.Tile.C + NeighbouringTiles[iTile][0];
+		r = this.Tile.R + NeighbouringTiles[iTile][1];
+
+		return (Map.Tiles[c][r]);
+	},
+	GetGarrsionTiles() {  //UNLOGGED - returns number of tiles that a stack can be built on
+		//-depends on land/sea/air produced
 	}
 };

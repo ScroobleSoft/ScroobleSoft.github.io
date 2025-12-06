@@ -16,21 +16,22 @@ TacticalIsland.prototype = {
 	SetType(type) {
 
 		this.Type = type;
-		this.Cities = new Array(ISLAND.CITIES[this.Type]);
+		this.Cities = new GenieArray();
+		this.Cities.Set(ISLAND.CITIES[this.Type], TacticalCity);
 	},
-	SetTile(c, r) {
+	SetTile(tile) {
 
-		this.Tile.Set(c, r);
+		this.Tile = tile;
 	},
 	SetCities(iCity) {
 		var i;
+		var c, r;
 
 		for (i=0;i<this.Cities.length;++i) {
-			Cities[iCity+i].SetTile(this.Tile.C+CityOffsets[this.Type][i][0], this.Tile.R+CityOffsets[this.Type][i][1]);
-			this.Cities[i] = Cities[iCity+i];
+			c = this.Tile.C + CityOffsets[this.Type][i][0];
+			r = this.Tile.R + CityOffsets[this.Type][i][1];
+			this.Cities[i].SetTile( Map.Tiles[c][r] );
 			this.Cities[i].SetIsland(this);
-			if ( this.Type==ISLAND.SMALL && i==2 )
-				Map.ClanCities.push(this.Cities[i]);
 		}
 	},
 	CheckOnScreen() {
