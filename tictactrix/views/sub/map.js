@@ -9,7 +9,7 @@ TacticalMapInfoView.prototype.Set = function(cnvs, specs, mView) {
 	GenieSubView.prototype.Set.call(this, cnvs, specs, mView);
 
 };
-TacticalMapInfoView.prototype.SetClan = function(clan) {  //UNLOGGED
+TacticalMapInfoView.prototype.SetClan = function(clan) {
 
 	this.Clan = clan;
 };
@@ -22,6 +22,7 @@ TacticalMapInfoView.prototype.Draw = function() {
 	this.Context.fillRect(0, 0, INFoBOX.WIDTH, INFoBOX.HEIGHT);
 
 	this.DrawIslands();
+	this.DrawPlatforms();
 	if (Map.CheckDarkMapOn())
 		this.DrawDarkMap();
 
@@ -74,17 +75,28 @@ TacticalMapInfoView.prototype.DrawIslands = function() {
 				x = this.Specs.TILE.W * (Islands[i][j].Cities[k].Tile.C+0.5);
 				y = this.Specs.TILE.H * (Islands[i][j].Cities[k].Tile.R+0.5);
 				if (Islands[i][j].Cities[k].Clan)
-					Graphics.DrawCircle(x, y, this.Specs.TILE.W/2, ClanColours[Islands[i][j].Cities[k].Clan.Index], 0);
+					Graphics.DrawCircle(x, y, this.Specs.TILE.W/2, ClanColours[Islands[i][j].Cities[k].Clan.Index][0], 0);
 				else
-					Graphics.DrawCircle(x, y, this.Specs.TILE.W/2, ClanColours[CLAN.NEUTRAL], 0);
+					Graphics.DrawCircle(x, y, this.Specs.TILE.W/2, ClanColours[CLAN.NEUTRAL][0], 0);
 			}
 		}
+};
+TacticalMapInfoView.prototype.DrawPlatforms = function() {
+	var i;
+	var x, y;
+
+	for (i=0;i<PLATFORM.COUNT;++i) {
+		x = this.Specs.TILE.W * (Platforms[i].Tile.C+0.5);
+		y = this.Specs.TILE.H * (Platforms[i].Tile.R+0.5);
+		if (Platforms[i].Clan)
+			Graphics.DrawDiamond(x, y, this.Specs.TILE.W/2, ClanColours[Platforms[i].Clan.Index][0], 0);
+		else
+			Graphics.DrawDiamond(x, y, this.Specs.TILE.W/2, ClanColours[CLAN.NEUTRAL][0], 0);
+	}
 };
 TacticalMapInfoView.prototype.DrawDarkMap = function() {
 	var c, r;
 	var x, y;
-
-	Graphics.SetContext(this.Context);
 
 	for (r=0;r<MAP.TILE.R;++r)
 		for (c=0;c<MAP.TILE.C;++c) {
@@ -94,6 +106,4 @@ TacticalMapInfoView.prototype.DrawDarkMap = function() {
 				Graphics.DrawRectangle(x, y, this.Specs.TILE.W, this.Specs.TILE.H, "black", 0);
 			}
 		}
-
-	Graphics.ResetContext();
 };
