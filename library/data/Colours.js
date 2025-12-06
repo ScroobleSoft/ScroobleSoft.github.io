@@ -6,7 +6,7 @@ var GREEN = { ONE: "rgb(0,255,0)", TWO: "rgb(0,223,0)", THREE: "rgb(0,191,0)", F
 				  SEVEN: "rgb(0,63,0)", EIGHT: "rgb(0,31,0)", BRIGHT: "rgb(127,255,0)", PASTEL: "rgb(0,191,63)", HARLEQUIN: "rgb(63,255,0)",
 				  OLIVE: "rgb(127,127,0)", GRASS: "rgb(124,177,1)" };
 var BLUE = { INDIGO: "rgb(0,0,255)", MEDIUM: "rgb(0,63,255)", AZURE: "rgb(0,127,255)", DEEpSKY: "rgb(0,191,255)",
-				 CYAN: "rgb(0,255,255)", CERULEAN: "rgb(0,127,191)", AQuaMARINE: "rgb(127,255,255)", ULTRaMARINE: "rgb(15,15,143)",
+				 CYAN: "rgb(0,255,255)", CERULEAN: "rgb(0,127,191)", AQUaMARINE: "rgb(127,255,255)", ULTRaMARINE: "rgb(015,015,143)",
 				 DARK: "rgb(0,0,191)", NAVY: "rgb(0,0,127)", SAPPHIRE: "rgb(0,0,111)", MIDNIGHtEXPRESS: "rgb(0,0,63)",
 				 MIDNIGHT: "rgb(31,31,95)", OXFORD: "rgb(0,31,63)", PRUSSIAN: "rgb(000,047,111)", LAPIsLAZULI: "rgb(31,95,159)",
 				 ROYAL: "rgb(63,111,223)", AZURE: "rgb(015,159,255)", SILVErLAKE: "rgb(95,127,191)", COBALT: "rgb(0,63,175)",
@@ -33,7 +33,7 @@ var PAINT = { SKY: "rgb(153,217,234)", SEA: "rgb(000,162,232)", NAVY: "rgb(063,0
 				  ORANGE: "rgb(255,127,039)", MARIGOLD: "rgb(255,201,014)", YELLOW: "rgb(255,242,000)", FAWN: "rgb(239,228,176)",
 				  RED: "rgb(237,028,036)", PINK: "rgb(255,174,201)", GREY: "rgb(127,127,127)", SILVER: "rgb(195,195,195)",
 				  MAROON: "rgb(136,000,021)" };
-var PASTEL = { OFfWHITE: "rgb(255,255,228)" };
+var PASTEL = { OFfWHITE: "rgb(255,255,223)", CREAM: "rgb(255,255,175)" };
 
 //-- SPECTRA --
 
