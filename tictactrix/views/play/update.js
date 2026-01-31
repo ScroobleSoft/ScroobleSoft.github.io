@@ -31,63 +31,74 @@ TacticalPlayView.prototype.UpdateCanvasClick = function() {
 };
 TacticalPlayView.prototype.UpdateStackClick = function(tile) {  //UNLOGGED
 
-		if (this.SelectedStack) {
-			if (this.SelectedStack===tile.Stack) {
-				this.SelectedStack = null;							//de-select stack
+		//A lot hinges on whether a stack is selected by the player, or not
+		if (this.SelectedStack) {																	//check if a player stack is currently selected
+			if (this.SelectedStack===tile.Stack) {												//check if stack clicked is already selected
+				this.SelectedStack = null;															//de-select stack
 				this.Draw();
 				//-clear console contents if it was showing selected stack (maybe replace with something else)
 			} else {
-					/***   PSEUDO-CODE   ***/
-				//if rival stack {
-				//  if selected stack adjacent (-need a method to check adjacency) {
-				//    if stack types match
-				//		  attack (actually, have to check if attack is valid)
-				//		else
-				//		  show no entry symbol
-				//	 } else
-				//    if show stack contents on
-				//		  show contents in console
-				//} else (own stack)
-				//    if selected stack adjacent {
-				//		  if stack types match
-				//			 merge/transfer
-				//		  else if army-navy combo
-				//			 transfer land units either way (using transfer view)
-				//		} else
-				//		  select this stack (old selection automatically de-selects)
-					/***   PSEUDO-CODE   ***/
+				if (tile.Stack.Clan.Index!=PlayerClan.Index) {								//check if rival stack
+					if (this.SelectedStack.CheckStackAdjacent(tile.Stack)) {				//check if rival stack is next to selected stack
+						if (this.SelectedStack.CheckStackAttackable(tile.Stack)) {		//see if unit types match to an extent
+							//-open combat screen
+						} else {
+							//-display no entry symbol
+						}
+					} else {
+							//-if (stack visible)
+							//-	show contents in console
+					}
+				} else { 																				//is own stack
+				   if (this.SelectedStack.CheckStackAdjacent(tile.Stack)) {
+						if (this.SelectedStack.Type==tile.Stack.Type) {
+							TransferView.SetStacks(this.SelectedStack, tile.Stack);
+							this.Close(this.OpenTransferView.bind(this), 100);				//open transfer window
+						} else {
+							//-display no entry symbol
+						}
+					} else {
+						this.SelectedStack = tile.Stack;											//select new stack
+						this.Draw();
+					}
+				}
 			}
-		} else {
+		} else {																							//no stack has been selected
 			if (tile.Stack.Clan===PlayerClan) {
 				this.SelectedStack = tile.Stack;
-				this.Draw();
+				this.DisplaySelector();
 				//-show stack contents in console
-			} else {  //rival stack
-					/***   PSEUDO-CODE   ***/
-				//if see in stacks on
-				//  show rival stack contents
-					/***   PSEUDO-CODE   ***/
+			} else {  																					//rival stack
+				//-if (stack visible)
+				//-	show rival stack contents
 			}
 		}
 };
 TacticalPlayView.prototype.UpdateCityClick = function(tile) {  //UNLOGGED
 
-	if (Map.CheckNeighbouringTiles(this.SelectedStack.Tile, tile)) {
-					/***   PSEUDO-CODE   ***/
-		//if own city
-		//		open teleport view
-		//else if rival city
-		//		attack (open combat screen)
-		//else (neutral city)
-		//		capture city (re-draw city only, end turn)
-					/***   PSEUDO-CODE   ***/
+	if (this.SelectedStack) {
+		if (Map.CheckNeighbouringTiles(this.SelectedStack.Tile, tile)) {				//check if city is adjacent to selected stack
+			if (!tile.City.Clan) {																	//if city neutral, capture it
+				this.SelectedStack.CaptureCity(tile.City);
+				Game.ExecuteTurns();
+				this.Draw();
+				this.InfoView.Draw();
+			} else if (tile.City.Clan===PlayerClan) {													//if own city open teleport view
+				//-open teleport view
+				//-if teleportation is cancelled, do nothing, else execute turns, re-draw view
+			} else {																						//if rival city, attack
+				//-attack rival city (open combat screen)
+				//-execute turns, re-draw view
+			}
+		} else {
+			if (tile.City.Clan===PlayerClan) {
+				//-show contents in console
+			} else {												//rival city
+				//-show contents if city visible
+			}
+		}
 	} else {
-					/***   PSEUDO-CODE   ***/
-		//if own city
-		//		show contents in console
-		//else
-		//		show contents if visible
-					/***   PSEUDO-CODE   ***/
+		//-show contents if visible
 	}
 };
 TacticalPlayView.prototype.UpdatePlatformClick = function(tile) {  //UNLOGGED
@@ -120,11 +131,12 @@ TacticalPlayView.prototype.UpdateTileClick = function(tile) {  //UNLOGGED
 //		else
 //			setTimeout(tile.Draw.bind(this), 50);		//TODO: will this even work?
 	} else {
-//		this.SelectedStack.Move(tile);
 		this.SelectedStack.Move(tile);
+		Game.ExecuteTurns();
 		this.AdjustMarkers();
 		this.Draw();					//TODO: if neither tile is a shore tile, they can be drawn individually instead
+		this.InfoView.Draw();
 	}
 };
-TacticalPlayView.prototype.UpdateKeys = function() {  //UNLOGGED - REDUNDANT unless a desktop game is made (could have on-screen keys)
+TacticalPlayView.prototype.UpdateKeys = function() {  //UNLOGGED - REDUNDANT unless a desktop game is made (could have on-screen keys for mobile)
 };

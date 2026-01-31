@@ -1,53 +1,5 @@
 
-TacticalPlayView.prototype.DetermineAction = function(tile) {  //UNLOGGED - REDUNDANT
-
-	if (this.SelectedStack)
-		if (Map.CheckNeighbouringTiles(this.SelectedStack.Tile, tile)) {
-			actn = this.SelectedStack.DetermineAction(tile);
-			switch (actn) {
-				case STACK.ACTION.MOVE:
-					this.MoveStack(tile);
-					//AI.ExecuteTurns();
-					break;
-				case STACK.ACTION.TRANSFER:
-					this.Close(this.OpenTransferView.bind(this), 100);
-					break;
-				case STACK.ACTION.TELEPORT:
-					this.Close(this.OpenTeleportView.bind(this), 100);
-					break;
-				case STACK.ACTION.ATTACK:
-					this.Close(this.OpenCombatView.bind(this), 100);
-					break;
-				case STACK.ACTION.CAPTURE:
-					this.CaptureCity(tile.City);
-					//AI.ExecuteTurns();
-					break;
-			}
-		}
-};
-TacticalPlayView.prototype.MoveStack = function(tile) {  //REDUNDANT
-//	var tle;
-
-	//Check if a move is even possible (depends on whether it is a land/sea/air unit)
-	if (!this.SelectedStack.CheckMoveValid(tile)) {
-		this.DisplayMoveInvalid(tile);
-		setTimeout(this.Draw.bind(this), 50);		//call time lapsed to clear symbol - TODO: some tiles can be individually drawn instead
-		return;
-	} else {
-		this.SelectedStack.Move(tile);
-		this.AdjustMarkers();
-		this.Draw();
-	}
-/*
-	tle = this.SelectedStack.Tile;
-	tile.SetStack(this.SelectedStack);
-	this.SelectedStack.SetTile(tile);
-	tle.ClearStack();
-	this.AdjustMarkers();
-	this.Draw();
-*/
-};
-TacticalPlayView.prototype.CaptureCity = function(city) {  //UNLOGGED - keep this method
+TacticalPlayView.prototype.CaptureCity = function(city) {  //UNLOGGED
 
 	//-stack doesn't move
 	//-city transfers to clan, it's colour changing

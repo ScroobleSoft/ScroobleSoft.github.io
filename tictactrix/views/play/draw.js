@@ -86,3 +86,10 @@ TacticalPlayView.prototype.DisplayMoveInvalid = function(tile) {  //draw no entr
 
 	NoEntryImage.Draw(x, y);
 };
+TacticalPlayView.prototype.DisplaySelector = function() {
+	var x, y;
+
+	x = this.Specs.TILE.W * (this.SelectedStack.Tile.C-TopLeftTile.C);
+	y = this.Specs.TILE.H * (this.SelectedStack.Tile.R-TopLeftTile.R);
+	this.SelectionImage.Draw(x+1, y+1);
+};
