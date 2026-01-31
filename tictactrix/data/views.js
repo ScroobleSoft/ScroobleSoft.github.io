@@ -21,6 +21,8 @@ var VIEW = { INTRO: { COLOUR: PAINT.SKY,
 						 },
 				 COMBAT: { COLOUR: GREY.LIGHT
 							},
+				 DAILY: {
+						  },
 				 DOCS: { COLOUR: MAP.COLOUR.LAND,
 							BUTTON: { HELP: { L: 23, T: 30, W: 100, H: 25, LW: 3, LABEL: "Help", COLOUR: MAP.COLOUR.SEA,
 																										TEXT: { COLOUR: "white" }, STYLE: BUTTON.STYLE.RAISED },
@@ -71,11 +73,11 @@ var VIEW = { INTRO: { COLOUR: PAINT.SKY,
 											}
 							  },
 				 TUTORIAL: { COLOUR: GREY.LIGHT,
-								 BUTTON: { TUTORIAL: { L: 82, T: 52, W: 76, H: 42, LW: 3, SX: 111, SY: 36, STYLE: BUTTON.STYLE.RAISED },
-											  DEMO: { L: 82, T: 146, W: 76, H: 42, LW: 3, SX: 15, SY: 134, STYLE: BUTTON.STYLE.RAISED }
+								 BUTTON: { TUTORIAL: { L: 69, T: 52, W: 102, H: 42, LW: 3, SX: 98, SY: 31, STYLE: BUTTON.STYLE.RAISED },
+											  DEMO: { L: 69, T: 146, W: 102, H: 42, LW: 3, SX: 1, SY: 129, STYLE: BUTTON.STYLE.RAISED }
 											}
 							  },
-				 UNIT: {
+				 UNITS: {
 							INFO: { },
 							CONSOLE: { }
 						 }
