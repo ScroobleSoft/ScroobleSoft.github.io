@@ -1,6 +1,6 @@
 
 //----------------------------------------------------------
-//------------ TACTICAL HELICOPTER -------------------------  UNLOGGED
+//------------ TACTICAL HELICOPTER -------------------------
 var TacticalHelicopter = function() {
 };
 TacticalHelicopter.prototype = new TacticalJet();

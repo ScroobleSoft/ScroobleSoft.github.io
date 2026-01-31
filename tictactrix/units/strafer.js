@@ -1,6 +1,6 @@
 
 //------------------------------------------------------
-//------------ TACTICAL STRAFER ------------------------  UNLOGGED
+//------------ TACTICAL STRAFER ------------------------
 var TacticalStrafer = function() {
 };
 TacticalStrafer.prototype = new TacticalJet();

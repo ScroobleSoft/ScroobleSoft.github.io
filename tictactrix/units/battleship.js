@@ -1,6 +1,6 @@
 
 //---------------------------------------------------------
-//------------ TACTICAL BATTLESHIP ------------------------  UNLOGGED
+//------------ TACTICAL BATTLESHIP ------------------------
 var TacticalBattleship = function() {
 };
 TacticalBattleship.prototype = new TacticalShip();

@@ -1,6 +1,6 @@
 
 //-------------------------------------------------------
-//------------ TACTICAL FIGHTER -------------------------  UNLOGGED
+//------------ TACTICAL FIGHTER -------------------------
 var TacticalFighter = function() {
 };
 TacticalFighter.prototype = new TacticalJet();

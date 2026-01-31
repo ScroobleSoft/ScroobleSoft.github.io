@@ -1,6 +1,6 @@
 
 //------------------------------------------------------
-//------------ TACTICAL BOMBER -------------------------  UNLOGGED
+//------------ TACTICAL BOMBER -------------------------
 var TacticalBomber = function() {
 };
 TacticalBomber.prototype = new TacticalJet();

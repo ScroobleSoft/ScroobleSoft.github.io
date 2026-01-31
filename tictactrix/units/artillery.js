@@ -3,12 +3,15 @@
 //---------- TACTICAL ARTILLERY --------------------
 var TacticalArtillery = function() {
 };
-TacticalArtillery.prototype = new TacticalUnit();
+TacticalArtillery.prototype = new TacticalLandUnit();
 TacticalArtillery.prototype.Set = function(specs, sprite, wSprite) {
-	TacticalUnit.prototype.Set.call(this, specs, sprite, wSprite);
+	TacticalLandUnit.prototype.Set.call(this, specs, sprite, wSprite);
 
 	this.Type = TACTICAlUNIT.ARTILLERY;
+	this.UndercarriageSpecs = this.Specs.TREAD;
+	this.UndercarriageSprite = MediumTreadSprite;
 };
+/*
 TacticalArtillery.prototype.Draw = function() {  //UNLOGGED - TODO: adjust for animation (and firing)
 	TacticalUnit.prototype.Draw.call(this);
 
@@ -17,3 +20,4 @@ TacticalArtillery.prototype.Draw = function() {  //UNLOGGED - TODO: adjust for a
 	else
 		MediumTreadSprite.Draw(this.ScreenCoords.X+this.Specs.TREAD.W.X, this.ScreenCoords.Y+this.Specs.TREAD.W.Y);
 };
+*/

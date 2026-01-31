@@ -9,6 +9,13 @@ TacticalGunner.prototype.Set = function(specs, sprite, wSprite) {
 
 	this.Type = TACTICAlUNIT.GUNNER;
 };
+TacticalGunner.prototype.SwitchContext = function(context) {
+
+	this.EastSprite.Context = context;
+	this.WestSprite.Context = context;
+	EastRifleSprite.Context = context;
+	WestRifleSprite.Context = context;
+};
 TacticalGunner.prototype.Draw = function() {  //UNLOGGED - TODO: adjust for animation (and firing)
 	TacticalTrooper.prototype.Draw.call(this);
 
