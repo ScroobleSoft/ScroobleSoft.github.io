@@ -3,7 +3,7 @@ TacticalComponents.prototype.CreateTrooperSprites = function() {
 
 	EastTrooperSprite = new AnimatedSprite();
 	WestTrooperSprite = new AnimatedSprite();
-	FeetSprite = new AnimatedSprite();
+	BootSprite = new AnimatedSprite();
 	RightArmSprite = new GenieSprite();
 	LeftArmSprite = new GenieSprite();
 };
@@ -11,7 +11,7 @@ TacticalComponents.prototype.SetTrooperSprites = function() {
 
 	EastTrooperSprite.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.SPRITES], EAStTROOPErSPRITE);
 	WestTrooperSprite.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.SPRITES], WEStTROOPErSPRITE);
-	FeetSprite.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.SPRITES], FEEtSPRITE);
+	BootSprite.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.SPRITES], BOOtSPRITE);
 	RightArmSprite.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.SPRITES], RIGHtARmSPRITE);
 	LeftArmSprite.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.SPRITES], LEFtARmSPRITE);
 };
@@ -89,6 +89,7 @@ TacticalComponents.prototype.SetHeavyVehicleSprites = function() {
 };
 TacticalComponents.prototype.CreateUndercarriageSprites = function() {
 
+	BootsSprite = new AnimatedSprite();
 	TireSprite = new AnimatedSprite();
 	SmallTreadSprite = new AnimatedSprite();
 	MediumTreadSprite = new AnimatedSprite();
@@ -99,6 +100,7 @@ TacticalComponents.prototype.CreateUndercarriageSprites = function() {
 };
 TacticalComponents.prototype.SetUndercarriageSprites = function() {
 
+	BootsSprite.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.SPRITES], BOOTsSPRITE);
 	TireSprite.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.SPRITES], TIReSPRITE);
 	SmallTreadSprite.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.SPRITES], SMALlTREAdSPRITE);
 	MediumTreadSprite.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.SPRITES], MEDIUmTREAdSPRITE);
@@ -184,4 +186,86 @@ TacticalComponents.prototype.SetLargeAmmoSprites = function() {
 	EastMissileSprite.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.SPRITES], EAStMISSILeSPRITE);
 	WestMissileSprite.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.SPRITES], WEStMISSILeSPRITE);
 	MineSprite.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.SPRITES], MINeSPRITE);
+};
+TacticalComponents.prototype.CreateOrdnanceSprites = function() {  //UNLOGGED
+
+	//Wheeled vehicles
+	EastJeepGunSprite = new AnimatedSprite();
+	WestJeepGunSprite = new AnimatedSprite(); 
+	EastPodSprite = new AnimatedSprite();
+	WestPodSprite = new AnimatedSprite();
+
+	//Tread vehicles
+	EastHowitzerBarrelSprite = new AnimatedSprite();
+	WestHowitzerBarrelSprite = new AnimatedSprite();
+	EastArtilleryBarrelSprite = new AnimatedSprite();
+	WestArtilleryBarrelSprite = new AnimatedSprite();
+	EastAVBarrelSprite = new AnimatedSprite();
+	WestAVBarrelSprite = new AnimatedSprite();
+
+	//Tracked vehicles
+	EastSwiftBarrelSprite = new AnimatedSprite();
+	WestSwiftBarrelSprite = new AnimatedSprite();
+	EastHybridTopBarrelSprite = new AnimatedSprite();
+	WestHybridTopBarrelSprite = new AnimatedSprite();
+	EastHybridBottomBarrelSprite = new AnimatedSprite();
+	WestHybridBottomBarrelSprite = new AnimatedSprite();
+	EastMegaBarrelSprite = new AnimatedSprite();
+	WestMegaBarrelSprite = new AnimatedSprite();
+
+	//Ships
+	EastFrigateBarrelSprite = new AnimatedSprite();
+	WestFrigateBarrelSprite = new AnimatedSprite();
+	EastCruiserBarrelSprite = new AnimatedSprite();
+	WestCruiserBarrelSprite = new AnimatedSprite();
+	EastDestroyerBarrelSprite = new AnimatedSprite();
+	WestDestroyerBarrelSprite = new AnimatedSprite();
+	EastBattleshipBarrelSprite = new AnimatedSprite();
+	WestBattleshipBarrelSprite = new AnimatedSprite();
+
+	//Jets
+	SmallCannonSprite = new GenieSprite();
+	LargeCannonSprite = new GenieSprite();
+	CopterPropellerSprite = new AnimatedSprite();
+};
+TacticalComponents.prototype.SetOrdnanceSprites = function() {  //UNLOGGED
+
+	//Wheeled vehicles
+	EastJeepGunSprite.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.SPRITES], EAStJEEpGUnSPRITE);
+	WestJeepGunSprite.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.SPRITES], WEStJEEpGUnSPRITE); 
+	EastPodSprite.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.SPRITES], EAStPOdSPRITE);
+	WestPodSprite.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.SPRITES], WEStPOdSPRITE);
+
+	//Tread vehicles
+	EastHowitzerBarrelSprite.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.SPRITES], EAStHOWITZErBARRElSPRITE);
+	WestHowitzerBarrelSprite.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.SPRITES], WEStHOWITZErBARRElSPRITE);
+	EastArtilleryBarrelSprite.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.SPRITES], EAStARTILLERyBARRElSPRITE);
+	WestArtilleryBarrelSprite.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.SPRITES], WEStARTILLERyBARRElSPRITE);
+	EastAVBarrelSprite.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.SPRITES], EAStAVbARRElSPRITE);
+	WestAVBarrelSprite.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.SPRITES], WEStAVbARRElSPRITE);
+
+	//Tracked vehicles
+	EastSwiftBarrelSprite.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.SPRITES], EAStSWIFtBARRElPRITE);
+	WestSwiftBarrelSprite.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.SPRITES], WEStSWIFtBARRElPRITE);
+	EastHybridTopBarrelSprite.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.SPRITES], EAStHYBRIdTOpBARRElSPRITE);
+	WestHybridTopBarrelSprite.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.SPRITES], WEStHYBRIdTOpBARRElSPRITE);
+	EastHybridBottomBarrelSprite.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.SPRITES], EAStHYBRIdBOTTOmBARRElSPRITE);
+	WestHybridBottomBarrelSprite.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.SPRITES], WEStHYBRIdBOTTOmBARRElSPRITE);
+	EastMegaBarrelSprite.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.SPRITES], EAStMEGaBARRElSPRITE);
+	WestMegaBarrelSprite.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.SPRITES], WEStMEGaBARRElSPRITE);
+
+	//Ships
+	EastFrigateBarrelSprite.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.SPRITES], EAStFRIGATeBARRElSPRITE);
+	WestFrigateBarrelSprite.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.SPRITES], WEStFRIGATeBARRElSPRITE);
+	EastCruiserBarrelSprite.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.SPRITES], EAStCRUISErBARRElSPRITE);
+	WestCruiserBarrelSprite.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.SPRITES], WEStCRUISErBARRElSPRITE);
+	EastDestroyerBarrelSprite.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.SPRITES], EAStDESTROYErBARRElSPRITE);
+	WestDestroyerBarrelSprite.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.SPRITES], WEStDESTROYErBARRElSPRITE);
+	EastBattleshipBarrelSprite.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.SPRITES], EAStBATTLESHIpBARRElSPRITE);
+	WestBattleshipBarrelSprite.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.SPRITES], WEStBATTLESHIpBARRElSPRITE);
+
+	//Jets
+	SmallCannonSprite.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.SPRITES], SMALlCANNOnSPRITE);
+	LargeCannonSprite.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.SPRITES], LARGeCANNOnSPRITE);
+	CopterPropellerSprite.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.SPRITES], COPTErPROPELLErSPRITE);
 };

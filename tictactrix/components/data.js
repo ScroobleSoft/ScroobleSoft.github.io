@@ -29,7 +29,18 @@ TacticalComponents.prototype.SetOffsetData = function() {
 };
 TacticalComponents.prototype.SetAgentData = function() {  //UNLOGGED
 
+	//Army
+	TROOPER = Object.assign({}, ARMyUNIT, TROOPER);
 	GUNNER = Object.assign({}, TROOPER, GUNNER);
 	BAZOOKER = Object.assign({}, TROOPER, BAZOOKER);
 	MISSILER = Object.assign({}, TROOPER, MISSILER);
+	JEEP = Object.assign({}, ARMyUNIT, JEEP);
+	ROCKEtPOD = Object.assign({}, ARMyUNIT, ROCKEtPOD);
+	MISSILeLAUNCHER = Object.assign({}, ARMyUNIT, MISSILeLAUNCHER);
+	HOWITZER = Object.assign({}, ARMyUNIT, HOWITZER);
+	ARTILLERY = Object.assign({}, ARMyUNIT, ARTILLERY);
+	AV = Object.assign({}, ARMyUNIT, AV);
+	SWIFtTANK = Object.assign({}, ARMyUNIT, SWIFtTANK);
+	HYBRIdTANK = Object.assign({}, ARMyUNIT, HYBRIdTANK);
+	MEGaTANK = Object.assign({}, ARMyUNIT, MEGaTANK);
 };
