@@ -1,4 +1,6 @@
-
+/*
+		Platform captured if 16 units destroyed, which still leaves 16+ intact in case of a failed attack (platform could start regenerating then)
+*/
 //-------------------------------------------------
 //---------- TACTICAL PLATFORM --------------------
 var TacticalPlatform = function() {
@@ -19,6 +21,10 @@ TacticalPlatform.prototype = {
 
 		this.Tile = tile;
 		this.Tile.Platform = this;
+	},
+	GetAssetType() {
+
+		return (TACTICAL.ASSET.PLATFORM);
 	},
 	CheckOnScreen() {
 

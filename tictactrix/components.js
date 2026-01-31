@@ -4,8 +4,8 @@
 
 var TacticalScape, TacticalGraphics, TacticalCalcPad, TacticalText, TacticalRandomizer, Controller;				//library
 var TinyIslands, SmallIslands, MediumIslands, LargeIslands, HugeIslands, CapitalIslands, Islands;					//islands
-var Cities, Platforms, Map;																												//geography
-var Clans, PlayerClan, Stacks, AI;																										//core
+var Cities, Platforms, Map;																								//geography - only map not REDUNDANT?
+var Clans, PlayerClan, AI/*REDUNDANT?*/;																													//core
 var TacticalUtils, ScreenRect, InfoRect, TopLeftTile;																				//tools
 
 //-----------------------------------
@@ -25,13 +25,13 @@ var RaisedCornerImages, CheckBoxImages;
 //-------------------------------------
 //---------- IMAGES -------------------
 
-var CityOctagonImages, PlatformImages;
+var CityOctagonImages, PlatformImages, PadImages, ClearPadImages;
 var NoEntryImage;
 
 //--------------------------------------
 //---------- SPRITES -------------------
 
-var EastTrooperSprite, WestTrooperSprite, FeetSprite, RightArmSprite, LeftArmSprite;																	//trooper
+var EastTrooperSprite, WestTrooperSprite, BootsSprite, RightArmSprite, LeftArmSprite;																	//trooper
 var EastRifleSprite, WestRifleSprite, EastBazookaSprite, WestBazookaSprite, EastLauncherSprite, WestLauncherSprite;							//weapons
 var EastJeepSprite, WestJeepSprite, EastRocketPodSprite, WestRocketPodSprite, EastMissileLauncherSprite, WestMissileLauncherSprite;		//light vehicles
 var EastHowitzerSprite, WestHowitzerSprite, EastArtillerySprite, WestArtillerySprite, EastAVSprite, WestAVSprite;								//medium vehicles
@@ -40,9 +40,18 @@ var TireSprite, SmallTreadSprite, MediumTreadSprite, LargeTreadSprite, SwiftTrac
 var EastFrigateSprite, WestFrigateSprite, EastCruiserSprite, WestCruiserSprite, EastDestroyerSprite, WestDestroyerSprite,
 																											EastBattleshipSprite, WestBattleshipSprite;				//ships
 var EastFighterSprite, WestFighterSprite, EastBomberSprite, WestBomberSprite, EastStraferSprite, WestStraferSprite,
-																										EastHelicopterSprite, WestHelicopterSprite;					//jets - UNLOGGED
-var BulletSprite, ShellSprite, EastMissileHeadSprite, WestMissileHeadSprite;																				//trooper ammo - U
-var EastAAMSprite, WestAAMSprite, EastBombSprite, WestBombSprite, EastMissileSprite, WestMissileSprite, MineSprite;							//large ammo - U
+																										EastHelicopterSprite, WestHelicopterSprite;					//jets
+var BulletSprite, ShellSprite, EastMissileHeadSprite, WestMissileHeadSprite;																				//trooper ammo
+var EastAAMSprite, WestAAMSprite, EastBombSprite, WestBombSprite, EastMissileSprite, WestMissileSprite, MineSprite;							//large ammo
+
+//Ordnance
+var EastJeepGunSprite, WestJeepGunSprite, EastPodSprite, WestPodSprite;
+var EastHowitzerBarrelSprite, WestHowitzerBarrelSprite, EastArtilleryBarrelSprite, WestArtilleryBarrelSprite, EastAVBarrelSprite, WestAVBarrelSprite;
+var EastSwiftBarrelSprite, WestSwiftBarrelSprite, EastHybridTopBarrelSprite, WestHybridTopBarrelSprite,
+											 EastHybridBottomBarrelSprite, WestHybridBottomBarrelSprite, EastMegaBarrelSprite, WestMegaBarrelSprite;
+var EastFrigateBarrelSprite, WestFrigateBarrelSprite, EastCruiserBarrelSprite, WestCruiserBarrelSprite,
+		EastDestroyerBarrelSprite, WestDestroyerBarrelSprite, EastBattleshipBarrelSprite, WestBattleshipBarrelSprite;
+var SmallCannonSprite, LargeCannonSprite, CopterPropellerSprite;
 
 //-------------------------------------
 //---------- AGENTS -------------------
@@ -60,9 +69,11 @@ var TacticalUnits;
 //------------------------------------
 //---------- VIEWS -------------------
 
-var IntroView, OptionsView, DocsConsoleView;
+var IntroView, DailyView, OptionsView, TutorialInfoView, DocsConsoleView;
 var ScreenMapView, PlayView, MapInfoView, CityConsoleView;
 var TransferView, TeleportView, CombatView;		//stacks
+var GuideView, GuideInfoView, GuideConsoleView, HelpView, HelpInfoView, HelpConsoleView, FAQView, FAQInfoView, FAQConsoleView,
+																														UnitsView, UnitsInfoView, UnitsConsoleView;
 
 //--------------------------------------------------
 //---------- Tactical COMPONENTS -------------------
@@ -120,7 +131,6 @@ TacticalComponents.prototype = {
 		Platforms = new GenieArray();
 		Map = new TacticalMap();
 		Clans = new GenieArray();
-		Stacks = new GenieList();
 		AI = new TacticalAI();
 	},
 	SetCoreObjects() {  //UNLOGGED
@@ -129,7 +139,7 @@ TacticalComponents.prototype = {
 		this.SetIslands();
 		Map.Set(MAP, this.GraphicsTool, this.Randomizer, this.CalcPad);
 		Clans.Set(CLAN.COUNT, TacticalClan, INDEXED);
-		Stacks.Set(1000);
+		PlayerClan = Clans[0];		//TEMP!!!
 	},
 	CreateTools() {  //UNLOGGED
 
@@ -140,7 +150,7 @@ TacticalComponents.prototype = {
 	},
 	SetTools() {  //UNLOGGED
 
-		TacticalUtils.Set();
+		TacticalUtils.Set(this.Screen);
 		TopLeftTile.Set(0, 0);
 		ScreenRect.Set(0, 0, SCREEN.WIDTH, SCREEN.HEIGHT);
 		InfoRect.Set(0, 0, INFoBOX.WIDTH*(SCREEN.WIDTH/MAP.W), INFoBOX.HEIGHT*(SCREEN.HEIGHT/MAP.H));
@@ -163,12 +173,16 @@ TacticalComponents.prototype = {
 
 		CityOctagonImages = new GenieImage();
 		PlatformImages = new GenieImage();
+		PadImages = new GenieImage();
+		ClearPadImages = new GenieImage();
 		NoEntryImage = new GenieImage();
 	},
 	SetImages() {  //UNLOGGED
 
 		CityOctagonImages.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.IMAGES], CITyOCTAGOnIMAGEs);
 		PlatformImages.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.IMAGES], PLATFORmIMAGEs);
+		PadImages.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.IMAGES], PAdIMAGEs);
+		ClearPadImages.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.IMAGES], CLEArPAdIMAGEs);
 		NoEntryImage.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.IMAGES], NoENTRyIMAGE);
 	},
 	CreateSprites() {  //UNLOGGED
@@ -183,6 +197,7 @@ TacticalComponents.prototype = {
 		this.CreateJetSprites();
 		this.CreateMiniAmmoSprites();
 		this.CreateLargeAmmoSprites();
+		this.CreateOrdnanceSprites();
 	},
 	SetSprites() {  //UNLOGGED
 
@@ -196,6 +211,7 @@ TacticalComponents.prototype = {
 		this.SetJetSprites();
 		this.SetMiniAmmoSprites();
 		this.SetLargeAmmoSprites();
+		this.SetOrdnanceSprites();
 	},
 	CreateAgents() {  //UNLOGGED
 
@@ -260,9 +276,6 @@ TacticalComponents.prototype = {
 	},
 	CreateViews() {  //UNLOGGED
 
-		IntroView = new TacticalIntroView();
-		OptionsView = new GameOptionsView();
-		DocsConsoleView = new TacticalDocsConsoleView();
 		ScreenMapView = new TacticalScreenMapView();
 		PlayView = new TacticalPlayView();
 		MapInfoView = new TacticalMapInfoView();
@@ -272,14 +285,11 @@ TacticalComponents.prototype = {
 		TransferView = new UnitTransferView();
 		TeleportView = new UnitTeleportView();
 		CombatView = new TacticalCombatView();
+
+		this.CreateIntroViews();
+		this.CreateDocumentationViews();
 	},
 	SetViews() {  //UNLOGGED
-
-		IntroView.SetLinks(null, this.TextWriter);
-		OptionsView.Set(this.Interface.PrimeScape, VIEW.OPTIONS);
-		IntroView.Set(this.Interface.PrimeScape, VIEW.INTRO);
-		DocsConsoleView.Set(this.Interface.Console, VIEW.INTRO.CONSOLE);
-		IntroView.SetSubViews(null, DocsConsoleView);
 
 		ScreenMapView.Set(this.Interface.PrimeScape, VIEW.MAP);
 		PlayView.Set(this.Interface.PrimeScape, VIEW.PLAY);
@@ -291,5 +301,8 @@ TacticalComponents.prototype = {
 		TransferView.Set(this.Interface.PrimeScape, VIEW.TRANSFER);
 		TeleportView.Set(this.Interface.PrimeScape, VIEW.TELEPORT);
 		CombatView.Set(this.Interface.PrimeScape, VIEW.COMBAT);
+
+		this.SetIntroViews();
+		this.SetDocumentationViews();
 	}
 };

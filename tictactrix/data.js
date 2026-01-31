@@ -34,7 +34,7 @@ var CONTROlPANEL = { WIDTH: 146, HEIGHT: 250 };
 //----------------------------------------
 //---------- GAME DATA -------------------
 
-var TACTICAL = { UNIT: { FOV: 2 } };
+var TACTICAL = { UNIT: { FOV: 2 }, ASSET: { TILE: 0, STACK: 1, CITY: 2, PLATFORM: 3 } };
 var CLAN = { COUNT: 8, NEUTRAL: 8 };
 var CITY = { COUNT: { TOTAL: 160, COASTAL: 92, NAVAL: 32, PORTLESS: 128, INLAND: 68, AIR: 32 },
 				 PRODUCTION: { TURNS: 3, TYPE: { NONE: -1, ARMY: 0, NAVY: 1, AIrFORCE: 2 } } };
@@ -52,13 +52,13 @@ var MAP = { W: 2000, H: 2000, INFO: { SCALE: INFoBOX.WIDTH/SCREEN.WIDTH },
 				ISLANDS: { TINY: 10, SMALL: 8, MEDIUM: 4, LARGE: 2, HUGE: 1 },
 				TILE: { C: 50, R: 50, W: 40, H: 40, SEA: 0, SHORE: 1, LAND: 2, SCREEN: { C: 10, R: 10 } },
 				COLOUR: { LAND: "rgb(047,175,047)", SEA: "rgb(031,175,223)" } };
-var STACK = { ACTION: { MOVE: 0, TRANSFER: 1, TELEPORT: 2, ATTACK: 3, CAPTURE: 4 }, UNITS: { MAX: 8 },
+var STACK = { ACTION: { MOVE: 0, TRANSFER: 1, TELEPORT: 2, ATTACK: 3, CAPTURE: 4 }, UNITS: { MAX: 8 }, LAND: 0, SEA: 1, AIR: 2,
 				  GOAL: { GARRISON: 0, EXPLORATION: 1, COMBAT: 2, CONQUEST: 3, TRANSFER: 4, TELEPORTATION: 5 } };		//TODO: ACION and GOAL may be REDUNDANT
 var ConquerorNames = [ "Pasha Green", "Spahbed Blue", "Shogun Pink", "Marshall Purple", "Khagan Olive", "Czar Yellow", "Sardar Crimson", "Dux Orange",
 							  "General Grey" ];
 var UnitNames = [ "Gunner", "Bazooker", "Missiler", "Jeep", "Rocket Pod", "Missile Launcher", "Howitzer", "Artillery", "AV",
 						"Swift Tank", "Hybrid Tank", "Mega Tank", "Frigate", "Cruiser", "Destroyer", "Battleship", "Fighter", "Bomber", "Strafer", "Helicopter" ];
-var UnitTurns = [ 1,1,1, 2,2,2, 3,3,3, 3,3,3, 4,4,4,4, 4,4,4,4 ];
+var UnitTurns = [ 2,2,2, 3,3,3, 4,4,4, 4,4,4, 4,4,4,4, 4,4,4,4 ];
 
 //---------------------------------------
 //---------- CONTROLS -------------------
@@ -68,6 +68,8 @@ var UnitTurns = [ 1,1,1, 2,2,2, 3,3,3, 3,3,3, 4,4,4,4, 4,4,4,4 ];
 
 var CITyOCTAGOnIMAGEs = { L: 1, T: 35, W: 70, H: 8, O: 2, C: 9, R: 1, PATCH: { W: 8, H: 8 } };
 var PLATFORmIMAGEs = { L: 26, T: 47, W: 340, H: 36, O: 2, C: 9, R: 1, PATCH: { W: 36, H: 36 } };
+var PAdIMAGEs = { L: 1, T: 136, W: 318, H: 38, O: 2, C: 8, R: 1, PATCH: { W: 38, H: 38 } };
+var CLEArPAdIMAGEs = { L: 1, T: 176, W: 318, H: 38, O: 2, C: 8, R: 1, PATCH: { W: 38, H: 38 } };
 var NoENTRyIMAGE = { L: 1, T: 45, W: 23, H: 23, O: { X: 8, Y: 8 } };
 
 //---------------------------------

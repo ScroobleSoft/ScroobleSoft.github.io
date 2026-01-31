@@ -14,7 +14,6 @@ var TacticalCity = function() {
 TacticalCity.prototype = {
 	Set() {
 		this.Tile = new GenieTile();
-		this.Turns = CITY.PRODUCTION.TURNS;
 	},
 	SetUnit(unit) {
 
@@ -33,6 +32,10 @@ TacticalCity.prototype = {
 
 		this.Tile = tile;
 		this.Tile.City = this;
+	},
+	GetAssetType() {
+
+		return (TACTICAL.ASSET.CITY);
 	},
 	CheckOnScreen() {
 
@@ -54,61 +57,79 @@ TacticalCity.prototype = {
 	ProduceUnit() {  //UNLOGGED
 		var i;
 		var aTiles;		//indices
+		var type;
 
-		aTiles = new Array(NeighbouringTiles.length);
-		Randomizer.Shuffle(aTiles, INITIALIZE);
+		aTiles = new Array(NeighbouringTiles.length);																//make an array of neighbouring tiles
+		Randomizer.Shuffle(aTiles, INITIALIZE);																		//shuffle the tiles
+		type = TacticalUtils.GetUnitType(this.Unit);
 
-		//First look for empty tiles
+		//Look for empty tiles, place unit there
 		for (i=0;i<aTiles.length;++i) {
+
 			c = this.Tile.C + NeighbouringTiles[aTiles[i]][0];
 			r = this.Tile.R + NeighbouringTiles[aTiles[i]][1];
-			if (Map.Tiles[c][r].Stack)		//skip empty tiles
+			if (Map.Tiles[c][r].Stack)																						//skip tiles occupied by own stack or opponent's
 				continue;
-			if (Map.Tiles[c][r].Type==MAP.TILE.SEA) {
-				if (TacticalUtils.GetUnitType()==CITY.PRODUCTION.TYPE.NAVY) {
-					TacticalUtils.CreateStack(TACTICAlUNIT.TYPE.SEA, this.Clan, Map.Tiles[c][r], this.Unit);
-					return;
-				} else if (TacticalUtils.GetUnitType()==CITY.PRODUCTION.TYPE.AIrFORCE) {
-					TacticalUtils.CreateStack(TACTICAlUNIT.TYPE.AIR, this.Clan, Map.Tiles[c][r], this.Unit);
-					return;
-				}
-			} else if (Map.Tiles[c][r].Type==MAP.TILE.LAND) {
-				if (TacticalUtils.GetUnitType()==CITY.PRODUCTION.TYPE.ARMY) {
-					TacticalUtils.CreateStack(TACTICAlUNIT.TYPE.LAND, this.Clan, Map.Tiles[c][r], this.Unit);
-					return;
-				} else if (TacticalUtils.GetUnitType()==CITY.PRODUCTION.TYPE.AIrFORCE) {
-					TacticalUtils.CreateStack(TACTICAlUNIT.TYPE.AIR, this.Clan, Map.Tiles[c][r], this.Unit);
-					return;
-				}
-			} else  //shore tile
-				if (TacticalUtils.GetUnitType()==CITY.PRODUCTION.TYPE.AIrFORCE) {
-					TacticalUtils.CreateStack(TACTICAlUNIT.TYPE.AIR, this.Clan, Map.Tiles[c][r], this.Unit);
-					return;
-				}
+
+			switch (Map.Tiles[c][r].Type) {
+				case MAP.TILE.LAND:
+					if (type==TACTICAlUNIT.TYPE.LAND) {																	//if land tile, create army or air force stack
+						TacticalUtils.CreateStack(STACK.LAND, this.Clan, Map.Tiles[c][r], this.Unit);
+						return;
+					} else if (type==TACTICAlUNIT.TYPE.AIR) {
+						TacticalUtils.CreateStack(STACK.AIR, this.Clan, Map.Tiles[c][r], this.Unit);
+						return;
+					}
+					break;
+				case MAP.TILE.SEA:
+					if (type==TACTICAlUNIT.TYPE.SEA) {																	//if sea tile, create naval or air force stack
+						TacticalUtils.CreateStack(STACK.SEA, this.Clan, Map.Tiles[c][r], this.Unit);
+						return;
+					} else if (type==TACTICAlUNIT.TYPE.AIR) {
+						TacticalUtils.CreateStack(STACK.AIR, this.Clan, Map.Tiles[c][r], this.Unit);
+						return;
+					}
+					break;
+				default:		//shore tile
+					if (type==TACTICAlUNIT.TYPE.AIR) {																//if air unit, create stack
+						TacticalUtils.CreateStack(STACK.AIR, this.Clan, Map.Tiles[c][r], this.Unit);
+						return;
+					}
+					break;
+			}
 		}
 
 		//If no empty tile was found, add to a neighbouring stack
-		if (i==aTiles.length)
+		if (i==aTiles.length)																								//check if no empty tiles are found
 			for (i=0;i<aTiles.length;++i) {
+
 				c = this.Tile.C + NeighbouringTiles[aTiles[i]][0];
 				r = this.Tile.R + NeighbouringTiles[aTiles[i]][1];
-				if (Map.Tiles[c][r].Type==MAP.TILE.SEA) {
-					if (TacticalUtils.GetUnitType()==CITY.PRODUCTION.TYPE.NAVY) {
-						if (Map.Tiles[c][r].Stack.AddUnit(this.Unit))
-							return;
-					}
-				} else if (Map.Tiles[c][r].Type==MAP.TILE.LAND) {
-					if (TacticalUtils.GetUnitType()==CITY.PRODUCTION.TYPE.ARMY) {
-						if (Map.Tiles[c][r].Stack.AddUnit(this.Unit))
-							return;
-					}
-				} else
-					if (Map.Tiles[c][r].Stack.AddUnit(this.Unit))
-						return;
+				if (!Map.Tiles[c][r].Stack)																				//skip if there is no stack on tile
+					continue;
+				if (!(Map.Tiles[c][r].Stack.Clan===PlayerClan))														//skip rival stacks
+					continue;
+
+				switch (Map.Tiles[c][r].Stack.Type) {
+					case STACK.LAND:
+						if (type==TACTICAlUNIT.TYPE.LAND)																//if army unit, add to stack on land tile
+							if (Map.Tiles[c][r].Stack.AddUnit(this.Unit))
+								return;
+						break;
+					case STACK.SEA:
+						if (type==TACTICAlUNIT.TYPE.SEA)																	//if naval unit, add to stack on sea tile
+							if (Map.Tiles[c][r].Stack.AddUnit(this.Unit))
+								return;
+						break;
+					default:
+						if (type==STACK.AIR)																	//if air force unit, add to stack on air tile
+							if (Map.Tiles[c][r].Stack.AddUnit(this.Unit))
+								return;
+						break;
+				}
 			}
 
-		//If all stacks were full, maybe teleport? fill a slightly further tile?
-		//-TODO:
+		//-TODO: if all stacks were full, maybe teleport? fill a slightly further tile?
 	},
 	Draw() {  //UNLOGGED - should city images move out of play view?
 		var x, y;

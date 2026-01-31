@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	<div id="PrimeDiv" style="position:absolute; top:8px; left:8px; z-index:1">
 	    <canvas id="PrimeCanvas" width="400" height="400"></canvas>
 	</div>
@@ -73,13 +74,15 @@
 
 	<!-- Agents -->
 	<script src="..\library\GenieAgent.js"></script>
-	<script src="..\library\agent\Draw.js"></script>
-	<script src="..\library\agent\Update.js"></script>
-	<script src="..\library\agent\Space.js"></script>
+	<script src="..\library\agent\Animation.js"></script>
 	<script src="..\library\agent\Collision.js"></script>
+	<script src="..\library\agent\Draw.js"></script>
+	<script src="..\library\agent\Space.js"></script>
+	<script src="..\library\agent\Update.js"></script>
 
 	<!-- FX -->
 	<script src="..\library\GenieSound.js"></script>
+	<script src="..\library\GenieMusic.js"></script>
 
 	<!-- Interface -->
 	<script src="..\library\GenieMouse.js"></script>
@@ -109,6 +112,7 @@
 
 	<!-- units -->
 	<script src="unit.js"></script>
+	<script src="units\land.js"></script>
 	<script src="units\trooper.js"></script>
 	<script src="units\gunner.js"></script>
 	<script src="units\bazooker.js"></script>
@@ -137,12 +141,14 @@
 	<script src="city.js"></script>
 	<script src="island.js"></script>
 	<script src="platform.js"></script>
+	<script src="pad.js"></script>
 	<script src="map.js"></script>
 	<script src="map\tile.js"></script>
 
 	<!-- core -->
 	<script src="stack.js"></script>
 	<script src="clan.js"></script>
+	<script src="clan\turn.js"></script>
 	<script src="AI.js"></script>
 	<script src="utils.js"></script>
 
@@ -151,11 +157,14 @@
 	<script src="components\core.js"></script>
 	<script src="components\data.js"></script>
 	<script src="components\sprites.js"></script>
+	<script src="components\views.js"></script>
 
 	<!-- views -->
 	<script src="views\intro.js"></script>
-	<script src="views\options.js"></script>
+	<script src="views\sub\tutorial.js"></script>
 	<script src="views\sub\docs.js"></script>
+	<script src="views\daily.js"></script>
+	<script src="views\options.js"></script>
 
 	    <!-- map views -->
 	    <script src="views\map.js"></script>
@@ -174,6 +183,20 @@
 
 	    <script src="views\sub\turn.js"></script>
 
+	    <!-- documentation views -->
+	    <script src="views\FAQ.js"></script>
+	    <script src="views\FAQ\info.js"></script>
+	    <script src="views\FAQ\console.js"></script>
+	    <script src="views\guide.js"></script>
+	    <script src="views\guide\info.js"></script>
+	    <script src="views\guide\console.js"></script>
+	    <script src="views\help.js"></script>
+	    <script src="views\help\info.js"></script>
+	    <script src="views\help\console.js"></script>
+	    <script src="views\units.js"></script>
+	    <script src="views\units\info.js"></script>
+	    <script src="views\units\console.js"></script>
+
 	<script src="tConquest.js"></script>
 
 	<script>
@@ -188,7 +211,8 @@
 		TacticalCalcPad = new GenieCalcPad();
 		TacticalGraphics = new GenieGraphics();
 		TacticalText = new GenieText();
-		TacticalRandomizer = new GenieRandomizer();
+//		TacticalRandomizer = new GenieRandomizer();
+		TacticalRandomizer = Randomizer;
 
 		//Set library components
 		TacticalScape.Set("PrimeCanvas", "InfoCanvas", "ConsoleCanvas");
@@ -198,7 +222,7 @@
 		TacticalScape.PrimeScape.Context.font = FONT.DEFAULT;
 		TacticalScape.AddController(GAMePAD.ARROWS);
 		Controller = TacticalScape.ControllerA;
-		TacticalRandomizer.Set();
+//		TacticalRandomizer.Set();
 
 		//Load and assign graphic images
 		ImageManager.Set(TacticalImages);

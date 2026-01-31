@@ -7,7 +7,7 @@ var TacticalMap = function() {
 	var Tiles, LightMap;
 	var Grid;																			//used for island and platform generation
 	var Sectors;																		//TODO: needed for naval exploration? SECTOR: { W: 5, H: 5, C: 10, R: 10 }
-	var CoastalCities, PortlessCities, InlandCities, ClanCities;
+	var CoastalCities, PortlessCities, InlandCities;
 	var CoastalCityIndices, SeaTiles, ShoreTiles;							//indices only
 	var DarkMapFlag;
 };
@@ -22,6 +22,7 @@ TacticalMap.prototype = {
 	SetData() {
 		var c, r;
 
+		//Tiles
 		this.Grid = ArrayUtils.Create2D(MAP.TILE.C, MAP.TILE.R);
 		this.Tiles = ArrayUtils.Create2D(MAP.TILE.C, MAP.TILE.R, TacticalTile);
 		for (r=0;r<MAP.TILE.R;++r)
@@ -29,11 +30,12 @@ TacticalMap.prototype = {
 				this.Tiles[c][r].Set(c, r);
 		this.LightMap = ArrayUtils.Create2D(MAP.TILE.C, MAP.TILE.R);
 
+		//Cities
 		this.CoastalCities = new Array(CITY.COUNT.COASTAL);
 		this.PortlessCities = new Array(CITY.COUNT.PORTLESS);
 		this.InlandCities = new Array(CITY.COUNT.INLAND);
-		this.ClanCities = new Array();
 
+		//Indices
 		this.CoastalCityIndices = [ [ ],
 											 [ 0,1,3,4 ],
 											 [ 0,1,2,5,6,9,10,11 ],
@@ -107,8 +109,6 @@ TacticalMap.prototype = {
 				Islands[i][j].SetCities();
 				for (k=0;k<Islands[i][j].Cities.length;++k) {
 					Cities[nCities] = Islands[i][j].Cities[k];							//add newly created cities to universal Cities list
-					if ( i==ISLAND.SMALL && k==2 )
-						this.ClanCities.push(Cities[nCities]);
 					if (this.CoastalCityIndices[i].includes(k)) {
 						this.CoastalCities[nCoastals] = Islands[i][j].Cities[k];
 						++nCoastals;
