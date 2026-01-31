@@ -1,4 +1,6 @@
-
+/*
+		** derived from Play View - would make sense
+*/
 //--------------------------------------------------
 //---------- UNIT TELEPORT VIEW --------------------
 var UnitTeleportView = function() {
@@ -41,4 +43,7 @@ UnitTeleportView.prototype.Update = function() {  //UNLOGGED
 	}
 };
 UnitTeleportView.prototype.Draw = function() {  //UNLOGGED
+	//-best thing to do is have the same main and info screens as Play View, and in console show the city and surrounding tiles (showing garrison)
+	//-once a city is selected, by clicking on 'teleport' button in console view, which brings up the unit teleport view
+	//-teleport screen will show stack selected on left, city and neighbouring tiles on right, clicking on any garrison transferring 1 unit to it
 };

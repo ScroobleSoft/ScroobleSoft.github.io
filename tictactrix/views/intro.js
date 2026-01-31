@@ -19,14 +19,6 @@ TacticalIntroView.prototype.Set = function(cnvs, specs) {
 //	this.State = this.Specs.STATE.OPEN;
 	this.InfoCount = 0;
 };
-/*
-TacticalIntroView.prototype.SetImages = function() {  //UNLOGGED
-
-	this.CellImage = this.SetImage(ImageManager.Pics[IMAGeINDEX.IMAGES], this.Specs.IMAGE.CELL);
-	this.SelectionImage = this.SetImage(ImageManager.Pics[IMAGeINDEX.IMAGES], this.Specs.IMAGE.SELECTION);
-	this.DeselectionImage = this.SetImage(ImageManager.Pics[IMAGeINDEX.IMAGES], this.Specs.IMAGE.DESELECTION);
-};
-*/
 TacticalIntroView.prototype.SetControls = function() {  //UNLOGGED
 
 	//Choice
@@ -48,67 +40,6 @@ TacticalIntroView.prototype.SetControls = function() {  //UNLOGGED
 
 	//Touch bar
 	this.MonthsTouchBar = this.SetTouchBar(this.Specs.TOUChBAR.MONTHS, this.Specs.TOUChBAR.MONTHS.IMAGE, ImageManager.Pics[IMAGeINDEX.CONTROLS]);
-*/
-};
-/*
-TacticalIntroView.prototype.ShowControls = function() {  //UNLOGGED
-
-	this.Controls.forEach(function(cntrl) {cntrl.DeActivate();});
-
-	switch (this.State) {
-		case this.Specs.STATE.OPEN:
-			this.ShowOpenControls();
-			break;
-		case this.Specs.STATE.START:
-			this.ShowStartControls();
-			break;
-		case this.Specs.STATE.INFO:
-			this.PlayButton.Show();
-			this.InfoButton.Show();
-			break;
-		case this.Specs.STATE.CHARACTER:
-			this.OkButton.Show();
-			this.CancelButton.Show();
-			break;
-		case this.Specs.STATE.PAST:
-			this.ShowPastControls();
-			break;
-	}
-};
-*/
-TacticalIntroView.prototype.Open = function() {  //UNLOGGED
-
-	this.ColourScape(null, PAINT.SKY);
-
-	//TEMP - MOCK-UP (background)
-	var Design = new GenieImage();
-	Design.Set(this.Context, ImageManager.Pics[IMAGeINDEX.DESIGN], { L: 0, T: 0, W: 410, H: 270 } );
-//	this.Context.drawImage(Design.Pic, 6, 4, 381, 118, 10, 5, 381, 118);
-//	this.Context.drawImage(Design.Pic, 4, 130, 114, 138, 5, 255, 114, 138);
-//	this.Context.drawImage(Design.Pic, 123, 132, 117, 134, 277, 260, 117, 134);
-
-	//TEMP - MOCK-UP
-	var MockUp = new GenieImage();
-	MockUp.Set(this.Context, ImageManager.Pics[IMAGeINDEX.MOCKUP1], { L: 2, T: 2, W: 331, H: 335 } );
-//	this.Context.drawImage(MockUp.Pic, 2, 2, 200, 150, 100, 125, 200, 150);
-	Graphics.DrawRectangle(100, 100, 200, 200, MAP.COLOUR.LAND, 0);
-	Graphics.DrawRectangle(100, 100, 200, 200, "white", 2);
-	Text.Write("TicTacTrix", 142, 130, { COLOUR: "white", FONT: "bold 24px Arial", STYLE: FONT.STYLE.UNDERLINED } );
-	TacticalScape.InfoBox.fillStyle = GREY.LIGHT;
-	TacticalScape.InfoBox.fillRect(0, 0, INFoBOX.WIDTH, INFoBOX.HEIGHT);
-	TacticalScape.InfoBox.drawImage(MockUp.Pic, 204, 2, 124, 134, 35, 50, 124, 134);
-//	TacticalScape.ControlPanel.fillStyle = MAP.COLOUR.LAND;
-//	TacticalScape.ControlPanel.fillRect(0, 0, INFoBOX.WIDTH, INFoBOX.HEIGHT);
-//	TacticalScape.ControlPanel.drawImage(MockUp.Pic, 2, 154, 146, 179, 0, 0, 146, 179);
-//	Text.Write("* click screen for designs", 110, 150);
-
-	GenieView.prototype.Open.call(this);
-/*
-	if (this.State==this.Specs.STATE.OPEN) {
-		this.DailyDate = new Date();
-		this.DailyDate.getTime();
-		this.GameInfo = this.DailyDate.toDateString();
-	}
 */
 };
 TacticalIntroView.prototype.Update = function() {  //UNLOGGED
@@ -147,31 +78,24 @@ TacticalIntroView.prototype.Update = function() {  //UNLOGGED
 	if (this.State==VIEW.INTRO.STATE.PAST)
 		this.UpdatePastControls();
 */
+	this.InfoView.UpdateButtons();
 	this.ConsoleView.UpdateButtons();
 };
-/*
-TacticalIntroView.prototype.Draw = function() {  //UNLOGGED
-
-	this.GraphicsTool.DrawRectangle(this.Specs.L, this.Specs.T, this.Specs.W, this.Specs.H, "white", 3);
-
-	this.TextWriter.SetColour("white");
-	this.TextWriter.Write("Welcome to the planet Dominion,", 96, 90);
-	this.TextWriter.Write("colonized by Dominion Corp. The", 96, 107);
-	this.TextWriter.Write("company has decided to quit the", 96, 124);
-	this.TextWriter.Write("colony, and leave its 101 nations", 96, 141);
-	this.TextWriter.Write("to pick a leader themselves.", 96, 158);
-	this.TextWriter.ResetColour();
-
-//	this.Update();
-};
-*/
-TacticalIntroView.prototype.Draw = function() {  //UNLOGGED
+TacticalIntroView.prototype.Draw = function() {
 	var pCln;
+
+	this.DrawBackground();
 
 	ScreenRect.L = 0;
 	ScreenRect.T = 0;
 	pCln = this.DrawPlayerUnits();
 	this.DrawRivalUnits(pCln);
+};
+TacticalIntroView.prototype.DrawBackground = function() {
+
+	Graphics.DrawRectangle(100, 100, 200, 200, MAP.COLOUR.LAND, 0);
+	Graphics.DrawRectangle(100, 100, 200, 200, "white", 2);
+	Text.Write("TicTacTrix", 142, 130, { COLOUR: "white", FONT: "bold 24px Arial", STYLE: FONT.STYLE.UNDERLINED } );
 };
 TacticalIntroView.prototype.DrawPlayerUnits = function() {
 	var i;
@@ -251,24 +175,6 @@ TacticalIntroView.prototype.DrawRivalUnits = function(pClan) {  //p- Player
 		TacticalUnits[iUnt].Draw();
 	}
 };
-/*
-TacticalIntroView.prototype.OpenGuideView = function() {  //UNLOGGED
-
-	this.ConsoleView.Close();
-	this.SetConsoleView(DocumentationConsoleView);
-	GuideView.Open();
-	GuideView.Update();
-};
-*/
-/*
-TacticalIntroView.prototype.OpenMapView = function() {  //UNLOGGED
-
-	ChoiceView.SetNation(PlayerPower);
-	GazetteerInfoView.MainView = ChoiceView;
-	ChoiceView.Open();
-	ChoiceView.Update();
-};
-*/
 TacticalIntroView.prototype.UpdateButtons = function() {  //UNLOGGED
 
 	if (this.DailyButton.CheckClicked())
@@ -282,6 +188,10 @@ TacticalIntroView.prototype.UpdateButtons = function() {  //UNLOGGED
 };
 TacticalIntroView.prototype.OpenScreenMapView = function() {
 
+	//TEST - predictable map and actions
+//	Randomizer.SetSeeds(88256767, 1393744072);
+	//TEST - useful for debugging
+
 	Game.SetUp();
 	PlayerClan = Clans[0];		//TEMP - this will be selected in Intro sub-screen
 	ScreenMapView.SetClan(PlayerClan);
@@ -289,4 +199,19 @@ TacticalIntroView.prototype.OpenScreenMapView = function() {
 		Map.ActivateDarkMap();
 	ScreenMapView.Open();
 	ScreenMapView.Update();
+};
+TacticalIntroView.prototype.OpenHelpView = function() {  //UNLOGGED
+};
+/*
+TacticalIntroView.prototype.OpenGuideView = function() {  //UNLOGGED
+
+	this.ConsoleView.Close();
+	this.SetConsoleView(DocumentationConsoleView);
+	GuideView.Open();
+	GuideView.Update();
+};
+*/
+TacticalIntroView.prototype.OpenFAQView = function() {  //UNLOGGED
+};
+TacticalIntroView.prototype.OpenUnitsView = function() {  //UNLOGGED
 };

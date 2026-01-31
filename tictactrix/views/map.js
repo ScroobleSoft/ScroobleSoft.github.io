@@ -79,7 +79,7 @@ TacticalScreenMapView.prototype.DrawIslands = function() {
 					CityOctagonImages.DrawPatchNumber(Islands[i][j].Cities[k].Clan.Index, x, y);
 				else
 					CityOctagonImages.DrawPatchNumber(CLAN.NEUTRAL, x, y);
-				Text.Write(Islands[i][j].Cities[k].Unit, x-6, y-2, { COLOUR: "white" } );
+//				Text.Write(Islands[i][j].Cities[k].Unit, x-6, y-2, { COLOUR: "white" } );		TEMP
 			}
 		}
 };
