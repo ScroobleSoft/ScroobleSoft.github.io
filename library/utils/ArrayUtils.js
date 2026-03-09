@@ -50,7 +50,7 @@ ArrayUtilities.prototype = {
 
 		return (array);
 	},
-	Clear2D(a2D, val) {
+	Clear2D(a2D, val) {  //TODO: replace with Fill2D below
 		var c, r;
 
 		if (!val)
@@ -60,7 +60,17 @@ ArrayUtilities.prototype = {
 			for (r=0;r<a2D[c].length;++r)
 				a2D[c][r] = val;
 	},
-	Index(arry) {
+	Fill2D(a2D, val) {
+		var c, r;
+
+		if (!val)
+			val = 0;
+
+		for (c=0;c<a2D.length;++c)
+			for (r=0;r<a2D[c].length;++r)
+				a2D[c][r] = val;
+	},
+	Index(arry) {  //TODO: can also be called ::Enumerate
 
 		for (this.i=0;this.i<arry.length;++this.i)
 			arry[this.i] = this.i;
@@ -174,6 +184,19 @@ ArrayUtilities.prototype = {
 			}
 
 		return (this.indx);
+	},
+	CheckIncludesElement(arry, aElmnts) {  //checks for multiple elements (a capability .includes doesn't have)
+
+		for (this.i=0;this.i<aElmnts.length;++this.i)
+			if (arry.includes(aElmnts[this.i]))
+				return (true);
+
+		return (false);
+	},
+	Combine(aSource, aDestination) {
+
+		while (aSource.length)
+			aDestination.push(aSource.shift());
 	}
 };
 

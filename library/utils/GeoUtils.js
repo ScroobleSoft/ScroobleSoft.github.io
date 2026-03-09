@@ -113,6 +113,10 @@ GeometricUtilities.prototype = {
 		else
 	 return (1);
 	},
+	GetDistance(cA, cB) {  //c-coords
+
+		return (Math.sqrt(Math.pow(cA.X-cB.X, 2) + Math.pow(cA.Y-cB.Y, 2)));
+	},
 	CartesianToIsometric(crds, bAnticlockwise, bModify, page) {
 		if (page) {
 	 crds.X -=  page.W/2;

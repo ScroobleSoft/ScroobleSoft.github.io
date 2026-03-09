@@ -73,7 +73,7 @@ PerspectiveUtilities.prototype = {
 	    this.Quad[3].X = this.ScreenQuad[3].X - w;
 	    this.Quad[3].Y = this.ScreenQuad[3].Y + h;
 	    this.Quad[3].Y -= elvtn;
-	    return (InterUtils.CheckPointPolygon(pos, this.Quad));	//TODO: if this is slow, will try different techniques, such as scaled pos
+	    return (IntersectUtils.CheckPointPolygon(pos, this.Quad));	//TODO: if this is slow, will try different techniques, such as scaled pos
 	    break;							//	checked against .ScreenRect
 //	 case PERSPECTIVE.CUSTOM:
 //	    break;
