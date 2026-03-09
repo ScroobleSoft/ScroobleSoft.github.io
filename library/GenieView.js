@@ -52,6 +52,18 @@ GenieView.prototype = {
 		this.ConsoleView = cView;
 		this.ConsoleView.MainView = this;
 	},
+	SwitchInfoView(iView) {  //NOTE: applicable only to main view
+
+		this.InfoView.Close();
+		this.SetInfoView(iView);
+		this.InfoView.Open();
+	},
+	SwitchConsoleView(cView) {  //NOTE: applicable only to main view
+
+		this.ConsoleView.Close();
+		this.SetConsoleView(cView);
+		this.ConsoleView.Open();
+	},
 	SetPerspective(prspctv) {
 
 		this.Perspective = prspctv;
@@ -306,7 +318,7 @@ GenieView.prototype = {
 
 		chkbx = new GenieCheckBox();
 		chkbx.Set(this.Canvas, specs, img);
-		chkbx.SetLinks(null, this.TextWriter);
+		chkbx.SetLinks(null, tWriter);
 		this.Controls.push(chkbx);
 
 		return (chkbx);
@@ -379,7 +391,7 @@ GenieView.prototype = {
 
 		rdio = new GenieRadioControls();
 		rdio.Set(this.Canvas, specs, img);
-		rdio.SetLinks(null, this.TextWriter);
+		rdio.SetLinks(null, tWriter);
 		this.Controls.push(rdio);
 
 		return (rdio);

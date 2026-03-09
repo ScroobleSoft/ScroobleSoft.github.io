@@ -1,29 +1,15 @@
 
 //------------------------------------------
 //---------- GENIE GAME --------------------
-var GenieGame = function () {
+var GenieNewGame = function () {						//TODO: will eventually replace GenieGame
 	var Interface;
-	var Screen, InfoBox, ControlPanel, Ticker, Tabloid;
-	var GraphicsTool, TextWriter;
-	var Randomizer;
-	var View;
 	var Components;
 	var Settings, Level, Type;			//NOTE: .Type is mostly for random/scheduled etc.
 	var AnimationFrameHandle;
 };
-GenieGame.prototype = {
-	Set(intrfc, gTool, tWriter, rGenerator) {
-		this.Interface = intrfc;
-		this.Screen = this.Interface.PrimeScape.Context;
-		this.InfoBox = this.Interface.ZoomScape.Context;
-		this.ControlPanel = this.Interface.Console.Context;
-		if ( (Game.Settings & GAME.PLATFORM.TABLET) || (Game.Settings & GAME.PLATFORM.PC) ) {	//TODO: DUBIOUS!! (where are .Settings being set?)
-			this.Ticker = this.Interface.Dashboard.Context;
-			this.Tabloid = this.Interface.HelpDeck.Context;
-		}
-		this.GraphicsTool = gTool;
-		this.TextWriter = tWriter;
-		this.Randomizer = rGenerator;
+GenieNewGame.prototype = {
+	Set() {
+		this.Interface = GameScape;		//TODO: bit of a hack (used in GenieView, needs to replaced with GameScape)
 		this.Settings = 0;
 		this.Level = 0;
 	},
@@ -33,17 +19,14 @@ GenieGame.prototype = {
 
 		if (ImageManager.AllLoaded) {
 			cancelAnimationFrame(this.AnimationFrameHandle);
-			this.SetComponents();
+			this.Components.Set();
 			this.Start();
 		}
 	},
 	Start() {
 
-		Intro.Start();
-	},
-	SetView(view) {
-
-		this.View = view;
+		IntroView.Open();
+		IntroView.Update();
 	},
 	SetDaily(date) {
 		var dt;
@@ -51,51 +34,6 @@ GenieGame.prototype = {
 		dt = new Date();
 		this.Randomizer.SetDailySeed(dt);
 		Calendar.SetBaseDate(date);
-	},
-	ShowButtons() {  //REDUNDANT
-
-		this.InfoBox.fillStyle = "rgb(47,159,255)";
-		this.InfoBox.fillRect(0, 0, INFoBOX.WIDTH, INFoBOX.HEIGHT);
-
-		NewGameButton.Show();
-		TutorialButton.Show();
-		DemoButton.Show();
-		MiniGamesButton.Show();
-	},
-	PollButtons() {  //REDUNDANT
-
-		this.AnimationFrameHandle = requestAnimationFrame(this.PollButtons.bind(this));
-
-		if (NewGameButton.CheckClicked()) {
-			cancelAnimationFrame(this.AnimationFrameHandle);
-			this.HideButtons();
-			this.Start();
-		}
-
-		if (TutorialButton.CheckClicked()) {
-			cancelAnimationFrame(this.AnimationFrameHandle);
-			this.HideButtons();
-			Tutorial.Start();
-		}
-
-		if (DemoButton.CheckClicked()) {
-			cancelAnimationFrame(this.AnimationFrameHandle);
-			this.HideButtons();
-			Demo.Start();
-		}
-
-		if (MiniGamesButton.CheckClicked()) {
-			cancelAnimationFrame(this.AnimationFrameHandle);
-			this.HideButtons();
-			MiniGames.Start();
-		}
-	},
-	HideButtons() {  //REDUNDANT
-
-		NewGameButton.Hide();
-		TutorialButton.Hide();
-		DemoButton.Hide();
-		MiniGamesButton.Hide();
 	},
 	Pause() {
 

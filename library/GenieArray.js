@@ -73,7 +73,7 @@ GenieArray.prototype.RemoveAll = function() {  //NOTE: this could be re-written 
 
 	this.length = 0;
 };
-GenieArray.prototype.RemoveElement = function(elmnt) {  //NOTE: returns 'false' is element not found
+GenieArray.prototype.RemoveElement = function(elmnt) {  //NOTE: returns 'false' if element not found
 	var i;
 
 	for (i=0;i<this.length;++i)
@@ -87,6 +87,10 @@ GenieArray.prototype.RemoveElement = function(elmnt) {  //NOTE: returns 'false' 
 GenieArray.prototype.Extract = function(eIndx) {  //e- element . . . NOTE: only one item retrieved
 
 	return (this.splice(eIndx, 1)[0]);
+};
+GenieArray.prototype.PopFront = function() {
+
+	return (this.shift());
 };
 GenieArray.prototype.Swap = function(eIndx1, eIndx2) {  //e- element
 	var element;

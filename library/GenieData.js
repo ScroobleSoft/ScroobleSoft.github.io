@@ -24,6 +24,8 @@ var Alphabet = "abcdefghijklmnopqrstuvwxyz";
 var DescendingLetters = "gjpqy";
 
 var CALENDAR = { DAYS: { WEEK: 7, FORTNIGHT: 14 }, MONTHS: 12 };
+var MONTH = { JANUARY: 0, FEBRUARY: 1, MARCH: 2, APRIL: 3, MAY: 4, JUNE: 5, JULY: 6, AUGUST: 7, SEPTEMBER: 8, OCTOBER: 9, NOVEMBER: 10, DECEMBER: 11 };
 var YEAR = { WEEKS: 52, DAYS: { COMMON: 365, LEAP: 366 } };
-var Day = [ "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" ];
-var Month = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
+var Days = [ "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" ];
+var Months = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
+var DaysInMonth = [ 31,28,31,30,31,30,31,31,30,31,30,31 ];

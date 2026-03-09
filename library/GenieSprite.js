@@ -61,7 +61,7 @@ GenieSprite.prototype = {
 			x = Math.round(x);
 			y = Math.round(y);
 		}
-		this.Context.drawImage(this.Pic, this.Left, this.Top, this.Specs.W, this.Specs.H, x, y-(this.Specs.H-1), this.Specs.W, this.Specs.H);
+		this.Context.drawImage(this.Pic, this.Left, this.Top, this.Specs.W, this.Specs.H, x, y-this.Specs.H, this.Specs.W, this.Specs.H);
 	},
 	DrawAligned(x, y) {
 
