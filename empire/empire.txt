@@ -1,0 +1,8 @@
+ ** units annihilated, winners can merge
+ ** target tile relevant
+ * half the regiments will be at the base rows, the other half centrally (in random positions)
+ ** moves, not turns - this is more like chess
+ ** losing half of regiment loses battle/skirmish/melee
+ ** regiments w/ 0 troops are not deleted, just not shown
+ ** don't have to have the same number of terrain regions, so could have a totally random terrain, and similarly could have the same thing with command composition
+ ** defeated soldiers are put into a collective pool - actually half could be captured and turned, the other half abandoning the field and become roving mercenaries

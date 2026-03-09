@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+    <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<div id="PrimeDiv" style="position:absolute; top:8px; left:8px; z-index:1">
+	    <canvas id="PrimeCanvas" width="800" height="600"></canvas>
+	</div>
+	<div id="ZoomDiv" style="position:absolute; top:8px; left:812px; z-index:2">
+	    <canvas id="ZoomCanvas" width="240" height="320"></canvas>
+	</div>
+	<div id="ConsoleDiv" style="position:absolute; top:332px; left:812px; z-index:3">
+	    <canvas id="ConsoleCanvas" width="240" height="240"></canvas>
+	</div>
+    </head>
+
+    <button type="button" id="StartButton"	onclick="EventHandler(0)">Start</button>
+    <button type="button" id="LoadButton"	onclick="EventHandler(1)">Load</button>
+    <button type="button" id="SaveButton"	onclick="EventHandler(2)">Save</button>
+    <button type="button" id="TestButton"	onclick="EventHandler(3)">Test</button>
+    <button type="button" id="ExpandButton"	onclick="EventHandler(4)">Expand</button>
+    <button type="button" id="FullScreenButton" onclick="EventHandler(5)">Full Screen</button>
+
+    <body onload="RunCheckeredBattles()">
+
+	<!-- Data -->
+	<script src="..\library\GenieData.js"></script>
+	<script src="..\library\data\Consts.js"></script>
+	<script src="..\library\data\Colours.js"></script>
+	<script src="..\library\data\Geo.js"></script>
+	<script src="..\library\data\IO.js"></script>
+	<script src="..\library\data\Characters.js"></script>
+	<script src="..\library\data\Controls.js"></script>
+	<script src="..\library\data\Images.js"></script>
+	<script src="..\library\data\Sprites.js"></script>
+	<script src="..\library\data\Agents.js"></script>
+	<script src="..\library\data\Weapons.js"></script>
+
+	<!-- Types -->
+	<script src="..\library\GenieTypes.js"></script>
+	<script src="..\library\GenieArray.js"></script>
+	<script src="..\library\GenieList.js"></script>
+	<script src="..\library\AgentArray.js"></script>
+	<script src="..\library\GenieList.js"></script>
+
+	<!-- Utilities -->
+	<script src="..\library\GenieUtils.js"></script>
+	<script src="..\library\utils\ArrayUtils.js"></script>
+	<script src="..\library\utils\GeoUtils.js"></script>
+	<script src="..\library\utils\IntersectUtils.js"></script>
+	<script src="..\library\utils\SpaceUtils.js"></script>
+	<script src="..\library\utils\StringUtils.js"></script>
+	<script src="..\library\utils\TileUtils.js"></script>
+
+	<!-- Controls -->
+	<script src="..\library\GenieControl.js"></script>
+	<script src="..\library\controls\GenieButton.js"></script>
+	<script src="..\library\controls\TextButton.js"></script>
+	<script src="..\library\controls\ImageButton.js"></script>
+	<script src="..\library\controls\GenieCheckBox.js"></script>
+	<script src="..\library\controls\IconPanel.js"></script>
+	<script src="..\library\controls\GenieTouchBar.js"></script>
+
+	<!-- Objects -->
+	<script src="..\library\GenieBuffer.js"></script>
+	<script src="..\library\GenieStructure.js"></script>
+	<script src="..\library\MobileObject.js"></script>
+
+	<!-- Tools -->
+	<script src="..\library\GenieRandom.js"></script>
+	<script src="..\library\ScreenManager.js"></script>
+	<script src="..\library\GenieCalcPad.js"></script>
+	<script src="..\library\GenieText.js"></script>
+
+	<!-- Graphics -->
+	<script src="..\library\GenieImage.js"></script>
+	<script src="..\library\ImageMap.js"></script>
+	<script src="..\library\GenieGraphics.js"></script>
+	<script src="..\library\GenieShape.js"></script>
+	<script src="..\library\shapes\GenieLine.js"></script>
+	<script src="..\library\shapes\GenieRectangle.js"></script>
+
+	<!-- Sprites -->
+	<script src="..\library\GenieSprite.js"></script>
+	<script src="..\library\sprites\AnimatedSprite.js"></script>
+	<script src="..\library\sprites\GeometricSprite.js"></script>
+	<script src="..\library\sprites\CompositeSprite.js"></script>
+
+	<!-- Agents -->
+	<script src="..\library\GenieAgent.js"></script>
+	<script src="..\library\agent\Draw.js"></script>
+	<script src="..\library\agent\Update.js"></script>
+	<script src="..\library\agent\Space.js"></script>
+	<script src="..\library\agent\Collision.js"></script>
+
+	<!-- Interface -->
+	<script src="..\library\GenieMouse.js"></script>
+	<script src="..\library\GenieKeyboard.js"></script>
+	<script src="..\library\GenieGamepad.js"></script>
+	<script src="..\library\ImageManager.js"></script>
+
+	<!-- Framework -->
+	<script src="..\library\GenieComponents.js"></script>
+	<script src="..\library\GenieCanvas.js"></script>
+	<script src="..\library\GenieScape.js"></script>
+	<script src="..\library\GenieView.js"></script>
+	<script src="..\library\views\SubView.js"></script>
+	<script src="..\library\GenieNewGame.js"></script>
+
+	<!-- data -->
+	<script src="data.js"></script>
+	<script src="data\agents.js"></script>
+	<script src="data\sprites.js"></script>
+	<script src="data\views.js"></script>
+
+	<!-- units -->
+	<script src="unit.js"></script>
+	<script src="units\archer.js"></script>
+	<script src="units\longbowman.js"></script>
+	<script src="units\horsearcher.js"></script>
+	<script src="units\axeman.js"></script>
+	<script src="units\swordsman.js"></script>
+	<script src="units\pikeman.js"></script>
+	<script src="units\maceman.js"></script>
+	<script src="units\cataphract.js"></script>
+	<script src="units\knight.js"></script>
+	<script src="units\immortal.js"></script>
+
+	<script src="army\squad.js"></script>
+	<script src="army\battalion.js"></script>
+	<script src="army\regiment.js"></script>
+	<script src="army\command.js"></script>
+	<script src="army.js"></script>
+
+	<!-- battle -->
+	<script src="battle\division.js"></script>
+
+	<script src="satrapy.js"></script>
+	<script src="battlefield.js"></script>
+	<script src="manager.js"></script>
+
+	<!-- components -->
+	<script src="components.js"></script>
+	<script src="components\sprites.js"></script>
+	<script src="components\views.js"></script>
+
+	<!-- -- views -- -->
+
+	    <!-- command battle -->
+	    <script src="views\engagement.js"></script>
+	    <script src="views\battle.js"></script>
+	    <script src="views\battle\info.js"></script>
+	    <script src="views\battle\console.js"></script>
+
+	    <!-- regiment clash -->
+	    <script src="views\clash.js"></script>
+	    <script src="views\clash\info.js"></script>
+	    <script src="views\clash\console.js"></script>
+	    <script src="views\clash\sim.js"></script>
+
+	    <!-- battalion skirmish -->
+	    <script src="views\skirmish.js"></script>
+	    <script src="views\skirmish\info.js"></script>
+	    <script src="views\skirmish\console.js"></script>
+	    <script src="views\skirmish\sim.js"></script>
+
+	    <!-- squad melee -->
+	    <script src="views\melee.js"></script>
+	    <script src="views\melee\info.js"></script>
+	    <script src="views\melee\console.js"></script>
+	    <script src="views\melee\sim.js"></script>
+
+	    <!-- combat sim -->
+	    <script src="views\combat.js"></script>
+	    <script src="views\combat\info.js"></script>
+	    <script src="views\combat\console.js"></script>
+	    <script src="views\combat\sim.js"></script>
+
+	<!-- sim -->
+	<script src="views\intro.js"></script>
+	<script src="views\intro\info.js"></script>
+	<script src="views\intro\console.js"></script>
+	<script src="views\demo.js"></script>
+	<script src="views\tutorial.js"></script>
+	<script src="views\minigames.js"></script>
+	<script src="views\testing.js"></script>
+
+	<script src="game.js"></script>
+
+	<script>
+
+	    var Game;	//main game object
+
+	    function RunCheckeredBattles() {
+
+		//Create library components
+		GameScape = new GenieScape();
+		GameScape.Set("PrimeCanvas", "ZoomCanvas", "ConsoleCanvas", null, null, Controls);
+		Graphics.Set(GameScape.Screen, GameScape.InfoBox, GameScape.ControlPanel);
+		Text.Set(GameScape.Screen, null, GameScape.InfoBox, GameScape.ControlPanel);
+		GameScape.AddController(GAMePAD.ARROWS);
+		Controller = GameScape.ControllerA;
+
+		//Load and assign graphic images
+		ImageManager.Set(Images);
+	   	ImageManager.LoadImages();
+	   	ImageManager.Check();				//Check if images have loaded
+
+		//Begin as soon as images have loaded
+		Game = new EmpireGame();
+		Game.Set();
+		Game.CheckImagesLoaded();
+	}
+
+	function EventHandler(EventNumber) {
+	    cancelAnimationFrame(Intro.AnimationFrameHandle);
+	    switch (EventNumber) {
+		case EVENT.STARtBUTTOnCLICKED:
+		    if (Game.CheckPaused()) {
+			Game.Settings -= GAME.STATE.PAUSED;
+			document.getElementById("StartButton").innerHTML = "Pause";
+		    } else {
+			Game.Settings += GAME.STATE.PAUSED;
+			document.getElementById("StartButton").innerHTML = "Start";
+		    }
+		    break;
+		case EVENT.LOAdBUTTOnCLICKED:
+		    alert("Sorry - not yet implemented");
+		    break;
+		case EVENT.SAVeBUTTOnCLICKED:
+		    break;
+		case EVENT.TEStBUTTOnCLICKED:
+		    Testing.Start();
+		    break;
+		case EVENT.EXPANdBUTTOnCLICKED:
+		    if (Game.CheckExpanded()) {
+			GameScape.Contract();
+			Game.Settings -= GAME.SCREEN.EXPANDED;
+			document.getElementById("ExpandButton").innerHTML = "Expand";
+		    } else {
+			GameScape.Expand();
+			Game.Settings += GAME.STATE.PAUSED;
+			document.getElementById("ExpandButton").innerHTML = "Contract";
+		    }
+		    break;
+		case EVENT.FULlSCREEnBUTTOnCLICKED:
+		    if (Game.CheckFullScreen()) {
+			GameScape.SetBrowserSize();
+			Game.Settings -= GAME.SCREEN.FULL;
+			document.getElementById("FullScreenButton").innerHTML = "Full Screen";
+		    } else {
+			GameScape.SetFullScreen();
+			Game.Settings += GAME.SCREEN.FULL;
+			document.getElementById("FullScreenButton").innerHTML = "Exit Full Screen";
+		    }
+		    break;
+	    }
+	};
+
+	</script>
+    </body>
+</html>
