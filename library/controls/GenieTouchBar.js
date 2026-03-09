@@ -1,8 +1,9 @@
 
 //----------------------------------------------  specs: { L: -1, T: -1, W: -1, H: -1, O: -1, C: -1, R: -1, KEYS: -1, MULTI: false, NULL: false,
-//---------- GENIE TOUCH BAR -------------------			  COLOUR: { KEY: "", SELECTION: "", DISABLED: "" }, SELECT: -1/[], ORIENT: -1 }
+//---------- GENIE TOUCH BAR -------------------			  FRAME: { IMAGE: {} }, COLOUR: { KEY: "", SELECTION: "", DISABLED: "" }, SELECT: -1/[], ORIENT: -1 }
 var GenieTouchBar = function() {
 	var SelectedKey, SelectedKeys, DisabledKeys;
+	var FrameImage;
 	var KeyChangeFlag;
 	var Offset;
 
@@ -17,10 +18,17 @@ GenieTouchBar.prototype.Set = function(cnvs, specs, pSpecs, img) {  //p- pic
 		this.Pic.Set(this.Context, img, pSpecs);
 	else
 		this.Pic.Set(this.Context, ImageManager.Pics[IMAGeINDEX.CONTROLS], pSpecs);
+	if (this.Specs.FRAME) {
+		this.FrameImage = new GenieImage();
+		this.FrameImage.Set(this.Context, ImageManager.Pics[IMAGeINDEX.CONTROLS], this.Specs.FRAME.IMAGE);
+	}
 	this.SetSelection();
 	this.KeyChangeFlag = false;
 	this.rct = new GenieRect();
-	this.Offset = this.Specs.O || 1;
+	if (this.Specs.O!==undefined)
+		this.Offset = this.Specs.O;
+	else
+		this.Offset = 1;
 };
 GenieTouchBar.prototype.SetSelection = function() {
 
@@ -41,6 +49,19 @@ GenieTouchBar.prototype.SetDisabled = function(aKeys) {
 };
 GenieTouchBar.prototype.Draw = function() {
 
+	if (this.Specs.FRAME) {
+		this.Pic.Draw(this.Specs.L, this.Specs.T);
+		if (this.Specs.MULTI) {
+			for (this.i=0;this.i<this.Specs.KEYS;++this.i)
+				if (this.SelectedKeys[this.i])
+					this.DrawKey(this.i);
+		} else {
+			if (this.SelectedKey!=-1)
+				this.DrawKey(this.SelectedKey);
+		}
+		return;
+	}
+
 	//Strip background
 	if (this.Specs.COLOUR)
 		this.Context.fillStyle = this.Specs.COLOUR.KEY || TOUChBAR.COLOUR.KEY;
@@ -49,13 +70,13 @@ GenieTouchBar.prototype.Draw = function() {
 	this.Context.fillRect(this.Specs.L+this.Offset, this.Specs.T+this.Offset, this.Specs.W-(2*this.Offset), this.Specs.H-(2*this.Offset));
 
 	//Colour disabled cells
-	if (this.Specs.COLOUR)
-		this.Context.fillStyle = this.Specs.COLOUR.DISABLED || TOUChBAR.COLOUR.DISABLED;
-	else
-		this.Context.fillStyle = TOUChBAR.COLOUR.DISABLED;
-	if (this.DisabledKeys)
-		for (this.i=0;this.i<this.DisabledKeys.length;++this.i)
-			this.DrawKey(this.DisabledKeys[this.i]);
+		if (this.Specs.COLOUR)
+			this.Context.fillStyle = this.Specs.COLOUR.DISABLED || TOUChBAR.COLOUR.DISABLED;
+		else
+			this.Context.fillStyle = TOUChBAR.COLOUR.DISABLED;
+		if (this.DisabledKeys)
+			for (this.i=0;this.i<this.DisabledKeys.length;++this.i)
+				this.DrawKey(this.DisabledKeys[this.i]);
 
 	//Selection
 	if (this.Specs.COLOUR)
@@ -77,19 +98,30 @@ GenieTouchBar.prototype.DrawKey = function(iKey) {
 
 	if (this.Specs.ORIENT==ORIENTATION.HORIZONTAL) {
 		this.l = this.Specs.L + (iKey*(this.Specs.KEY.W+this.Offset)) + this.Offset;
-		this.Context.fillRect(this.l, this.Specs.T+this.Offset, this.Specs.KEY.W, this.Specs.KEY.H);
+		if (this.Specs.FRAME)
+			this.FrameImage.Draw(this.l, this.Specs.T+this.Offset);
+		else
+			this.Context.fillRect(this.l, this.Specs.T+this.Offset, this.Specs.KEY.W, this.Specs.KEY.H);
 	} else if (this.Specs.ORIENT==ORIENTATION.VERTICAL) {
 		this.t = this.Specs.T + (iKey*(this.Specs.KEY.H+this.Offset)) + this.Offset;
-		this.Context.fillRect(this.Specs.L+this.Offset, this.t, this.Specs.KEY.W, this.Specs.KEY.H);
+		if (this.Specs.FRAME)
+			this.FrameImage.Draw(this.Specs.L+this.Offset, this.t);
+		else
+			this.Context.fillRect(this.Specs.L+this.Offset, this.t, this.Specs.KEY.W, this.Specs.KEY.H);
 	} else {
 		this.l = (iKey % this.Specs.C) * (this.Specs.KEY.W+this.Offset);
 		this.t = Math.floor(iKey/this.Specs.C) * (this.Specs.KEY.H+this.Offset);
-		this.Context.fillRect(this.Specs.L+this.Offset+this.l, this.Specs.T+this.Offset+this.t, this.Specs.KEY.W, this.Specs.KEY.H);
+		if (this.Specs.FRAME)
+			this.FrameImage.Draw(this.l, this.t);
+		else
+			this.Context.fillRect(this.Specs.L+this.Offset+this.l, this.Specs.T+this.Offset+this.t, this.Specs.KEY.W, this.Specs.KEY.H);
 	}
 };
 GenieTouchBar.prototype.MouseDown = function() {
 
 	this.i = this.GetKey();
+	if (this.i<0)
+		return;
 
 	//Check if a disabled cell (key) was clicked
 	if (this.DisabledKeys)
