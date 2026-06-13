@@ -2,18 +2,21 @@
 //---------------------------------------------------
 //---------- GRIDIRON DRAFT VIEW --------------------
 var GridironDraftView = function() {
+	var OffDefIconPanel;
+	var GridImage, ProjectImage, ProjectLegendImage;
 	var Draft;
 	var Roster;
 	var GridderTypes;
 	var NextButton, PreviousButton, PositionTouchBar;
 	var TradeUpButton, TradeDownButton, RoundTouchBar, AutoSelectCheckBox, AutoSelectButton, SelectButton;
-	var SlotImage, LegendImages, MarkerImage, SpeedImageMap, SpeedMap;
+	var SlotImage, LegendImages, MarkerImage, SpeedImageMap, SpeedMap;		//.MarkerImage REDUNDANT?
 
 	var PreviewPage, PreviewSlot, PreviewProspectIndex, MarkedProspects;
 	var DisplayRound, DisplayProspect, DisplayList;									//.DisplayList REDUNDANT
 	var Selections;																			//array of strings containing basic team and player info
 	var AutoModeFlag;
 	var PlayerPicks;																			//quantity
+	var DraftPickSection;
 
 	//Frequently used variables
 	var Font, Prospect;
@@ -57,46 +60,75 @@ GridironDraftView.prototype.ShowControls = function() {
 		this.SpeedImageMap.Draw();
 	}
 };
-GridironDraftView.prototype.Open = function() {			//UNLOGGED
+GridironDraftView.prototype.Open = function() {
+
+	PlayerTeam.Roster.GeneratePriorityNeeds();
+	PrioritiesConsoleView.SyncNeeds();
+
 	GenieView.prototype.Open.call(this);
 
-	this.Update();
+	if (this.State!=this.Specs.STATE.SELECTION)
+		this.InfoView.Disable();
 };
 GridironDraftView.prototype.Update = function() {
 
 	this.AnimationFrameHandle = requestAnimationFrame(this.Update.bind(this));
 
-	switch (this.State) {
-		case this.Specs.STATE.PREVIEW:
-			this.UpdateControls();
-			if (this.CheckSlotChanged())
-				this.DisplayPreview();
-			this.UpdateDoubleClick();
-			break;
-		case this.Specs.STATE.SELECTION:
-			this.UpdateButtons();
-			this.UpdateTouchBar();
-			this.UpdateSelectors();
-			if (this.Draft.Round==8)		 //check if draft has ended
-				this.EndDraft();
-			break;
-		case this.Specs.STATE.PROJECTS:
-			break;
-		case this.Specs.STATE.CAMP:
-			break;
-	}
+	if (Game.CheckPhone())
+		this.InfoView.Update();
+	else
+		switch (this.State) {
+			case this.Specs.STATE.PREVIEW:
+				this.UpdateControls();
+				if (this.CheckSlotChanged())
+					this.DisplayPreview();
+				this.UpdateDoubleClick();
+				break;
+			case this.Specs.STATE.SELECTION:
+				this.UpdateButtons();
+				this.UpdateTouchBar();
+				this.UpdateSelectors();
+				if (this.Draft.Round==8)		 //check if draft has ended
+					this.EndDraft();
+				break;
+			case this.Specs.STATE.PROJECTS:
+				break;
+			case this.Specs.STATE.CAMP:
+				break;
+		}
 
 	this.ConsoleView.Update();
+
+	if (Mouse.CheckLeftClicked(CANVAS.PRIME)) {
+	} else if (Mouse.CheckLeftClicked(CANVAS.ZOOM)) {
+	} else if (Mouse.CheckLeftClicked(CANVAS.CONSOLE))
+		this.ConsoleView.UpdateClick();
 };
 GridironDraftView.prototype.Draw = function() {
 
 	this.DisplayRoster();
-	this.DisplaySelections();		//selection order
+	if (Game.CheckPhone()) {
+		this.DisplayPhonePicks();
+		this.DisplayGrid();
+		this.DisplayNeeds();
+	} else {
+		this.DisplaySelections();		//selection order
 
-	this.Context.fillStyle = GREY.ASH;
-	this.Context.fillRect(475, 0, 125, 25);
-	this.TextWriter.Write("Trade:", 476, 18);
-	
-	this.Context.fillStyle = GREY.ASH;
-	this.Context.fillRect(400, 540, 200, 60);
+		this.Context.fillStyle = GREY.ASH;
+		this.Context.fillRect(475, 0, 125, 25);
+		this.TextWriter.Write("Trade:", 476, 18);
+		
+		this.Context.fillStyle = GREY.ASH;
+		this.Context.fillRect(400, 540, 200, 60);
+	}
+};
+GridironDraftView.prototype.OpenProspectsView = function() {
+
+	GridderInfoView.State = VIEW.GRIDDER.STATE.PREVIEW;
+	this.Close(this.LaunchProspectsView.bind(this), 100);
+};
+GridironDraftView.prototype.LaunchProspectsView = function() {
+
+	DraftProspectsView.Open();
+	DraftProspectsView.Update();
 };

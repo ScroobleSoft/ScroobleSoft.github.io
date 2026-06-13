@@ -3,6 +3,7 @@
 //---------- GRIDIRON LEAGUE VIEW --------------------
 var GridironLeagueView = function() {
 	var TeamButtons;
+	var ConferenceIconPanel;
 
 	var i;
 };
@@ -16,14 +17,59 @@ GridironLeagueView.prototype.Set = function(cnvs, specs, gTool, tWriter, rGenera
 	GenieView.prototype.Set.call(this, cnvs, specs);
 };
 GridironLeagueView.prototype.SetControls = function() {
+
+	this.TeamButtons = ArrayUtils.Create(LEAGUE.TEAMS, ImageButton);
+	if (Game.CheckPhone())
+		this.SetPhoneButtons();
+	else
+		this.SetTabletButtons();
+
+	if (Game.CheckPhone())
+		this.ConferenceIconPanel = this.SetCornersIconPanel(this.Specs.ICOnPANEL.CONFERENCE, this.Specs.ICOnPANEL.CONFERENCE.IMAGE, IconCornersImage,
+																																	Graphics, ImageManager.Pics[IMAGeINDEX.CONTROLS]);
+};
+GridironLeagueView.prototype.SetPhoneButtons = function() {
 	var i;
 	var l, t;
 	var sx, sy;
 	var specs;
 
-	this.TeamButtons = ArrayUtils.Create(LEAGUE.TEAMS, ImageButton);
+	t = this.Specs.BUTTON.TEAM.PHONE.T;
 	for (i=0;i<LEAGUE.TEAMS;++i) {
-		l = this.Specs.BUTTON.TEAM.L + (140*(i % Math.round(this.Specs.BUTTON.TEAM.C)));
+		l = this.Specs.BUTTON.TEAM.PHONE.L + (this.Specs.BUTTON.TEAM.PHONE.O*((i % 4) % this.Specs.BUTTON.TEAM.PHONE.C));
+		if (i<LEAGUE.TEAMS/2) {
+			if (l!=this.Specs.BUTTON.TEAM.PHONE.L)
+				l += 3;
+		} else {
+			if (l!=this.Specs.BUTTON.TEAM.PHONE.L)
+				l -= 3;
+		}
+
+		sx = 1 + ((this.Specs.IMAGE.HELMET.W+this.Specs.IMAGE.HELMET.O)*(i % Math.round(LEAGUE.TEAMS/4)));
+		sy = 1 + ((this.Specs.IMAGE.HELMET.H+this.Specs.IMAGE.HELMET.O)*Math.floor(i/(LEAGUE.TEAMS/4)));
+		specs = { L: l, T: t, W: this.Specs.BUTTON.TEAM.W, H: this.Specs.BUTTON.TEAM.H, LW: this.Specs.BUTTON.TEAM.LW, SX: sx, SY: sy,
+					 STYLE: this.Specs.BUTTON.TEAM.STYLE };
+		this.TeamButtons[i].Set(this.Canvas, specs, ImageManager.Pics[IMAGeINDEX.CONTROLS]);
+		this.TeamButtons[i].SetCornersPic(RaisedCornerImages);
+		this.Controls.push(this.TeamButtons[i]);
+		if (i==((LEAGUE.TEAMS/2)-1))
+			t = this.Specs.BUTTON.TEAM.PHONE.T;
+		else {
+			if (i % 4==2)
+				t += 40;
+			else if (i % 4==3)
+				t += 50;
+		}
+	}
+};
+GridironLeagueView.prototype.SetTabletButtons = function() {
+	var i;
+	var l, t;
+	var sx, sy;
+	var specs;
+
+	for (i=0;i<LEAGUE.TEAMS;++i) {
+		l = this.Specs.BUTTON.TEAM.L + (140*(i % this.Specs.BUTTON.TEAM.C));
 		t = this.Specs.BUTTON.TEAM.T + (60*Math.floor(i/this.Specs.BUTTON.TEAM.C));
 		if (i>=LEAGUE.TEAMS/2)
 			t += 40;
@@ -36,60 +82,109 @@ GridironLeagueView.prototype.SetControls = function() {
 		this.Controls.push(this.TeamButtons[i]);
 	}
 };
+GridironLeagueView.prototype.ShowControls = function() {  //UNLOGGED
+
+	if (Game.CheckPhone())
+		this.ConferenceIconPanel.Show();
+	this.ShowButtons();
+};
+GridironLeagueView.prototype.ShowButtons = function() {  //UNLOGGED
+	var i;
+
+	if (Game.CheckPhone()) {
+		if (this.ConferenceIconPanel.DepressedIcon==0)
+			for (i=0;i<LEAGUE.TEAMS/2;++i)
+				this.TeamButtons[i].Show();
+		else
+			for (i=LEAGUE.TEAMS/2;i<LEAGUE.TEAMS;++i)
+				this.TeamButtons[i].Show();
+	} else
+		this.TeamButtons.forEach( function(btn) {btn.Show();} );
+};
 GridironLeagueView.prototype.Open = function() {
 
 	if (Game.Type!=ZFL.TYPE.RANDOM) {
 		this.GenerateLeague();
-		this.SimSeason();
-		this.ConsoleView.DisplayStarterThumbnails();
+//		this.ConsoleView.DisplayStarterThumbnails();		REDUNDANT
 	}
 
 	GenieView.prototype.Open.call(this);
-
-	this.Update();
 };
 GridironLeagueView.prototype.Update = function() {
 
 	this.AnimationFrameHandle = requestAnimationFrame(this.Update.bind(this));
 
-	//Check team selected
-	if (this.UpdateTeamButtons()!=-1)
+	if (Game.CheckPhone())
+		this.UpdatePhone();
+	else {
+		if (this.UpdateTeamButtons()!=-1) {			//check team selected
+			this.SelectLeague();
+			this.Close(this.OpenTeamView.bind(this), 100);
+		}
+
+		if (this.UpdateLoadGame())						//check load game request - for PC only
+			this.LoadLeague();
+	}
+};
+GridironLeagueView.prototype.UpdatePhone = function() {
+
+	if (this.ConferenceIconPanel.CheckIconChanged()) {
+		this.TeamButtons.forEach( function(btn) {btn.Hide();} );
+		Graphics.DrawRectangle(0, 0, 280, 400, this.Specs.COLOUR, 0);
+		Graphics.DrawRectangle(280, 35, 120, 365, this.Specs.COLOUR, 0);
+		this.Draw();
+		this.ShowButtons();
+	}
+
+	if (this.UpdateTeamButtons()!=-1) {			//check team selected
 		this.SelectLeague();
-
-	//Check load game request
-	if (this.UpdateLoadGame())
-		this.LoadLeague();
+		this.Close(this.OpenRosterView.bind(this), 100);
+	}
 };
-/*  needs DE-LOGGING
-GridironLeagueView.prototype.Close = function() {
-
-	cancelAnimationFrame(this.AnimationFrameHandle);
-
-	//Remove controls
-	this.TeamButtons.forEach(function(button) {button.Enabled = false;});
-	this.LeagueTouchBar.Enabled = false;
-	this.GameRadioOptions.Enabled = false;
-	this.DifficultyTouchBar.Enabled = false;
-
-	this.Context.clearRect(0, 0, SCREEN.WIDTH, SCREEN.HEIGHT);
-	this.InfoScape.Context.clearRect(0, 0, INFoBOX.WIDTH, INFoBOX.HEIGHT);
-	this.ConsoleScape.Context.clearRect(0, 0, CONTROlPANEL.WIDTH, CONTROlPANEL.HEIGHT);
-
-	TeamView.SetTeam(PlayerTeam);
-//		document.getElementById("LoadButton").disabled = true;
-
-	setTimeout(this.Exit.bind(this), 50);
-};
-*/
 GridironLeagueView.prototype.Draw = function() {
-	//UNLOGGED
+
+	if (Game.CheckPhone())
+		this.DrawPhone();
+	else
+		this.DrawTablet();
+};
+GridironLeagueView.prototype.DrawPhone = function() {
+	var i;
+	var ofst;
+
+	//Titles
+	if (this.ConferenceIconPanel.DepressedIcon==0) {
+		this.TextWriter.Write("TDFC", this.Specs.LABEL.PHONE.X, this.Specs.LABEL.PHONE.Y, { FONT: "bold 14px Arial" } );
+		this.TextWriter.Write("(Touchdown Football Conference):", this.Specs.LABEL.PHONE.X, this.Specs.LABEL.PHONE.Y+15, { FONT: "bold 14px Arial" } );
+		ofst = 0;
+	} else {
+		this.TextWriter.Write("SMFC", this.Specs.LABEL.PHONE.X, this.Specs.LABEL.PHONE.Y, { FONT: "bold 14px Arial" } );
+		this.TextWriter.Write("(Smash Mouth Football Conference):", this.Specs.LABEL.PHONE.X, this.Specs.LABEL.PHONE.Y+15, { FONT: "bold 14px Arial" } );
+		ofst = LEAGUE.TEAMS/2;
+	}
+
+	//Division names and sections
+	for (i=0;i<LEAGUE.DIVISIONS;++i) {
+		Graphics.DrawRectangle(5, 40+(90*i), 395, 85, PAINT.SEA, 0);
+		Text.Write(DivisionNames[i]+" Division", 265, 115+(90*i), { FONT: "bold 14px Arial" } );
+	}
+
+	//Buttons labels
+	for (i=0;i<this.TeamButtons.length/2;++i) {
+		this.TextWriter.Write(TeamNames[i+ofst][TEAM.CITY], this.TeamButtons[i+ofst].Specs.L+40, this.TeamButtons[i+ofst].Specs.T+12);
+		this.TextWriter.Write(TeamNames[i+ofst][TEAM.NICkNAME], this.TeamButtons[i+ofst].Specs.L+40, this.TeamButtons[i+ofst].Specs.T+32);
+	}
+};
+GridironLeagueView.prototype.DrawTablet = function() {  //UNLOGGED
 	var i;
 
 	//Titles
-	this.TextWriter.Write("TDFC Teams:", 35, 35, { FONT: "bold 18px Arial" } );
-	this.TextWriter.Write("SMFC Teams:", 35, 315, { FONT: "bold 18px Arial" } );
+	this.TextWriter.Write("TDFC (Touchdown Football Conference) Teams:", this.Specs.LABEL.TABLET.TDFC.X, this.Specs.LABEL.TABLET.TDFC.Y,
+																																					{ FONT: "bold 18px Arial" } );
+	this.TextWriter.Write("SMFC (Smash Mouth Football Conference) Teams:", this.Specs.LABEL.TABLET.SMFC.X, this.Specs.LABEL.TABLET.SMFC.Y,
+																																					{ FONT: "bold 18px Arial" } );
 
-	//Buttons and labels
+	//Buttons labels
 	for (i=0;i<this.TeamButtons.length;++i) {
 		this.TextWriter.Write(TeamNames[i][TEAM.CITY], this.TeamButtons[i].Specs.L+40, this.TeamButtons[i].Specs.T+12);
 		this.TextWriter.Write(TeamNames[i][TEAM.NICkNAME], this.TeamButtons[i].Specs.L+40, this.TeamButtons[i].Specs.T+32);
@@ -160,8 +255,8 @@ GridironLeagueView.prototype.SelectLeague = function() {
 		 NFLUtils.ConfigureNomenclature(PlayerTeam);
 	 League.SimSeason();
 */
-	League.Dump();
-	this.Close(this.OpenTeamView.bind(this), 100);
+	if (Game.CheckPC())
+		League.Dump();
 };
 GridironLeagueView.prototype.GenerateLeague = function() {  //NOTE: for scheduled games
 
@@ -169,12 +264,17 @@ GridironLeagueView.prototype.GenerateLeague = function() {  //NOTE: for schedule
 	League.Options = ROSTER.DISTRIBUTION.RANDOM;
 	this.Randomizer.SaveSeeds();
 	this.Randomizer.SetSeeds(Daily[0][0], Daily[0][0]+1);
+//		var dt = new Date();
+//		this.Randomizer.SetDailySeed(dt);
 	Teams.forEach(function(team) {team.Generate();});
+	League.SimulateSeason(RANDOM);
+	Draft.Generate();
 	this.Randomizer.RestoreSeeds();
 	FreeAgency.SortGridders();
-	League.Dump();
+	if (Game.CheckPC())
+		League.Dump();
 };
-GridironLeagueView.prototype.SimSeason = function() {
+GridironLeagueView.prototype.SimSeason = function() {  //REDUNDANT
 	var i, j;
 	var num;
 	var nHomeQuality, nVisitorsQuality;
@@ -236,4 +336,11 @@ GridironLeagueView.prototype.OpenTeamView = function() {
 
 	TeamView.SetTeam(PlayerTeam);
 	TeamView.Open();
+};
+GridironLeagueView.prototype.OpenRosterView = function() {
+
+	RosterView.SetRoster(PlayerTeam.Roster);
+	SquadConsoleView.SetSquad(PlayerTeam.PracticeSquad);
+	RosterView.Open();
+	RosterView.UpdatePhone();
 };

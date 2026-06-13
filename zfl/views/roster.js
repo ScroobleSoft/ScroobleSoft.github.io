@@ -1,9 +1,12 @@
-
+/*
+		TODO: remove HARD-CODING!
+*/
 //-----------------------------------------------------------
 //---------- GRIDIRON ROSTER NESTED VIEW --------------------
 var GridironRosterNestedView = function() {
-	var Roster;
+	var OffDefIconPanel, ViewsIconPanel;
 	var PositionButtons;
+	var Roster;
 	var Prospect;
 	var Slot, SelectedSlot;
 
@@ -25,7 +28,7 @@ GridironRosterNestedView.prototype.Set = function(cnvs, specs, mView) {
 
 	this.Id = VIEW.TEAM.SUB.ROSTER;
 	this.RosterSlots = new GenieArray();
-	this.RosterSlots.Set(ROSTER.SLOTS, Coordinate2D);
+	this.RosterSlots.Set(ROSTER.SLOTS, function() { var X, Y, Player; } );
 	this.SelectedSlot = this.RosterSlots[0];
 	this.TradePartners = new Array();
 	this.SurplusSlots = 0;
@@ -43,6 +46,12 @@ GridironRosterNestedView.prototype.SetControls = function() {
 		this.PositionButtons[i].SetCornersPic(ShallowCornerImages);
 		this.Controls.push(this.PositionButtons[i]);
 	}
+
+	if (Game.CheckPhone()) {
+		this.OffDefIconPanel = this.SetCornersIconPanel(this.Specs.ICOnPANEL.OFFDEF, this.Specs.ICOnPANEL.OFFDEF.IMAGE, IconCornersImage, Graphics,
+																																				ImageManager.Pics[IMAGeINDEX.CONTROLS] );
+		this.Controls.push(ViewsIconPanel);
+	}
 };
 GridironRosterNestedView.prototype.SetRoster = function(rstr) {
 
@@ -54,22 +63,16 @@ GridironRosterNestedView.prototype.SetRoster = function(rstr) {
 		this.DisplayRoster();
 	},
 */
-GridironRosterNestedView.prototype.Update = function() {
-
-	//UNLOGGED
+GridironRosterNestedView.prototype.Update = function() {  //UNLOGGED
 
 	if (Mouse.CheckLeftClicked(CANVAS.PRIME))
 		this.UpdateSlot();
 };
-/*
-	Close() {
+GridironRosterNestedView.prototype.UpdatePhone = function() {  //UNLOGGED
 
-		PositionButtons.forEach(function(btn){btn.Hide();});
-		this.Context.clearRect(0, 0, SCREEN.WIDTH, SCREEN.HEIGHT);		//TODO: does entire width of screen need to be cleared?
-//		this.InfoView.Close();
-//		this.ConsoleView.Close();
-	},
-*/
+	this.AnimationFrameHandle = requestAnimationFrame(this.UpdatePhone.bind(this));
+
+};
 GridironRosterNestedView.prototype.UpdateSlot = function() {
 
 	//UNLOGGED
@@ -359,10 +362,11 @@ GridironRosterNestedView.prototype.DrawBasReliefSection = function(x, y, slots, 
 };
 GridironRosterNestedView.prototype.GetSlot = function() {
 
-		for (this.i=0;this.i<this.RosterSlots.length;++this.i)
-	 if (Utilities.CheckPointInBox({X: Mouse.X, Y: Mouse.Y}, {L: this.RosterSlots[this.i].X, T: this.RosterSlots[this.i].Y-15, W: 260, H: 15}))
-		 return (this.RosterSlots[this.i]);
-		return (null);
+	for (this.i=0;this.i<this.RosterSlots.length;++this.i)
+		if (Utilities.CheckPointInBox({X: Mouse.X, Y: Mouse.Y}, {L: this.RosterSlots[this.i].X, T: this.RosterSlots[this.i].Y-15, W: 260, H: 15}))
+			return (this.RosterSlots[this.i]);
+
+	return (null);
 };
 GridironRosterNestedView.prototype.SelectSlot = function(slot) {
 
