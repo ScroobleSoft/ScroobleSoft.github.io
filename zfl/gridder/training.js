@@ -63,13 +63,13 @@ FootballGridder.prototype.TrainNormal = function() {
 	if (this.Experience==GRIDDER.YEARS.ROOKIE) {
 		this.Potential = this.Randomizer.GetInRange(1, this.Potential);
 		if (this.Potential>(0.75*ptntl))
-			this.Status = 3;
+			this.Status += 3 * 0xb1000;
 		else if (this.Potential>(0.5*ptntl))
-			this.Status = 2;
+			this.Status += 2 * 0xb1000;
 		else if (this.Potential>(0.25*ptntl))
-			this.Status = 1;
+			this.Status += 1 * 0xb1000;
 		else 
-			this.Status = 0;
+			this.Status += 0 * 0xb1000;
 	} else
 		if (this.Potential!=0)
 			this.Potential = this.Randomizer.GetInRange(1, this.Potential);
@@ -99,7 +99,7 @@ FootballGridder.prototype.TrainDivisional = function() {
 			--this.Quality;
 	}
 	if (this.Experience==GRIDDER.YEARS.ROOKIE)
-		this.Status = 2;
+		this.Status = 2 * 0xb1000;
 
 	if (this.Quality<GRADE.Aplus) {
 		this.Quality = GRADE.Aplus;
@@ -115,13 +115,13 @@ FootballGridder.prototype.TrainInjured = function() {
 		if (this.Randomizer.CheckUnderOdds(1,this.Experience+2)) {	//check if player can overcome injury
 			this.Potential = this.Randomizer.GetInRange(1, this.Potential);
 			if (this.Experience==GRIDDER.YEARS.ROOKIE) {
-				this.Status = 2;
+				this.Status = 2 * 0xb1000;
 				if (this.Potential>=8)
-					++this.Status;
+					this.Status +=  1 * 0xb1000;
 			}
 		} else {
 			if (this.Experience==GRIDDER.YEARS.ROOKIE)
-				this.Status = 0;
+				this.Status += 0 * 0xb1000;
 			return;
 		}
 	} else
@@ -141,10 +141,10 @@ FootballGridder.prototype.TrainSparker = function() {
 	if (this.Experience==GRIDDER.YEARS.ROOKIE) {
 		if (this.Randomizer.CheckUnderOdds(3,4)) {
 			this.Potential = 0;
-			this.Status = 0;
+			this.Status += 0 * 0xb1000;
 		} else {
 			this.Quality -= this.Potential;
-			this.Status = 3;
+			this.Status += 3 * 0xb1000;
 		}
 	}
 };
@@ -153,13 +153,13 @@ FootballGridder.prototype.TrainTemperamental = function() {
 	if (this.Experience==GRIDDER.YEARS.ROOKIE) {
 		this.Potential = this.Randomizer.GetInRange(0, this.Potential);
 		if (this.Potential>4)
-			this.Status = 3;
+			this.Status += 3 * 0xb1000;
 		else if (this.Potential>2)
-			this.Status = 2;
+			this.Status += 2 * 0xb1000;
 		else if (this.Potential>0)
-			this.Status = 1;
+			this.Status += 1 * 0xb1000;
 		else
-			this.Status = 0;
+			this.Status += 0 * 0xb1000;
 	}
 	this.Quality -= this.Potential;
 };
@@ -169,13 +169,13 @@ FootballGridder.prototype.TrainVersatile = function() {
 		this.Potential = this.Randomizer.GetInRange(1, this.Potential);
 	if (this.Experience==GRIDDER.YEARS.ROOKIE) {
 			if (this.Potential>5)
-				this.Status = 3;
+				this.Status += 3 * 0xb1000;
 			else if (this.Potential>3)
-				this.Status = 2;
+				this.Status += 2 * 0xb1000;
 			else if (this.Potential>1)
-				this.Status = 1;
+				this.Status += 1 * 0xb1000;
 			else
-				this.Status = 0;
+				this.Status += 0 * 0xb1000;
 	}
 	this.Quality -= this.Potential;
 	if (this.Quality<GRADE.Cplus) {							//NOTE: Versatiles can not be better than C+
@@ -193,13 +193,13 @@ FootballGridder.prototype.TrainVolatile = function() {
 	this.Potential = num - this.Randomizer.GetInRange(0,2*num);
 	if (this.Experience==GRIDDER.YEARS.ROOKIE) {
 		if (this.Potential>7)
-			this.Status = 3;
+			this.Status += 3 * 0xb1000;
 		else if (this.Potential>0)
-			this.Status = 2;
+			this.Status += 2 * 0xb1000;
 		else if (this.Potential>-7)
-			this.Status = 1;
+			this.Status += 1 * 0xb1000;
 		else
-			this.Status = 0;
+			this.Status += 0 * 0xb1000;
 	}
 	this.Quality -= this.Potential;
 	if (this.Quality<GRADE.Aplus) {
@@ -211,7 +211,7 @@ FootballGridder.prototype.TrainDimensional = function() {
 
 	this.Potential = this.Randomizer.GetInRange(1, this.Potential);
 	if (this.Experience==GRIDDER.YEARS.ROOKIE)
-		this.Status = this.Potential;
+		this.Status += this.Potential * 0xb1000;
 };
 FootballGridder.prototype.GetProjectedValue = function() {  //NOTE: applies only to Improvers - value of Decliners is not hidden; called after training camp
 		var i;
