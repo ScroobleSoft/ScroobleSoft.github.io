@@ -3,21 +3,23 @@
 //--------- GRIDIRON TEAM -------------------
 var GridironTeam = function() {
 	var Randomizer;
+	var PrimaryColour, SecondaryColour;
 
-	var OffFormation, DefFormation;			//REDUNDANT
+	var OffFormation, DefFormation;
 	var OffSystem, DefSystem;
 	var DraftPosition, DraftProfile;
 	var Roster;
 	var PracticeSquad;
 	var Injuries;					//cumulative injuries already accrued
 
-	var StarterNeeds, DepthNeeds, QualityNeeds;
+	var StarterNeeds, DepthNeeds, PriorityNeeds;
 	var OffStarters, DefStarters;
 	var Picks;						//TODO: REDUNDANT? useful only for displaying team info
 	var TradeTargets;
 	var Transactions;
 
 	var PreviousRecord, Record;
+	var Schedule, Scores;
 	var Stats;
 	var CapSpace;
 };
@@ -26,7 +28,19 @@ GridironTeam.prototype = {
 		this.Randomizer = rGenerator;
 		this.SetGridders();
 		this.SetLists();
-		this.SetFields();
+		this.SetData();
+		this.OffFormation = FORMATION.OFF.IfORM;		//TEMP
+		this.DefFormation = FORMATION.DEF.MM43;		//TEMP
+	},
+	SetColours() {
+
+		if (this.Index<(LEAGUE.TEAMS/2)) {
+			this.PrimaryColour = TeamColours[0][this.Index];
+			this.SecondaryColour = TeamColours[1][this.Index];
+		} else {
+			this.PrimaryColour = TeamColours[1][this.Index % (LEAGUE.TEAMS/2)];
+			this.SecondaryColour = TeamColours[0][this.Index % (LEAGUE.TEAMS/2)];
+		}
 	},
 	SetGridders() {
 
@@ -55,13 +69,15 @@ GridironTeam.prototype = {
 		this.TradeTargets = new GenieList();
 		this.TradeTargets.Set(VIEW.ROSTER.TRADE.PAGINATION.TARGETS.ITEM.MAX);
 	},
-	SetFields() {
+	SetData() {
 
 		this.CapSpace = 0;
 		this.Injuries = 0;
 		this.PreviousRecord = { W: 0, L: 0, T: 0 };
 		this.Record = { W: 0, L: 0, T: 0, Scored: 0, Conceded: 0 };
-		this.DraftPosition = -1;
+		this.DraftPosition = DUMMY;
+		this.Schedule = new Array(SEASON.GAMES);
+		this.Scores = ArrayUtils.Create(SEASON.GAMES, function() {var Scored, Conceded;} );
 //		this.Stats = stats;
 	},
 	Generate() {
@@ -74,7 +90,7 @@ GridironTeam.prototype = {
 
 		//UNLOGGED
 
-		this.DraftProfile = this.Randomizer.GetNumberWithinRange(0, 100);
+		this.DraftProfile = this.Randomizer.GetInRange(0, 100);
 	},
 	SetFormations(oForm, dForm) {  //REDUNDANT
 
@@ -169,26 +185,24 @@ GridironTeam.prototype = {
 		for (i=0;i<POSITION.COUNT/2;++i) {
 
 			//OFF
-			for (j=0;j<OffFormationStarters[this.OffSystem][i];++j) {		//offense
+			for (j=0;j<OffFormationStarters[this.OffSystem][i];++j) {
 				for (k=0;k<this.Roster.Gridders[i].length;++k)
-		//			 if ((this.Roster.Gridders[i][k].Injury & fGame)==0 && this.Roster.Gridders[i][k].History==0) {
-					if ((this.Roster.Gridders[i][k].Injury & fGame)==0) {
+					if ((this.Roster.Gridders[i][k].Injury & fGame)==0 && (this.Roster.Gridders[i][k].Status & 0b1)==0) {
 						this.OffStarters[oStarters] = this.Roster.Gridders[i][k];
-						this.Roster.Gridders[i][k].History = -1;
+						++this.Roster.Gridders[i][k].Status;		//mark as selected (temporarily)
 						break;
 					}
-				if (k==this.Roster.Gridders[i].length)
+				if (k==this.Roster.Gridders[i].length)		//if no selectable player was found, sign a street free agent
 					this.OffStarters[oStarters] = this.SignTempFreeAgent(i);
 				++oStarters;
-			 }
+			}
 
 			//DEF
-			for (j=0;j<DefFormationStarters[this.DefSystem][i];++j) {		//defense
+			for (j=0;j<DefFormationStarters[this.DefSystem][i];++j) {
 				for (k=0;k<this.Roster.Gridders[i+5].length;++k)
-		//			 if ((this.Roster.Gridders[i+5][k].Injury & fGame)==0 && this.Roster.Gridders[i+5][k].History==0) {
-					if ((this.Roster.Gridders[i+5][k].Injury & fGame)==0) {
+					if ((this.Roster.Gridders[i+5][k].Injury & fGame)==0 && (this.Roster.Gridders[i+5][k].Status & 0b1)==0) {
 						this.DefStarters[dStarters] = this.Roster.Gridders[i+5][k];
-						this.Roster.Gridders[i+5][k].History = -1;
+						++this.Roster.Gridders[i+5][k].Status;
 						break;
 					}
 				if (k==this.Roster.Gridders[i+5].length)
@@ -200,7 +214,7 @@ GridironTeam.prototype = {
 		//Clear all temporary flags
 		for (i=0;i<this.Roster.Gridders.length;++i)
 			for (j=0;j<this.Roster.Gridders[i].length;++j)
-				this.Roster.Gridders[i][j].History = 0;
+				this.Roster.Gridders[i][j].Status &= 0b0;
 	},
 	GenerateTradeTargets(grddr, pos) {
 		var i, j;
@@ -267,17 +281,19 @@ GridironTeam.prototype = {
 		var i;
 		var aFAs;
 
+		//Make a list of free agents at that position
 		aFAs = new Array();
 		for (i=0;i<FreeAgency.Gridders.length;++i)
-	 if (FreeAgency.Gridders[i].Position==pos)
-		 aFAs.push(FreeAgency.Gridders[i]);
+			if (FreeAgency.Gridders[i].Position==pos)
+				aFAs.push(FreeAgency.Gridders[i]);
 
+		//Return a free agent if found, otherwise create one
 		if (aFAs.length) {
-	 num = this.Randomizer.GetInRange(0,aFAs.length-1);
-	 return ( { Name: { First: aFAs[num].Name.First, Last: aFAs[num].Name.Last+"*" }, Position: pos, Quality: aFAs[num].Quality } );
+			num = this.Randomizer.GetIndex(aFAs.length);
+			return ( { Name: { First: aFAs[num].Name.First, Last: aFAs[num].Name.Last+"*" }, Position: pos, Quality: aFAs[num].Quality, Team: this } );
 		} else {
-	 num = this.Randomizer.GetInRange(15,29);
-	 return ( { Name: { First: "Street", Last: "Free Agent" }, Position: pos, Quality: num } );
+			num = this.Randomizer.GetInRange(15,29);
+			return ( { Name: { First: "Free", Last: "Agent**" }, Position: pos, Quality: num, Team: this } );  //TODO: generate proper name
 		}
 	},
 	GetWaivables() {  //return all players between E+ and E- with 4 years experience
@@ -307,7 +323,7 @@ GridironTeam.prototype = {
 
 		//Remove and return a random Alternate
 		if (aAlts.length) {
-	 iAlt = this.Randomizer.GetNumberWithinRange(0, aAlts.length-1);
+	 iAlt = this.Randomizer.GetInRange(0, aAlts.length-1);
 	 return (this.Roster.RemoveGridder(aAlts[iAlt]));
 		} else
 	 return (null);

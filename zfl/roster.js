@@ -554,7 +554,8 @@ GridironRoster.prototype = {
 
 		size = 0;
 		for (i=0;i<POSITION.COUNT;++i)
-	size += this.Gridders[i].length;
+			size += this.Gridders[i].length;
+
 		return (size);
 	},
 	SortPositions(bValue) {
@@ -578,5 +579,90 @@ GridironRoster.prototype = {
 	 this.Team.PracticeSquad.AddGridder(this.RemoveGridder(this.PlayerList[nGridders-1]));
 	 --nGridders;
 		}
+	},
+	GetOffPlayers() {  //returns quantity
+		var i;
+		var num;
+
+		num = 0;
+		for (i=0;i<POSITION.COUNT/2;++i)
+			num += this.Gridders[i].length;
+
+		return (num);
+	},
+	GetDefPlayers() {  //returns quantity
+		var i;
+		var num;
+
+		num = 0;
+		for (i=POSITION.COUNT/2;i<POSITION.COUNT;++i)
+			num += this.Gridders[i].length;
+
+		return (num);
+	},
+	GetFirstOffPlayer() {  //WARNING: crashes if there are no OFF players (possible) - used in PHONE
+		var i;
+
+		for (i=0;i<POSITION.COUNT/2;++i)
+			if (this.Gridders[i].length)
+				return (this.Gridders[i][0]);
+	},
+	GetFirstDefPlayer() {  //TODO: make sure a roster w/o a single off or def player is generated; in fact, make sure there is some balance
+		var i;
+
+		for (i=POSITION.COUNT/2;i<POSITION.COUNT;++i)
+			if (this.Gridders[i].length)
+				return (this.Gridders[i][0]);
+	},
+	GetOffGridder(iSlot) {
+		var i, j;
+		var nGrddr;
+
+		nGrddr = 0;
+		for (i=0;i<POSITION.COUNT/2;++i)
+			for (j=0;j<this.Gridders[i].length;++j) {
+				if (nGrddr==iSlot)
+					return (this.Gridders[i][j]);
+				++nGrddr;
+			}
+	},
+	GetDefGridder(iSlot) {
+		var i, j;
+		var nGrddr;
+
+		nGrddr = 0;
+		for (i=POSITION.COUNT/2;i<POSITION.COUNT;++i)
+			for (j=0;j<this.Gridders[i].length;++j) {
+				if (nGrddr==iSlot)
+					return (this.Gridders[i][j]);
+				++nGrddr;
+			}
+	},
+	GeneratePriorityNeeds() {  //TODO: adjust for different formations (easy - just sub in .OffFormation, .DefFormation for oFrmtn, dFrmtn respectively)
+		var i, j;
+		var strtrs;
+
+		//TEMP
+		var oFrmtn = 0;
+		var dFrmtn = 0;
+
+		this.Team.PriorityNeeds = new Array();
+		for (i=0;i<POSITION.COUNT;++i) {
+
+			//Determine number of starters needed at that position
+			if (i<(POSITION.COUNT/2))
+				strtrs = StarterDistributions[0][oFrmtn][i % (POSITION.COUNT/2)];
+			else
+				strtrs = StarterDistributions[1][dFrmtn][i % (POSITION.COUNT/2)];
+
+			//Add ratings of starters
+			for (j=0;j<strtrs;++j)
+				if (j<this.Gridders[i].length)
+					this.Team.PriorityNeeds.push( { Position: i, Quality: this.Gridders[i][j].Quality } );
+				else
+					this.Team.PriorityNeeds.push( { Position: i, Quality: GRADE.Fplus } );
+		}
+
+		this.Team.PriorityNeeds.sort(function(pos1,pos2) {return (pos2.Quality-pos1.Quality);} );
 	}
 };

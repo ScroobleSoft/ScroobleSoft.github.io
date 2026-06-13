@@ -17,8 +17,8 @@ var FootballGridder = function() {
 	var History1, History2;		//bit-packed, split into 2 variables since not all machines are 64-bit
 	var Injury;						//0 if none, otherwise bit-packed to indicate games out
 	var Stat1, Stat2;
-	var Status;						//TODO: unused field, will be used for book-keeping, such as for Versatiles
-
+	var Status;						//used for book-keeping, such as to check if already selected, and for Versatiles - bit 0 is for selection, bits 1-2 for
+										// versatile position switch, 3-5 for training outcome
 	var Value;
 	var Salary;						//set rather than computed since depends on draft position rather than quality
 /*
@@ -40,6 +40,7 @@ FootballGridder.prototype = {
 		this.Salary = -1;			//TEMP
 		this.Stat1 = 0;
 		this.Stat2 = 0;
+		this.Status = 0;
 	},
 	SetTeam(team) {
 
@@ -94,11 +95,12 @@ FootballGridder.prototype = {
 		//TODO: plenty left here to implement - in fact should be ::DetermineSalary
 		this.Salary = Math.round(23000/(20+this.Drafted));		//number is in K's
 	},
-	SwitchPosition() {
+	SwitchPosition() {  //TODO: this has to be re-written, so the poisition picked (at random) is marked in .Status
 		var num;
 		var pos;
 		var info;
 
+		//TODO: have to check if position has already been switched, and if so, which one
 		num = this.Randomizer.GetInRange(0,1);
 		if (this.Team.Index==PlayerTeam.Index)
 			pos = this.Position;
@@ -111,7 +113,7 @@ FootballGridder.prototype = {
 			info = Positions[pos] + " " + this.Name.GetFullName() + " has switched position to " + Positions[this.Position];
 			alert(info);
 		}
-		this.Status = true;
+		this.Status |= Math.pow(2,num+1);
 	},
 	SetAlternate() {
 

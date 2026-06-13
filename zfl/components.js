@@ -8,6 +8,7 @@ var Draft, DraftPreview, FreeAgency;																//players
 var SideViewField;
 var Intro, Demo, Tutorial, MiniGames;																//sim
 var Testing, GridironUtils;																			//tools
+var GameSim, Scorecard;
 
 var SideViewGame;  //TEMP
 
@@ -28,19 +29,17 @@ var DraftValueDistribution, DraftBatchDistribution, RosterGradeDistribution;
 var NewGameButton, TutorialButton, DemoButton, MiniGamesButton;									//standard
 var IconCornersImage, ShallowCornerImages, RaisedCornerImages, RoundedCornerImages,			//images
 	 RadioOptionImage, CheckBoxImage, DropListButtonImage;
-
 var LeagueTouchBar, PositionTouchBar;
-
-//Draft preview
-var DraftPreviewButton, PreviewOptions, PreviewAlternates;
-
-var LeagueDataArea, RosterDataArea, FADataArea;		//Info
+var ViewsIconPanel;
+var DraftPreviewButton, PreviewOptions, PreviewAlternates;											//draft preview
+var LeagueDataArea, RosterDataArea, FADataArea;															//info
 
 //-------------------------------------
 //---------- IMAGES -------------------
 
-var DemoImage, TutorialImage, MiniGamesImage, TestingImage;			//Image Maps
-var DraftGradeImages, GradeMarksImages, TypeSymbolImages;
+var DemoImage, TutorialImage, MiniGamesImage, TestingImage;											//Image Maps
+var DraftGradeImages, GradeMarksImages, TypeSymbolImages, WhiteSymbolImages, WhitePlusMinusImage;
+var AbbreviationImages;
 
 //--------------------------------------
 //---------- SPRITES -------------------
@@ -73,11 +72,15 @@ var VisitorSideViewDEs, VisitorSideViewDTs, VisitorSideViewLBs, VisitorSideViewS
 //-------------------------------------
 //---------- VIEWS -------------------
 
-var LeagueView, LeagueInfoView, LeagueConsoleView;
-var TeamView, TeamInfoView, TeamConsoleView;
-var RosterNestedView, TradeConsoleView, GridderNestedView, PracticeSquadNestedView, RetirementDialogView;
-var FreeAgencyView, PendingFreeAgentsView;
-var DraftView, TradeUpOptionView, TradeDownOptionView, ProjectDialogView, CampDialogView;
+var IntroView, IntroInfoView, IntroConsoleView;
+var LeagueView, LeagueInfoView, LeagueConsoleView, TeamView, TeamInfoView, TeamConsoleView;														//league + team
+var RosterNestedView, TradeConsoleView, GridderNestedView, PracticeSquadNestedView, RetirementDialogView, TeamFAsDialogView;
+var FreeAgencyView, PendingFreeAgentsView;	//latter is REDUNDANT
+var DraftView, TradeUpOptionView, TradeDownOptionView, ProjectDialogView, CampDialogView;															//draft
+var DraftProspectsView, ProspectsConsoleView, MarkedDialogView;																							//draft view
+var RosterView, GridderInfoView, SquadConsoleView, PrioritiesConsoleView;  //phone for first 3
+var SeasonView, SeasonInfoView, SeasonConsoleView, MatchUpsView, ExitConsoleView, StatsView, StatsInfoView, StatsConsoleView;			//season
+var MatchView, MatchInfoView, MatchConsoleView;
 
 //--------------------------------------------------
 //---------- GRIDIRON COMPONENTS -------------------
@@ -103,26 +106,25 @@ GridironComponents.prototype = {
 
 		this.SetData();
 
-		this.CreateCoreObjects();
-		this.CreateSimObjects();
-		this.CreateTools();
 		this.CreateControls();
-		this.CreateImageMaps();
-		this.CreateImages();
-		this.CreateViews();
-		this.CreateSprites();
-		this.CreateAgents();
-		this.CreateSounds();
-
-		this.SetCoreObjects();
-		this.SetSimObjects();
-		this.SetTools();
 		this.SetControls();
+		this.CreateCoreObjects();
+		this.SetCoreObjects();
+		this.CreateSimObjects();
+		this.SetSimObjects();
+		this.CreateTools();
+		this.SetTools();
+		this.CreateImageMaps();
 		this.SetImageMaps();
+		this.CreateImages();
 		this.SetImages();
+		this.CreateViews();
 		this.SetViews();
+		this.CreateSprites();
 		this.SetSprites();
+		this.CreateAgents();
 		this.SetAgents();
+		this.CreateSounds();
 		this.SetSounds();
 	},
 	SetData() {
@@ -153,6 +155,9 @@ GridironComponents.prototype = {
 		Draft = new GridironDraft();
 		FreeAgency = new GridironFreeAgency();
 		SideViewField = new GridironSideViewField();
+
+		GameSim = new GridironGameSim();
+		Scorecard = new GridironScorecard();
 	},
 	SetCoreObjects() {
 
@@ -160,10 +165,14 @@ GridironComponents.prototype = {
 
 		League.Set(this.Randomizer);
 		Teams.Set(TEAM.COUNT, GridironTeam, INDEXED, this.Randomizer);
+		Teams.forEach( function(team) {team.SetColours();} );
 		Draft.Set(this.Randomizer);
 		FreeAgency.Set();
 
 		SideViewField.Set(this.Screen, this.GraphicsTool, this.TextWriter);
+
+		GameSim.Set();
+		Scorecard.Set();
 	},
 	CreateSimObjects() {
 
@@ -225,9 +234,7 @@ GridironComponents.prototype = {
 		RosterDataArea = new GenieTextArea();
 		FADataArea = new GenieTextArea();
 	},
-	SetControls() {
-
-		//UNLOGGED
+	SetControls() {  //UNLOGGED
 
 		//Standard buttons
 		NewGameButton.Set(this.Interface.ZoomScape, NEwGAMeBUTTOnIMAGE, ImageManager.Pics[IMAGeINDEX.GENIeIMAGES]);
@@ -243,6 +250,11 @@ GridironComponents.prototype = {
 		RadioOptionImage.Set(this.ControlPanel, ImageManager.Pics[IMAGeINDEX.GENIeCONTROLS], RADIoCONTROlIMAGE);
 		CheckBoxImage.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.GENIeCONTROLS], CHECkBOxIMAGE);
 		DropListButtonImage.Set(this.ControlPanel, ImageManager.Pics[IMAGeINDEX.GENIeCONTROLS], DROpLIStBUTTOnIMAGE);
+
+		ViewsIconPanel = new GenieIconPanel();
+		ViewsIconPanel.Set(this.Interface.PrimeScape, VIEWsICOnPANEL, VIEWsICOnPANEL.IMAGE, ImageManager.Pics[IMAGeINDEX.CONTROLS] );
+		ViewsIconPanel.SetCornersPic(IconCornersImage);
+		ViewsIconPanel.SetLinks(Graphics);
 
 		PositionTouchBar.Set(this.Interface.Console, POSITIOnTOUChBAR, POSITIOnBArIMAGE);
 
@@ -272,21 +284,23 @@ GridironComponents.prototype = {
 		MiniGamesImage.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.MINiGAMES], MINiGAMEsIMAGE, MiniGamesMap);
 		TestingImage.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.TESTING], TESTINgIMAGE, TestingMap);
 	},
-	CreateImages() {
-
-		//UNLOGGED
+	CreateImages() {  //UNLOGGED
 
 		DraftGradeImages = new GenieImage();
 		GradeMarksImages = new GenieImage();
 		TypeSymbolImages = new GenieImage();
+		WhiteSymbolImages = new GenieImage();
+		WhitePlusMinusImage = new GenieImage();
+		AbbreviationImages = new GenieImage();
 	},
-	SetImages() {
-
-		//UNLOGGED
+	SetImages() {  //UNLOGGED
 
 		DraftGradeImages.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.IMAGES], DRAFtGRADeIMAGES);
 		GradeMarksImages.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.IMAGES], GRADeMARKsIMAGES);
 		TypeSymbolImages.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.IMAGES], TYPeSYMBOlIMAGES);
+		WhiteSymbolImages.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.IMAGES], WHITeSYMBOlIMAGES);
+		WhitePlusMinusImage.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.IMAGES], WHITePLUsMINUsIMAGE);
+		AbbreviationImages.Set(this.Screen, ImageManager.Pics[IMAGeINDEX.IMAGES], ABBREVIATIOnIMAGES);
 	},
 	CreateSprites() {
 
@@ -447,32 +461,39 @@ GridironComponents.prototype = {
 		TeamConsoleView = new GridironTeamConsoleView();
 
 		//Gridder
-		RosterNestedView = new GridironRosterNestedView();
+		if (!Game.CheckPhone()) {
+			RosterNestedView = new GridironRosterNestedView();
+			PrioritiesConsoleView = new NeedPrioritiesConsoleView();
+		}
 		TradeConsoleView = new GridironTradeConsoleView();
 		GridderNestedView = new ZFLGridderInfoView();
 		PracticeSquadNestedView = new GridironPracticeSquadConsoleView();
 		RetirementDialogView = new GridironRetirementDialogView();
+		TeamFAsDialogView = new GridironFADialogView();
 
 		//FAs
-		PendingFAsView = new PendingFreeAgentsView();
+		PendingFAsView = new PendingFreeAgentsView();		//REDUNDANT
 		FreeAgencyView = new GridironFreeAgencyView();
 
 		//Draft
-		DraftPreview = new GridironDraftPreview();
-		DraftView = new GridironDraftView();
-		DraftInfoView = new GridironDraftInfoView();
-		DraftConsoleView = new GridironDraftConsoleView();
 		TradeUpOptionView = new GridironTradeUpOptionView();
 		TradeDownOptionView = new GridironTradeDownOptionView();
 		ProjectDialogView = new GridironProjectsDialogView();
 		CampDialogView = new TrainingCampDialogView();
 
+		//Phone
+		if (Game.CheckPhone()) {
+			this.CreateIntroViews();
+			this.CreatePhoneViews();
+		}
+
+		this.CreateDraftViews();
+		this.CreateSeasonViews();
+
 		//TEMP
 		SideViewGame = new ZFLGameSideView();
 	},
-	SetViews() {
-
-		//UNLOGGED
+	SetViews() {  //UNLOGGED
 
 		//League
 		LeagueView.Set(this.Interface.PrimeScape, VIEW.LEAGUE, this.GraphicsTool, this.TextWriter, this.Randomizer);
@@ -488,8 +509,11 @@ GridironComponents.prototype = {
 		TeamView.SetSubViews(TeamInfoView, TeamConsoleView);
 
 		//Roster
-		RosterNestedView.SetLinks(this.GraphicsTool, this.TextWriter);
-		RosterNestedView.Set(this.Interface.PrimeScape, VIEW.ROSTER, TeamView);
+		if (!Game.CheckPhone()) {
+			RosterNestedView.SetLinks(this.GraphicsTool, this.TextWriter);
+			RosterNestedView.Set(this.Interface.PrimeScape, VIEW.ROSTER, TeamView);
+			PrioritiesConsoleView.Set(this.Interface.Console, VIEW.PRIORITIES, RosterView);
+		}
 		TradeConsoleView.SetLinks(null, this.TextWriter);
 		TradeConsoleView.Set(this.Interface.Console, VIEW.ROSTER.TRADE, TeamView);
 		GridderNestedView.SetLinks(this.GraphicsTool, this.TextWriter, this.Randomizer);
@@ -497,7 +521,12 @@ GridironComponents.prototype = {
 		PracticeSquadNestedView.Set(this.Interface.Console, VIEW.SQUAD, TeamConsoleView);
 		PracticeSquadNestedView.SetLinks(null, this.TextWriter);
 		RetirementDialogView.SetLinks(this.GraphicsTool, this.TextWriter);
-		RetirementDialogView.Set(this.Interface.PrimeScape, VIEW.RETIREMENT, TeamView);
+		if (Game.CheckPhone())
+			RetirementDialogView.Set(this.Interface.PrimeScape, VIEW.RETIREMENT, RosterView);
+		else
+			RetirementDialogView.Set(this.Interface.PrimeScape, VIEW.RETIREMENT, TeamView);
+		TeamFAsDialogView.SetLinks(null, this.TextWriter);
+		TeamFAsDialogView.Set(this.Interface.PrimeScape, VIEW.TEAmFAs, RosterView);
 
 		//FAs
 		PendingFAsView.Set(this.Interface.PrimeScape, VIEW.PENDING, this.GraphicsTool, this.TextWriter);
@@ -507,21 +536,10 @@ GridironComponents.prototype = {
 		FreeAgencyView.SetFreeAgency(FreeAgency);
 
 		//Draft
-		DraftPreview.Set(this.Interface.PrimeScape, VIEW.DRAFT.PREVIEW, this.GraphicsTool, this.TextWriter);
-		DraftPreview.SetSubScapes(null, this.Interface.Console);
-//		DraftPreview.SetSubViews(DraftInfoView, DraftConsoleView);
-		DraftView.SetLinks(this.GraphicsTool, this.TextWriter, this.Randomizer);
-		DraftView.Set(this.Interface.PrimeScape, VIEW.DRAFT);
-		DraftInfoView.Set(this.Interface.ZoomScape, VIEW.DRAFT.INFO, DraftView);
-		DraftInfoView.SetLinks(null, this.TextWriter);
-		DraftConsoleView.SetLinks(this.GraphicsTool, this.TextWriter);
-		DraftConsoleView.Set(this.Interface.Console, VIEW.DRAFT.CONSOLE, DraftView);
 		TradeUpOptionView.SetLinks(null, this.TextWriter);
 		TradeUpOptionView.Set(this.Interface.PrimeScape, VIEW.DRAFT.TRADeUP, DraftView);
 		TradeDownOptionView.SetLinks(null, this.TextWriter);
 		TradeDownOptionView.Set(this.Interface.PrimeScape, VIEW.DRAFT.TRADeDOWN, DraftView);
-		DraftView.SetSubViews(DraftInfoView, DraftConsoleView);
-		DraftView.SetDraft(Draft);
 		ProjectDialogView.SetLinks(this.GraphicsTool, this.TextWriter);
 		ProjectDialogView.Set(this.Interface.PrimeScape, VIEW.DRAFT.PROJECTS, DraftView);
 		CampDialogView.SetLinks(this.GraphicsTool, this.TextWriter, this.Randomizer);

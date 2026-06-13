@@ -19,7 +19,7 @@ var GridironDraft = function() {
 	var ValueList, PositionLists;
 	var AlternatesList, AlternateLists;
 	var Projects;
-	var FilteredList;
+	var FilteredList, FilteredIndices;
 	var ProspectDistribution;
 	var TargetSpread;
 
@@ -59,6 +59,8 @@ GridironDraft.prototype = {
 
 		this.FilteredList = new GenieList();
 		this.FilteredList.Set(DRAFT.PROSPECTS);
+		this.FilteredIndices = new GenieList();
+		this.FilteredIndices.Set(DRAFT.PROSPECTS);
 
 		this.Picks = new Array();
 		this.PickNumbers = new Array();
@@ -242,6 +244,24 @@ GridironDraft.prototype = {
 			}
 		}
 	},
+	GetPhoneProspects(pos, type) {  //UNLOGGED
+		var i;
+
+		if (pos==-1)
+			return (this.ValueList);
+		else {
+			this.FilteredList.Reset();
+			for (i=0;i<this.ValueList.length;++i)
+				if (this.ValueList[i].Position==pos) {
+					if (type==-1)
+						this.FilteredList.Add(this.ValueList[i]);
+					else if (this.ValueList[i].Type==type)
+						this.FilteredList.Add(this.ValueList[i]);
+				}
+
+			return(this.FilteredList);
+		}
+	},
 	ExciseValueList(prspct) {
 
 		for (this.i=0;this.i<this.ValueList.length;++this.i)
@@ -322,5 +342,16 @@ GridironDraft.prototype = {
 		info += Math.ceil((pick2+1)/LEAGUE.TEAMS) + "." + ((pick2+1) % LEAGUE.TEAMS);
 		alert(info);
 */
+	},
+	GetPlayerPicks() {
+		var i;
+		var aPicks;
+
+		aPicks = new Array();
+		for (i=0;i<this.SelectionOrder.length;++i)
+			if (this.SelectionOrder[i]==PlayerTeam.Index)
+				aPicks.push(i);
+
+		return (aPicks);
 	}
 };

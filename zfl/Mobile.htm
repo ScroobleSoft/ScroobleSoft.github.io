@@ -10,10 +10,10 @@
 	    <canvas id="PrimeCanvas" width="400" height="400"></canvas>
 	</div>
 	<div id="InfoDiv" style="position:absolute; top:444px; left:8px; z-index:2">
-	    <canvas id="ZoomCanvas" width="240" height="240"></canvas>
+	    <canvas id="ZoomCanvas" width="200" height="240"></canvas>
 	</div>
-	<div id="ConsoleDiv" style="position:absolute; top:444px; left:252px; z-index:3">
-	    <canvas id="ConsoleCanvas" width="156" height="240"></canvas>
+	<div id="ConsoleDiv" style="position:absolute; top:444px; left:212px; z-index:3">
+	    <canvas id="ConsoleCanvas" width="196" height="240"></canvas>
 	</div>
     </head>
 
@@ -42,6 +42,7 @@
 	<script src="..\library\utils\BitUtils.js"></script>
 	<script src="..\library\utils\ArrayUtils.js"></script>
 	<script src="..\library\utils\GeoUtils.js"></script>
+	<script src="..\library\utils\IntersectUtils.js"></script>
 	<script src="..\library\utils\SpaceUtils.js"></script>
 	<script src="..\library\utils\StringUtils.js"></script>
 
@@ -56,6 +57,7 @@
 	<script src="..\library\controls\GenieTextArea.js"></script>
 	<script src="..\library\controls\GenieCheckBox.js"></script>
 	<script src="..\library\controls\GenieDropList.js"></script>
+	<script src="..\library\controls\GenieGauge.js"></script>
 	<script src="..\library\controls\GeniePagination.js"></script>
 	<script src="..\library\controls\ScrollBar.js"></script>
 	<script src="..\library\controls\GenieTabs.js"></script>
@@ -155,6 +157,10 @@
 	<script src="match\scoreboard.js"></script>
 	<script src="sideview\match.js"></script>
 
+	<script src="match.js"></script>
+	<script src="match\sim.js"></script>
+	<script src="match\scorecard.js"></script>
+
 	<!-- league -->
 	<script src="league.js"></script>
 	<script src="draft.js"></script>
@@ -169,41 +175,71 @@
 
 	<script src="components.js"></script>
 	<script src="components\agents.js"></script>
+	<script src="components\views.js"></script>
 
 	<!-- views -->
 
-	<script src="views\league.js"></script>
-	<script src="views\league\info.js"></script>
-	<script src="views\league\console.js"></script>
+	    <script src="views\intro.js"></script>
+	    <script src="views\intro\info.js"></script>
+	    <script src="views\intro\console.js"></script>
+	    <script src="views\start.js"></script>
+	    <script src="views\start\info.js"></script>
+	    <script src="views\start\console.js"></script>
 
-	<script src="views\team.js"></script>
-	<script src="views\team\info.js"></script>
-	<script src="views\team\console.js"></script>
-	<script src="views\team\update.js"></script>
+	    <script src="views\league.js"></script>
+	    <script src="views\league\info.js"></script>
+	    <script src="views\league\console.js"></script>
 
-	<script src="views\table.js"></script>
+	    <script src="views\team.js"></script>
+	    <script src="views\team\info.js"></script>
+	    <script src="views\team\console.js"></script>
+	    <script src="views\team\update.js"></script>
 
-	<script src="views\draftpreview.js"></script>
-	<script src="views\draft.js"></script>
-	<script src="views\draft\info.js"></script>
-	<script src="views\draft\console.js"></script>
-	<script src="views\draft\draw.js"></script>
-	<script src="views\draft\update.js"></script>
-	<script src="views\draft\set.js"></script>
-	<script src="views\draft\select.js"></script>
-	<script src="views\draft\tradeup.js"></script>
-	<script src="views\draft\tradedown.js"></script>
-	<script src="views\draft\projects.js"></script>
-	<script src="views\draft\camp.js"></script>
+	    <script src="views\table.js"></script>
 
-	<script src="views\roster.js"></script>
-	<script src="views\roster\retirement.js"></script>
-	<script src="views\roster\trade.js"></script>
+	    <script src="views\draftpreview.js"></script>
+	    <script src="views\draft.js"></script>
+	    <script src="views\draft\info.js"></script>
+	    <script src="views\draft\console.js"></script>
+	    <script src="views\draft\draw.js"></script>
+	    <script src="views\draft\update.js"></script>
+	    <script src="views\draft\set.js"></script>
+	    <script src="views\draft\select.js"></script>
+	    <script src="views\draft\tradeup.js"></script>
+	    <script src="views\draft\tradedown.js"></script>
+	    <script src="views\draft\projects.js"></script>
+	    <script src="views\draft\camp.js"></script>
+	    <script src="views\prospects.js"></script>
+	    <script src="views\prospects\info.js"></script>
+	    <script src="views\prospects\console.js"></script>
+	    <script src="views\prospects\marked.js"></script>
 
-	<script src="views\practicesquad.js"></script>
-	<script src="views\gridder.js"></script>
-	<script src="views\pending.js"></script>
-	<script src="views\freeagency.js"></script>
+	    <script src="views\roster\freeagents.js"></script>
+	    <script src="views\roster\retirement.js"></script>
+	    <script src="views\roster\trade.js"></script>
+	    <script src="views\roster\priorities.js"></script>
+
+	    <script src="views\practicesquad.js"></script>
+	    <script src="views\gridder.js"></script>
+	    <script src="views\pending.js"></script>
+	    <script src="views\freeagency.js"></script>
+
+	    <script src="views\phone\gridder.js"></script>
+	    <script src="views\phone\roster.js"></script>
+	    <script src="views\phone\squad.js"></script>
+
+	    <script src="views\season.js"></script>
+	    <script src="views\season\info.js"></script>
+	    <script src="views\season\console.js"></script>
+	    <script src="views\season\matchups.js"></script>
+	    <script src="views\season\exit.js"></script>
+	    <script src="views\season\stats.js"></script>
+	    <script src="views\season\faceoff.js"></script>
+	    <script src="views\season\yards.js"></script>
+
+	    <script src="views\match.js"></script>
+	    <script src="views\match\info.js"></script>
+	    <script src="views\match\console.js"></script>
 
 	<script src="demo.js"></script>
 
@@ -219,42 +255,49 @@
 	<script src="testing\sprites.js"></script>
 	<script src="testing\curve.js"></script>
 
-	<script src="gGridiron.js"></script>
+	<script src="game.js"></script>
 
 	<script>
 
-	//Main game object
-	var Game;
+	    //Main game object
+	    var Game;
 
-	function RunMobileGridders() {
+	    function RunMobileGridders() {
 
-	    //Create library components
-	    ZFLScape = new GenieScape();
-	    ZFLCalcPad = new GenieCalcPad();
-	    ZFLGraphics = new GenieGraphics();
-	    ZFLText = new GenieText();
-	    ZFLRandomizer = new GenieRandomizer();
+		//Create library components
+		ZFLScape = new GenieScape();
+		ZFLCalcPad = new GenieCalcPad();
+		ZFLGraphics = new GenieGraphics();
+		ZFLText = new GenieText();
+		ZFLRandomizer = new GenieRandomizer();
 
-	    //Set library components
-	    ZFLScape.Set("PrimeCanvas", "ZoomCanvas", "ConsoleCanvas");
-	    ZFLCalcPad.Set();
-	    ZFLGraphics.Set(ZFLScape.Screen, ZFLScape.InfoBox, ZFLScape.ControlPanel);
-	    ZFLText.Set(ZFLScape.Screen, null, ZFLScape.InfoBox, ZFLScape.ControlPanel);
-	    ZFLScape.PrimeScape.Context.font = FONT.DEFAULT;
-	    ZFLScape.AddController(GAMePAD.ARROWS);
-	    Controller = ZFLScape.ControllerA;
-	    ZFLRandomizer.Set();
+		//Set library components
+		ZFLScape.Set("PrimeCanvas", "ZoomCanvas", "ConsoleCanvas");
+		ZFLCalcPad.Set();
+		ZFLGraphics.Set(ZFLScape.Screen, ZFLScape.InfoBox, ZFLScape.ControlPanel);
+		ZFLText.Set(ZFLScape.Screen, null, ZFLScape.InfoBox, ZFLScape.ControlPanel);
+		ZFLScape.PrimeScape.Context.font = FONT.DEFAULT;
+		ZFLScape.AddController(GAMePAD.ARROWS);
+		Controller = ZFLScape.ControllerA;
+		ZFLRandomizer.Set();
 
-	    //Load and assign graphic images
-	    ImageManager.Set(ZFLImages);
-	    ImageManager.LoadImages();
-	    ImageManager.Check();				//Check if images have loaded
+		//TODO: these will be the replacement
+		GameScape = new GenieScape();
+		GameScape.Set("PrimeCanvas", "ZoomCanvas", "ConsoleCanvas");
+		Graphics.Set(GameScape.Screen, GameScape.InfoBox, GameScape.ControlPanel);
+		Text.Set(GameScape.Screen, null, GameScape.InfoBox, GameScape.ControlPanel);
 
-	    //Begin as soon as images have loaded
-	    Game = new GridironGame();
-	    Game.Set(ZFLScape, ZFLGraphics, ZFLCalcPad, ZFLText, ZFLRandomizer, Controller);
-	    Game.CheckImagesLoaded();
-	}
+		//Load and assign graphic images
+		ImageManager.Set(ZFLImages);
+		ImageManager.LoadImages();
+		ImageManager.Check();				//Check if images have loaded
+
+		//Begin as soon as images have loaded
+		Game = new GridironGame();
+		Game.Set(ZFLScape, ZFLGraphics, ZFLCalcPad, ZFLText, ZFLRandomizer, Controller);
+		Game.SetPhone();
+		Game.CheckImagesLoaded();
+	    }
 
 	</script>
     </body>

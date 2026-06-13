@@ -59,17 +59,18 @@ var EVENT = {
 //---------- CORE DATA -------------------
 
 var ZFL = { TYPE: { RANDOM: 0, FEATURED: 1, DAILY: 2, WEEKLY: 3 },
-				TURQUOISE: "rgb(063,191,223)", SKY: "rgb(063,191,223)" };
+				TURQUOISE: "rgb(063,191,223)", SKY: "rgb(063,191,223)", LIVID: "rgb(063,127,255)", INDIGO: "rgb(079,127,207)",
+				STEEL: "rgb(079,127,207)" };
 
-var SCREEN = { WIDTH: 600, HEIGHT: 600 };
-var INFoBOX = { WIDTH: 300, HEIGHT: 240 };
-var CONTROlPANEL = { WIDTH: 300, HEIGHT: 320 };
+var SCREEN = { WIDTH: 600, HEIGHT: 600, PHONE: { W: 400, H: 400 } };
+var INFoBOX = { WIDTH: 300, HEIGHT: 240, PHONE: { W: 200, H: 240 } };
+var CONTROlPANEL = { WIDTH: 300, HEIGHT: 320, PHONE: { W: 196, H: 240 } };
 
 //----------------------------------------
 //---------- GAME DATA -------------------
 
 //Colours
-var GRIDIROnCOLOUR = { LIVID: "rgb(127,159,207)", INDIGO: "rgb(079,127,207)" };
+var GRIDIROnCOLOUR = { LIVID: "rgb(127,159,207)", INDIGO: "rgb(079,127,207)" };  //TODO: make REDUNDANT
 var TeamColours = [ [ "rgb(000,047,095)", "rgb(031,079,159)", "rgb(075,111,175)", "rgb(111,031,063)",
 							 "rgb(159,031,047)", "rgb(207,015,031)", "rgb(239,093,015)", "rgb(015,095,095)",
 							 "rgb(079,127,047)", "rgb(079,047,047)", "rgb(127,079,063)", "rgb(079,047,127)",
@@ -78,8 +79,8 @@ var TeamColours = [ [ "rgb(000,047,095)", "rgb(031,079,159)", "rgb(075,111,175)"
 							 "rgb(255,223,031)", "rgb(255,191,207)", "rgb(191,191,000)", "rgb(191,143,111)",
 							 "rgb(239,239,063)", "rgb(239,175,191)", "rgb(191,179,223)", "rgb(031,159,191)",
 							 "rgb(127,207,191)", "rgb(127,223,239)", "rgb(095,255,127)", "rgb(255,239,095)"  ]  ];
-var InterfaceColours = [ BLUE.POWDER, "rgb(095,223,239)", "rgb(127,255,255)" ];
-var RosterColours = [ "rgb(143,095,191)", "rgb(000,000,255)", "rgb(000,127,063)", "rgb(255,239,047)", "rgb(191,000,000)", "black" ];	//purple-blue-green-yellow-red
+var InterfaceColours = [ BLUE.POWDER, "rgb(095,223,239)", "rgb(127,255,255)", "rgb(127,223,239)", "rgb(095,207,239)" ];
+var RosterColours = [ "rgb(191,000,000)", "rgb(143,095,191)", "rgb(000,000,255)", "rgb(000,127,063)", "rgb(255,239,047)", "black" ];
 var ZFLComplexions = [ "rgb(255,194,140)", "rgb(244,198,174)", "rgb(227,175,135)", "rgb(244,171,154)",
 							  "rgb(183,102,039)", "rgb(118,053,015)", "rgb(120,072,050)", "rgb(090,037,021)"  ];
 var ZFLHairColours = [ "rgb(236,094,028)", "rgb(187,063,001)", "rgb(149,062,019)", "rgb(099,039,000)",
@@ -101,8 +102,9 @@ var TeamNames = [ ["Buffalo", "Regals"], ["Miami", "Beachniks"], ["New England",
 					   ["Arizona", "Tycoons"], ["Seattle", "Samaritans"], ["San Francisco", "Vintners"], ["St. Louis", "Archons"] ];
 var TeamAbbreviations = [ "BUF", "MIA", "NE", "NYJ", "HOU", "IND", "JAX", "TEN", "BAL", "CIN", "CLE", "PIT", "DEN", "KC", "OAK", "SD",
 								  "DAL", "NYG", "PHI", "WSH", "ATL", "CAR", "NO", "TB", "CHI", "DET", "GB", "MIN", "ARZ", "SEA", "SF", "STL" ];
-var LEAGUE = { TEAMS: 32, TYPES: 14,
+var LEAGUE = { TEAMS: 32, CONFERENCES: 2, DIVISIONS: 4, TYPES: 14,
 					ZFL: 0, IFFL: 1, IMFL: 2, IZFL: 3, HOFL: 4, MOFL: 5, TTFL: 6, SBFL: 7, TWFL: 8, FWFL: 9, OCFL: 10, HBFL: 11, DHFL: 12, TWFL: 13 };
+var DivisionNames = [ "Atlantic", "Midwest", "Mountain", "Pacific" ];
 var SEASON = { GAMES: 16, DEADLINE: 8,
 					STATE: { END: -8, START: -7, FAs: -6, TRADES: -5, DRAFT: -4, PROJECTS: -3, CAMP: -2, CUTS: -1, GAME: 0 } };
 var DRAFT = { ROUNDS: 7, PROSPECTS: 366, NORMALS: 120, FRINGES: 105, ALTERNATES: 105, DIMENSIONALS: 36, PROJECTS: 80,
@@ -111,12 +113,15 @@ var DraftOutcomes = [ "Disaster", "Poor", "Below Average", "Average", "Above Ave
 var TrainingOutcomes = [ "Bust", "Disappointing", "Encouraging", "Brilliant" ];
 var TRAINING = { METHODS: 3 };
 var PLAY = { RECEIVERS: { MAX: 5 } };
+var FIELD = { COLOUR: GREEN.TWO };
 
 //---------------------------------------
 //---------- CONTROLS -------------------
 
 var POSITIOnBArIMAGE = { L: 231, T: 137, W: 25, H: 188 };
 var POSITIOnTOUChBAR = { L: 5, T: 20, W: 25, H: 188, O: 1, KEYS: 11, KEY: { W: 23, H: 16 }, SELECT: 0, ORIENT: ORIENTATION.VERTICAL };
+var VIEWsICOnPANEL = { L: 310, T: 35, W: 86, H: 168, C: 1, R: 7, LW: 3, ICONS: 7, ICON: { W: 86, H: 24 }, PRESS: 1,
+												IMAGE: { L: 103, T: 137, W: 80, H: 138, O: 2, C: 1, R: 7, PATCH: { W: 80, H: 18 } } }
 
 //------------------------------------------
 //---------- IMAGE MAPS --------------------
@@ -153,6 +158,9 @@ var MiniGameDescriptions = [ [ "Mini Game One" ], [ "Mini Game Two" ]
 var DRAFtGRADeIMAGES = { L: 1, T: 1, W: 94, H: 15, C: 8, R: 1, O: 2, PATCH: { W: 12, H: 15 } };
 var GRADeMARKsIMAGES = { L: 1, T: 18, W: 20, H: 9, C: 2, R: 1, O: 2, PATCH: { W: 9, H: 9 } };
 var TYPeSYMBOlIMAGES = { L: 124, T: 19, W: 80, H: 9, C: 8, R: 1, O: 1, PATCH: { W: 9, H: 9 } };
+var WHITeSYMBOlIMAGES = { L: 2, T: 51, W: 80, H: 9, C: 8, R: 1, O: 1, PATCH: { W: 9, H: 9 } };
+var WHITePLUsMINUsIMAGE = { L: 196, T: 1, W: 5, H: 8 };
+var ABBREVIATIOnIMAGES = { L: 228, T: 1, W: 66, H: 254, C: 2, R: 16, O: 2, PATCH: { W: 32, H: 14 } };
 
 //--------------------------------------
 //---------- SPRITES -------------------

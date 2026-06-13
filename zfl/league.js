@@ -76,10 +76,12 @@ GridironLeague.prototype = {
 
 		//TODO: draft picks list not being recorded right now
 
-		this.DumpLeague();
-		this.DumpRosters();
-		this.DumpSquads();
-		this.DumpFAs();
+		if (!Game.CheckPhone()) {
+			this.DumpLeague();
+			this.DumpRosters();
+			this.DumpSquads();
+			this.DumpFAs();
+		}
 	},
 	DumpLeague() {
 		var i;
@@ -369,5 +371,101 @@ GridironLeague.prototype = {
 			gridder.Stat2	= aFAs[i][16];
 			FreeAgency.AddGridder(gridder);
 		}
+	},
+	SimulateSeason(bRandom) {  //NOTE: the non-random option pits 16 teams from each conference against the other in a round-robin format
+		var i;
+		var iTeams;
+
+		//Populate array of team indices if non-random option is chosen
+		if (!bRandom) {
+			iTeams = new Array(LEAGUE.TEAMS/2);
+			for (i=LEAGUE.TEAMS/2;i<LEAGUE.TEAMS;++i)
+				iTeams[i-(LEAGUE.TEAMS/2)] = i;
+		}
+
+		//Simulate randomly or non-randomly
+		for (i=0;i<SEASON.GAMES;++i) {
+			this.SimulateWeek(iTeams);
+			if (!bRandom)
+				ArrayUtils.Rotate(iTeams);
+		}
+
+		//Check outcomes
+		var aTeams = new Array(LEAGUE.TEAMS);
+		var aWins = new Array(LEAGUE.TEAMS);
+		for (i=0;i<LEAGUE.TEAMS;++i) {
+			aTeams[i] = Teams[i].Roster.GetCumulativeQuality() + Math.round(22*Teams[i].Roster.GetStarterQuality()) - 540;
+			aWins[i] = Teams[i].Record.W;
+		}
+	},
+	SimulateWeek(iTms) {  //NOTE: the non-random option determines winner based on rating comparison only
+		var i;
+		var iTeams;
+		var hTeam, vTeam;		//h- home, v- visitor
+		var hRtng, vRtng;		//h- home, v- visitor
+
+		//Generate or assign league match-ups
+		if (iTms)
+			iTeams = iTms;
+		else {
+			iTeams = new Array(LEAGUE.TEAMS);
+			this.Randomizer.GetUniqueIndices(iTeams, LEAGUE.TEAMS, LEAGUE.TEAMS);
+		}
+
+		//Simulate games and update records
+		for (i=0;i<(LEAGUE.TEAMS/2);++i) {
+
+			if (iTms) {
+				hTeam = i;
+				vTeam = iTeams[i];
+			} else {
+				hTeam = iTeams[i];
+				vTeam = iTeams[i+(LEAGUE.TEAMS/2)];
+			}
+
+			//Determine ratings
+			hRtng = Teams[hTeam].Roster.GetCumulativeQuality();
+			hRtng += Math.round((OFFENSE.PLAYERS+DEFENSE.PLAYERS)*Teams[hTeam].Roster.GetStarterQuality());
+			vRtng = Teams[vTeam].Roster.GetCumulativeQuality();
+			vRtng += Math.round((OFFENSE.PLAYERS+DEFENSE.PLAYERS)*Teams[vTeam].Roster.GetStarterQuality());
+
+			//Simulate games, update records
+			if (iTms) {
+				if (hRtng<vRtng)
+					bWnnr = 0;
+				else
+					bWnnr = 1;
+			} else
+				bWnnr = this.GetWinner(hRtng, vRtng);
+			if (bWnnr==0) {
+				++Teams[hTeam].Record.W;
+				++Teams[vTeam].Record.L;
+			} else {
+				++Teams[hTeam].Record.L;
+				++Teams[vTeam].Record.W;
+			}
+		}
+
+		Teams.forEach(function(team){team.UpdatePostMatch();});		//update injuries and alternate training results
+
+		//Update league
+		++League.GamesPlayed;
+		if (League.GamesPlayed==SEASON.GAMES) {  //check if season is over
+			++League.Season;
+			League.GamesPlayed = SEASON.STATE.END;
+			Teams.forEach(function(team){team.Roster.EraseInjuries();});
+		}
+	},
+	GetWinner(hRating, vRating) {  //NOTE: knocks down the ratings so there is a greater relative difference
+
+		do {
+			hRating -= 30;										//NOTE: '30' is a hueristic that came up with after a few iterations
+			vRating -= 30;
+		} while ( hRating>10 && vRating>10 );
+
+		hRating += 30;
+		vRating += 30;
+
+		return (this.Randomizer.GetWinner(hRating, vRating, INVERTED));
 	}
 };
