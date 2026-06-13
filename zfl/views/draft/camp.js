@@ -83,7 +83,10 @@ TrainingCampDialogView.prototype.Update = function() {
 TrainingCampDialogView.prototype.Draw = function() {
 
 	this.GraphicsTool.DrawRectangle(this.Specs.L, this.Specs.T, this.Specs.W, this.Specs.H, "white", 3);
-	this.TextWriter.Write("Pick one:", 120, 140, { FONT: "bold 14pt Arial" } );
+	if (Game.CheckPhone())
+		this.TextWriter.Write("Pick one:", 156, 140, { FONT: "bold 14pt Arial" } );
+	else
+		this.TextWriter.Write("Pick one:", this.Specs.L+20, 140, { FONT: "bold 14pt Arial" } );
 };
 TrainingCampDialogView.prototype.RunCamp = function() {
 	var i;
@@ -100,14 +103,20 @@ TrainingCampDialogView.prototype.RunCamp = function() {
 		}
 
 	this.GraphicsTool.DrawRectangle(0, 0, SCREEN.WIDTH, SCREEN.HEIGHT, this.Specs.COLOUR, 0);
-	this.GraphicsTool.DrawVerticalLine( { X: 200, Y: 40 }, 520, "white", 1);
-	this.GraphicsTool.DrawVerticalLine( { X: 201, Y: 40 }, 520, GREY.MEDIUM, 1);
-	this.GraphicsTool.DrawVerticalLine( { X: 400, Y: 40 }, 520, "white", 1);
-	this.GraphicsTool.DrawVerticalLine( { X: 401, Y: 40 }, 520, GREY.MEDIUM, 1);
+	if (Game.CheckPhone()) {
+	this.GraphicsTool.DrawVerticalLine( { X: 200, Y: 40 }, 310, "white", 1);
+	this.GraphicsTool.DrawVerticalLine( { X: 201, Y: 40 }, 310, GREY.MEDIUM, 1);
+	} else {
+		this.GraphicsTool.DrawVerticalLine( { X: 200, Y: 40 }, 520, "white", 1);
+		this.GraphicsTool.DrawVerticalLine( { X: 201, Y: 40 }, 520, GREY.MEDIUM, 1);
+		this.GraphicsTool.DrawVerticalLine( { X: 400, Y: 40 }, 520, "white", 1);
+		this.GraphicsTool.DrawVerticalLine( { X: 401, Y: 40 }, 520, GREY.MEDIUM, 1);
+	}
 
 	this.DisplayQuitters();
 	this.DisplayDraftees();
-	this.DisplayImprovers();
+	if (!Game.CheckPhone())
+		this.DisplayImprovers();
 	this.DisplayOutcome();
 
 	this.OkButton.Show();
@@ -130,6 +139,7 @@ TrainingCampDialogView.prototype.DisplayDraftees = function() {
 	var i;
 	var info;
 	var nGrddr;
+	var outcm;
 
 	this.TextWriter.Write("Drafted players:", 205, 20, { FONT: "bold 14pt Arial" } );
 	nGrddr = 0;
@@ -152,7 +162,8 @@ TrainingCampDialogView.prototype.DisplayDraftees = function() {
 			this.TextWriter.Write(Utils.NumberToGrade(Draft.Picks[i].Quality), 240, 65+(30*nGrddr));							//quality
 			this.TextWriter.Write("+"+Draft.Picks[i].Potential, 258, 65+(30*nGrddr));												//training result
 			this.TextWriter.Write("(+"+Draft.Picks[i].History1+")", 285, 65+(30*nGrddr));											//original potential
-			this.TextWriter.Write(TrainingOutcomes[Draft.Picks[i].Status], 320, 65+(30*nGrddr));								//outcome
+			outcm = (Draft.Picks[i].Status & 0b111000) / 0b1000;
+			this.TextWriter.Write(TrainingOutcomes[outcm], 320, 65+(30*nGrddr));								//outcome
 			this.TextWriter.ResetFont();
 			++nGrddr;
 		}
@@ -177,8 +188,12 @@ TrainingCampDialogView.prototype.OpenParentView = function() {
 
 	DraftView.Close();
 	Teams.forEach(function(team) {team.Roster.Trim();});
-	TeamView.NestedView = RosterNestedView;
-	TeamView.Open();
+	if (Game.CheckPhone())
+		RosterView.Open();
+	else {
+		TeamView.NestedView = RosterNestedView;
+		TeamView.Open();
+	}
 };
 TrainingCampDialogView.prototype.DisplayOutcome = function() {
 	var i;
@@ -187,11 +202,19 @@ TrainingCampDialogView.prototype.DisplayOutcome = function() {
 
 	outcm = 0;
 	for (i=0;i<Draft.Picks.length;++i)
-		outcm += Draft.Picks[i].Status;
+		outcm += (Draft.Picks[i].Status & 0b111000) / 0b1000;
 	outcm /= Draft.Picks.length;
-	this.TextWriter.Write("Draft training outcome -", 10, 310);
+	if (Game.CheckPhone())
+		this.TextWriter.Write("Draft training outcome -", 5, 162);
+	else
+		this.TextWriter.Write("Draft training outcome -", 10, 310);
 	this.OutcomeImage.Draw();
 	y = 523 - (28*Math.round(outcm/0.405));
-	this.MarkerImages.DrawPatchNumber(0, 32, y);
-	this.MarkerImages.DrawPatchNumber(1, 32+126, y);
+	if (Game.CheckPhone()) {
+		this.MarkerImages.DrawPatchNumber(0, 5, y-151);
+		this.MarkerImages.DrawPatchNumber(1, 5+126, y-151);
+	} else {
+		this.MarkerImages.DrawPatchNumber(0, 32, y);
+		this.MarkerImages.DrawPatchNumber(1, 32+126, y);
+	}
 };

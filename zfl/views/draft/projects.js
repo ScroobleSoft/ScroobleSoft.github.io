@@ -61,7 +61,10 @@ GridironProjectsDialogView.prototype.Update = function() {
 GridironProjectsDialogView.prototype.Draw = function() {
 
 	this.GraphicsTool.DrawRectangle(this.Specs.L, this.Specs.T, this.Specs.W, this.Specs.H, "white", 3);
-	this.TextWriter.Write("Do you want to sign Project players?", 136, 225, { FONT: "bold 14pt Arial" } );
+	if (Game.CheckPhone())
+		this.TextWriter.Write("Do you want to sign Project players?", this.Specs.L+36, 175, { FONT: "bold 14pt Arial" } );
+	else
+		this.TextWriter.Write("Do you want to sign Project players?", this.Specs.L+36, this.Specs.T+125, { FONT: "bold 14pt Arial" } );
 };
 GridironProjectsDialogView.prototype.SetSelectionOrder = function(aTeams) {
 	var i;
@@ -106,21 +109,21 @@ GridironProjectsDialogView.prototype.DisplayProjects = function() {
 	this.NoButton.Hide();
 	this.ColourScape();
 	this.GraphicsTool.DrawRectangle(this.Specs.L, this.Specs.T, this.Specs.W, this.Specs.H, "white", 3);
-	this.TextWriter.Write("Projects signed:", 228, 225, { FONT: "bold 14pt Arial" } );
+	this.TextWriter.Write("Projects signed:", this.Specs.L+128, this.Specs.T+25, { FONT: "bold 14pt Arial" } );
 
 	nPrjcts = 0;
 	for (i=0;i<PlayerTeam.Roster.Gridders.length;++i)
 		for (j=0;j<PlayerTeam.Roster.Gridders[i].length;++j)
-			if (PlayerTeam.Roster.Gridders[i][j].Type==GRIDDER.TYPE.PROJECT) {
-				this.TextWriter.Write(Positions[PlayerTeam.Roster.Gridders[i][j].Position], 120, 265+(20*nPrjcts));
+			if ( PlayerTeam.Roster.Gridders[i][j].Type==GRIDDER.TYPE.PROJECT && PlayerTeam.Roster.Gridders[i][j].Experience==0 ) {
+				this.TextWriter.Write(Positions[PlayerTeam.Roster.Gridders[i][j].Position], this.Specs.L+20, this.Specs.T+65+(20*nPrjcts));
 				name = PlayerTeam.Roster.Gridders[i][j].Name.GetFullName();
 				if (StringUtils.GetTextWidth(name, null, this.Context)>170) {
 					name = PlayerTeam.Roster.Gridders[i][j].Name.First[0] + " ";
 					name += PlayerTeam.Roster.Gridders[i][j].Name.Last;
 				}
-				this.TextWriter.Write(name, 145, 265+(20*nPrjcts));
-				this.TextWriter.Write(Utils.NumberToGrade(PlayerTeam.Roster.Gridders[i][j].Quality), 320, 265+(20*nPrjcts));
-				this.TextWriter.Write("+"+PlayerTeam.Roster.Gridders[i][j].Potential, 340, 265+(20*nPrjcts));
+				this.TextWriter.Write(name, this.Specs.L+45, this.Specs.T+65+(20*nPrjcts));
+				this.TextWriter.Write(Utils.NumberToGrade(PlayerTeam.Roster.Gridders[i][j].Quality), this.Specs.L+220, this.Specs.T+65+(20*nPrjcts));
+				this.TextWriter.Write("+"+PlayerTeam.Roster.Gridders[i][j].Potential, this.Specs.L+240, this.Specs.T+65+(20*nPrjcts));
 				++nPrjcts;
 			}
 

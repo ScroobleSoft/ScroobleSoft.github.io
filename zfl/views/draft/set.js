@@ -1,4 +1,13 @@
 
+GridironDraftView.prototype.SetDraft = function(drft) {
+
+	this.Draft = drft;
+	DraftConsoleView.SetDraft(this.Draft);
+};
+GridironDraftView.prototype.SetRoster = function(rstr) {
+
+	this.Roster = rstr;
+};
 GridironDraftView.prototype.SetData = function() {
 
 	this.GridderTypes = [ "", "Divisional", "Injured", "Sparker", "Special", "Temperamental", "Versatile", "Volatile", "Dimensional", "Project" ];
@@ -8,6 +17,24 @@ GridironDraftView.prototype.SetControls = function() {
 	this.SetTradeButtons();
 	this.SetSelectionControls();
 	this.SetPreviewControls();
+};
+GridironDraftView.prototype.SetImages = function() {
+
+	if (Game.CheckPhone())
+		this.GridImage = this.SetImage(ImageManager.Pics[IMAGeINDEX.IMAGES], this.Specs.IMAGE.GRID);
+
+	//TODO: the below should be in an 'else' block since are only relevant to tablet/desktop
+	this.SlotImage = new GenieImage();
+	this.SlotImage.Set(this.Context, ImageManager.Pics[IMAGeINDEX.IMAGES], this.Specs.IMAGE.SLOT);
+	this.LegendImages = new GenieImage();
+	this.LegendImages.Set(this.Context, ImageManager.Pics[IMAGeINDEX.IMAGES], this.Specs.IMAGE.LEGEND);
+	this.MarkerImage = new GenieImage();
+	this.MarkerImage.Set(this.Context, ImageManager.Pics[IMAGeINDEX.IMAGES], this.Specs.IMAGE.MARKER);		//REDUNDANT?
+	this.ProjectImage = this.SetImage(ImageManager.Pics[IMAGeINDEX.IMAGES], this.Specs.IMAGE.PROJECT);
+	this.ProjectLegendImage = this.SetImage(ImageManager.Pics[IMAGeINDEX.IMAGES], this.Specs.IMAGE.PROJECtLEGEND);
+	this.SpeedImageMap = new GenieImageMap();
+	this.SpeedMap = [ { L: 1, T: 1, W: 23, H: 23 }, { L: 1, T: 24, W: 23, H: 23 } ];
+	this.SpeedImageMap.Set(this.Context, ImageManager.Pics[IMAGeINDEX.IMAGES], this.Specs.IMAGeMAP.SPEED, this.SpeedMap);
 };
 GridironDraftView.prototype.SetTradeButtons = function() {
 
@@ -57,31 +84,10 @@ GridironDraftView.prototype.SetPreviewControls = function() {
 	this.PositionTouchBar.Set(this.Canvas, this.Specs.TOUChBAR.POSITION, this.Specs.TOUChBAR.POSITION.IMAGE);
 	this.Controls.push(this.PositionTouchBar);
 };
-GridironDraftView.prototype.SetImages = function() {
-
-	this.SlotImage = new GenieImage();
-	this.SlotImage.Set(this.Context, ImageManager.Pics[IMAGeINDEX.IMAGES], this.Specs.IMAGE.SLOT);
-	this.LegendImages = new GenieImage();
-	this.LegendImages.Set(this.Context, ImageManager.Pics[IMAGeINDEX.IMAGES], this.Specs.IMAGE.LEGEND);
-	this.MarkerImage = new GenieImage();
-	this.MarkerImage.Set(this.Context, ImageManager.Pics[IMAGeINDEX.IMAGES], this.Specs.IMAGE.MARKER);
-	this.SpeedImageMap = new GenieImageMap();
-	this.SpeedMap = [ { L: 1, T: 1, W: 23, H: 23 }, { L: 1, T: 24, W: 23, H: 23 } ];
-	this.SpeedImageMap.Set(this.Context, ImageManager.Pics[IMAGeINDEX.IMAGES], this.Specs.IMAGeMAP.SPEED, this.SpeedMap);
-};
 GridironDraftView.prototype.SetSelections = function() {
 	var i;
 
 	this.Selections = new Array(DRAFT.ROUNDS*LEAGUE.TEAMS);
 	for (i=0;i<this.Selections.length;++i)
 		this.Selections[i] = { Position: -1, Initials: "", Grade: "", Potential: -1 };
-};
-GridironDraftView.prototype.SetDraft = function(drft) {
-
-	this.Draft = drft;
-	DraftConsoleView.SetDraft(this.Draft);
-};
-GridironDraftView.prototype.SetRoster = function(rstr) {
-
-	this.Roster = rstr;
 };

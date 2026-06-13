@@ -50,7 +50,7 @@ GridironDraftView.prototype.UpdateButtons = function() {
 
 	//Check if first 4 rounds are over
 	if (this.Draft.CurrentPick==128) {
-		this.TradeUpButton.Disable();
+//		this.TradeUpButton.Disable();				TODO: will be disabled later in draft
 		this.TradeDownButton.Disable();
 	}
 
@@ -140,11 +140,18 @@ GridironDraftView.prototype.EndDraft = function() {
 	this.ConsoleView.EndDraft();
 	this.State = this.Specs.STATE.PROJECTS;
 
-	//Hide controls
-	this.AutoSelectCheckBox.Hide();
-	this.TradeUpButton.Hide();
-	this.TradeDownButton.Hide();
-	this.AutoSelectButton.Hide();
-	this.SelectButton.Hide();
-	this.RoundTouchBar.Hide();
+	if (Game.CheckPhone()) {
+		this.InfoView.Controls.forEach( function(cntrl) {cntrl.Hide();} );
+		this.InfoView.Context.fillStyle = GREY.SILVER;
+		this.InfoView.Context.fillRect(0, 182, INFoBOX.WIDTH, 58);
+	} else {
+
+		//Hide controls
+		this.AutoSelectCheckBox.Hide();
+		this.TradeUpButton.Hide();
+		this.TradeDownButton.Hide();
+		this.AutoSelectButton.Hide();
+		this.SelectButton.Hide();
+		this.RoundTouchBar.Hide();
+	}
 };
