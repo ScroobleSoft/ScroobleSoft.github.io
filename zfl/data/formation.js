@@ -4,9 +4,9 @@ var FORMATION = { OFF: { IfORM: 0, OFFSEtI: 1, SPLItBACK: 2, NoTE: 3, THREeWR: 4
 		  DEF: { MM43: 0, COVER2: 1, TAMPA2: 2, COVER3: 3, ZONE43: 4, MM34: 5, MM44: 6,
 			 ZN34C2: 7, ZN34C3: 8, ZONE34: 9, TWoNT: 10, FIVeDL: 11, MM46: 12, COUNT: 13 } };  //NOTE: ZONE defense means blitz
 var SYSTEM = { OFF: { NONE: 0, IfORM: 1, IfORmPASS: 2, IfORmRUN: 3, HYBRD: 4, MIX: 5, TWoTE: 6,
-		      SPLItBACK: 7, THREeWR: 8, FOUrWR: 9, OFFSEtI: 10, HbACK: 11, DUAlHbACK: 12, WINgT: 13, COUNT: 13 },
-	       DEF: { NONE: 0, MIX43: 1, MM43: 2, ZN43: 3, HYBRD: 4, MIX: 5, ZN34: 6,
-		      TAMPA2: 7, MM34: 8, RAVEN43: 9, COVER3: 10, IR43: 11, MIX34: 12, BLTZ34: 13, COUNT: 13 } };
+							 SPLItBACK: 7, THREeWR: 8, FOUrWR: 9, OFFSEtI: 10, HbACK: 11, DUAlHbACK: 12, WINgT: 13, COUNT: 13 },
+					DEF: { NONE: 0, MIX43: 1, MM43: 2, ZN43: 3, HYBRD: 4, MIX: 5, ZN34: 6,
+							 TAMPA2: 7, MM34: 8, RAVEN43: 9, COVER3: 10, MM43: 11, MIX34: 12, BLTZ34: 13, COUNT: 13 } };
 var Systems = [ [ "Customizable", "I-Formation", "I-Formation Passing", "I-Formation Running", "I-Formation, 3 WR Mix", "All Formations", "2 Tight-End",
 		  "Split Back", "3 Wide Receivers", "4 Wide Receivers", "Offset-I Formation", "H-Back Formations", "Dual H-Back", "Wing-T Formation" ],
 		[ "Customizable", "43 Zone/Man Mix", "43 Man-to-Man", "43 Zone", "43/34 Mix", "All Formations", "34 Zone",
