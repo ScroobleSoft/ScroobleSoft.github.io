@@ -11,7 +11,6 @@ GenieAgent.prototype.SetDestination = function(pos) {
 
 	//TODO: may not need to use 'square' and calculate distance - one axis and velocity components should suffice
 
-	this.State.Motion = STATE.MOTION.ADVANCING;
 	this.Steps = 0;
 	this.distance = SpaceUtils.GetDistance(this.Position, this.Destination);
 	this.MaxSteps = Math.round(this.distance/this.Speed);

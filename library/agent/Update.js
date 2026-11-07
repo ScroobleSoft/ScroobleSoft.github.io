@@ -20,7 +20,7 @@ GenieAgent.prototype.Update = function() {
 			} else
 			this.SetDestination(this.Path[this.PathNode]);
 		} else
-		this.Move();
+			this.Move();
 	}
 
 	//Process movement
@@ -34,16 +34,14 @@ GenieAgent.prototype.Update = function() {
 			this.UpdateTankControls();
 	}
 
-	if (this.State.Motion==STATE.MOTION.ADVANCING) {
+	if (this.State.Motion & STATE.MOTION.ADVANCING) {
 		this.Move();
 		if (this.Animation)		//update sprite state if animated
 			this.UpdateAnimation();
 		if (this.MaxSteps) {		//NOTE: this step is necessary since there might not be a destination
 			++this.Steps;
-			if (this.Steps==this.MaxSteps) {
-				this.State.Motion = STATE.MOTION.STATIONARY;
-				this.State.Animation.State = 0;
-			}
+			if (this.Steps==this.MaxSteps)
+				this.State.Motion -= STATE.MOTION.ADVANCING;
 		}
 	}
 
