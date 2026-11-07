@@ -42,6 +42,7 @@ GenieDialogView.prototype.Close = function() {
 GenieDialogView.prototype.OpenParentView = function() {
 
 	this.ParentView.Open();
+	this.ParentView.Update();		//TODO: this could be optional depending on a setting
 };
 GenieDialogView.prototype.ColourScape = function() {
 

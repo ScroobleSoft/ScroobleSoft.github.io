@@ -18,12 +18,8 @@ GenieOptionsView.prototype.Update = function() {
 	this.AnimationFrameHandle = requestAnimationFrame(this.Update.bind(this));
 
 	for (this.i=0;this.i<this.Buttons.length;++this.i)
-		if (this.Buttons[this.i].CheckClicked())
-			this.Close(this.i);
-};
-GenieOptionsView.prototype.Close = function(iOptn) {
-	GenieDialogView.prototype.Close.call(this);
-
-	this.ParentView.Option = iOptn;
-	setTimeout(this.OpenParentView.bind(this), 100);
+		if (this.Buttons[this.i].CheckClicked()) {
+			this.ParentView.Option = this.i;
+			this.Close();
+		}
 };
