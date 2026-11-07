@@ -251,6 +251,24 @@ GenieRandomizer.prototype = {
 			++dArray[this.j];
 		}
 	},
+	GetWeightedAscending(lArray) {  //get a random slot from an array w/ ascending values, i.e. [1,2,3,4 . . . ] . . . l- length
+		var aSlots;
+
+		aSlots = new Array(lArray);
+		for (this.i=0;this.i<lArray;++this.i)
+			aSlots[this.i] = this.i + 1;
+
+		return (this.GetSlot(this.i));
+	},
+	GetWeightedDescending(lArray) {
+		var aSlots;
+
+		aSlots = new Array(lArray);
+		for (this.i=lArray;this.i>0;--this.i)
+			aSlots[this.i-1] = this.i;
+
+		return (this.GetSlot(this.i));
+	},
 	GetWinner(val1, val2, invrtd) {	 //index of winner is returned; INVERTED means lower value is better
 
 		if (!val1 || !val2) {  //NOTE: this check is added in case agent ratings are being passed (in which case values can be 0)
@@ -303,3 +321,5 @@ GenieRandomizer.prototype = {
 
 var Randomizer = new GenieRandomizer();
 Randomizer.Set();
+var Random = new GenieRandomizer();
+Random.Set();

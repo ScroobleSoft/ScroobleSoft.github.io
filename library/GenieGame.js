@@ -145,6 +145,17 @@ GenieGame.prototype = {
 
 		return (this.Settings & GAME.TILED);
 	},
+	SetPhone() {
+
+		this.Settings = GAME.PLATFORM.PHONE;
+
+		SCREEN.WIDTH = SCREEN.PHONE.W;
+		SCREEN.HEIGHT = SCREEN.PHONE.H;
+		INFoBOX.WIDTH = INFoBOX.PHONE.W;
+		INFoBOX.HEIGHT = INFoBOX.PHONE.H;
+		CONTROlPANEL.WIDTH = CONTROlPANEL.PHONE.W;
+		CONTROlPANEL.HEIGHT = CONTROlPANEL.PHONE.H;
+	},
 	SetMobile() {
 
 		this.Settings = GAME.PLATFORM.PHONE;
@@ -168,12 +179,20 @@ GenieGame.prototype = {
 
 		return (this.Settings & GAME.PLATFORM.TABLET);
 	},
-	CheckPC() {  //UNLOGGED - this could change when approach to tablets is decided (tablets can be called PC's too)
+	CheckPC() {
 
 		return (!this.CheckMobile());
 	},
 	CheckDesktop() {  //UNLOGGED - desktop only, not tablet
 
 		//-
+	},
+	CheckTap(iCnvs) {
+
+		if (Mouse.CheckDowned(iCnvs))
+			return (true);
+
+		if (TouchScreen.CheckTouched(iCnvs))
+			return (true);
 	}
 };

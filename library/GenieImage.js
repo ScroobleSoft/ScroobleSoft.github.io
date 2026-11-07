@@ -23,6 +23,10 @@ GenieImage.prototype = {
 		//ISSUE: if height and width are not declared in specs, they'll have to be determined and stored here
 		//OPEN: may need X, Y fields in some apps
 	},
+	SetContext(cntxt) {
+
+		this.Context = cntxt;
+	},
 	SetCoords(x, y) {
 
 		if (this.Specs) {

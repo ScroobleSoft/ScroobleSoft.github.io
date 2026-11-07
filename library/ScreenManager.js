@@ -201,5 +201,30 @@ GenieScreenManager.prototype = {
 		//UNLOGGED
 
 		//-return NULL if terrain clicked (have to check agents and structures, not projectiles), otherwise return object
+	},
+	DrawImageContextSwitched(img, cntxt, x, y) {
+		var iCntxt;
+
+		iCntxt = img.Context;
+		img.Context = cntxt;
+		if (arguments.length>2)
+			img.Draw(x, y);
+		else
+			img.Draw();
+		img.Context = iCntxt;
+	},
+	DrawPatchContextSwitched(img, ptch, cntxt, x, y) {
+		var iCntxt;
+
+		iCntxt = img.Context;
+		img.Context = cntxt;
+		if (arguments.length>3)
+			img.DrawPatchNumber(ptch, x, y);
+		else
+			img.Draw(ptch);
+		img.Context = iCntxt;
 	}
 };
+
+ScreenTool = new GenieScreenManager();		//TODO: will eventually be called ScreenManager
+ScreenTool.Set();

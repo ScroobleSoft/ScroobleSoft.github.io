@@ -179,18 +179,21 @@ GenieGraphics.prototype = {
 		}
 	},
 	DrawEllipse(x, y, width, height, colour, lWidth, opcty) {
+
 		this.SetOpacity(opcty);
+
 		this.Context.beginPath();
 		this.Context.ellipse(x, y, width/2, height/2, 0, 0, 2*Math.PI);
 		if (lWidth) {
-	 this.Context.lineWidth = lWidth;
-	 this.Context.fillStyle = colour || "black";
-	 this.Context.stroke();
+			this.Context.lineWidth = lWidth;
+			this.Context.fillStyle = colour || "black";
+			this.Context.stroke();
 		} else {
-	 this.Context.fillStyle = colour || "black";
-	 this.Context.fill();
+			this.Context.fillStyle = colour || "black";
+			this.Context.fill();
 		}
 		this.Context.closePath();
+
 		this.ResetOpacity(opcty);
 	},
 	DrawTriangle(x, y, size, colour, lWidth, alignment, style, angle, opcty) {
@@ -220,7 +223,9 @@ GenieGraphics.prototype = {
 		this.DrawPolygon(x, y, this.vrtcs, colour, lWidth, opcty);
 	},
 	DrawDiamond(x, y, rds, colour, lWidth, opcty) {
+
 		this.SetOpacity(opcty);
+
 		this.Context.beginPath();
 		this.Context.moveTo(x, y-rds);
 		this.Context.lineTo(x+rds, y);
@@ -228,14 +233,15 @@ GenieGraphics.prototype = {
 		this.Context.lineTo(x-rds, y);
 		this.Context.lineTo(x, y-rds);
 		if (lWidth) {
-	 this.Context.lineWidth = lWidth;
-	 this.Context.strokeStyle = colour;
-	 this.Context.stroke();
+			this.Context.lineWidth = lWidth;
+			this.Context.strokeStyle = colour;
+			this.Context.stroke();
 		} else {
-	 this.Context.fillStyle = colour;
-	 this.Context.fill();
+			this.Context.fillStyle = colour;
+			this.Context.fill();
 		}
 		this.Context.closePath();
+
 		this.ResetOpacity(opcty);
 	},
 	DrawSquare(x, y, size, colour, lWidth, opcty) {
@@ -395,6 +401,15 @@ GenieGraphics.prototype = {
 		this.DrawRectangle(l+1, t+1, w, h, "white", 1);
 		if (wLabel)
 			this.DrawRectangle(l+6, t-1, wLabel, 3, colour, 0);		//HARD-CODED!
+	},
+	DrawDivider(pos, lngth, colour) {  //NOTE: draws a horizontal bas-relief line, left to right
+
+		this.coords.Set(pos.X, pos.Y+0.5);
+		this.coords2.Set(this.coords.X+lngth, this.coords.Y);
+		this.DrawLine(this.coords, this.coords2, colour, 1);
+		++this.coords.Y;
+		++this.coords2.Y;
+		this.DrawLine(this.coords, this.coords2, "white", 1);
 	}
 };
 

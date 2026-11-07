@@ -83,6 +83,17 @@ GenieNewGame.prototype = {
 
 		return (this.Settings & GAME.TILED);
 	},
+	SetPhone() {
+
+		this.Settings = GAME.PLATFORM.PHONE;
+
+		SCREEN.WIDTH = SCREEN.PHONE.W;
+		SCREEN.HEIGHT = SCREEN.PHONE.H;
+		INFoBOX.WIDTH = INFoBOX.PHONE.W;
+		INFoBOX.HEIGHT = INFoBOX.PHONE.H;
+		CONTROlPANEL.WIDTH = CONTROlPANEL.PHONE.W;
+		CONTROlPANEL.HEIGHT = CONTROlPANEL.PHONE.H;
+	},
 	SetMobile() {
 
 		this.Settings = GAME.PLATFORM.PHONE;
