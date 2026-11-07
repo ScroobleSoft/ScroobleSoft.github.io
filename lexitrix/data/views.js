@@ -70,7 +70,7 @@ var SHUFFLE = { COLOUR: GREY.SILVER,
 								 TILES: { L: 376, T: 131, W: 112, H: 36, O: 2, C: 3, R: 1, PATCH: { W: 36, H: 36 } }
 							  }
 };
-var SPINDLE = { COLOUR: "rgb(143,111,239)", TYPE: { DAILY: 0, ELEVEN: 1, NINE: 2, SEVEN: 3, RANDOM: 4, MINUTE: 5 }, MILLISECONDS: 1738149589965,
+var SPINDLE = { COLOUR: "rgb(143,111,239)", TYPE: { DAILY: 0, ELEVEN: 1, NINE: 2, SEVEN: 3, RANDOM: 4, MINUTE: 5 }, MILLISECONDS: 1767225600000,
 					 IMAGE: { INTRO: { L: 181, T: 2, W: 280, H: 224, X: 40, Y: 40 } },
 					 BUTTON: { HINT: { L: 4, T: 510, W: 60, H: 25, LW: 3, LABEL: "Hint", STYLE: BUTTON.STYLE.ROUNDED,
 											 COLOUR: "rgb(079,000,159)", BACKGROUND: "rgb(143,111,239)", TEXT: { COLOUR: "rgb(255,223,255)" } },
@@ -133,10 +133,11 @@ var SPINDLE = { COLOUR: "rgb(143,111,239)", TYPE: { DAILY: 0, ELEVEN: 1, NINE: 2
 							 }
 };
 var JIGGLE = { };
-var CROSSLE = { COLOUR: "yellow", TYPE: { DAILY: 0, NUMBERED: 1, SYMMETRICAL: 2, ASYMMETRIC: 3 }, MILLISECONDS: 1738149589965,
+var CROSSLE = { COLOUR: "yellow", TYPE: { DAILY: 0, NUMBERED: 1, SYMMETRICAL: 2, ASYMMETRIC: 3 }, MILLISECONDS: 1767225600000,
 					 IMAGE: { INTRO: { L: 604, T: 2, W: 280, H: 248, X: 40, Y: 81 } },
 					 ICON: { VOWELS: { L:  25, T: 520, W: 140, H: 25, LW: 3, IMAGE: { L: 549, T: 306, W: 134, H: 19 }, BACKGROUND: "yellow" },
-								BORDER: { L: 195, T: 520, W: 140, H: 25, LW: 3, IMAGE: { L: 685, T: 170, W: 134, H: 19 }, BACKGROUND: "yellow" }  },
+								BORDER: { L: 195, T: 520, W: 140, H: 25, LW: 3, IMAGE: { L: 685, T: 170, W: 134, H: 19 }, BACKGROUND: "yellow" }
+							 },
 					 BUTTON: { INSTRUCTIONS: { L: 20, T: 560, W: 100, H: 25, LW: 3, LABEL: "Instructions", STYLE: BUTTON.STYLE.ROUNDED,
 														COLOUR: "black", BACKGROUND: "yellow", TEXT: { COLOUR: "white" } },
 								  SOLVE: { L: 140, T: 560, W: 60, H: 25, LW: 3, LABEL: "Solve", STYLE: BUTTON.STYLE.ROUNDED,
@@ -146,6 +147,9 @@ var CROSSLE = { COLOUR: "yellow", TYPE: { DAILY: 0, NUMBERED: 1, SYMMETRICAL: 2,
 								  QUIT: { L: 280, T: 560, W: 60, H: 25, LW: 3, LABEL: "Quit", STYLE: BUTTON.STYLE.ROUNDED,
 											 COLOUR: "black", BACKGROUND: "yellow", TEXT: { COLOUR: "white" } }
 								},
+					 ROUNdPUShBUTTON: { VOWELS: { L: 209, T: 515, W: 25, H: 25, R: 12, O: 5, COUNT: 5, BACKGROUND: "yellow", SINGLE: true,
+															IMAGE: { L: 582, T: 367, W: 259, H: 25, O: 1, R: 1, C: 5, PATCH: { W: 25, H: 25 } } }
+											},
 					 BOARD: { L: 20, T: 45, W: 320, H: 320, COLOUR: "white", STATE: { NORMAL: 0, CLICKED: 1, WAITING: 2, DOUBLeCLICKED: 3 },
 								 CELL: { COUNT: 121, W: 29, H: 29, C: 11, R: 11, OFFSET: { X: 10, Y: 8 } },
 								 IMAGE: { CELL: { L: 330, T: 230, W: 30, H: 30 },
@@ -198,7 +202,7 @@ var BUNDLE = {	COLOUR: "rgb(143,223,255)",
 								COLOUR: { CORRECT: "rgb(143,000,000)", INCORRECT: "rgb(031,079,047)" }
 							 }
 };
-var TURTLE = {	COLOUR: "rgb(000,143,063)", TYPE: { DAILY: 0, NUMBERED: 1, RANDOM: 2 }, MILLISECONDS: 1766735316380,
+var TURTLE = {	COLOUR: "rgb(000,143,063)", TYPE: { DAILY: 0, NUMBERED: 1, RANDOM: 2 }, MILLISECONDS: 1767225600000,
 					BUTTON: { INSTRUCTIONS: { L: 20, T: 460, W: 100, H: 25, LW: 3, LABEL: "Instructions", STYLE: BUTTON.STYLE.ROUNDED,
 													  COLOUR: "rgb(191,255,047)", BACKGROUND: "rgb(000,143,063)", TEXT: { COLOUR: "rgb(047,095,015)" } },
 								 SOLVE: { L: 140, T: 460, W: 60, H: 25, LW: 3, LABEL: "Solve", STYLE: BUTTON.STYLE.ROUNDED,
@@ -270,15 +274,15 @@ var TURTLE = {	COLOUR: "rgb(000,143,063)", TYPE: { DAILY: 0, NUMBERED: 1, RANDOM
 													}
 									  }
 };
-var FIDDLE = {	COLOUR: "rgb(047,063,127)", TYPE: { DAILY: 0, NUMBERED: 1, RANDOM: 2 }, MILLISECONDS: 1738149589965,
+var FIDDLE = {	COLOUR: "rgb(159,223,255)", TYPE: { DAILY: 0, NUMBERED: 1, RANDOM: 2 }, MILLISECONDS: 1767225600000,
 					BUTTON: { INSTRUCTIONS: { L: 20, T: 525, W: 100, H: 25, LW: 3, LABEL: "Instructions", STYLE: BUTTON.STYLE.ROUNDED,
-													  COLOUR: "rgb(063,191,223)", BACKGROUND: "rgb(047,063,127)", TEXT: { COLOUR: "rgb(047,063,127)" } },
+													  COLOUR: BLUE.INDIGO, BACKGROUND: "rgb(159,223,255)", TEXT: { COLOUR: "rgb(159,223,255)" } },
 								 SOLVE: { L: 140, T: 525, W: 60, H: 25, LW: 3, LABEL: "Solve", STYLE: BUTTON.STYLE.ROUNDED,
-											 COLOUR: "rgb(063,191,223)", BACKGROUND: "rgb(047,063,127)", TEXT: { COLOUR: "rgb(047,063,127)" } },
+											 COLOUR: BLUE.INDIGO, BACKGROUND: "rgb(159,223,255)", TEXT: { COLOUR: "rgb(159,223,255)" } },
 								 RESTART: { L: 210, T: 525, W: 60, H: 25, LW: 3, LABEL: "Restart", STYLE: BUTTON.STYLE.ROUNDED,
-												COLOUR: "rgb(063,191,223)", BACKGROUND: "rgb(047,063,127)", TEXT: { COLOUR: "rgb(047,063,127)" } },
+												COLOUR: BLUE.INDIGO, BACKGROUND: "rgb(159,223,255)", TEXT: { COLOUR: "rgb(159,223,255)" } },
 								 QUIT: { L: 280, T: 525, W: 60, H: 25, LW: 3, LABEL: "Quit", STYLE: BUTTON.STYLE.ROUNDED,
-											COLOUR: "rgb(063,191,223)", BACKGROUND: "rgb(047,063,127)", TEXT: { COLOUR: "rgb(047,063,127)" } }
+											COLOUR: BLUE.INDIGO, BACKGROUND: "rgb(159,223,255)", TEXT: { COLOUR: "rgb(159,223,255)" } }
 							  },
 					ICON: { CORNER: { L: 25, T: 440, W: 140, H: 25, LW: 3, IMAGE: { L: 844, T: 327, W: 134, H: 19 }, BACKGROUND: "rgb(000,143,063)" },
 							  VOWELS: { L: 195, T: 440, W: 140, H: 25, LW: 3, IMAGE: { L: 844, T: 348, W: 134, H: 19 }, BACKGROUND: "rgb(000,143,063)" },
