@@ -88,9 +88,8 @@ LexiComponents.prototype = {
 	SetData() {
       var i;
 
-		//UNLOGGED
-
-		Solutions = Solutions0.concat(Solutions100, Solutions200, Solutions300, Solutions400, Solutions500);
+		Solutions = Solutions0.concat(Solutions100, Solutions200, Solutions300, Solutions400,
+												Solutions500, Solutions600, Solutions700, Solutions800, Solutions900);
 
 		//Word arrays
 		FiveLetterWords = [ Words5a, Words5b, Words5c, Words5d, Words5e, Words5f, Words5g, Words5h, Words5i, Words5j, Words5k, Words5l, Words5m,
