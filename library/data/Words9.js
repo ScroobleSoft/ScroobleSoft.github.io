@@ -1,4 +1,4 @@
-//+4
+//+2
 var Words9a = [ "abandoned", "abasement", "abashedly", "abdicated",
 					 "abdicates", "abdominal", "abduction", "aberrance", "abhorrent", "abidingly", "abilities", "ablutions", "abnegated",
 					 "abnegates", "abolished", "abolishes", "abolition", "aborigine", "abounding", "abrasions", "abridging", "abrogated", "abrogates",
@@ -414,7 +414,7 @@ var Words9q = [ "quadrants", "quadratic", "quadricep", "quadruple", "quaintest",
 
 var Words9r = [ "rabidness", "racehorse", "racetrack", "racketeer", "raconteur", "radiating", "radiation", "radiators",
 					 "radically", "radiocast", "radiology", "railroads", "rainbirds", "raincheck", "raincoats", "raindrops", "rainfalls", "rainmaker",
-					 "rainproof", "rainstorm", "rainwater", "rallyings", "rallyists", "ramifying", "rampagers", "rampaging", "rampantly", "ramparted",
+					 "rainproof", "rainstorm", "rainwater", "rallyists", "ramifying", "rampagers", "rampaging", "rampantly", "ramparted",
 					 "ramrodded", "rancidity", "randomise", "ranginess", "ransacked", "ransoming", "rapacious", "rapidness", "rappelled",
 					 "rapturous", "raspberry", "raspiness", "ratcheted", "ratifying", "rationale", "rationing", "raucously", "raunchier", "raunchily",
 					 "ravishing", "razorback", "reabsorbs", "reachable", "reacquire", "reactions", "readiness", "readjourn", "readjusts",
@@ -535,7 +535,7 @@ var Words9u = [ "ultimatum", "ultrachic", "ultrarich", "ululating", "umbilical",
 var Words9v = [ "vacancies", "vacations", "vaccinate", "vacillate", "vacuously", "vacuuming", "vagabonds", "vagueness", "valentine", "valiantly",
 					 "validated", "validates", "valuables", "valuation", "valueless", "vampirish", "vampirism", "vandalism", "vandalize", "vanguards",
 					 "vanishing", "vapidness", "vanishing", "vaporised", "vaporizer", "variables", "variances", "variation", "variegate", "varietals",
-					 "varieties", "variously", "varnished", "varnishes", "varyingly", "vasomotor", "vassalage", "vaultlike", "vectoring", "vegetable",
+					 "varieties", "variously", "varnished", "varnishes", "varyingly", "vasomotor", "vassalage", "vectoring", "vegetable",
 					 "vegetated", "vegetates", "vehemence", "vehicular", "velodrome", "velveteen", "vendettas", "venerable", "venerably", "venerated",
 					 "venerates", "vengeance", "venomless", "ventilate", "ventricle", "venturing", "verandahs", "verbalise", "verbosely", "verbosity",
 					 "verdigris", "verifying", "veritable", "veritably", "verminous", "versatile", "vertebrae", "vertebral", "vestibule",
