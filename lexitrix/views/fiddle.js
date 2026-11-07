@@ -72,20 +72,18 @@ LexiFiddleView.prototype.Draw = function() {
 	this.Board.Draw();
 
 	//Display scorecard
-	this.GraphicsTool.DrawRectangle(20, 10, 100, 30, "rgb(063,191,223)", 1);
-	this.TextWriter.Write("Moves: "+this.Moves, 25, 30, { COLOUR: "rgb(063,191,223)" } );
-	this.GraphicsTool.DrawRectangle(130, 10, 100, 30, "rgb(063,191,223)", 1);
-	this.TextWriter.Write("Errors: 0", 135, 30, { COLOUR: "rgb(063,191,223)" } );
-	this.GraphicsTool.DrawRectangle(240, 10, 100, 30, "rgb(063,191,223)", 1);
-	this.TextWriter.Write("Seconds: 0", 245, 30, { COLOUR: "rgb(063,191,223)" } );
+	this.GraphicsTool.DrawRectangle(20, 10, 100, 30, "black", 1);
+	this.TextWriter.Write("Moves: "+this.Moves, 25, 30);
+	this.GraphicsTool.DrawRectangle(130, 10, 100, 30, "black", 1);
+	this.TextWriter.Write("Errors: 0", 135, 30);
+	this.GraphicsTool.DrawRectangle(240, 10, 100, 30, "black", 1);
+	this.TextWriter.Write("Seconds: 0", 245, 30);
 
 	//Game info
 	this.TextWriter.SetFont("18px Arial");
-	this.TextWriter.SetColour("rgb(063,191,223)");
 	this.TextWriter.Write(this.DailyDate.toDateString(), 25, 430);
 	if (this.GameType!=this.Specs.TYPE.RANDOM)
 		this.TextWriter.Write(this.Selector.SolutionIndex+1, 325-(Math.floor(Math.log10(this.Selector.SolutionIndex+1))*10), 430);
-	this.TextWriter.ResetColour();
 	this.TextWriter.ResetFont();
 };
 LexiFiddleView.prototype.UpdateButtons = function() {
@@ -139,13 +137,13 @@ LexiFiddleView.prototype.IncrementMoves = function() {
 
 	++this.Moves;
 	this.GraphicsTool.DrawRectangle(22, 12, 96, 26, this.Specs.COLOUR, 0);
-	this.TextWriter.Write("Moves: "+this.Moves, 25, 30, { COLOUR: "rgb(063,191,223)" } );
+	this.TextWriter.Write("Moves: "+this.Moves, 25, 30);
 };
 LexiFiddleView.prototype.IncrementErrors = function() {
 
 	++this.Errors;
 	this.GraphicsTool.DrawRectangle(132, 12, 96, 26, this.Specs.COLOUR, 0);
-	this.TextWriter.Write("Errors: "+this.Errors, 135, 30, { COLOUR: "rgb(063,191,223)" } );
+	this.TextWriter.Write("Errors: "+this.Errors, 135, 30);
 };
 LexiFiddleView.prototype.IncrementSeconds = function() {
 
@@ -157,7 +155,7 @@ LexiFiddleView.prototype.IncrementSeconds = function() {
 	if (this.Seconds==999)
 		this.TextWriter.Write("Seconds: "+this.Seconds, 245, 30, { COLOUR: "red" } );
 	else
-		this.TextWriter.Write("Seconds: "+this.Seconds, 245, 30, { COLOUR: "rgb(063,191,223)" } );
+		this.TextWriter.Write("Seconds: "+this.Seconds, 245, 30);
 };
 LexiFiddleView.prototype.Reset = function() {
 
