@@ -79,17 +79,34 @@ ArrayUtilities.prototype = {
 
 		arry.splice(eIndx, 1);
 	},
+	RemoveElement(arry, elmnt) {
+
+		this.indx = this.GetElementIndex(arry, elmnt);
+		this.Remove(arry, this.indx);
+	},
 	Extract(arry, eIndx) {
 
 		return (arry.splice(eIndx, 1)[0]);
+	},
+	ExtractElement(arry, elmnt) {
+
+		for (this.i=0;this.i<arry.length;++this.i)
+			if (arry[this.i]==elmnt)
+				return (this.Extract(arry, this.i));
 	},
 	Split(arry, eIndx) {
 		var aSub;
 
 		aSub = arry.slice(eIndx);
-		arry = arry.slice(0, eIndx);
-
+		this.val = arry.length - eIndx;
+		for (this.i=0;this.i<this.val;++this.i)
+			arry.pop();
+		
 		return (aSub);
+	},
+	Insert(arry, elmnt, eIndx) {
+
+		arry.splice(eIndx, 0, elmnt);
 	},
 	InsertAtFront(arry, elmnt) {
 
@@ -135,12 +152,6 @@ ArrayUtilities.prototype = {
 
 		return (aCol);
 	},
-	Index(arry) {
-		var i;
-
-		for (i=0;i<arry.length;++i)
-			arry[i] = i;
-	},
 	Rotate(arry) {  //UNTESTED
 
 		this.InsertAtFront(arry, arry.pop());
@@ -173,7 +184,6 @@ ArrayUtilities.prototype = {
 		return (aElmnts);
 	},
 	GetHighestIndex(arry) {
-		var indx;
 
 		this.indx = 0 ;
 		this.val = arry[this.indx];
@@ -184,6 +194,44 @@ ArrayUtilities.prototype = {
 			}
 
 		return (this.indx);
+	},
+	GetLowestValue(arry) {
+
+		this.val = arry[this.indx];
+		for (this.i=1;this.i<arry.length;++this.i)
+			if (arry[this.i]<this.val)
+				this.val = arry[this.i];
+
+		return (this.val);
+	},
+	GetElementIndex(arry, elmnt) {
+
+		for (this.i=0;this.i<arry.length;++this.i)
+			if (arry[this.i]===elmnt)
+				return (this.i);
+
+		return (-1);
+	},
+	GetElementOccurrenceIndex(arry, elmnt, nOcrrnc) {
+
+		this.val = 0;
+		for (this.i=0;this.i<arry.length;++this.i)
+			if (arry[this.i]===elmnt) {
+				if (this.val==nOcrrnc)
+					return (this.i);
+				else
+					++this.val;
+			}
+
+		return (-1);
+	},
+	GetMatchingIndex(arry, indx) {  //NOTE: requires array to have an .Index field
+
+		for (this.i=0;this.i<arry.length;++this.i)
+			if (arry[this.i].Index==indx)
+				break;
+
+		return (this.i);
 	},
 	CheckIncludesElement(arry, aElmnts) {  //checks for multiple elements (a capability .includes doesn't have)
 
@@ -197,6 +245,13 @@ ArrayUtilities.prototype = {
 
 		while (aSource.length)
 			aDestination.push(aSource.shift());
+	},
+	AbsoluteNormalize(arry) {  //raises all values evenly until none are negative
+
+		this.val = this.GetLowestValue(arry);
+		if (this.val<0)
+			for (this.i=0;this.i<arry.length;++this.i)
+				arry[this.i] -= this.val;
 	}
 };
 
