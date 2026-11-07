@@ -4,16 +4,23 @@
 var GeniePushButton = function() {
 	var EdgePics;
 	var Pressed;
+	var SinglePushFlag;		//once pressed, stays pressed permanently
 };
 GeniePushButton.prototype = new GenieControl();
 GeniePushButton.prototype.Set = function(canvas, specs, iBtn) {
 	GenieControl.prototype.Set.call(this, canvas, specs, iBtn);
 
 	this.Pressed = false;
+	if (this.Specs.SINGLE)
+		this.SetSinglePush();
 };
 GeniePushButton.prototype.SetEdgePics = function(iEdges) {
 
 	this.EdgePics = iEdges;
+};
+GeniePushButton.prototype.SetSinglePush = function() {
+
+	this.SinglePushFlag = true;
 };
 GeniePushButton.prototype.Draw = function(bPressed) {
 
@@ -35,7 +42,9 @@ GeniePushButton.prototype.MouseDown = function() {
 
 	this.Draw(PRESSED);
 	this.Pressed = true;
-	setTimeout(this.Reset.bind(this), 60);
+
+	if (!this.SinglePushFlag)
+		setTimeout(this.Reset.bind(this), 60);
 };
 GeniePushButton.prototype.CheckPressed = function() {
 
